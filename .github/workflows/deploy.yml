@@ -25,14 +25,12 @@ jobs:
       - name: Build React app
         run: npm run build
       
-      - name: List built files (Debug)
-        run: ls -R react-app
       
       - name: Deploy to Raiola via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
-          server: ftp.empc.es
-          username: scylea@empc.es
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USER }}
           password: ${{ secrets.FTP_PASS }}
           local-dir: ./
           server-dir: /wp-content/themes/empc-theme/
