@@ -61,6 +61,15 @@ function empc_load_scripts()
 
     if (file_exists($react_js_path)) {
         wp_enqueue_script('empc-react', $react_js, [], filemtime($react_js_path), true);
+
+        // Localizamos el script justo después de encolarlo para asegurar que el handle existe
+        $data = [
+            'siteUrl' => home_url(),
+            'restUrl' => get_rest_url(), // Devuelve la raíz de la API (ej: /wp-json/)
+            'nonce' => wp_create_nonce('wp_rest'),
+            'isLoggedIn' => is_user_logged_in()
+        ];
+        wp_localize_script('empc-react', 'empcData', $data);
     }
 
     // Estilos del tema base
@@ -74,6 +83,10 @@ add_action('wp_enqueue_scripts', 'empc_load_scripts');
 function empc_script_type_module($tag, $handle, $src)
 {
     if (in_array($handle, ['vite-client', 'empc-react'])) {
+        // Para que wp_localize_script funcione con módulos, necesitamos definir la variable global manualmente
+        // ya que type="module" aísla el scope.
+        // Pero wp_localize_script imprime <script>var empcData = ...</script> ANTES del script del handle.
+        // Como el script del handle es module, puede leer window.empcData.
         return '<script type="module" src="' . esc_url($src) . '"></script>';
     }
     return $tag;
@@ -89,21 +102,7 @@ function empc_react_shortcode($atts)
 }
 add_shortcode('empc_react', 'empc_react_shortcode');
 
-/**
- * Pasar datos de WordPress a React
- */
-function empc_localize_data()
-{
-    $data = [
-        'siteUrl' => home_url(),
-        'restUrl' => rest_url('wp/v2/'),
-        'nonce' => wp_create_nonce('wp_rest'),
-        'isLoggedIn' => is_user_logged_in()
-    ];
-
-    wp_localize_script('empc-react', 'empcData', $data);
-}
-add_action('wp_enqueue_scripts', 'empc_localize_data');
+/* Eliminamos la función separada para evitar condiciones de carrera */
 
 /**
  * REST API Endpoint para Formulario de Contacto
@@ -139,7 +138,9 @@ function empc_handle_contact_form($request)
     <p><small>Enviado desde empc.es</small></p>
     ";
 
+    // For debugging local environment: simulate success
     $sent = wp_mail($to, $subject, $message, $headers);
+    // $sent = true;
 
     if ($sent) {
         return new WP_REST_Response(['status' => 'success', 'message' => 'Email enviado correctamente'], 200);
