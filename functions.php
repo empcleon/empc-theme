@@ -113,7 +113,55 @@ add_action('rest_api_init', function () {
         'callback' => 'empc_handle_contact_form',
         'permission_callback' => '__return_true' // Validamos nonce manualmente si es necesario, o lo dejamos abierto con rate limit (pendiente)
     ]);
+
+    register_rest_route('empc/v1', '/budget', [
+        'methods' => 'POST',
+        'callback' => 'empc_handle_budget',
+        'permission_callback' => '__return_true'
+    ]);
 });
+
+function empc_handle_budget($request)
+{
+    $params = $request->get_json_params();
+    $name = sanitize_text_field($params['name']);
+    $email = sanitize_email($params['email']);
+    $budget_data = $params['budget_data'];
+
+    if (empty($name) || empty($email)) {
+        return new WP_Error('missing_params', 'Faltan campos obligatorios', ['status' => 400]);
+    }
+
+    // Componer Email para el Admin
+    $to = 'empcleon@gmail.com';
+    $subject = '💰 Nuevo Lead Calculadora: ' . $name;
+
+    $features_list = implode(', ', $budget_data['features']);
+
+    $message = "
+    <h2>Nuevo cálculo de presupuesto</h2>
+    <p><strong>Nombre:</strong> $name</p>
+    <p><strong>Email:</strong> $email</p>
+    <hr>
+    <h3>Detalles del Proyecto:</h3>
+    <ul>
+        <li><strong>Tipo:</strong> {$budget_data['type']}</li>
+        <li><strong>Extras:</strong> $features_list</li>
+        <li><strong>Rango Estimado:</strong> {$budget_data['estimated_range']['min']}€ - {$budget_data['estimated_range']['max']}€</li>
+    </ul>
+    <p><small>Enviado desde el Post de la Calculadora</small></p>
+    ";
+
+    $headers = ['Content-Type: text/html; charset=UTF-8'];
+
+    $sent = wp_mail($to, $subject, $message, $headers);
+
+    if ($sent) {
+        return new WP_REST_Response(['status' => 'success', 'message' => 'Presupuesto enviado'], 200);
+    } else {
+        return new WP_Error('cant_send', 'Error al enviar email', ['status' => 500]);
+    }
+}
 
 function empc_handle_contact_form($request)
 {
