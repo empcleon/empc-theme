@@ -62,13 +62,26 @@ function empc_load_scripts()
     if (file_exists($react_js_path)) {
         wp_enqueue_script('empc-react', $react_js, [], filemtime($react_js_path), true);
 
+
         // Localizamos el script justo después de encolarlo para asegurar que el handle existe
         $data = [
             'siteUrl' => home_url(),
             'restUrl' => get_rest_url(), // Devuelve la raíz de la API (ej: /wp-json/)
             'nonce' => wp_create_nonce('wp_rest'),
-            'isLoggedIn' => is_user_logged_in()
+            'isLoggedIn' => is_user_logged_in(),
+            'postConfig' => null
         ];
+
+        // Si estamos en un single post o página, intentamos cargar su configuración específica
+        if (is_singular()) {
+            global $post;
+            $raw_config = get_post_meta($post->ID, '_empc_react_config', true);
+            if ($raw_config) {
+                // Decodificamos y volvemos a codificar para asegurar que sea un objeto JS válido
+                $data['postConfig'] = json_decode($raw_config);
+            }
+        }
+
         wp_localize_script('empc-react', 'empcData', $data);
     }
 
@@ -624,6 +637,277 @@ add_action('init', function () {
             'post_author' => 1,
             'post_category' => $cat_ids,
             'post_excerpt' => 'Automatiza la recepción de pedidos en tu imprenta de León. Calculadoras de precios dinámicas y subida de archivos pesados con Antigravity.'
+        ]);
+
+        if ($post_id) {
+            update_post_meta($post_id, '_empc_react_config', $json_config);
+        }
+    }
+});
+/**
+ * Insertar Post #6: WPO y Velocidad
+ */
+add_action('init', function () {
+    if (!get_page_by_title('Mi web en WordPress carga lenta: Guía WPO para negocios de León', OBJECT, 'post')) {
+        $json_config = '{
+          "post_type": "blog",
+          "post_id": "wpo-wordpress-leon",
+          "category": {
+            "slug": "rendimiento-wpo",
+            "name": "Rendimiento / WPO"
+          },
+          "seo_keywords": ["web lenta León", "WPO WordPress León", "Core Web Vitals León", "optimizar velocidad web"],
+          "primary_cta": "island-budget-calculator",
+          "island_data": {
+            "calculator_mode": "performance-focus",
+            "feature_highlight": "speed-optimization",
+            "promo_code": "LEON-RAPIDO"
+          }
+        }';
+
+        $content = '
+        <!-- wp:html -->
+        <h1>Mi web en WordPress carga lenta: Guía WPO para negocios de León</h1>
+
+        <p>¿Sabías que si tu web tarda más de 3 segundos en cargar, la mitad de tus posibles clientes en <strong>León</strong> cerrarán la pestaña antes de verte? En un mercado local cada vez más digitalizado, la velocidad no es un lujo; es el factor que decide si vendes tú o tu competencia en la Calle Ancha.</p>
+
+        <h2>El coste real de una web lenta en León</h2>
+        <p>Google utiliza los llamados <strong>Core Web Vitals</strong> para medir la experiencia de usuario. Si tu negocio en León ofrece una experiencia lenta, Google te penalizará bajándote en los resultados de búsqueda. Además, una web pesada consume más datos móviles, algo crítico para usuarios que te buscan mientras pasean por el centro de la ciudad.</p>
+
+        <h3>¿Por qué falla tu WordPress actual?</h3>
+        <ul>
+            <li><strong>Exceso de Plugins:</strong> El uso de constructores como Elementor o Divi añade miles de líneas de código innecesario.</li>
+            <li><strong>Imágenes sin optimizar:</strong> Subir fotos directamente de la cámara sin pasar por herramientas de compresión.</li>
+            <li><strong>Hosting mal configurado:</strong> No aprovechar la potencia de servidores locales o cachés de alto nivel.</li>
+        </ul>
+
+        <div id="island-budget-calculator" class="my-10 p-8 bg-indigo-900 rounded-3xl text-white shadow-2xl">
+            <h3 class="text-2xl font-black mb-4 text-indigo-300">¿Quieres una web que vuele?</h3>
+            <p class="mb-6">Calcula cuánto costaría migrar tu sitio actual al stack de <strong>Antigravity</strong> y mejorar tus métricas de Google de inmediato.</p>
+            <!-- React Island Mount Point -->
+            <div class="p-4 bg-indigo-700/50 rounded animate-pulse text-center">Cargando calculadora WPO...</div>
+        </div>
+
+        <h2>La solución Antigravity: React al servicio de tu velocidad</h2>
+        <p>A diferencia de las agencias tradicionales en León que solo instalan plantillas, en <strong>EMPC</strong> hemos desarrollado el tema <strong>Antigravity</strong>. Al separar la visualización (React) de la gestión (WordPress), eliminamos el "ruido" técnico. El resultado es una web instantánea, con transiciones fluidas que parecen una aplicación móvil.</p>
+
+        <h2>Checklist de WPO para tu pyme en León</h2>
+        <ol>
+            <li><strong>Mide tus tiempos:</strong> Usa PageSpeed Insights para ver tu nota actual.</li>
+            <li><strong>Limpia tu base de datos:</strong> Elimina revisiones antiguas y comentarios spam.</li>
+            <li><strong>Implementa WebP:</strong> Cambia tus PNGs pesados por formatos modernos de última generación.</li>
+        </ol>
+
+        <p>Si este checklist te parece chino, no te preocupes. Estamos aquí en <strong>León</strong> para ayudarte a que tu tecnología sea un motor, no un freno.</p>
+        <!-- /wp:html -->
+        ';
+
+        // Intentar obtener ID de categoría por slug, si no default
+        $cat_ids = [];
+        $term = get_term_by('slug', 'rendimiento-wpo', 'category');
+        if ($term)
+            $cat_ids[] = $term->term_id;
+        else
+            $cat_ids[] = 1;
+
+        $post_id = wp_insert_post([
+            'post_title' => 'Mi web en WordPress carga lenta: Guía WPO para negocios de León',
+            'post_content' => $content,
+            'post_status' => 'publish',
+            'post_author' => 1,
+            'post_category' => $cat_ids,
+            'post_excerpt' => 'Guía de optimización WPO para negocios en León. Descubre por qué tu web carga lenta y cómo los Core Web Vitals afectan a tu posicionamiento.'
+        ]);
+
+        if ($post_id) {
+            update_post_meta($post_id, '_empc_react_config', $json_config);
+        }
+    }
+});
+
+/**
+ * Insertar Post #7: Restaurantes (Barrio Húmedo/Romántico)
+ */
+add_action('init', function () {
+    if (!get_page_by_title('Webs para restaurantes en León: Más allá del PDF de la carta', OBJECT, 'post')) {
+        $json_config = '{
+          "post_type": "blog",
+          "post_id": "web-restaurantes-leon",
+          "category": {
+            "slug": "reservas-y-automatizacion",
+            "name": "Reservas y automatización"
+          },
+          "seo_keywords": ["web para restaurantes León", "carta digital interactiva León", "reservas mesa online León"],
+          "primary_cta": "island-budget-calculator",
+          "island_data": {
+            "calculator_mode": "restaurant-focus",
+            "feature_highlight": "interactive-menu-module",
+            "upsell": "google-maps-pack"
+          }
+        }';
+
+        $content = '
+        <!-- wp:html -->
+        <h1>Webs para restaurantes en León: Más allá del PDF de la carta</h1>
+
+        <p>En una ciudad con la cultura gastronómica de <strong>León</strong>, desde las tapas del Húmedo hasta los restaurantes del Romántico, tu presencia digital es tu primera mesa. Si tu cliente todavía tiene que descargar un PDF pesado para ver tus precios, estás perdiendo reservas.</p>
+
+        <h2>La evolución: Menús interactivos con React</h2>
+        <p>Con el stack <strong>Antigravity</strong>, transformamos tu carta en una experiencia fluida. Gracias a React, los clientes pueden filtrar por alérgenos o ver platos del día de forma instantánea, sin esperas ni recargas de página. Es la tecnología de las grandes cadenas, adaptada a la hostelería leonesa.</p>
+
+        <h3>¿Qué necesita tu restaurante para destacar en León?</h3>
+        <ul>
+            <li><strong>Reservas inteligentes:</strong> Un sistema que gestione turnos y evite el "no-show".</li>
+            <li><strong>SEO Gastronómico:</strong> Aparecer cuando alguien busca "dónde comer cocido maragato" o "mejores tapas en León".</li>
+            <li><strong>Velocidad móvil:</strong> Tus clientes te buscan en la calle, con 4G limitado; tu web debe ser la más rápida.</li>
+        </ul>
+
+        <div id="island-budget-calculator" class="my-10 p-8 bg-red-50 rounded-3xl border-2 border-red-200">
+             <h3 class="text-2xl font-bold text-red-900 mb-4">¿Digitalizamos tu cocina?</h3>
+             <p class="text-red-800 mb-6">Calcula cuánto cuesta integrar un sistema de reservas y carta interactiva en tu local de León.</p>
+             <!-- React Island Mount Point -->
+             <div class="p-4 bg-red-800/20 rounded animate-pulse text-center text-red-700">Cargando calculadora Restauración...</div>
+        </div>
+        <!-- /wp:html -->
+        ';
+
+        // Intentar obtener ID de categoría por slug, si no default
+        $cat_ids = [];
+        $term = get_term_by('slug', 'reservas-automatizacion', 'category');
+        if ($term)
+            $cat_ids[] = $term->term_id;
+        else
+            $cat_ids[] = 1;
+
+        $post_id = wp_insert_post([
+            'post_title' => 'Webs para restaurantes en León: Más allá del PDF de la carta',
+            'post_content' => $content,
+            'post_status' => 'publish',
+            'post_author' => 1,
+            'post_category' => $cat_ids,
+            'post_excerpt' => 'Digitaliza tu restaurante en León. Menús interactivos, reservas online y SEO local para captar más clientes en el Húmedo y el Romántico.'
+        ]);
+
+        if ($post_id) {
+            update_post_meta($post_id, '_empc_react_config', $json_config);
+        }
+    }
+});
+
+/**
+ * Insertar Post #8: Comercio Local / Panaderías
+ */
+add_action('init', function () {
+    if (!get_page_by_title('Tiendas de barrio en León: Cómo competir con los grandes desde el mostrador digital', OBJECT, 'post')) {
+        $json_config = '{
+          "post_type": "blog",
+          "post_id": "comercio-local-panaderia-leon",
+          "category": {
+            "slug": "wordpress-para-negocio",
+            "name": "WordPress para negocio"
+          },
+          "seo_keywords": ["web para comercios León", "panadería online León", "encargos web comercio local"],
+          "primary_cta": "island-budget-calculator",
+          "island_data": {
+            "calculator_mode": "local-shop-focus",
+            "feature_highlight": "click-and-collect-logic"
+          }
+        }';
+
+        $content = '
+        <!-- wp:html -->
+        <h1>Tiendas de barrio en León: Cómo competir con los grandes desde el mostrador digital</h1>
+
+        <p>Una panadería artesana en el barrio de El Ejido o una tienda de productos de León tiene algo que Amazon no tiene: cercanía. Pero para que esa cercanía funcione en 2026, tus clientes en <strong>León</strong> deben poder encontrarte y reservar sus productos desde el móvil.</p>
+
+        <h2>El "Click & Collect" leonés</h2>
+        <p>No necesitas un ecommerce complejo. Necesitas una web rápida donde tus clientes habituales vean el pan especial del día o el stock de productos de temporada y puedan "apartarlo" para recogerlo al salir del trabajo. Eso es lo que logramos con <strong>Antigravity</strong>: tecnología útil para el día a día.</p>
+
+        <h3>Claves para el pequeño comercio en León:</h3>
+        <ul>
+            <li><strong>Ficha de Google Maps optimizada:</strong> Para que "panadería cerca de mí" sea tu negocio.</li>
+            <li><strong>Actualización fácil:</strong> Cambia tus productos destacados desde el móvil con WordPress en segundos.</li>
+            <li><strong>Fidelización local:</strong> Contacto directo por WhatsApp integrado en tu isla de React.</li>
+        </ul>
+
+        <div id="island-budget-calculator" class="my-10 p-8 bg-amber-50 rounded-3xl border-2 border-amber-200">
+             <h3 class="text-2xl font-bold text-amber-900 mb-4">Lleva tu mostrador a Internet</h3>
+             <p class="text-amber-800 mb-6">Obtén un presupuesto para una web sencilla, rápida y efectiva para tu comercio en León.</p>
+             <!-- React Island Mount Point -->
+             <div class="p-4 bg-amber-800/10 rounded animate-pulse text-center text-amber-700">Cargando calculadora Comercio...</div>
+        </div>
+        <!-- /wp:html -->
+        ';
+
+        // Intentar obtener ID de categoría por slug, si no default
+        $cat_ids = [];
+        $term = get_term_by('slug', 'wordpress-negocio', 'category');
+        if ($term)
+            $cat_ids[] = $term->term_id;
+        else
+            $cat_ids[] = 1;
+
+        $post_id = wp_insert_post([
+            'post_title' => 'Tiendas de barrio en León: Cómo competir con los grandes desde el mostrador digital',
+            'post_content' => $content,
+            'post_status' => 'publish',
+            'post_author' => 1,
+            'post_category' => $cat_ids,
+            'post_excerpt' => 'Soluciones web reales para el pequeño comercio de León. Click & Collect, visibilidad en Google Maps y gestión sencilla para panaderías y tiendas locales.'
+        ]);
+
+        if ($post_id) {
+            update_post_meta($post_id, '_empc_react_config', $json_config);
+        }
+    }
+
+    // 10. Insertar Post #9 "Especial Hostelería en León (Simulación de Reservas)"
+    if (!get_page_by_title('Especial Hostelería en León (Simulación de Reservas)', OBJECT, 'post')) {
+        $json_config = '{
+          "post_type": "blog",
+          "post_id": "demo-reservas-restaurantes-leon",
+          "category": {
+            "slug": "reservas-y-automatizacion",
+            "name": "Reservas y automatización"
+          },
+          "seo_keywords": ["reservas online restaurantes León", "digitalizar restaurante León", "sistema de turnos hostelería"],
+          "primary_cta": "island-booking",
+          "island_data": {
+            "mode": "demo-mode",
+            "venue_type": "restaurant",
+            "location": "León Centro"
+          }
+        }';
+
+        $content = '
+        <!-- wp:html -->
+        <h1>¿Tu restaurante en León sigue perdiendo clientes por culpa del teléfono?</h1>
+        <p>Imagínate esto: es viernes noche, tu local en el Barrio Húmedo está a tope y el teléfono no para de sonar. No puedes atenderlo, y cada llamada perdida es una mesa vacía para mañana. En <strong>León</strong>, los clientes ya no quieren esperar; quieren reservar su mesa mientras se toman una corta en la plaza.</p>
+        <h2>La diferencia entre un formulario y un Sistema de Reservas</h2> <p>Muchos negocios cometen el error de poner un simple correo de contacto. Eso no es digitalizar. Un sistema real, construido con <strong>React y Antigravity</strong>, permite al cliente ver la disponibilidad en tiempo real y recibir una confirmación inmediata.</p>
+        <h3>¿Por qué esta demo es el futuro de tu local?</h3> <ul> <li><strong>Cero esperas:</strong> El cliente elige día y hora en 3 clicks.</li> <li><strong>Optimizado para móviles:</strong> Perfecto para el turista que busca "dónde cenar en León" desde su smartphone.</li> <li><strong>Sin comisiones por cubierto:</strong> Es tu tecnología, en tu propia web.</li> </ul>
+        <div class="my-12 p-2 bg-gradient-to-br from-slate-100 to-white rounded-3xl shadow-inner border border-slate-200">
+            <div id="island-booking"></div>
+            <p class="text-center text-xs text-slate-400 mt-4 italic">Simulación de reserva real: Prueba a seleccionar un servicio y una hora para ver la fluidez del sistema.</p>
+        </div>
+        <h2>Tecnología de León para la hostelería de León</h2> <p>En <strong>EMPC</strong> no solo instalamos software; diseñamos experiencias. Al usar este sistema de reservas, liberas a tu personal de las llamadas y aseguras que tu base de datos de clientes crezca cada día, permitiéndote enviar promociones en San Froilán o Semana Santa de forma automática.</p>
+        <!-- /wp:html -->
+        ';
+
+        // Intentar obtener ID de categoría por slug
+        $cat_ids = [];
+        $term = get_term_by('slug', 'reservas-y-automatizacion', 'category');
+        if ($term)
+            $cat_ids[] = $term->term_id;
+        else
+            $cat_ids[] = 1;
+
+        $post_id = wp_insert_post([
+            'post_title' => 'Especial Hostelería en León (Simulación de Reservas)',
+            'post_content' => $content,
+            'post_status' => 'publish',
+            'post_author' => 1,
+            'post_category' => $cat_ids,
+            'post_excerpt' => 'Demo interactiva de reservas para restaurantes en León. Digitaliza tu local del Húmedo sin pagar comisiones.'
         ]);
 
         if ($post_id) {

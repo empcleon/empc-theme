@@ -35,3 +35,15 @@ if (calculatorElement) {
         );
     });
 }
+
+// 4. Montar Island: Restaurant Booking (Demo)
+const bookingElement = document.getElementById('island-booking');
+if (bookingElement) {
+    import('./components/RestaurantBooking').then(({ default: RestaurantBooking }) => {
+        ReactDOM.createRoot(bookingElement).render(
+            <React.StrictMode>
+                <RestaurantBooking />
+            </React.StrictMode>
+        );
+    });
+}
