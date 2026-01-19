@@ -35,7 +35,7 @@ jobs:
           username: ${{ secrets.FTP_USER }}
           password: ${{ secrets.FTP_PASS }}
           local-dir: ./
-          server-dir: /public_html/wp-content/themes/empc-theme/
+          server-dir: /wp-content/themes/empc-theme/
           exclude: |
             **/.git*
             **/.git*/**
