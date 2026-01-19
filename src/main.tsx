@@ -24,8 +24,14 @@ if (waElement) {
     );
 }
 
-// 3. Componente ContactForm (Integrado en App.tsx ahora)
-// const contactElement = document.getElementById('react-contact-root');
-// if (contactElement) {
-//    ...
-// }
+// 3. Montar Island: Budget Calculator
+const calculatorElement = document.getElementById('island-budget-calculator');
+if (calculatorElement) {
+    import('./components/BudgetCalculator').then(({ default: BudgetCalculator }) => {
+        ReactDOM.createRoot(calculatorElement).render(
+            <React.StrictMode>
+                <BudgetCalculator />
+            </React.StrictMode>
+        );
+    });
+}
