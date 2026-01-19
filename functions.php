@@ -101,6 +101,49 @@ function empc_localize_data()
         'isLoggedIn' => is_user_logged_in()
     ];
 
-    wp_localize_script('empc-react-app', 'empcData', $data);
+    wp_localize_script('empc-react', 'empcData', $data);
 }
 add_action('wp_enqueue_scripts', 'empc_localize_data');
+
+/**
+ * REST API Endpoint para Formulario de Contacto
+ */
+add_action('rest_api_init', function () {
+    register_rest_route('empc/v1', '/contact', [
+        'methods' => 'POST',
+        'callback' => 'empc_handle_contact_form',
+        'permission_callback' => '__return_true' // Validamos nonce manualmente si es necesario, o lo dejamos abierto con rate limit (pendiente)
+    ]);
+});
+
+function empc_handle_contact_form($request)
+{
+    $params = $request->get_json_params();
+
+    // Validar datos básicos
+    if (empty($params['email']) || empty($params['message'])) {
+        return new WP_Error('missing_params', 'Faltan datos obligatorios', ['status' => 400]);
+    }
+
+    $to = 'empcleon@gmail.com';
+    $subject = 'Nuevo Lead Web: ' . sanitize_text_field($params['name']);
+    $headers = ['Content-Type: text/html; charset=UTF-8'];
+
+    $message = "
+    <h2>Nuevo mensaje de contacto</h2>
+    <p><strong>Nombre:</strong> " . sanitize_text_field($params['name']) . "</p>
+    <p><strong>Email:</strong> " . sanitize_email($params['email']) . "</p>
+    <p><strong>Servicio:</strong> " . sanitize_text_field($params['service']) . "</p>
+    <p><strong>Mensaje:</strong><br>" . nl2br(sanitize_textarea_field($params['message'])) . "</p>
+    <hr>
+    <p><small>Enviado desde empc.es</small></p>
+    ";
+
+    $sent = wp_mail($to, $subject, $message, $headers);
+
+    if ($sent) {
+        return new WP_REST_Response(['status' => 'success', 'message' => 'Email enviado correctamente'], 200);
+    } else {
+        return new WP_Error('cant_send', 'Error al enviar email', ['status' => 500]);
+    }
+}

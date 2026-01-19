@@ -28,3 +28,14 @@ body {
 .empc-react-container {
     min-height: 100vh;
 }
+
+/* Fix para la barra de administración de WordPress */
+body.admin-bar nav {
+    top: 32px !important;
+}
+
+@media screen and (max-width: 782px) {
+    body.admin-bar nav {
+        top: 46px !important;
+    }
+}

@@ -23,11 +23,32 @@ const ContactForm = () => {
         e.preventDefault();
         setIsSubmitting(true);
 
-        // Simulación de envío (aquí conectaríamos con WP REST API más tarde)
-        await new Promise(resolve => setTimeout(resolve, 1500));
+        try {
+            // @ts-ignore - empcData viene del global de WP injected en functions.php
+            const apiUrl = window.empcData?.restUrl + 'empc/v1/contact';
+            // @ts-ignore
+            const nonce = window.empcData?.nonce;
 
-        setIsSubmitting(false);
-        setIsSuccess(true);
+            const response = await fetch(apiUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-WP-Nonce': nonce
+                },
+                body: JSON.stringify(formData)
+            });
+
+            if (response.ok) {
+                setIsSuccess(true);
+            } else {
+                alert('Hubo un error al enviar el mensaje. Por favor, intenta de nuevo.');
+            }
+        } catch (error) {
+            console.error('Error enviando formulario:', error);
+            alert('Error de conexión. Comprueba tu internet.');
+        } finally {
+            setIsSubmitting(false);
+        }
     };
 
     if (isSuccess) {
@@ -120,8 +141,8 @@ const ContactForm = () => {
                                     <label
                                         key={service}
                                         className={`p-4 rounded-xl border cursor-pointer transition-all ${formData.service === service
-                                                ? 'bg-rose-500/10 border-rose-500 text-white'
-                                                : 'bg-slate-800 border-slate-700 text-slate-400 hover:border-slate-500'
+                                            ? 'bg-rose-500/10 border-rose-500 text-white'
+                                            : 'bg-slate-800 border-slate-700 text-slate-400 hover:border-slate-500'
                                             }`}
                                     >
                                         <input
