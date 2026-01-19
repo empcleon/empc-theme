@@ -29,8 +29,14 @@
                         class="text-slate-300 hover:text-white transition-colors text-sm font-medium">Nuestro Método</a>
                     <a href="<?php echo home_url('/#servicios'); ?>"
                         class="text-slate-300 hover:text-white transition-colors text-sm font-medium">Servicios</a>
-                    <a href="<?php echo home_url('/blog'); ?>"
-                        class="text-white font-medium text-sm border-b-2 border-rose-500 pb-1">Blog</a>
+                    <?php
+                    // Lógica para estado activo del Blog (Home de entradas, single, archivos)
+                    $is_blog = (is_home() || is_single() || is_archive() || is_search());
+                    $blog_class = $is_blog
+                        ? "text-white font-medium text-sm border-b-2 border-rose-500 pb-1"
+                        : "text-slate-300 hover:text-white transition-colors text-sm font-medium";
+                    ?>
+                    <a href="<?php echo home_url('/blog'); ?>" class="<?php echo $blog_class; ?>">Blog</a>
                     <a href="<?php echo home_url('/#demos'); ?>"
                         class="text-slate-300 hover:text-white transition-colors text-sm font-medium">Demos</a>
                     <a href="<?php echo home_url('/#consultor-ia'); ?>"
@@ -68,7 +74,12 @@
                 class="mobile-link text-2xl font-medium text-slate-200">Método</a>
             <a href="<?php echo home_url('/#servicios'); ?>"
                 class="mobile-link text-2xl font-medium text-slate-200">Servicios</a>
-            <a href="<?php echo home_url('/blog'); ?>" class="mobile-link text-2xl font-medium text-white">Blog</a>
+            <?php
+            $mobile_blog_class = $is_blog
+                ? "mobile-link text-2xl font-medium text-white"
+                : "mobile-link text-2xl font-medium text-slate-200";
+            ?>
+            <a href="<?php echo home_url('/blog'); ?>" class="<?php echo $mobile_blog_class; ?>">Blog</a>
             <a href="<?php echo home_url('/#demos'); ?>"
                 class="mobile-link text-2xl font-medium text-slate-200">Demos</a>
             <a href="<?php echo home_url('/#contacto'); ?>"
@@ -121,5 +132,83 @@
                     document.body.style.overflow = '';
                 });
             });
+
+            // ScrollSpy for Active State (Desktop)
+            // Enhanced to wait for React Hydration/Rendering
+            const initScrollSpy = () => {
+                const desktopLinks = document.querySelectorAll('#main-nav .hidden.md\\:flex a[href*="#"]');
+                const activeClasses = ['text-white', 'border-b-2', 'border-rose-500', 'pb-1'];
+                const inactiveClasses = ['text-slate-300', 'hover:text-white', 'transition-colors'];
+
+                const setActive = (link, active) => {
+                    if (link.classList.contains('bg-white')) return; // Ignore CTA button
+                    if (active) {
+                        link.classList.remove(...inactiveClasses);
+                        link.classList.add(...activeClasses);
+                    } else {
+                        link.classList.remove(...activeClasses);
+                        link.classList.add(...inactiveClasses);
+                    }
+                };
+
+                const observerCallback = (entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const id = '#' + entry.target.id;
+                            desktopLinks.forEach(link => {
+                                try {
+                                    const linkHash = new URL(link.href).hash;
+                                    if (linkHash === id) {
+                                        setActive(link, true);
+                                    } else {
+                                        setActive(link, false);
+                                    }
+                                } catch (e) { }
+                            });
+                        }
+                    });
+                };
+
+                const observerOptions = {
+                    threshold: 0.3,
+                    rootMargin: "-20% 0px -50% 0px"
+                };
+
+                const observer = new IntersectionObserver(observerCallback, observerOptions);
+                let targetsFound = 0;
+
+                desktopLinks.forEach(link => {
+                    try {
+                        const hash = new URL(link.href).hash;
+                        if (hash) {
+                            const target = document.querySelector(hash);
+                            if (target) {
+                                observer.observe(target);
+                                targetsFound++;
+                            }
+                        }
+                    } catch (e) { }
+                });
+
+                return targetsFound > 0;
+            };
+
+            // Attempt to init immediately
+            if (!initScrollSpy()) {
+                // If not found (React rendering), wait for changes in #root
+                const rootNode = document.getElementById('root');
+                if (rootNode) {
+                    const mutationObserver = new MutationObserver((mutations, obs) => {
+                        if (initScrollSpy()) {
+                            // Once we find targets, we can stop observing DOM changes to save performance
+                            // checking if ALL targets are found would be better, but 'some' is a start
+                            // For now, we'll keep observing if content loads progressively, or disconnect if confident.
+                            // Let's disconnect after a successful hit to avoid infinite loops if structure changes.
+                            obs.disconnect();
+                        }
+                    });
+                    mutationObserver.observe(rootNode, { childList: true, subtree: true });
+                }
+            }
         });
     </script>
