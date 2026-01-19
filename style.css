@@ -1,0 +1,30 @@
+/*
+Theme Name: EMPC Theme
+Theme URI: https://empc.es
+Author: EMPC
+Author URI: https://empc.es
+Description: Tema personalizado con React para EMPC - Desarrollo Web en León
+Version: 1.0.0
+Requires at least: 6.0
+Requires PHP: 8.0
+License: GNU General Public License v2 or later
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: empc-theme
+*/
+
+/* Reset básico - los estilos principales vienen de React/Tailwind */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+    background-color: #0f172a;
+    color: #f8fafc;
+}
+
+.empc-react-container {
+    min-height: 100vh;
+}
