@@ -32,7 +32,7 @@ jobs:
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
           server: ftp.empc.es
-          username: ${{ secrets.FTP_USER }}
+          username: scylea@empc.es
           password: ${{ secrets.FTP_PASS }}
           local-dir: ./
           server-dir: /wp-content/themes/empc-theme/
