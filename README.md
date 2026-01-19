@@ -1,34 +1,70 @@
-# EMPC Theme
+# EMPC Theme - Arquitectura Híbrida (WordPress + React)
 
-Tema WordPress híbrido con React para empc.es.
+Este proyecto implementa una **Arquitectura de Islas** que combina la robustez SEO de WordPress con la interactividad de React.
 
-## Desarrollo Local
+## 🏗️ Arquitectura Técnica
 
-```bash
-npm install
-npm run dev
-```
+### 1. WordPress (Backend & Estructura)
+- **Tema Base**: Estructura clásica (`header.php`, `footer.php`, `index.php`).
+- **Renderizado Híbrido**:
+  - `functions.php`: Detecta entorno (Local vs Producción).
+  - **Local (Docker)**: Carga Vite Client (puerto 5173). *[Actualmente en modo Build por estabilidad]*
+  - **Producción**: Carga assets compilados de `/react-app/assets/`.
+- **Mount Points (Islas)**:
+  - `#root`: Contenedor principal (actualmente renderiza la Home completa).
+  - `#react-whatsapp-bubble`: Widget flotante independiente.
+  - `#react-contact-root`: Reservado para futuros formularios.
 
-## Producción
+### 2. React (Frontend & UI)
+- **Stack**: React 18 + TypeScript + Vite.
+- **Estilos**: TailwindCSS 3 + PostCSS.
+- **Entry Point**: `src/main.tsx` que busca los IDs en el DOM y monta componentes condicionalmente via `ReactDOM.createRoot`.
 
-```bash
-npm run build
-git push origin main  # Auto-deploy a Raiola
-```
+### 3. Workflow de Desarrollo
 
-## Estructura
+#### Entorno Local (Docker)
+1. **Arrancar WordPress**:
+   ```bash
+   sudo docker-compose up -d
+   ```
+   Acceso: `http://localhost:8080`
+
+2. **Desarrollar en React**:
+   Editar archivos en `src/`.
+   Para ver cambios:
+   ```bash
+   npm run build
+   ```
+   *(Recargar navegador)*
+
+#### Despliegue (CI/CD)
+Gestionado por GitHub Actions (`.github/workflows/deploy.yml`):
+- Push a `main` -> `npm install` -> `npm run build` -> FTP Upload a Raiola.
+
+## 🚀 Roadmap de Componentes
+
+### "Must Have" (Prioridad alta)
+- [x] **Arquitectura Base**: Configuración híbrida y Docker.
+- [x] **Widget WhatsApp**: Componente React flotante sustituyendo plugin.
+- [ ] **Formulario Multi-step**: React Island para mejorar conversión en contacto.
+- [ ] **Limpieza**: Eliminación de plugins duplicados (plugins de WhatsApp, Elementor).
+
+### "Should Have"
+- [ ] **Calculadora de Presupuesto**: Herramienta interactiva para cualificación de leads.
+- [ ] **Portfolio Interactivo**: Filtrado instantáneo de proyectos.
+
+## 📂 Estructura de Carpetas
 
 ```
 empc-theme/
-├── style.css           # WordPress theme metadata
-├── functions.php       # WordPress + React integration
-├── index.php           # Main template
-├── src/                # React source code
-│   ├── main.tsx
-│   ├── App.tsx
-│   ├── index.css
-│   └── components/
-├── react-app/          # Built React app (generated)
-└── .github/workflows/  # GitHub Actions CI/CD
+├── .github/            # Workflows CI/CD
+├── react-app/          # Output del build (assets compilados)
+├── src/                # Código fuente React
+│   ├── components/     # Componentes (Islands)
+│   ├── styles/         # CSS global / Tailwind
+│   └── main.tsx        # Punto de entrada / Montaje de islas
+├── functions.php       # Lógica de encolado condicional
+├── index.php           # Template con mount points
+├── header.php          # Cabecera estándar WP
+└── footer.php          # Pie estándar WP
 ```
-# Deploy triggered: Mon Jan 19 01:02:36 PM CET 2026

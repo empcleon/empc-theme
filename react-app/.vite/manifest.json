@@ -1,11 +1,18 @@
 {
+  "src/assets/logo-transparent.png": {
+    "file": "assets/logo-transparent.png",
+    "src": "src/assets/logo-transparent.png"
+  },
   "src/main.tsx": {
     "file": "assets/app.js",
     "name": "main",
     "src": "src/main.tsx",
     "isEntry": true,
     "css": [
-      "assets/styles.css"
+      "assets/main.css"
+    ],
+    "assets": [
+      "assets/logo-transparent.png"
     ]
   }
 }

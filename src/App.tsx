@@ -4,7 +4,9 @@ import Services from './components/Services';
 import InteractiveShowcase from './components/InteractiveShowcase';
 import ArchitectureDiagram from './components/ArchitectureDiagram';
 import AiConsultant from './components/AiConsultant';
+import ContactForm from './components/ContactForm';
 import { Menu, X, Github, Linkedin, Mail } from 'lucide-react';
+import logo from './assets/logo-transparent.png';
 
 const App: React.FC = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -18,17 +20,15 @@ const App: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-slate-900 text-slate-50 font-sans selection:bg-rose-500 selection:text-white">
-      
+
       {/* Navigation */}
       <nav className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? 'bg-slate-900/95 backdrop-blur-md shadow-lg border-b border-white/5' : 'bg-transparent'}`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between h-20 items-center">
             {/* Logo */}
-            <div className="flex-shrink-0 flex items-center gap-2">
-              <div className="w-10 h-10 bg-gradient-to-br from-rose-500 to-orange-600 rounded-lg flex items-center justify-center font-bold text-xl text-white shadow-lg shadow-rose-500/20">
-                E
-              </div>
-              <span className="font-bold text-xl tracking-tight text-white">EMPC<span className="text-rose-500">.dev</span></span>
+            {/* Logo */}
+            <div className="flex-shrink-0 flex items-center">
+              <img src={logo} alt="EMPC Logo" className="h-12 w-auto" />
             </div>
 
             {/* Desktop Menu */}
@@ -59,10 +59,10 @@ const App: React.FC = () => {
       {mobileMenuOpen && (
         <div className="fixed inset-0 z-40 bg-slate-900 pt-24 px-6 md:hidden animate-fadeIn">
           <div className="flex flex-col space-y-8 text-center">
-             <a href="#metodo" onClick={() => setMobileMenuOpen(false)} className="text-2xl font-medium text-slate-200">Método</a>
-             <a href="#servicios" onClick={() => setMobileMenuOpen(false)} className="text-2xl font-medium text-slate-200">Servicios</a>
-             <a href="#demos" onClick={() => setMobileMenuOpen(false)} className="text-2xl font-medium text-slate-200">Demos</a>
-             <button className="bg-rose-600 py-4 rounded-xl font-bold text-white text-xl shadow-lg shadow-rose-900/50">Contactar Ahora</button>
+            <a href="#metodo" onClick={() => setMobileMenuOpen(false)} className="text-2xl font-medium text-slate-200">Método</a>
+            <a href="#servicios" onClick={() => setMobileMenuOpen(false)} className="text-2xl font-medium text-slate-200">Servicios</a>
+            <a href="#demos" onClick={() => setMobileMenuOpen(false)} className="text-2xl font-medium text-slate-200">Demos</a>
+            <button className="bg-rose-600 py-4 rounded-xl font-bold text-white text-xl shadow-lg shadow-rose-900/50">Contactar Ahora</button>
           </div>
         </div>
       )}
@@ -97,21 +97,33 @@ const App: React.FC = () => {
         </div>
       </section>
 
+      {/* 6. Contact Section */}
+      <section id="contacto" className="py-24 bg-slate-900 relative">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Hablemos de tu Proyecto</h2>
+            <p className="text-slate-400">
+              Cuéntanos qué necesitas y diseñaremos una arquitectura a medida.
+            </p>
+          </div>
+          <ContactForm />
+        </div>
+      </section>
+
       {/* Footer */}
       <footer className="bg-slate-950 py-16 border-t border-slate-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
             <div>
-              <div className="flex items-center gap-2 mb-6">
-                <div className="w-8 h-8 bg-gradient-to-br from-rose-500 to-orange-600 rounded-md flex items-center justify-center font-bold text-white">E</div>
-                <span className="font-bold text-xl text-white">EMPC.dev</span>
+              <div className="flex items-center mb-6">
+                <img src={logo} alt="EMPC Logo" className="h-10 w-auto" />
               </div>
               <p className="text-slate-500 text-sm leading-relaxed">
-                Desarrollo web artesanal desde León. <br/>
+                Desarrollo web artesanal desde León. <br />
                 Combinamos código robusto con diseño estratégico para ayudar al comercio local a escalar.
               </p>
             </div>
-            
+
             <div>
               <h4 className="text-white font-bold mb-4">Servicios</h4>
               <ul className="space-y-2 text-sm text-slate-500">
@@ -136,15 +148,15 @@ const App: React.FC = () => {
                 </a>
               </div>
               <p className="text-slate-600 text-xs">
-                León, España. <br/>
+                León, España. <br />
                 Disponible para proyectos remotos.
               </p>
             </div>
           </div>
-          
+
           <div className="pt-8 border-t border-slate-900 flex flex-col md:flex-row justify-between items-center gap-4">
             <div className="text-slate-600 text-xs">
-              © 2024 EMPC Desarrollo Web. Todos los derechos reservados.
+              © 2026 EMPC Desarrollo Web. Todos los derechos reservados.
             </div>
             <div className="flex gap-6 text-xs text-slate-600">
               <a href="#" className="hover:text-slate-400">Aviso Legal</a>

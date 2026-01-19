@@ -43,50 +43,37 @@ function empc_theme_setup()
 add_action('after_setup_theme', 'empc_theme_setup');
 
 /**
- * Cargar assets de React
+ * Cargar assets de React (Siempre versión compilada para estabilidad)
  */
-function empc_enqueue_scripts()
+function empc_load_scripts()
 {
-    $react_css = EMPC_THEME_DIR . '/react-app/assets/styles.css';
-    $react_js = EMPC_THEME_DIR . '/react-app/assets/app.js';
+    // Cargamos siempre los archivos generados en 'react-app'
+    $react_css = get_template_directory_uri() . '/react-app/assets/main.css';
+    $react_js = get_template_directory_uri() . '/react-app/assets/app.js';
 
-    // CSS de React
-    if (file_exists($react_css)) {
-        wp_enqueue_style(
-            'empc-react-styles',
-            EMPC_THEME_URI . '/react-app/assets/styles.css',
-            [],
-            filemtime($react_css)
-        );
+    // Importante: La ruta base para validar file_exists debe ser del sistema de archivos, no URL
+    $react_css_path = EMPC_THEME_DIR . '/react-app/assets/main.css';
+    $react_js_path = EMPC_THEME_DIR . '/react-app/assets/app.js';
+
+    if (file_exists($react_css_path)) {
+        wp_enqueue_style('empc-react-styles', $react_css, [], filemtime($react_css_path));
     }
 
-    // JavaScript de React
-    if (file_exists($react_js)) {
-        wp_enqueue_script(
-            'empc-react-app',
-            EMPC_THEME_URI . '/react-app/assets/app.js',
-            [],
-            filemtime($react_js),
-            true
-        );
+    if (file_exists($react_js_path)) {
+        wp_enqueue_script('empc-react', $react_js, [], filemtime($react_js_path), true);
     }
 
-    // Estilos del tema
-    wp_enqueue_style(
-        'empc-theme-style',
-        get_stylesheet_uri(),
-        [],
-        EMPC_THEME_VERSION
-    );
+    // Estilos del tema base
+    wp_enqueue_style('empc-theme-style', get_stylesheet_uri(), [], EMPC_THEME_VERSION);
 }
-add_action('wp_enqueue_scripts', 'empc_enqueue_scripts');
+add_action('wp_enqueue_scripts', 'empc_load_scripts');
 
 /**
- * Añadir type="module" al script de React
+ * Filtro para añadir type="module" (necesario para Vite y módulos ES)
  */
 function empc_script_type_module($tag, $handle, $src)
 {
-    if ($handle === 'empc-react-app') {
+    if (in_array($handle, ['vite-client', 'empc-react'])) {
         return '<script type="module" src="' . esc_url($src) . '"></script>';
     }
     return $tag;
