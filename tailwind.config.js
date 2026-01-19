@@ -2,6 +2,7 @@
 export default {
     content: [
         "./src/**/*.{js,ts,jsx,tsx}",
+        "./**/*.php"
     ],
     theme: {
         extend: {
@@ -24,5 +25,7 @@ export default {
             }
         },
     },
-    plugins: [],
+    plugins: [
+        require('@tailwindcss/typography'),
+    ],
 }

@@ -148,3 +148,94 @@ function empc_handle_contact_form($request)
         return new WP_Error('cant_send', 'Error al enviar email', ['status' => 500]);
     }
 }
+
+/**
+ * Auto-insertor de Contenido (MVP)
+ * Se ejecuta en 'init' y comprueba si existe el post.
+ */
+add_action('init', function () {
+    // Evitar ejecutar en cada carga si ya existe
+    if (get_page_by_title('¿Cuánto cuesta una web en León? Guía de precios 2026', OBJECT, 'post')) {
+        return;
+    }
+
+    $city = 'León';
+    $json_config = '{
+      "post_type": "blog",
+      "seo_keywords": ["presupuesto web León", "precio diseño web León", "empc servicios"],
+      "primary_cta": "island-budget-calculator",
+      "related_service": "desarrollo-wordpress",
+      "featured_image_alt": "Calculando presupuesto de desarrollo web en León",
+      "island_data": {
+        "calculator_mode": "full",
+        "base_pack_highlight": "esencial"
+      }
+    }';
+
+    $content = '
+    <!-- wp:html -->
+    <p>Si estás buscando un desarrollador en <strong>' . $city . '</strong>, te habrás dado cuenta de que los precios varían enormemente. Desde opciones "low-cost" que terminan siendo caras, hasta presupuestos de agencias que se escapan de la realidad de una pyme.</p>
+
+    <h2>Los 3 pilares que definen el precio de tu web</h2> 
+    <p>En EMPC no solo instalamos una plantilla. Usamos una arquitectura <strong>híbrida de WordPress + React</strong> para asegurar que tu web no solo sea bonita, sino que vuele. Los tres factores que más influyen son:</p> 
+    <ul> 
+        <li><strong>Rendimiento (WPO):</strong> Una web que carga en < 1s posiciona mejor en ' . $city . '.</li> 
+        <li><strong>Funcionalidad:</strong> No es lo mismo una web informativa que una con sistema de reservas real.</li> 
+        <li><strong>Escalabilidad:</strong> Que tu web pueda crecer sin romperse.</li> 
+    </ul>
+
+    <div id="island-budget-calculator" class="my-12">
+        <!-- React Island Mount Point -->
+        <div class="p-4 bg-slate-800 rounded animate-pulse">Cargando calculadora...</div>
+    </div>
+
+    <h2>Nuestros Packs de Referencia en ' . $city . '</h2> 
+    <p>Aunque cada proyecto es único, estos son los puntos de partida habituales para negocios de la zona:</p>
+
+    <div class="overflow-x-auto my-8">
+        <table class="w-full text-left border-collapse"> 
+            <thead> 
+                <tr class="border-b border-slate-700"> 
+                    <th class="p-4 font-bold text-white">Pack</th> 
+                    <th class="p-4 font-bold text-white">Desde</th> 
+                    <th class="p-4 font-bold text-white">Ideal para...</th> 
+                </tr> 
+            </thead> 
+            <tbody class="text-slate-300"> 
+                <tr class="border-b border-slate-800"> 
+                    <td class="p-4 font-medium text-white">Web Esencial</td> 
+                    <td class="p-4">900€</td> 
+                    <td class="p-4">Profesionales y pequeños negocios locales.</td> 
+                </tr> 
+                <tr class="border-b border-slate-800"> 
+                    <td class="p-4 font-medium text-white">Web Pro (React)</td> 
+                    <td class="p-4">1.800€</td> 
+                    <td class="p-4">Empresas que necesitan velocidad extrema y SEO.</td> 
+                </tr> 
+                <tr> 
+                    <td class="p-4 font-medium text-white">App a Medida</td> 
+                    <td class="p-4">3.500€</td> 
+                    <td class="p-4">Sistemas de reservas o catálogos complejos.</td> 
+                </tr> 
+            </tbody> 
+        </table>
+    </div>
+
+    <h2>Conclusión: No compres solo una web, compra una herramienta</h2> 
+    <p>En ' . $city . ', la competencia digital está creciendo. Una web lenta construida con Elementor o Divi ya no es suficiente. El stack de <strong>Antigravity</strong> te da la ventaja competitiva que necesitas.</p>
+    <!-- /wp:html -->
+    ';
+
+    $post_id = wp_insert_post([
+        'post_title' => '¿Cuánto cuesta una web en ' . $city . '? Guía de precios 2026',
+        'post_content' => $content,
+        'post_status' => 'publish',
+        'post_author' => 1,
+        'post_category' => [1], // Categoría por defecto
+        'post_excerpt' => 'Guía actualizada de precios de desarrollo web en León. Descubre cuánto cuesta realmente una web profesional y qué factores influyen.'
+    ]);
+
+    if ($post_id) {
+        update_post_meta($post_id, '_empc_react_config', $json_config);
+    }
+});
