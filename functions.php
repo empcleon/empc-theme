@@ -304,7 +304,7 @@ add_action('admin_init', function () {
         wp_die('No tienes permisos para realizar esta acción.');
     }
 
-    $content_version = '1.8'; // FORCE UPDATE: Booking Island Content (Slug Fix)
+    $content_version = '1.9'; // FORCE UPDATE: Booking Island Production Deploy
 
     // Nota: Eliminamos la comprobación de versión aquí para permitir re-instalación forzada manual
     // si el usuario lo solicita explícitamente vía URL.
