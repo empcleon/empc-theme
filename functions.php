@@ -410,6 +410,16 @@ add_action('admin_init', function () {
         }
     };
 
+    // Post TEST: Debug
+    $insert_empc_post(
+        '00. TEST DE VERIFICACIÓN (Ignorar)',
+        'debug-test-post',
+        '<!-- wp:paragraph --><p>Si ves esto, el código se actualiza correctamente.</p><!-- /wp:paragraph -->',
+        'Debug Post',
+        'wordpress-negocio',
+        null
+    );
+
     // Post 1: Guía de Precios
     $insert_empc_post(
         '¿Cuánto cuesta una web en León? Guía de precios 2026',
@@ -493,8 +503,14 @@ add_action('admin_init', function () {
 
     // --- FIN ---
     // Mensaje de éxito al admin
+    // Mensaje de éxito al admin
     add_action('admin_notices', function () {
-        echo '<div class="notice notice-success is-dismissible"><p>✅ <strong>EMPC Theme:</strong> Contenido instalado y actualizado correctamente.</p></div>';
+        global $content_version;
+        echo '<div class="notice notice-info is-dismissible" style="border-left-color: #f59e0b; padding: 20px;">
+                <h3 style="margin: 0; color: #b45309;">⚠️ DEBUG ACTIVO</h3>
+                <p style="font-size: 1.2em;">El código de <strong>EMPC Theme</strong> se está ejecutando correctamente.</p>
+                <p>Versión de Contenido: <strong>' . $content_version . '</strong></p>
+              </div>';
     });
 
     // Marcar versión
