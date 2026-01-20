@@ -215,7 +215,7 @@ function empc_handle_contact_form($request)
  * Se ejecuta solo una vez por versión de contenido para evitar sobrecarga de memoria
  */
 add_action('init', function () {
-    $content_version = '1.3'; // INCREMENTAR SI SE AÑADEN NUEVOS POSTS
+    $content_version = '1.6'; // FORCE UPDATE POST CONTENT (CSS FIX)
 
     // Si ya hemos configurado esta versión, salimos inmediatamente para ahorrar recursos
     if (get_option('empc_content_version') === $content_version) {
@@ -283,14 +283,12 @@ add_action('init', function () {
 
     // --- 3. Inserción de Posts ---
 
-    // Función Helper para insertar si no existe
+    // Función Helper para insertar O ACTUALIZAR
     $insert_empc_post = function ($title, $slug, $content, $excerpt, $cat_slug, $json_config) use ($cat_ids, $default_cat) {
-        if (get_page_by_title($title, OBJECT, 'post'))
-            return; // Ya existe
-
+        $existing_post = get_page_by_title($title, OBJECT, 'post');
         $cat_id = isset($cat_ids[$cat_slug]) ? $cat_ids[$cat_slug] : $default_cat;
 
-        $post_id = wp_insert_post([
+        $post_data = [
             'post_title' => $title,
             'post_name' => $slug,
             'post_content' => $content,
@@ -298,9 +296,16 @@ add_action('init', function () {
             'post_author' => 1,
             'post_category' => [$cat_id],
             'post_excerpt' => $excerpt
-        ]);
+        ];
 
-        if ($post_id && $json_config) {
+        if ($existing_post) {
+            $post_data['ID'] = $existing_post->ID;
+            $post_id = wp_update_post($post_data);
+        } else {
+            $post_id = wp_insert_post($post_data);
+        }
+
+        if ($post_id && !is_wp_error($post_id) && $json_config) {
             update_post_meta($post_id, '_empc_react_config', $json_config);
         }
     };
@@ -380,7 +385,7 @@ add_action('init', function () {
     $insert_empc_post(
         'Especial Hostelería en León (Simulación de Reservas)',
         'demo-reservas-restaurantes-leon',
-        '<!-- wp:html --> <h1>¿Tu restaurante en León sigue perdiendo clientes por culpa del teléfono?</h1> <p>Imagínate esto: es viernes noche y el teléfono no para de sonar.</p> <h2>La diferencia entre un formulario y un Sistema de Reservas</h2> <p>Un sistema real permite recibir una confirmación inmediata.</p> <div class="my-12 p-2 bg-gradient-to-br from-slate-100 to-white rounded-3xl shadow-inner border border-slate-200"> <div id="island-booking"></div> <p class="text-center text-xs text-slate-400 mt-4 italic">Simulación de reserva real: Prueba a seleccionar un servicio y una hora para ver la fluidez del sistema.</p> </div> <h2>Tecnología de León para la hostelería de León</h2> <p>En <strong>EMPC</strong> no solo instalamos software; diseñamos experiencias.</p> <!-- /wp:html -->',
+        '<!-- wp:html --> <h1>¿Tu restaurante en León sigue perdiendo clientes por culpa del teléfono?</h1> <p>Imagínate esto: es viernes noche y el teléfono no para de sonar.</p> <h2>La diferencia entre un formulario y un Sistema de Reservas</h2> <p>Un sistema real permite recibir una confirmación inmediata.</p> <div class="not-prose my-12 p-2 bg-gradient-to-br from-slate-100 to-white rounded-3xl shadow-inner border border-slate-200"> <div id="island-booking" class="font-sans antialiased"></div> <p class="text-center text-xs text-slate-400 mt-4 italic">Simulación de reserva real: Prueba a seleccionar un servicio y una hora para ver la fluidez del sistema.</p> </div> <h2>Tecnología de León para la hostelería de León</h2> <p>En <strong>EMPC</strong> no solo instalamos software; diseñamos experiencias.</p> <!-- /wp:html -->',
         'Demo interactiva de reservas para restaurantes en León. Digitaliza tu local del Húmedo sin pagar comisiones.',
         'reservas-y-automatizacion',
         '{ "post_type": "blog", "post_id": "demo-reservas-restaurantes-leon", "seo_keywords": ["reservas online restaurantes León", "digitalizar restaurante León"], "primary_cta": "island-booking", "island_data": { "mode": "demo-mode", "venue_type": "restaurant", "location": "León Centro" } }'

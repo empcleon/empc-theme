@@ -1,3 +1,5 @@
+import colors from 'tailwindcss/colors';
+
 /** @type {import('tailwindcss').Config} */
 export default {
     content: [
@@ -18,7 +20,9 @@ export default {
                     700: '#b91c1c',
                     800: '#991b1b',
                     900: '#7f1d1d',
-                }
+                },
+                brand: colors.emerald,
+                slate: colors.slate,
             },
             fontFamily: {
                 sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
