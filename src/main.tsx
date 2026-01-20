@@ -50,3 +50,16 @@ if (bookingElement) {
         </React.StrictMode>
     );
 }
+
+// 5. Montar Island: Production Booking System (Generic)
+const empcBookingElement = document.getElementById('empc-booking-root');
+if (empcBookingElement) {
+    // Dynamic import to split code
+    import('./islands/booking/BookingIsland').then(({ default: BookingIsland }) => {
+        ReactDOM.createRoot(empcBookingElement).render(
+            <React.StrictMode>
+                <BookingIsland />
+            </React.StrictMode>
+        );
+    });
+}

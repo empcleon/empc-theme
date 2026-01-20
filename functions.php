@@ -120,6 +120,45 @@ function empc_load_scripts()
 }
 add_action('wp_enqueue_scripts', 'empc_load_scripts');
 
+// --- SHORTCODES ---
+
+// Shortcode: [empc_booking phone="34612345678" business="Mi Negocio"]
+function empc_booking_shortcode($atts)
+{
+    // 1. Extraer atributos con valores por defecto
+    $a = shortcode_atts([
+        'phone' => '34626195795', // Default EMPCLEON phone
+        'business' => 'EMPC Ingeniería',
+        'city' => 'León'
+    ], $atts);
+
+    // 2. Definir Configuración para React
+    // La pasamos como objeto global window.empcConfig
+    $config = [
+        'nonce' => wp_create_nonce('wp_rest'),
+        'restUrl' => get_rest_url(),
+        'city' => sanitize_text_field($a['city']),
+        'businessPhone' => sanitize_text_field($a['phone']),
+        'businessName' => sanitize_text_field($a['business']),
+        'timezone' => 'Europe/Madrid'
+    ];
+
+    $json_config = json_encode($config);
+
+    // 3. Renderizar HTML + JS de Config
+    // Nota: Usamos un div con ID único.
+    ob_start();
+    ?>
+    <script>
+        window.empcConfig = <?php echo $json_config; ?>;
+    </script>
+    <div id="empc-booking-root" class="my-8 min-h-[400px]"></div>
+    <?php
+    return ob_get_clean();
+}
+add_shortcode('empc_booking', 'empc_booking_shortcode');
+
+
 /**
  * Filtro para añadir type="module" (necesario para Vite y módulos ES)
  */
