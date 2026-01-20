@@ -47,6 +47,11 @@ add_action('after_setup_theme', 'empc_theme_setup');
  */
 function empc_load_scripts()
 {
+    // BLINDAJE: No cargar nada en admin, cron, ajax o REST
+    if (is_admin() || wp_doing_ajax() || wp_doing_cron() || defined('REST_REQUEST')) {
+        return;
+    }
+
     // Cargamos siempre los archivos generados en 'react-app'
     $react_css = get_template_directory_uri() . '/react-app/assets/main.css';
     $react_js = get_template_directory_uri() . '/react-app/assets/app.js';
@@ -55,11 +60,27 @@ function empc_load_scripts()
     $react_css_path = EMPC_THEME_DIR . '/react-app/assets/main.css';
     $react_js_path = EMPC_THEME_DIR . '/react-app/assets/app.js';
 
+    // 1. CSS (Crítico para todo el sitio: Header, Footer, Fuentes)
+    // Se carga SIEMPRE porque contiene el Tailwind global
     if (file_exists($react_css_path)) {
         wp_enqueue_style('empc-react-styles', $react_css, [], filemtime($react_css_path));
     }
 
-    if (file_exists($react_js_path)) {
+    // 2. JS (React Logic) - CARGA CONDICIONAL (WPO)
+    // Solo cargamos el runtime de React si realmente hay componentes ("islas") en la página
+    $should_load_react = false;
+
+    if (is_front_page()) {
+        $should_load_react = true; // Home suele tener Calculadora o Contacto
+    } elseif (is_singular()) {
+        global $post;
+        // Si el post tiene configuración de React explícita, cargamos
+        if (get_post_meta($post->ID, '_empc_react_config', true)) {
+            $should_load_react = true;
+        }
+    }
+
+    if ($should_load_react && file_exists($react_js_path)) {
         wp_enqueue_script('empc-react', $react_js, [], filemtime($react_js_path), true);
 
 
@@ -85,7 +106,7 @@ function empc_load_scripts()
         wp_localize_script('empc-react', 'empcData', $data);
     }
 
-    // Estilos del tema base
+    // Estilos del tema base (style.css vacío o mínimos)
     wp_enqueue_style('empc-theme-style', get_stylesheet_uri(), [], EMPC_THEME_VERSION);
 }
 add_action('wp_enqueue_scripts', 'empc_load_scripts');
@@ -121,16 +142,22 @@ add_shortcode('empc_react', 'empc_react_shortcode');
  * REST API Endpoint para Formulario de Contacto
  */
 add_action('rest_api_init', function () {
+    // Callback de seguridad (validar Nonce)
+    $auth_callback = function ($request) {
+        $nonce = $request->get_header('x-wp-nonce');
+        return wp_verify_nonce($nonce, 'wp_rest');
+    };
+
     register_rest_route('empc/v1', '/contact', [
         'methods' => 'POST',
         'callback' => 'empc_handle_contact_form',
-        'permission_callback' => '__return_true' // Validamos nonce manualmente si es necesario, o lo dejamos abierto con rate limit (pendiente)
+        'permission_callback' => $auth_callback
     ]);
 
     register_rest_route('empc/v1', '/budget', [
         'methods' => 'POST',
         'callback' => 'empc_handle_budget',
-        'permission_callback' => '__return_true'
+        'permission_callback' => $auth_callback
     ]);
 });
 
@@ -214,19 +241,31 @@ function empc_handle_contact_form($request)
  * Auto-insertor de Contenido (MVP) - OPTIMIZADO
  * Se ejecuta solo una vez por versión de contenido para evitar sobrecarga de memoria
  */
-add_action('init', function () {
-    $content_version = '1.6'; // FORCE UPDATE POST CONTENT (CSS FIX)
-
-    // Si ya hemos configurado esta versión, salimos inmediatamente para ahorrar recursos
-    if (get_option('empc_content_version') === $content_version) {
+/**
+ * Auto-insertor de Contenido (Disparador Manual)
+ * URL Trigger: /wp-admin/admin.php?empc_install_content=1
+ */
+add_action('admin_init', function () {
+    // 1. Verificar disparador manual
+    if (!isset($_GET['empc_install_content'])) {
         return;
     }
+
+    // 2. Verificar permisos de admin
+    if (!current_user_can('manage_options')) {
+        wp_die('No tienes permisos para realizar esta acción.');
+    }
+
+    $content_version = '1.6'; // FORCE UPDATE POST CONTENT (CSS FIX)
+
+    // Nota: Eliminamos la comprobación de versión aquí para permitir re-instalación forzada manual
+    // si el usuario lo solicita explícitamente vía URL.
 
     // --- 1. Crear Categorías ---
     $categories = [
         'WordPress para negocio' => 'wordpress-negocio',
         'SEO local' => 'seo-local',
-        'Reservas y automatización' => 'reservas-y-automatizacion', // Corregido slug consistente
+        'Reservas y automatización' => 'reservas-y-automatizacion',
         'Rendimiento / WPO' => 'rendimiento-wpo'
     ];
 
@@ -237,7 +276,11 @@ add_action('init', function () {
             $term = wp_insert_term($name, 'category', ['slug' => $slug]);
         }
         if (!is_wp_error($term)) {
-            $cat_ids[$slug] = $term['term_id'];
+            // wp_insert_term devuelve array; term_exists puede devolver array o int/null
+            $term_id = is_array($term) ? $term['term_id'] : $term;
+            if ($term_id) {
+                $cat_ids[$slug] = $term_id;
+            }
         }
     }
     // Fallback ID
@@ -392,7 +435,12 @@ add_action('init', function () {
     );
 
     // --- FIN ---
-    // Marcar como configurado para no volver a ejecutar esto en cada carga
+    // Mensaje de éxito al admin
+    add_action('admin_notices', function () {
+        echo '<div class="notice notice-success is-dismissible"><p>✅ <strong>EMPC Theme:</strong> Contenido instalado y actualizado correctamente.</p></div>';
+    });
+
+    // Marcar versión
     update_option('empc_content_version', $content_version);
 });
 
