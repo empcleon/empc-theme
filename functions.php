@@ -108,6 +108,15 @@ function empc_load_scripts()
 
     // Estilos del tema base (style.css vacío o mínimos)
     wp_enqueue_style('empc-theme-style', get_stylesheet_uri(), [], EMPC_THEME_VERSION);
+
+    // --- LIMPIEZA WPO (Fase 4) ---
+    // Eliminamos estilos basura de WordPress que no usamos (Gutenberg)
+    if (!is_admin()) {
+        wp_dequeue_style('wp-block-library');
+        wp_dequeue_style('wp-block-library-theme');
+        wp_dequeue_style('wc-blocks-style'); // Si hubiera restos de Woo
+        wp_dequeue_style('global-styles'); // El inline CSS gigante de WP 5.9+
+    }
 }
 add_action('wp_enqueue_scripts', 'empc_load_scripts');
 

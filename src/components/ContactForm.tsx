@@ -87,15 +87,16 @@ const ContactForm = () => {
                             <h3 className="text-2xl font-bold text-white mb-6">Empecemos por las presentaciones</h3>
 
                             <div className="space-y-2">
-                                <label className="block text-sm font-medium text-slate-400">¿Cómo te llamas?</label>
+                                <label htmlFor="cf-name" className="block text-sm font-medium text-slate-300">¿Cómo te llamas?</label>
                                 <div className="relative">
                                     <User className="absolute left-4 top-3.5 w-5 h-5 text-slate-500" />
                                     <input
+                                        id="cf-name"
                                         type="text"
                                         name="name"
                                         value={formData.name}
                                         onChange={handleChange}
-                                        className="w-full bg-slate-800 border border-slate-700 rounded-xl py-3 pl-12 pr-4 text-white focus:outline-none focus:border-rose-500 focus:ring-1 focus:ring-rose-500 transition-all"
+                                        className="w-full bg-slate-800 border border-slate-700 rounded-xl py-3 pl-12 pr-4 text-white focus:outline-none focus:border-rose-500 focus:ring-1 focus:ring-rose-500 transition-all placeholder-slate-500"
                                         placeholder="Tu nombre o empresa"
                                         required
                                     />
@@ -103,15 +104,16 @@ const ContactForm = () => {
                             </div>
 
                             <div className="space-y-2">
-                                <label className="block text-sm font-medium text-slate-400">Correo electrónico</label>
+                                <label htmlFor="cf-email" className="block text-sm font-medium text-slate-300">Correo electrónico</label>
                                 <div className="relative">
                                     <Mail className="absolute left-4 top-3.5 w-5 h-5 text-slate-500" />
                                     <input
+                                        id="cf-email"
                                         type="email"
                                         name="email"
                                         value={formData.email}
                                         onChange={handleChange}
-                                        className="w-full bg-slate-800 border border-slate-700 rounded-xl py-3 pl-12 pr-4 text-white focus:outline-none focus:border-rose-500 focus:ring-1 focus:ring-rose-500 transition-all"
+                                        className="w-full bg-slate-800 border border-slate-700 rounded-xl py-3 pl-12 pr-4 text-white focus:outline-none focus:border-rose-500 focus:ring-1 focus:ring-rose-500 transition-all placeholder-slate-500"
                                         placeholder="nombre@empresa.com"
                                         required
                                     />

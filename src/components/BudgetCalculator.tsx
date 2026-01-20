@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Calculator, Check, ArrowRight, Server, Search, PenTool, Calendar, ShoppingBag, Printer, Upload, Zap, MapPin, Utensils, Coffee, Store } from 'lucide-react';
+import { Check, ArrowRight, Server, Search, PenTool, Calendar, ShoppingBag, Printer, Upload, Zap, MapPin, Utensils } from 'lucide-react';
 
 // === Tipos & Configuración ===
 interface CalculatorConfig {
@@ -307,22 +307,30 @@ const BudgetCalculator = () => {
                     <form onSubmit={handleSubmit} className="bg-slate-800/50 p-6 rounded-xl border border-slate-700 text-left">
                         <h4 className="text-white font-bold mb-4">¿Quieres esta propuesta en PDF?</h4>
                         <div className="space-y-4">
-                            <input
-                                type="text"
-                                required
-                                className="w-full bg-slate-900 border border-slate-700 rounded-lg p-3 text-white focus:border-rose-500 focus:outline-none"
-                                placeholder="Tu Nombre o Empresa"
-                                value={lead.name}
-                                onChange={e => setLead({ ...lead, name: e.target.value })}
-                            />
-                            <input
-                                type="email"
-                                required
-                                className="w-full bg-slate-900 border border-slate-700 rounded-lg p-3 text-white focus:border-rose-500 focus:outline-none"
-                                placeholder="Email Profesional"
-                                value={lead.email}
-                                onChange={e => setLead({ ...lead, email: e.target.value })}
-                            />
+                            <div>
+                                <label htmlFor="bc-name" className="block text-sm font-medium text-slate-300 mb-1">Nombre</label>
+                                <input
+                                    id="bc-name"
+                                    type="text"
+                                    required
+                                    className="w-full bg-slate-900 border border-slate-700 rounded-lg p-3 text-white focus:border-rose-500 focus:outline-none placeholder-slate-500"
+                                    placeholder="Tu Nombre o Empresa"
+                                    value={lead.name}
+                                    onChange={e => setLead({ ...lead, name: e.target.value })}
+                                />
+                            </div>
+                            <div>
+                                <label htmlFor="bc-email" className="block text-sm font-medium text-slate-300 mb-1">Email</label>
+                                <input
+                                    id="bc-email"
+                                    type="email"
+                                    required
+                                    className="w-full bg-slate-900 border border-slate-700 rounded-lg p-3 text-white focus:border-rose-500 focus:outline-none placeholder-slate-500"
+                                    placeholder="Email Profesional"
+                                    value={lead.email}
+                                    onChange={e => setLead({ ...lead, email: e.target.value })}
+                                />
+                            </div>
                             <button
                                 type="submit"
                                 disabled={status === 'submitting'}
