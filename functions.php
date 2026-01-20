@@ -294,20 +294,19 @@ function empc_handle_contact_form($request)
  * URL Trigger: /wp-admin/admin.php?empc_install_content=1
  */
 add_action('admin_init', function () {
-    // 1. Verificar disparador manual
-    if (!isset($_GET['empc_install_content'])) {
-        return;
-    }
-
-    // 2. Verificar permisos de admin
+    // Verificar permisos de admin
     if (!current_user_can('manage_options')) {
-        wp_die('No tienes permisos para realizar esta acción.');
+        return;
     }
 
     $content_version = '1.9'; // FORCE UPDATE: Booking Island Production Deploy
 
-    // Nota: Eliminamos la comprobación de versión aquí para permitir re-instalación forzada manual
-    // si el usuario lo solicita explícitamente vía URL.
+    // Verificar si necesita actualización comparando versiones
+    $db_version = get_option('empc_content_version', '0');
+    if ($db_version === $content_version) {
+        return; // Ya está actualizado
+    }
+
 
     // --- 1. Crear Categorías ---
     $categories = [
