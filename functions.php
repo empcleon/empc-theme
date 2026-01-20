@@ -304,7 +304,7 @@ add_action('admin_init', function () {
         wp_die('No tienes permisos para realizar esta acción.');
     }
 
-    $content_version = '1.7'; // FORCE UPDATE: Booking Island Content
+    $content_version = '1.8'; // FORCE UPDATE: Booking Island Content (Slug Fix)
 
     // Nota: Eliminamos la comprobación de versión aquí para permitir re-instalación forzada manual
     // si el usuario lo solicita explícitamente vía URL.
@@ -374,9 +374,18 @@ add_action('admin_init', function () {
 
     // --- 3. Inserción de Posts ---
 
-    // Función Helper para insertar O ACTUALIZAR
+    // Función Helper para insertar O ACTUALIZAR (Búsqueda por SLUG más robusta)
     $insert_empc_post = function ($title, $slug, $content, $excerpt, $cat_slug, $json_config) use ($cat_ids, $default_cat) {
-        $existing_post = get_page_by_title($title, OBJECT, 'post');
+        // Buscar por SLUG (más fiable que el título que puede cambiar)
+        $args = [
+            'name' => $slug,
+            'post_type' => 'post',
+            'post_status' => 'any',
+            'numberposts' => 1
+        ];
+        $existing_posts = get_posts($args);
+        $existing_post = !empty($existing_posts) ? $existing_posts[0] : null;
+
         $cat_id = isset($cat_ids[$cat_slug]) ? $cat_ids[$cat_slug] : $default_cat;
 
         $post_data = [
