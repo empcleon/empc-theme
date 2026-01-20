@@ -353,6 +353,21 @@ add_action('admin_init', function () {
             'post_author' => 1,
             'post_name' => 'home'
         ]);
+        // Página: Nuestro Método (Method Island)
+        $method_page = get_page_by_title('Nuestro Método', OBJECT, 'page');
+        if (!$method_page) {
+            $method_id = wp_insert_post([
+                'post_title' => 'Nuestro Método',
+                'post_name' => 'nuestro-metodo',
+                'post_content' => '<!-- wp:html --><div id="island-method-page"></div><!-- /wp:html -->',
+                'post_status' => 'publish',
+                'post_type' => 'page',
+            ]);
+            if ($method_id && !is_wp_error($method_id)) {
+                update_post_meta($method_id, '_empc_react_config', '{"post_type":"page","page_id":"nuestro-metodo","primary_cta":"island-method-page"}');
+            }
+        }
+
         update_option('show_on_front', 'page');
         update_option('page_on_front', $home_id);
     }

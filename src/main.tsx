@@ -2,6 +2,7 @@ import React, { lazy, Suspense } from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
 import WhatsAppBubble from './components/WhatsAppBubble';
+import MethodPage from './components/MethodPage'; // New import
 import './index.css';
 
 // 1. Montar App principal (si existe el contenedor)
@@ -62,4 +63,14 @@ if (empcBookingElement) {
             </React.StrictMode>
         );
     });
+}
+
+// 6. Montar Island: Method Page (Nuestro Método)
+const methodElement = document.getElementById('island-method-page');
+if (methodElement) {
+    ReactDOM.createRoot(methodElement).render(
+        <React.StrictMode>
+            <MethodPage />
+        </React.StrictMode>
+    );
 }
