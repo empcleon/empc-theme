@@ -304,7 +304,7 @@ add_action('admin_init', function () {
         wp_die('No tienes permisos para realizar esta acción.');
     }
 
-    $content_version = '1.6'; // FORCE UPDATE POST CONTENT (CSS FIX)
+    $content_version = '1.7'; // FORCE UPDATE: Booking Island Content
 
     // Nota: Eliminamos la comprobación de versión aquí para permitir re-instalación forzada manual
     // si el usuario lo solicita explícitamente vía URL.
