@@ -404,9 +404,16 @@ add_action('admin_init', function () {
             $post_id = wp_insert_post($post_data);
         }
 
-        if ($post_id && !is_wp_error($post_id) && $json_config) {
-            update_post_meta($post_id, '_empc_react_config', $json_config);
+        // CRÍTICO: Siempre actualizar el meta, incluso si el post ya existía
+        // Esto corrige posts antiguos que no tienen _empc_react_config
+        if ($post_id && !is_wp_error($post_id)) {
+            if ($json_config) {
+                update_post_meta($post_id, '_empc_react_config', $json_config);
+            }
+            return $post_id;
         }
+
+        return false;
     };
 
     // Post TEST: Debug
