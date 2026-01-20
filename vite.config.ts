@@ -16,7 +16,8 @@ export default defineConfig(({ command }) => ({
             output: {
                 entryFileNames: 'assets/app.js',
                 chunkFileNames: 'assets/[name].js',
-                assetFileNames: 'assets/[name].[ext]'
+                assetFileNames: 'assets/[name].[ext]',
+                inlineDynamicImports: true, // Force everything into single bundle
             }
         },
     },
