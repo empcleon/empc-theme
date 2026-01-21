@@ -25,22 +25,28 @@
 
                 <!-- Desktop Menu -->
                 <div class="hidden md:flex space-x-8 items-center">
-                    <a href="<?php echo home_url('/#metodo'); ?>"
-                        class="text-slate-300 hover:text-white transition-colors text-sm font-medium">Nuestro Método</a>
-                    <a href="<?php echo home_url('/#servicios'); ?>"
-                        class="text-slate-300 hover:text-white transition-colors text-sm font-medium">Servicios</a>
                     <?php
-                    // Lógica para estado activo del Blog (Home de entradas, single, archivos)
+                    // Detectar página activa
+                    $current_page = get_queried_object();
+                    $is_home = is_front_page();
                     $is_blog = (is_home() || is_single() || is_archive() || is_search());
-                    $blog_class = $is_blog
-                        ? "text-white font-medium text-sm border-b-2 border-rose-500 pb-1"
-                        : "text-slate-300 hover:text-white transition-colors text-sm font-medium";
+                    $is_method_page = (is_page('nuestro-metodo') || (isset($current_page->post_name) && $current_page->post_name === 'nuestro-metodo'));
+
+                    // Clases para cada enlace
+                    $active_class = "text-white font-medium text-sm border-b-2 border-rose-500 pb-1";
+                    $inactive_class = "text-slate-300 hover:text-white transition-colors text-sm font-medium";
+
+                    $method_class = $is_method_page ? $active_class : $inactive_class;
+                    $blog_class = $is_blog ? $active_class : $inactive_class;
                     ?>
+                    <a href="<?php echo home_url('/#metodo'); ?>" class="<?php echo $inactive_class; ?>">Nuestro
+                        Método</a>
+                    <a href="<?php echo home_url('/#servicios'); ?>"
+                        class="<?php echo $inactive_class; ?>">Servicios</a>
                     <a href="<?php echo home_url('/blog'); ?>" class="<?php echo $blog_class; ?>">Blog</a>
-                    <a href="<?php echo home_url('/#demos'); ?>"
-                        class="text-slate-300 hover:text-white transition-colors text-sm font-medium">Demos</a>
+                    <a href="<?php echo home_url('/#demos'); ?>" class="<?php echo $inactive_class; ?>">Demos</a>
                     <a href="<?php echo home_url('/#consultor-ia'); ?>"
-                        class="text-slate-300 hover:text-white transition-colors text-sm font-medium flex items-center gap-2">
+                        class="<?php echo $inactive_class; ?> flex items-center gap-2">
                         <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
                         Consultor IA
                     </a>
