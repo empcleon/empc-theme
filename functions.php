@@ -12,6 +12,10 @@ define('EMPC_THEME_VERSION', '1.0.0');
 define('EMPC_THEME_DIR', get_template_directory());
 define('EMPC_THEME_URI', get_template_directory_uri());
 
+// Include service pages helpers
+require_once EMPC_THEME_DIR . '/inc/service-pages-config.php';
+require_once EMPC_THEME_DIR . '/inc/service-pages-data.php';
+
 /**
  * Configuración inicial del tema
  */
@@ -299,7 +303,7 @@ add_action('admin_init', function () {
         return;
     }
 
-    $content_version = '1.9'; // FORCE UPDATE: Booking Island Production Deploy
+    $content_version = '2.0'; // Bumped for service pages // FORCE UPDATE: Booking Island Production Deploy
 
     // Verificar si necesita actualización comparando versiones
     $db_version = get_option('empc_content_version', '0');
@@ -520,6 +524,13 @@ add_action('admin_init', function () {
         'Demo interactiva de reservas para restaurantes en León. Digitaliza tu local del Húmedo sin pagar comisiones.',
         'reservas-y-automatizacion',
         '{ "post_type": "blog", "post_id": "demo-reservas-restaurantes-leon", "seo_keywords": ["reservas online restaurantes León", "digitalizar restaurante León"], "primary_cta": "island-booking", "island_data": { "mode": "demo-mode", "venue_type": "restaurant", "location": "León Centro" } }'
+    );
+
+    // SERVICE PAGE: Diseño Web León
+    empc_insert_service_page(
+        'Diseño Web en León',
+        'diseno-web-leon',
+        get_diseno_web_leon_config()
     );
 
     // --- FIN ---

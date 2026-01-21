@@ -74,3 +74,33 @@ if (methodElement) {
         </React.StrictMode>
     );
 }
+
+// 7. Service Page Islands - Dynamic mounting from data attributes
+// These islands read their configuration from data-config attributes set by WordPress
+
+// Helper function to mount service islands
+function mountServiceIsland(elementId: string, Component: React.ComponentType<any>) {
+    const element = document.getElementById(elementId);
+    if (element) {
+        const configAttr = element.getAttribute('data-config');
+        const config = configAttr ? JSON.parse(configAttr) : {};
+
+        ReactDOM.createRoot(element).render(
+            <React.StrictMode>
+                <Component {...config} />
+            </React.StrictMode>
+        );
+    }
+}
+
+// Import service components
+import('./components/services').then((services) => {
+    mountServiceIsland('service-hero-island', services.ServiceHero);
+    mountServiceIsland('service-stats-island', services.StatsBar);
+    mountServiceIsland('service-features-island', services.FeatureGrid);
+    mountServiceIsland('service-pricing-island', services.PricingCards);
+    mountServiceIsland('service-process-island', services.ProcessTimeline);
+    mountServiceIsland('service-testimonials-island', services.TestimonialCard);
+    mountServiceIsland('service-faq-island', services.FAQAccordion);
+    mountServiceIsland('service-cta-island', services.CTAForm);
+});
