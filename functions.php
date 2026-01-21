@@ -303,7 +303,7 @@ add_action('admin_init', function () {
         return;
     }
 
-    $content_version = '2.0'; // Bumped for service pages // FORCE UPDATE: Booking Island Production Deploy
+    $content_version = '2.1'; // Force service page config update
 
     // Verificar si necesita actualización comparando versiones
     $db_version = get_option('empc_content_version', '0');
