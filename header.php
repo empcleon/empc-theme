@@ -31,6 +31,7 @@
                     $is_home = is_front_page();
                     $is_blog = (is_home() || is_single() || is_archive() || is_search());
                     $is_method_page = (is_page('nuestro-metodo') || (isset($current_page->post_name) && $current_page->post_name === 'nuestro-metodo'));
+                    $is_services_page = (is_page('diseno-web-leon') || is_page('tiendas-online-leon'));
 
                     // Clases para cada enlace
                     $active_class = "text-white font-medium text-sm border-b-2 border-rose-500 pb-1";
@@ -38,11 +39,40 @@
 
                     $method_class = $is_method_page ? $active_class : $inactive_class;
                     $blog_class = $is_blog ? $active_class : $inactive_class;
+                    $services_class = $is_services_page ? "text-white font-medium text-sm" : "text-slate-300 hover:text-white transition-colors text-sm font-medium";
                     ?>
                     <a href="<?php echo home_url('/#metodo'); ?>" class="<?php echo $inactive_class; ?>">Nuestro
                         Método</a>
-                    <a href="<?php echo home_url('/#servicios'); ?>"
-                        class="<?php echo $inactive_class; ?>">Servicios</a>
+
+                    <!-- Servicios Dropdown -->
+                    <div class="relative group">
+                        <button class="<?php echo $services_class; ?> flex items-center gap-1 focus:outline-none">
+                            Servicios
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="w-4 h-4 transition-transform group-hover:rotate-180">
+                                <path d="m6 9 6 6 6-6" />
+                            </svg>
+                        </button>
+                        <!-- Dropdown Content -->
+                        <div
+                            class="absolute left-1/2 -translate-x-1/2 top-full mt-2 w-64 bg-slate-800 rounded-xl shadow-xl border border-slate-700 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform origin-top overflow-hidden z-50">
+                            <div class="py-2">
+                                <a href="<?php echo home_url('/diseno-web-leon'); ?>"
+                                    class="block px-4 py-3 hover:bg-slate-700 transition-colors">
+                                    <span class="block text-white font-medium text-sm">Diseño Web</span>
+                                    <span class="block text-slate-400 text-xs mt-0.5">Landing pages y
+                                        corporativas</span>
+                                </a>
+                                <a href="<?php echo home_url('/tiendas-online-leon'); ?>"
+                                    class="block px-4 py-3 hover:bg-slate-700 transition-colors border-t border-slate-700/50">
+                                    <span class="block text-white font-medium text-sm">Tiendas Online</span>
+                                    <span class="block text-slate-400 text-xs mt-0.5">E-commerce y catálogos</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
                     <a href="<?php echo home_url('/blog'); ?>" class="<?php echo $blog_class; ?>">Blog</a>
                     <a href="<?php echo home_url('/#demos'); ?>" class="<?php echo $inactive_class; ?>">Demos</a>
                     <a href="<?php echo home_url('/#consultor-ia'); ?>"
@@ -74,12 +104,24 @@
 
     <!-- Mobile Menu Overlay -->
     <div id="mobile-menu"
-        class="fixed inset-0 z-40 bg-slate-900 pt-24 px-6 md:hidden hidden opacity-0 transition-opacity duration-300">
-        <div class="flex flex-col space-y-8 text-center">
+        class="fixed inset-0 z-40 bg-slate-900 pt-24 px-6 md:hidden hidden opacity-0 transition-opacity duration-300 overflow-y-auto">
+        <div class="flex flex-col space-y-6 text-center pb-10">
             <a href="<?php echo home_url('/#metodo'); ?>"
                 class="mobile-link text-2xl font-medium text-slate-200">Método</a>
-            <a href="<?php echo home_url('/#servicios'); ?>"
-                class="mobile-link text-2xl font-medium text-slate-200">Servicios</a>
+
+            <!-- Mobile Services Section -->
+            <div class="space-y-4 border-y border-slate-800 py-6">
+                <span class="text-xs uppercase tracking-widest text-slate-500 font-bold">Servicios</span>
+                <a href="<?php echo home_url('/diseno-web-leon'); ?>"
+                    class="mobile-link block text-xl font-medium text-white">
+                    Diseño Web
+                </a>
+                <a href="<?php echo home_url('/tiendas-online-leon'); ?>"
+                    class="mobile-link block text-xl font-medium text-white">
+                    Tiendas Online
+                </a>
+            </div>
+
             <?php
             $mobile_blog_class = $is_blog
                 ? "mobile-link text-2xl font-medium text-white"
@@ -89,7 +131,7 @@
             <a href="<?php echo home_url('/#demos'); ?>"
                 class="mobile-link text-2xl font-medium text-slate-200">Demos</a>
             <a href="<?php echo home_url('/#contacto'); ?>"
-                class="bg-rose-600 py-4 rounded-xl font-bold text-white text-xl shadow-lg shadow-rose-900/50">Contactar
+                class="bg-rose-600 py-4 rounded-xl font-bold text-white text-xl shadow-lg shadow-rose-900/50 block">Contactar
                 Ahora</a>
         </div>
     </div>

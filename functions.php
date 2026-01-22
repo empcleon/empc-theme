@@ -315,7 +315,7 @@ add_action('admin_init', function () {
         return;
     }
 
-    $content_version = '2.3'; // Add /presupuesto-web/ page with calculator
+    $content_version = '2.4';
 
     // Verificar si necesita actualización comparando versiones
     $db_version = get_option('empc_content_version', '0');
@@ -329,8 +329,9 @@ add_action('admin_init', function () {
         'WordPress para negocio' => 'wordpress-negocio',
         'SEO local' => 'seo-local',
         'Reservas y automatización' => 'reservas-y-automatizacion',
-        'Rendimiento / WPO' => 'rendimiento-wpo'
+        'Rendimiento / WPO' => 'rendimiento-wpo',
     ];
+
 
     $cat_ids = [];
     foreach ($categories as $name => $slug) {
@@ -544,6 +545,16 @@ add_action('admin_init', function () {
         'diseno-web-leon',
         get_diseno_web_leon_config()
     );
+
+    // SERVICE PAGE: Tiendas Online
+    if (function_exists('get_tiendas_online_config')) {
+        empc_insert_service_page(
+            'Tiendas Online en León',
+            'tiendas-online-leon',
+            get_tiendas_online_config(),
+            'page-tiendas-online.php'
+        );
+    }
 
     // Página dedicada de Calculadora de Presupuestos
     $calc_page_exists = get_page_by_title('Calculadora de Presupuesto Web', OBJECT, 'page');

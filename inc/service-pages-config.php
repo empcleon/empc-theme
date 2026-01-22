@@ -12,7 +12,7 @@
  * @param array $config Service configuration array
  * @return int|false Post ID or false on failure
  */
-function empc_insert_service_page($title, $slug, $config)
+function empc_insert_service_page($title, $slug, $config, $template = 'page-service.php')
 {
     // Check if page already exists
     $existing_page = get_page_by_title($title, OBJECT, 'page');
@@ -23,7 +23,7 @@ function empc_insert_service_page($title, $slug, $config)
         'post_content' => '', // Content handled by page-service.php template
         'post_status' => 'publish',
         'post_type' => 'page',
-        'page_template' => 'page-service.php'
+        'page_template' => $template
     ];
 
     if ($existing_page) {
