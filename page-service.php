@@ -22,48 +22,56 @@ get_header();
             ?>
 
             <!-- Hero Island -->
-            <div id="service-hero-island" data-config='<?php echo esc_attr(json_encode($config['hero'])); ?>'>
+            <div id="service-hero-island"
+                data-config='<?php echo esc_attr(json_encode($config['hero'], JSON_UNESCAPED_UNICODE)); ?>'>
             </div>
 
             <!-- Stats Bar Island -->
             <?php if (isset($config['stats'])): ?>
-                <div id="service-stats-island" data-config='<?php echo esc_attr(json_encode($config['stats'])); ?>'>
+                <div id="service-stats-island"
+                    data-config='<?php echo esc_attr(json_encode($config['stats'], JSON_UNESCAPED_UNICODE)); ?>'>
                 </div>
             <?php endif; ?>
 
             <!-- Features Grid Island -->
             <?php if (isset($config['features'])): ?>
-                <div id="service-features-island" data-config='<?php echo esc_attr(json_encode($config['features'])); ?>'>
+                <div id="service-features-island"
+                    data-config='<?php echo esc_attr(json_encode($config['features'], JSON_UNESCAPED_UNICODE)); ?>'>
                 </div>
             <?php endif; ?>
 
             <!-- Pricing Cards Island -->
             <?php if (isset($config['pricing'])): ?>
-                <div id="service-pricing-island" data-config='<?php echo esc_attr(json_encode($config['pricing'])); ?>'>
+                <div id="service-pricing-island"
+                    data-config='<?php echo esc_attr(json_encode($config['pricing'], JSON_UNESCAPED_UNICODE)); ?>'>
                 </div>
             <?php endif; ?>
 
             <!-- Process Timeline Island -->
             <?php if (isset($config['process'])): ?>
-                <div id="service-process-island" data-config='<?php echo esc_attr(json_encode($config['process'])); ?>'>
+                <div id="service-process-island"
+                    data-config='<?php echo esc_attr(json_encode($config['process'], JSON_UNESCAPED_UNICODE)); ?>'>
                 </div>
             <?php endif; ?>
 
             <!-- Testimonials Island -->
             <?php if (isset($config['testimonials'])): ?>
-                <div id="service-testimonials-island" data-config='<?php echo esc_attr(json_encode($config['testimonials'])); ?>'>
+                <div id="service-testimonials-island"
+                    data-config='<?php echo esc_attr(json_encode($config['testimonials'], JSON_UNESCAPED_UNICODE)); ?>'>
                 </div>
             <?php endif; ?>
 
             <!-- FAQ Island -->
             <?php if (isset($config['faq'])): ?>
-                <div id="service-faq-island" data-config='<?php echo esc_attr(json_encode($config['faq'])); ?>'>
+                <div id="service-faq-island"
+                    data-config='<?php echo esc_attr(json_encode($config['faq'], JSON_UNESCAPED_UNICODE)); ?>'>
                 </div>
             <?php endif; ?>
 
             <!-- CTA Form Island -->
             <?php if (isset($config['cta'])): ?>
-                <div id="service-cta-island" data-config='<?php echo esc_attr(json_encode($config['cta'])); ?>'>
+                <div id="service-cta-island"
+                    data-config='<?php echo esc_attr(json_encode($config['cta'], JSON_UNESCAPED_UNICODE)); ?>'>
                 </div>
             <?php endif; ?>
 

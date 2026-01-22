@@ -47,7 +47,7 @@ function empc_theme_setup()
 add_action('after_setup_theme', 'empc_theme_setup');
 
 /**
- * Cargar assets de React (Siempre versión compilada para estabilidad)
+ * Cargar assets de React (Desarrollo con Vite o producción con assets compilados)
  */
 function empc_load_scripts()
 {
@@ -56,19 +56,10 @@ function empc_load_scripts()
         return;
     }
 
-    // Cargamos siempre los archivos generados en 'react-app'
-    $react_css = get_template_directory_uri() . '/react-app/assets/main.css';
-    $react_js = get_template_directory_uri() . '/react-app/assets/app.js';
-
-    // Importante: La ruta base para validar file_exists debe ser del sistema de archivos, no URL
-    $react_css_path = EMPC_THEME_DIR . '/react-app/assets/main.css';
-    $react_js_path = EMPC_THEME_DIR . '/react-app/assets/app.js';
-
-    // 1. CSS (Crítico para todo el sitio: Header, Footer, Fuentes)
-    // Se carga SIEMPRE porque contiene el Tailwind global
-    if (file_exists($react_css_path)) {
-        wp_enqueue_style('empc-react-styles', $react_css, [], filemtime($react_css_path));
-    }
+    // DETECTAR MODO DESARROLLO
+    // TEMPORAL: Desactivado para usar assets compilados
+    $vite_dev_server = 'http://localhost:5173';
+    $is_dev_mode = false; // Cambiado a false para usar producción
 
     // 2. JS (React Logic) - CARGA CONDICIONAL (WPO)
     // Solo cargamos el runtime de React si realmente hay componentes ("islas") en la página
@@ -79,14 +70,35 @@ function empc_load_scripts()
     } elseif (is_singular()) {
         global $post;
         // Si el post tiene configuración de React explícita, cargamos
-        if (get_post_meta($post->ID, '_empc_react_config', true)) {
+        if (get_post_meta($post->ID, '_empc_react_config', true) || get_post_meta($post->ID, '_empc_service_config', true)) {
             $should_load_react = true;
         }
     }
 
-    if ($should_load_react && file_exists($react_js_path)) {
-        wp_enqueue_script('empc-react', $react_js, [], filemtime($react_js_path), true);
+    if ($should_load_react) {
+        if ($is_dev_mode) {
+            // MODO DESARROLLO: Cargar desde Vite
+            // Las rutas deben coincidir con el 'base' configurado en vite.config.ts
+            wp_enqueue_script('vite-client', $vite_dev_server . '/wp-content/themes/empc-theme/react-app/@vite/client', [], null, false);
+            wp_enqueue_script('empc-react-main', $vite_dev_server . '/wp-content/themes/empc-theme/react-app/src/main.tsx', [], null, true);
+        } else {
+            // MODO PRODUCCIÓN: Cargar assets compilados
+            $react_css = get_template_directory_uri() . '/react-app/assets/main.css';
+            $react_js = get_template_directory_uri() . '/react-app/assets/app.js';
 
+            $react_css_path = EMPC_THEME_DIR . '/react-app/assets/main.css';
+            $react_js_path = EMPC_THEME_DIR . '/react-app/assets/app.js';
+
+            // CSS
+            if (file_exists($react_css_path)) {
+                wp_enqueue_style('empc-react-styles', $react_css, [], filemtime($react_css_path));
+            }
+
+            // JS
+            if (file_exists($react_js_path)) {
+                wp_enqueue_script('empc-react', $react_js, [], filemtime($react_js_path), true);
+            }
+        }
 
         // Localizamos el script justo después de encolarlo para asegurar que el handle existe
         $data = [
@@ -168,7 +180,7 @@ add_shortcode('empc_booking', 'empc_booking_shortcode');
  */
 function empc_script_type_module($tag, $handle, $src)
 {
-    if (in_array($handle, ['vite-client', 'empc-react'])) {
+    if (in_array($handle, ['vite-client', 'empc-react', 'empc-react-main'])) {
         // Para que wp_localize_script funcione con módulos, necesitamos definir la variable global manualmente
         // ya que type="module" aísla el scope.
         // Pero wp_localize_script imprime <script>var empcData = ...</script> ANTES del script del handle.
@@ -303,7 +315,7 @@ add_action('admin_init', function () {
         return;
     }
 
-    $content_version = '2.1'; // Force service page config update
+    $content_version = '2.3'; // Add /presupuesto-web/ page with calculator
 
     // Verificar si necesita actualización comparando versiones
     $db_version = get_option('empc_content_version', '0');
@@ -532,6 +544,30 @@ add_action('admin_init', function () {
         'diseno-web-leon',
         get_diseno_web_leon_config()
     );
+
+    // Página dedicada de Calculadora de Presupuestos
+    $calc_page_exists = get_page_by_title('Calculadora de Presupuesto Web', OBJECT, 'page');
+    if (!$calc_page_exists) {
+        $calc_page_content = '<!-- wp:html -->
+<div id="island-pricing-calculator"></div>
+<!-- /wp:html -->';
+
+        $calc_page_id = wp_insert_post([
+            'post_title' => 'Calculadora de Presupuesto Web',
+            'post_name' => 'presupuesto-web',
+            'post_content' => $calc_page_content,
+            'post_status' => 'publish',
+            'post_type' => 'page'
+        ]);
+
+        if ($calc_page_id && !is_wp_error($calc_page_id)) {
+            update_post_meta($calc_page_id, '_empc_react_config', json_encode([
+                'post_type' => 'page',
+                'page_id' => 'presupuesto-web',
+                'calculator_page' => true
+            ], JSON_UNESCAPED_UNICODE));
+        }
+    }
 
     // --- FIN ---
     // Mensaje de éxito al admin

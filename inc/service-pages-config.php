@@ -34,13 +34,13 @@ function empc_insert_service_page($title, $slug, $config)
     }
 
     if ($page_id && !is_wp_error($page_id)) {
-        // Store service configuration as post meta
-        update_post_meta($page_id, '_empc_service_config', json_encode($config));
+        // Store service configuration as post meta - con caracteres UTF-8 sin escapar
+        update_post_meta($page_id, '_empc_service_config', json_encode($config, JSON_UNESCAPED_UNICODE));
         update_post_meta($page_id, '_empc_react_config', json_encode([
             'post_type' => 'page',
             'page_id' => $slug,
             'service_page' => true
-        ]));
+        ], JSON_UNESCAPED_UNICODE));
 
         return $page_id;
     }

@@ -14,9 +14,9 @@ function get_diseno_web_leon_config()
             'highlight' => 'genera resultados',
             'description' => 'Creamos páginas web profesionales, rápidas y optimizadas para convertir visitantes en clientes. Sin plantillas genéricas. Sin sorpresas en la factura.',
             'bulletPoints' => [
-                ['text' => '<strong class="text-white">PageSpeed 90+</strong> - Tu web volará'],
-                ['text' => '<strong class="text-white">SEO incluido</strong> - Posicionamiento desde el día 1'],
-                ['text' => '<strong class="text-white">Entrega en 2-3 semanas</strong> - Sin eternizarse']
+                ['text' => 'PageSpeed 90+ - Tu web volará', 'strong' => 'PageSpeed 90+'],
+                ['text' => 'SEO incluido - Posicionamiento desde el día 1', 'strong' => 'SEO incluido'],
+                ['text' => 'Entrega en 2-3 semanas - Sin eternizarse', 'strong' => 'Entrega en 2-3 semanas']
             ],
             'ctaPrimary' => ['text' => 'Solicitar presupuesto gratis', 'href' => '#presupuesto'],
             'ctaSecondary' => ['text' => 'Ver cómo trabajo', 'href' => '#proceso']

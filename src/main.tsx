@@ -37,6 +37,18 @@ if (calculatorElement) {
     });
 }
 
+// 4. Montar Island: Pricing Calculator (León específico)
+const pricingCalculatorElement = document.getElementById('island-pricing-calculator');
+if (pricingCalculatorElement) {
+    import('./components/PricingCalculator').then(({ default: PricingCalculator }) => {
+        ReactDOM.createRoot(pricingCalculatorElement).render(
+            <React.StrictMode>
+                <PricingCalculator />
+            </React.StrictMode>
+        );
+    });
+}
+
 // 4. Montar Island: Restaurant Booking (Demo)
 // Usamos lazy load para no cargar el código si no estamos en la página de la demo
 // Usamos importación directa para evitar errores de chunk loading en local
