@@ -67,6 +67,8 @@ function empc_load_scripts()
 
     if (is_front_page()) {
         $should_load_react = true; // Home suele tener Calculadora o Contacto
+    } elseif (is_home()) {
+        $should_load_react = true; // Blog necesita Tailwind para estilos
     } elseif (is_singular()) {
         global $post;
         // Si el post tiene configuración de React explícita, cargamos
