@@ -55,7 +55,7 @@ const FAQAccordion: React.FC<FAQAccordionProps> = ({
                                     }`}
                                 style={{ overflow: 'hidden' }}
                             >
-                                <p className="px-6 pb-6 text-slate-400 leading-relaxed">
+                                <p className="px-6 pb-6 text-slate-300 leading-relaxed">
                                     {faq.answer}
                                 </p>
                             </div>

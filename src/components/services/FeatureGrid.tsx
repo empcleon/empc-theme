@@ -38,7 +38,7 @@ const FeatureGrid: React.FC<FeatureGridProps> = ({
                         {title}
                     </h2>
                     {description && (
-                        <p className="text-slate-400 max-w-2xl mx-auto text-lg">
+                        <p className="text-slate-300 max-w-2xl mx-auto text-lg">
                             {description}
                         </p>
                     )}
@@ -56,7 +56,7 @@ const FeatureGrid: React.FC<FeatureGridProps> = ({
                                     <IconComponent className={`w-7 h-7 text-${feature.iconColor}-400`} />
                                 </div>
                                 <h3 className="text-xl font-bold text-white mb-3">{feature.title}</h3>
-                                <p className="text-slate-400 leading-relaxed">
+                                <p className="text-slate-300 leading-relaxed">
                                     {feature.description}
                                 </p>
                             </div>

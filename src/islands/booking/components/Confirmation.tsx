@@ -27,15 +27,15 @@ const Confirmation: React.FC<ConfirmationProps> = ({ data, config }) => {
             </div>
 
             <h2 className="text-2xl font-bold text-white mb-2">¡Todo listo!</h2>
-            <p className="text-slate-400 mb-8 max-w-xs mx-auto">
+            <p className="text-slate-300 mb-8 max-w-xs mx-auto">
                 Tu cita está reservada para el <strong>{formatDateES(data.date)}</strong> a las <strong>{data.slot}</strong>.
             </p>
 
             <div className="bg-slate-800 p-6 rounded-xl border border-slate-700 mb-8 text-left">
                 <h4 className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Resumen</h4>
                 <div className="text-white space-y-1">
-                    <p><span className="text-slate-400">Nombre:</span> {data.name}</p>
-                    <p><span className="text-slate-400">Teléfono:</span> {data.phone}</p>
+                    <p><span className="text-slate-300">Nombre:</span> {data.name}</p>
+                    <p><span className="text-slate-300">Teléfono:</span> {data.phone}</p>
                 </div>
             </div>
 

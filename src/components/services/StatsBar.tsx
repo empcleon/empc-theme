@@ -22,7 +22,7 @@ const StatsBar: React.FC<StatsBarProps> = ({ stats, darkMode = true }) => {
                                 {stat.number}
                                 <span className="text-blue-400">{stat.suffix}</span>
                             </p>
-                            <p className={darkMode ? 'text-slate-400' : 'text-gray-600'}>{stat.label}</p>
+                            <p className={darkMode ? 'text-slate-300' : 'text-gray-600'}>{stat.label}</p>
                         </div>
                     ))}
                 </div>

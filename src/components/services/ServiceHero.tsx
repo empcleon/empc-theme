@@ -80,7 +80,7 @@ const ServiceHero: React.FC<ServiceHeroProps> = ({
                                 href={ctaSecondary.href}
                                 className="inline-flex items-center justify-center gap-2 border-2 border-slate-600 hover:border-slate-500 text-white px-8 py-4 rounded-xl font-semibold text-lg transition"
                             >
-                                <Code2 className="w-5 h-5 text-slate-400" />
+                                <Code2 className="w-5 h-5 text-slate-300" />
                                 {ctaSecondary.text}
                             </a>
                         </div>
@@ -95,7 +95,7 @@ const ServiceHero: React.FC<ServiceHeroProps> = ({
                                     <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
                                     <div className="w-3 h-3 rounded-full bg-green-500"></div>
                                 </div>
-                                <div className="flex-1 bg-slate-700 rounded-lg px-4 py-1.5 text-sm text-slate-400 text-center">
+                                <div className="flex-1 bg-slate-700 rounded-lg px-4 py-1.5 text-sm text-slate-300 text-center">
                                     tunegocio.es
                                 </div>
                             </div>

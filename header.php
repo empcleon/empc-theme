@@ -61,13 +61,13 @@
                                 <a href="<?php echo home_url('/diseno-web-leon'); ?>"
                                     class="block px-4 py-3 hover:bg-slate-700 transition-colors">
                                     <span class="block text-white font-medium text-sm">Diseño Web</span>
-                                    <span class="block text-slate-400 text-xs mt-0.5">Landing pages y
+                                    <span class="block text-slate-300 text-xs mt-0.5">Landing pages y
                                         corporativas</span>
                                 </a>
                                 <a href="<?php echo home_url('/tiendas-online-leon'); ?>"
                                     class="block px-4 py-3 hover:bg-slate-700 transition-colors border-t border-slate-700/50">
                                     <span class="block text-white font-medium text-sm">Tiendas Online</span>
-                                    <span class="block text-slate-400 text-xs mt-0.5">E-commerce y catálogos</span>
+                                    <span class="block text-slate-300 text-xs mt-0.5">E-commerce y catálogos</span>
                                 </a>
                             </div>
                         </div>
@@ -88,7 +88,7 @@
 
                 <!-- Mobile Button -->
                 <div class="md:hidden">
-                    <button id="mobile-menu-btn" class="text-white p-2">
+                    <button id="mobile-menu-btn" class="text-white p-2" aria-label="Abrir menú de navegación">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                             class="lucide lucide-menu">

@@ -46,7 +46,7 @@ const CalendarGrid: React.FC<CalendarGridProps> = ({ selectedDate, onSelectDate 
             <div className="flex items-center justify-between mb-4">
                 <button
                     onClick={prevMonth}
-                    className="p-1 hover:bg-slate-700 rounded-lg text-slate-400 disabled:opacity-30"
+                    className="p-1 hover:bg-slate-700 rounded-lg text-slate-300 disabled:opacity-30"
                     disabled={month === new Date().getMonth() && year === new Date().getFullYear()} // Block past
                 >
                     <ChevronLeft className="w-5 h-5" />
@@ -54,7 +54,7 @@ const CalendarGrid: React.FC<CalendarGridProps> = ({ selectedDate, onSelectDate 
                 <h3 className="text-white font-bold capitalize">
                     {MONTH_NAMES[month]} <span className="text-slate-500 text-sm ml-1">{year}</span>
                 </h3>
-                <button onClick={nextMonth} className="p-1 hover:bg-slate-700 rounded-lg text-slate-400">
+                <button onClick={nextMonth} className="p-1 hover:bg-slate-700 rounded-lg text-slate-300">
                     <ChevronRight className="w-5 h-5" />
                 </button>
             </div>

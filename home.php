@@ -9,7 +9,7 @@ get_header(); ?>
     <!-- Header del Blog -->
     <div class="text-center mb-16">
         <h1 class="text-4xl md:text-5xl font-bold text-white mb-6">Blog & Recursos</h1>
-        <p class="text-slate-400 text-lg max-w-2xl mx-auto">
+        <p class="text-slate-300 text-lg max-w-2xl mx-auto">
             Guías sobre WordPress, SEO Local y automatización para negocios que quieren escalar sin complicaciones
             técnicas.
         </p>

@@ -106,7 +106,7 @@ export function EcommerceHero({
                             {badge.subtext && (
                                 <>
                                     <span className="text-slate-500">|</span>
-                                    <span className="text-slate-400 text-sm">{badge.subtext}</span>
+                                    <span className="text-slate-300 text-sm">{badge.subtext}</span>
                                 </>
                             )}
                         </div>
@@ -135,7 +135,7 @@ export function EcommerceHero({
                                     <p className={`text-3xl lg:text-4xl font-bold ${colors.accent}`}>
                                         {stat.number}
                                     </p>
-                                    <p className="text-slate-400 text-sm">{stat.label}</p>
+                                    <p className="text-slate-300 text-sm">{stat.label}</p>
                                 </div>
                             ))}
                         </div>
@@ -193,7 +193,7 @@ function EcommerceMockup({ theme }: { theme: string }) {
                         <div className="w-3 h-3 rounded-full bg-yellow-500" />
                         <div className="w-3 h-3 rounded-full bg-green-500" />
                     </div>
-                    <div className="flex-1 bg-slate-700 rounded px-3 py-1 text-xs text-slate-400 text-center">
+                    <div className="flex-1 bg-slate-700 rounded px-3 py-1 text-xs text-slate-300 text-center">
                         🔒 tutienda.es/productos
                     </div>
                 </div>
@@ -263,7 +263,7 @@ function EcommerceMockup({ theme }: { theme: string }) {
 
             {/* Payment Methods */}
             <div className="absolute -bottom-4 right-4 bg-slate-800 border border-slate-700 rounded-xl px-4 py-3 flex items-center gap-3">
-                <span className="text-slate-400 text-xs">Pagos:</span>
+                <span className="text-slate-300 text-xs">Pagos:</span>
                 <div className="flex gap-2">
                     <div className="w-8 h-5 bg-blue-600 rounded text-[8px] text-white flex items-center justify-center font-bold">
                         VISA

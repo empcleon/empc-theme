@@ -40,7 +40,7 @@ export function FeaturesGrid({
                     <h2 className="text-3xl md:text-4xl font-bold text-white mt-2 mb-4">
                         {title}
                     </h2>
-                    <p className="text-slate-400 max-w-2xl mx-auto text-lg">
+                    <p className="text-slate-300 max-w-2xl mx-auto text-lg">
                         {description}
                     </p>
                 </div>
@@ -66,7 +66,7 @@ export function FeaturesGrid({
                                 <h3 className="text-lg font-bold text-white mb-2">
                                     {feature.title}
                                 </h3>
-                                <p className="text-slate-400 text-sm leading-relaxed">
+                                <p className="text-slate-300 text-sm leading-relaxed">
                                     {feature.description}
                                 </p>
                             </div>

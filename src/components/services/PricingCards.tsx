@@ -37,7 +37,7 @@ const PricingCards: React.FC<PricingCardsProps> = ({
                         {title}
                     </h2>
                     {description && (
-                        <p className="text-slate-400 max-w-2xl mx-auto text-lg">
+                        <p className="text-slate-300 max-w-2xl mx-auto text-lg">
                             {description}
                         </p>
                     )}
@@ -59,7 +59,7 @@ const PricingCards: React.FC<PricingCardsProps> = ({
                             )}
 
                             <h3 className="text-xl font-bold text-white mb-2">{tier.title}</h3>
-                            <p className="text-slate-400 text-sm mb-4">{tier.description}</p>
+                            <p className="text-slate-300 text-sm mb-4">{tier.description}</p>
 
                             <div className="mb-6">
                                 <span className="text-3xl font-bold text-white">{tier.price}</span>

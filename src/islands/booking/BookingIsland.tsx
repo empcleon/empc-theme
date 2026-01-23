@@ -101,7 +101,7 @@ const BookingIsland = () => {
                         <CalendarGrid selectedDate={selectedDate} onSelectDate={handleDateSelect} />
 
                         <div className="border-t border-slate-800 pt-6">
-                            <h4 className="text-white font-bold mb-4 text-sm uppercase text-slate-400">Horarios Disponibles</h4>
+                            <h4 className="text-white font-bold mb-4 text-sm uppercase text-slate-300">Horarios Disponibles</h4>
                             <TimeSlotPicker selectedDate={selectedDate} selectedSlot={selectedTimeSlot} onSelectSlot={handleSlotSelect} />
                         </div>
 

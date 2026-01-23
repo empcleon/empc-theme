@@ -46,7 +46,7 @@ export function EcommercePricing({
                     <h2 className="text-3xl md:text-4xl font-bold text-white mt-2 mb-4">
                         {title}
                     </h2>
-                    <p className="text-slate-400 max-w-2xl mx-auto text-lg">
+                    <p className="text-slate-300 max-w-2xl mx-auto text-lg">
                         {description}
                     </p>
                 </div>
@@ -72,7 +72,7 @@ export function EcommercePricing({
                                 {/* Plan Header */}
                                 <div className="mb-6">
                                     <h3 className="text-2xl font-bold text-white mb-1">{plan.name}</h3>
-                                    <p className="text-slate-400 text-sm">{plan.description}</p>
+                                    <p className="text-slate-300 text-sm">{plan.description}</p>
                                 </div>
 
                                 {/* Price */}
@@ -80,7 +80,7 @@ export function EcommercePricing({
                                     <div className="flex items-baseline gap-1">
                                         <span className="text-4xl font-bold text-white">{plan.price}</span>
                                         {!plan.price.includes('Desde') && (
-                                            <span className="text-slate-400">{plan.currency}</span>
+                                            <span className="text-slate-300">{plan.currency}</span>
                                         )}
                                     </div>
                                     <p className={`text-${accentColor}-400 text-sm mt-1`}>{plan.productLimit}</p>
@@ -137,7 +137,7 @@ export function EcommercePricing({
                 {/* Note */}
                 <div className="text-center mt-10 space-y-2">
                     <p className="text-slate-500 text-sm">{note}</p>
-                    <p className="text-slate-400">
+                    <p className="text-slate-300">
                         ¿Proyecto especial?{' '}
                         <a href="#presupuesto" className={`text-${accentColor}-400 hover:underline`}>
                             Cuéntamelo

@@ -29,7 +29,7 @@ export function ComparisonTable({
                     <h2 className="text-2xl md:text-3xl font-bold text-white mb-3">
                         {title}
                     </h2>
-                    <p className="text-slate-400">{subtitle}</p>
+                    <p className="text-slate-300">{subtitle}</p>
                 </div>
 
                 {/* Table */}
@@ -37,7 +37,7 @@ export function ComparisonTable({
                     <table className="w-full">
                         <thead>
                             <tr>
-                                <th className="text-left py-4 px-6 text-slate-400 font-medium" />
+                                <th className="text-left py-4 px-6 text-slate-300 font-medium" />
                                 <th className="py-4 px-6 text-center">
                                     <div className="inline-flex items-center gap-2 bg-slate-700 px-4 py-2 rounded-lg">
                                         <Store className="w-5 h-5 text-slate-300" />
@@ -61,7 +61,7 @@ export function ComparisonTable({
                                     <td className="py-4 px-6 text-white font-medium">
                                         {item.aspect}
                                     </td>
-                                    <td className="py-4 px-6 text-center text-slate-400">
+                                    <td className="py-4 px-6 text-center text-slate-300">
                                         {item.physical}
                                     </td>
                                     <td className="py-4 px-6 text-center">
@@ -81,7 +81,7 @@ export function ComparisonTable({
                 {/* Conclusion */}
                 <div className="text-center mt-8">
                     <p
-                        className="text-slate-400"
+                        className="text-slate-300"
                         dangerouslySetInnerHTML={{ __html: conclusion }}
                     />
                 </div>

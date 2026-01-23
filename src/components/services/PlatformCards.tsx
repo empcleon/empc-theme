@@ -60,7 +60,7 @@ export function PlatformCards({
                     <h2 className="text-3xl md:text-4xl font-bold text-white mt-2 mb-4">
                         {title}
                     </h2>
-                    <p className="text-slate-400 max-w-2xl mx-auto text-lg">
+                    <p className="text-slate-300 max-w-2xl mx-auto text-lg">
                         {description}
                     </p>
                 </div>
@@ -81,7 +81,7 @@ export function PlatformCards({
                                 )}
                                 <div>
                                     <h3 className="text-xl font-bold text-white">{platform.name}</h3>
-                                    <p className="text-slate-400 text-sm">{platform.tagline}</p>
+                                    <p className="text-slate-300 text-sm">{platform.tagline}</p>
                                 </div>
                             </div>
 
@@ -107,7 +107,7 @@ export function PlatformCards({
                                 </p>
                                 <ul className="space-y-2">
                                     {platform.cons.map((con, cIndex) => (
-                                        <li key={cIndex} className="flex items-center gap-2 text-sm text-slate-400">
+                                        <li key={cIndex} className="flex items-center gap-2 text-sm text-slate-300">
                                             <AlertTriangle className="w-4 h-4 text-amber-400" />
                                             {con}
                                         </li>
@@ -128,7 +128,7 @@ export function PlatformCards({
 
                 {/* CTA */}
                 <div className="text-center mt-12">
-                    <p className="text-slate-400 mb-4">¿No sabes cuál elegir?</p>
+                    <p className="text-slate-300 mb-4">¿No sabes cuál elegir?</p>
                     <a
                         href={cta.href}
                         className={`inline-flex items-center gap-2 text-${accentColor}-400 hover:text-${accentColor}-300 font-medium`}

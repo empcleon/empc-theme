@@ -89,7 +89,7 @@ export function EcommerceCTAForm({
                         <Send className={`w-10 h-10 text-${accentColor}-400`} />
                     </div>
                     <h2 className="text-3xl font-bold text-white mb-4">¡Mensaje recibido!</h2>
-                    <p className="text-slate-400 text-lg mb-8">
+                    <p className="text-slate-300 text-lg mb-8">
                         He recibido tu solicitud correctamente. Analizaré tu proyecto y te contactaré en menos de 24-48 horas.
                     </p>
                     <button
@@ -111,7 +111,7 @@ export function EcommerceCTAForm({
                         <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
                             {title}
                         </h2>
-                        <p className="text-slate-400 text-lg">
+                        <p className="text-slate-300 text-lg">
                             {description}
                         </p>
                     </div>
@@ -178,7 +178,7 @@ export function EcommerceCTAForm({
                                     onChange={handleChange}
                                     checked={formData[checkbox.name] as boolean || false}
                                 />
-                                <label htmlFor={checkbox.name} className="text-sm text-slate-400">
+                                <label htmlFor={checkbox.name} className="text-sm text-slate-300">
                                     {checkbox.label}
                                 </label>
                             </div>
@@ -212,7 +212,7 @@ export function EcommerceCTAForm({
                         <div className="mt-8 pt-8 border-t border-slate-800 grid place-items-center">
                             <a
                                 href={`tel:${phone.number.replace(/\s/g, '')}`}
-                                className="flex items-center gap-2 text-slate-400 hover:text-white transition-colors"
+                                className="flex items-center gap-2 text-slate-300 hover:text-white transition-colors"
                             >
                                 <Phone className="w-4 h-4" />
                                 <span>{phone.text} <span className="text-white font-medium">{phone.number}</span></span>

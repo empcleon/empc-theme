@@ -43,7 +43,7 @@ const CustomerForm: React.FC<CustomerFormProps> = ({ data, onChange, onSubmit, i
             <div className="space-y-4">
                 {/* Name */}
                 <div className="space-y-1">
-                    <label className="text-sm text-slate-400 ml-1">Nombre Completo</label>
+                    <label className="text-sm text-slate-300 ml-1">Nombre Completo</label>
                     <div className="relative">
                         <User className="absolute left-3 top-3.5 w-5 h-5 text-slate-500" />
                         <input
@@ -60,7 +60,7 @@ const CustomerForm: React.FC<CustomerFormProps> = ({ data, onChange, onSubmit, i
 
                 {/* Phone */}
                 <div className="space-y-1">
-                    <label className="text-sm text-slate-400 ml-1">Teléfono (WhatsApp)</label>
+                    <label className="text-sm text-slate-300 ml-1">Teléfono (WhatsApp)</label>
                     <div className="relative">
                         <Phone className="absolute left-3 top-3.5 w-5 h-5 text-slate-500" />
                         <input
