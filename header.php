@@ -19,7 +19,7 @@
                 <div class="flex-shrink-0 flex items-center">
                     <a href="<?php echo home_url(); ?>">
                         <img src="<?php echo get_template_directory_uri(); ?>/react-app/assets/logo-transparent.png"
-                            alt="EMPC Logo" class="h-12 w-auto">
+                            alt="EMPC Logo" class="h-12 w-auto" width="120" height="48" fetchpriority="high">
                     </a>
                 </div>
 

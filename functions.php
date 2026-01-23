@@ -89,14 +89,21 @@ function empc_load_scripts()
             $react_css_path = EMPC_THEME_DIR . '/react-app/assets/main.css';
             $react_js_path = EMPC_THEME_DIR . '/react-app/assets/app.js';
 
-            // CSS
+            // CSS - Preload para mejorar LCP
             if (file_exists($react_css_path)) {
                 wp_enqueue_style('empc-react-styles', $react_css, [], filemtime($react_css_path));
+                // Añadir preload hint
+                add_action('wp_head', function () use ($react_css) {
+                    echo '<link rel="preload" href="' . esc_url($react_css) . '" as="style">';
+                }, 1);
             }
 
-            // JS
+            // JS - Con defer para no bloquear renderizado
             if (file_exists($react_js_path)) {
-                wp_enqueue_script('empc-react', $react_js, [], filemtime($react_js_path), true);
+                wp_enqueue_script('empc-react', $react_js, [], filemtime($react_js_path), [
+                    'strategy' => 'defer',
+                    'in_footer' => true
+                ]);
             }
         }
 
@@ -581,8 +588,9 @@ add_action('admin_init', function () {
     }
 
     // --- FIN ---
-    // Mensaje de éxito al admin
-    // Mensaje de éxito al admin
+
+    // DEBUG: Comentado para producción
+    /*
     add_action('admin_notices', function () {
         global $content_version;
         echo '<div class="notice notice-info is-dismissible" style="border-left-color: #f59e0b; padding: 20px;">
@@ -591,6 +599,7 @@ add_action('admin_init', function () {
                 <p>Versión de Contenido: <strong>' . $content_version . '</strong></p>
               </div>';
     });
+    */
 
     // Marcar versión
     update_option('empc_content_version', $content_version);
