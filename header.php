@@ -20,11 +20,16 @@
     <nav id="main-nav" class="fixed w-full z-50 transition-all duration-300 bg-transparent">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-20 items-center">
-                <!-- Logo -->
+                <!-- Logo optimizado WebP -->
                 <div class="flex-shrink-0 flex items-center">
                     <a href="<?php echo home_url(); ?>">
-                        <img src="<?php echo get_template_directory_uri(); ?>/react-app/assets/logo-transparent.png"
-                            alt="EMPC Logo" class="h-12 w-auto" width="120" height="48" fetchpriority="high">
+                        <picture>
+                            <source
+                                srcset="<?php echo get_template_directory_uri(); ?>/react-app/assets/logo-transparent.webp"
+                                type="image/webp">
+                            <img src="<?php echo get_template_directory_uri(); ?>/react-app/assets/logo-transparent.png"
+                                alt="EMPC Logo" class="h-12 w-auto" width="305" height="84" fetchpriority="high">
+                        </picture>
                     </a>
                 </div>
 
