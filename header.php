@@ -11,44 +11,29 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
     <!-- Crisp Chat - Lazy Load (no impacta LCP) -->
-    <script>
-        window.crispLazyLoad = function () {
-            // Solo ejecutar una vez
+    <script type="text/javascript">
+        // Configuración de Crisp (esto no pesa nada)
+        window.$crisp = [];
+        window.CRISP_WEBSITE_ID = "9f6b4900-955e-42d8-8aea-ed27760db271";
+
+        // Función para cargar el chat solo tras interacción o 5 segundos
+        function loadCrisp() {
             if (window.crispLoaded) return;
             window.crispLoaded = true;
-
-            // Inicializar Crisp
-            window.$crisp = [];
-            window.CRISP_WEBSITE_ID = "YOUR_CRISP_WEBSITE_ID"; // 🔴 REEMPLAZAR CON TU ID
-
-            // Cargar el script de Crisp
-            var d = document;
-            var s = d.createElement("script");
-            s.src = "https://client.crisp.chat/l.js";
-            s.async = 1;
-            d.head.appendChild(s);
-
-            console.log('✅ Crisp Chat loaded');
-        };
-
-        // Esperar a que el DOM esté listo
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', function () {
-                // Cargar Crisp en primera interacción
-                ['scroll', 'mousemove', 'touchstart', 'click'].forEach(function (event) {
-                    document.addEventListener(event, window.crispLazyLoad, { once: true, passive: true });
-                });
-
-                // Fallback: cargar después de 5 segundos si no hay interacción
-                setTimeout(window.crispLazyLoad, 5000);
-            });
-        } else {
-            // DOM ya está listo
-            ['scroll', 'mousemove', 'touchstart', 'click'].forEach(function (event) {
-                document.addEventListener(event, window.crispLazyLoad, { once: true, passive: true });
-            });
-            setTimeout(window.crispLazyLoad, 5000);
+            (function(){
+                d = document;
+                s = d.createElement("script");
+                s.src = "https://client.crisp.chat/l.js";
+                s.async = 1;
+                d.getElementsByTagName("head")[0].appendChild(s);
+            })();
         }
+
+        // Disparadores de carga: scroll, movimiento de ratón o espera de 5s
+        window.addEventListener('scroll', loadCrisp, { once: true });
+        window.addEventListener('mousemove', loadCrisp, { once: true });
+        window.addEventListener('touchstart', loadCrisp, { once: true });
+        setTimeout(loadCrisp, 5000);
     </script>
 
     <?php wp_head(); ?>
