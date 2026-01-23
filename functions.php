@@ -129,8 +129,18 @@ function empc_load_scripts()
         wp_localize_script('empc-react', 'empcData', $data);
     }
 
-    // Estilos del tema base (style.css vacío o mínimos)
+    // Estilos del tema base (style.css vacío o mínimos) - NO BLOQUEA RENDERIZADO
+    // Usamos el hack de media="print" + onload para evitar bloqueo crítico
     wp_enqueue_style('empc-theme-style', get_stylesheet_uri(), [], EMPC_THEME_VERSION);
+    add_action('wp_head', function () {
+        ?>
+        <link rel="stylesheet" href="<?php echo get_stylesheet_uri(); ?>" media="print"
+            onload="this.media='all'; this.onload=null;">
+        <noscript>
+            <link rel="stylesheet" href="<?php echo get_stylesheet_uri(); ?>">
+        </noscript>
+        <?php
+    }, 999); // Última prioridad para que cargue después de main.css
 
     // --- LIMPIEZA WPO (Fase 4) ---
     // Eliminamos estilos basura de WordPress que no usamos (Gutenberg)
