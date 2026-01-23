@@ -117,8 +117,8 @@ const PricingCalculator: React.FC = () => {
                                 <button
                                     onClick={() => handleProjectChange('web-basica', 375)}
                                     className={`text-left p-6 rounded-xl border-2 transition-all ${projectType === 'web-basica'
-                                            ? 'border-purple-500 bg-purple-50 ring-2 ring-purple-200'
-                                            : 'border-slate-200 hover:border-purple-300'
+                                        ? 'border-purple-500 bg-purple-50 ring-2 ring-purple-200'
+                                        : 'border-slate-200 hover:border-purple-300'
                                         }`}
                                 >
                                     <div className="flex justify-between items-start mb-3">
@@ -143,8 +143,8 @@ const PricingCalculator: React.FC = () => {
                                 <button
                                     onClick={() => handleProjectChange('web-media', 525)}
                                     className={`text-left p-6 rounded-xl border-2 transition-all ${projectType === 'web-media'
-                                            ? 'border-purple-500 bg-purple-50 ring-2 ring-purple-200'
-                                            : 'border-slate-200 hover:border-purple-300'
+                                        ? 'border-purple-500 bg-purple-50 ring-2 ring-purple-200'
+                                        : 'border-slate-200 hover:border-purple-300'
                                         }`}
                                 >
                                     <div className="flex justify-between items-start mb-3">
@@ -169,8 +169,8 @@ const PricingCalculator: React.FC = () => {
                                 <button
                                     onClick={() => handleProjectChange('tienda-online', 1000)}
                                     className={`text-left p-6 rounded-xl border-2 transition-all ${projectType === 'tienda-online'
-                                            ? 'border-purple-500 bg-purple-50 ring-2 ring-purple-200'
-                                            : 'border-slate-200 hover:border-purple-300'
+                                        ? 'border-purple-500 bg-purple-50 ring-2 ring-purple-200'
+                                        : 'border-slate-200 hover:border-purple-300'
                                         }`}
                                 >
                                     <div className="flex justify-between items-start mb-3">
@@ -195,8 +195,8 @@ const PricingCalculator: React.FC = () => {
                                 <button
                                     onClick={() => handleProjectChange('seo-mantenimiento', 0)}
                                     className={`text-left p-6 rounded-xl border-2 transition-all ${projectType === 'seo-mantenimiento'
-                                            ? 'border-purple-500 bg-purple-50 ring-2 ring-purple-200'
-                                            : 'border-slate-200 hover:border-purple-300'
+                                        ? 'border-purple-500 bg-purple-50 ring-2 ring-purple-200'
+                                        : 'border-slate-200 hover:border-purple-300'
                                         }`}
                                 >
                                     <div className="flex justify-between items-start mb-3">
@@ -231,15 +231,17 @@ const PricingCalculator: React.FC = () => {
                                     <button
                                         onClick={() => setExtraPages(Math.max(0, extraPages - 1))}
                                         className="w-10 h-10 bg-white border border-slate-300 rounded-lg flex items-center justify-center font-bold text-slate-700 hover:bg-slate-100 transition"
+                                        aria-label="Disminuir número de páginas adicionales"
                                     >
                                         -
                                     </button>
-                                    <div className="w-16 h-10 bg-white border border-slate-300 rounded-lg flex items-center justify-center font-bold text-slate-800">
+                                    <div className="w-16 h-10 bg-white border border-slate-300 rounded-lg flex items-center justify-center font-bold text-slate-800" role="status" aria-live="polite" aria-label={`${extraPages} páginas adicionales seleccionadas`}>
                                         {extraPages}
                                     </div>
                                     <button
                                         onClick={() => setExtraPages(extraPages + 1)}
                                         className="w-10 h-10 bg-white border border-slate-300 rounded-lg flex items-center justify-center font-bold text-slate-700 hover:bg-slate-100 transition"
+                                        aria-label="Aumentar número de páginas adicionales"
                                     >
                                         +
                                     </button>
@@ -264,16 +266,18 @@ const PricingCalculator: React.FC = () => {
                                         checked={services.seo}
                                         onChange={() => toggleService('seo')}
                                         className="hidden"
+                                        id="service-seo"
+                                        aria-label="SEO Local León - Optimización para búsquedas locales, 200 euros"
                                     />
                                     <div className="flex items-center justify-between">
                                         <div className="flex items-center gap-3">
                                             <div className={`w-6 h-6 border-2 rounded-md flex items-center justify-center flex-shrink-0 ${services.seo ? 'border-purple-500 bg-purple-500' : 'border-slate-300'
-                                                }`}>
+                                                }`} aria-hidden="true">
                                                 {services.seo && <Check className="w-4 h-4 text-white" />}
                                             </div>
                                             <div>
                                                 <h4 className="font-bold text-slate-800">SEO Local León</h4>
-                                                <p className="text-slate-600 text-sm">Optimización para búsquedas locales</p>
+                                                <p className="text-slate-300 text-sm">Optimización para búsquedas locales</p>
                                             </div>
                                         </div>
                                         <div className="text-right">
@@ -292,16 +296,18 @@ const PricingCalculator: React.FC = () => {
                                         checked={services.mantenimiento}
                                         onChange={() => toggleService('mantenimiento')}
                                         className="hidden"
+                                        id="service-mantenimiento"
+                                        aria-label="Mantenimiento Web - Seguridad, backups y actualizaciones, 39 euros al mes"
                                     />
                                     <div className="flex items-center justify-between">
                                         <div className="flex items-center gap-3">
                                             <div className={`w-6 h-6 border-2 rounded-md flex items-center justify-center flex-shrink-0 ${services.mantenimiento ? 'border-purple-500 bg-purple-500' : 'border-slate-300'
-                                                }`}>
+                                                }`} aria-hidden="true">
                                                 {services.mantenimiento && <Check className="w-4 h-4 text-white" />}
                                             </div>
                                             <div>
                                                 <h4 className="font-bold text-slate-800">Mantenimiento Web</h4>
-                                                <p className="text-slate-600 text-sm">Seguridad, backups, actualizaciones</p>
+                                                <p className="text-slate-300 text-sm">Seguridad, backups, actualizaciones</p>
                                             </div>
                                         </div>
                                         <div className="text-right">
@@ -321,16 +327,18 @@ const PricingCalculator: React.FC = () => {
                                         checked={services.diseno}
                                         onChange={() => toggleService('diseno')}
                                         className="hidden"
+                                        id="service-diseno"
+                                        aria-label="Diseño Gráfico - Logos, carteles y material promocional, 200 euros"
                                     />
                                     <div className="flex items-center justify-between">
                                         <div className="flex items-center gap-3">
                                             <div className={`w-6 h-6 border-2 rounded-md flex items-center justify-center flex-shrink-0 ${services.diseno ? 'border-purple-500 bg-purple-500' : 'border-slate-300'
-                                                }`}>
+                                                }`} aria-hidden="true">
                                                 {services.diseno && <Check className="w-4 h-4 text-white" />}
                                             </div>
                                             <div>
                                                 <h4 className="font-bold text-slate-800">Diseño Gráfico</h4>
-                                                <p className="text-slate-600 text-sm">Logos, carteles, material promocional</p>
+                                                <p className="text-slate-300 text-sm">Logos, carteles, material promocional</p>
                                             </div>
                                         </div>
                                         <div className="text-right">
@@ -349,16 +357,18 @@ const PricingCalculator: React.FC = () => {
                                         checked={services.react}
                                         onChange={() => toggleService('react')}
                                         className="hidden"
+                                        id="service-react"
+                                        aria-label="Integración React - Componentes interactivos en WordPress, 150 euros"
                                     />
                                     <div className="flex items-center justify-between">
                                         <div className="flex items-center gap-3">
                                             <div className={`w-6 h-6 border-2 rounded-md flex items-center justify-center flex-shrink-0 ${services.react ? 'border-purple-500 bg-purple-500' : 'border-slate-300'
-                                                }`}>
+                                                }`} aria-hidden="true">
                                                 {services.react && <Check className="w-4 h-4 text-white" />}
                                             </div>
                                             <div>
                                                 <h4 className="font-bold text-slate-800">Integración React</h4>
-                                                <p className="text-slate-600 text-sm">Componentes interactivos en WordPress</p>
+                                                <p className="text-slate-300 text-sm">Componentes interactivos en WordPress</p>
                                             </div>
                                         </div>
                                         <div className="text-right">
@@ -377,6 +387,8 @@ const PricingCalculator: React.FC = () => {
                                     checked={includeVat}
                                     onChange={() => setIncludeVat(!includeVat)}
                                     className="w-5 h-5 text-purple-600 rounded"
+                                    id="include-vat"
+                                    aria-label="Incluir IVA del 21 por ciento en el presupuesto"
                                 />
                                 <div className="ml-3">
                                     <span className="text-slate-700 font-medium">Incluir IVA (21%) en el presupuesto</span>
