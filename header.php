@@ -10,6 +10,47 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
+    <!-- Crisp Chat - Lazy Load (no impacta LCP) -->
+    <script>
+        window.crispLazyLoad = function () {
+            // Solo ejecutar una vez
+            if (window.crispLoaded) return;
+            window.crispLoaded = true;
+
+            // Inicializar Crisp
+            window.$crisp = [];
+            window.CRISP_WEBSITE_ID = "YOUR_CRISP_WEBSITE_ID"; // 🔴 REEMPLAZAR CON TU ID
+
+            // Cargar el script de Crisp
+            var d = document;
+            var s = d.createElement("script");
+            s.src = "https://client.crisp.chat/l.js";
+            s.async = 1;
+            d.head.appendChild(s);
+
+            console.log('✅ Crisp Chat loaded');
+        };
+
+        // Esperar a que el DOM esté listo
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', function () {
+                // Cargar Crisp en primera interacción
+                ['scroll', 'mousemove', 'touchstart', 'click'].forEach(function (event) {
+                    document.addEventListener(event, window.crispLazyLoad, { once: true, passive: true });
+                });
+
+                // Fallback: cargar después de 5 segundos si no hay interacción
+                setTimeout(window.crispLazyLoad, 5000);
+            });
+        } else {
+            // DOM ya está listo
+            ['scroll', 'mousemove', 'touchstart', 'click'].forEach(function (event) {
+                document.addEventListener(event, window.crispLazyLoad, { once: true, passive: true });
+            });
+            setTimeout(window.crispLazyLoad, 5000);
+        }
+    </script>
+
     <?php wp_head(); ?>
 </head>
 
