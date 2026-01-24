@@ -69,6 +69,12 @@ function empc_load_scripts()
         $should_load_react = true; // Home suele tener Calculadora o Contacto
     } elseif (is_home()) {
         $should_load_react = true; // Blog necesita Tailwind para estilos
+    } elseif (is_page_template('page-tiendas-online.php')) {
+        $should_load_react = true; // Tiendas Online usa React Islands
+    } elseif (is_page_template('page-service.php')) {
+        $should_load_react = true; // Páginas de servicios usan React Islands
+    } elseif (is_page_template('page-calculator.php')) {
+        $should_load_react = true; // Calculadora de presupuestos
     } elseif (is_singular()) {
         global $post;
         // Si el post tiene configuración de React explícita, cargamos
