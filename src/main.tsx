@@ -101,7 +101,6 @@ function mountServiceIsland(elementId: string, Component: React.ComponentType<an
         );
     }
 }
-}
 
 // Import service components
 import('./components/services').then((services) => {

@@ -166,12 +166,34 @@ function empc_cleanup_wordpress_styles() {
     wp_dequeue_style('global-styles'); // El principal culpable
     wp_dequeue_style('classic-theme-styles');
     
+    // Eliminamos estilos extra que siguen cargando
+    wp_dequeue_style('empc-theme-style'); // Nuestro propio style.css base
+    wp_dequeue_style('wp-img-auto-sizes-contain'); // Estilos inline de imágenes
+    wp_dequeue_style('wp-emoji-styles'); // Estilos de emojis
+    
     // Matamos los estilos inline que WP inyecta a la fuerza
     remove_action('wp_enqueue_scripts', 'wp_enqueue_global_styles');
     remove_action('wp_footer', 'wp_enqueue_global_styles', 1);
     remove_action('wp_head', 'wp_global_styles_render_svg_filters');
+    
+    // Remover estilos inline específicos
+    add_action('wp_head', function() {
+        ob_start(function($buffer) {
+            $buffer = preg_replace('/<style[^>]*>wp-img-auto-sizes.*?<\/style>/s', '', $buffer);
+            $buffer = preg_replace('/<style[^>]*>wp-emoji-styles.*?<\/style>/s', '', $buffer);
+            return $buffer;
+        });
+    }, 0);
 }
 add_action('wp_enqueue_scripts', 'empc_cleanup_wordpress_styles', 999); // La última palabra la tenemos nosotros
+
+// Script de diagnóstico temporal para React mounting
+function empc_debug_react_script() {
+    if (is_front_page()) {
+        wp_enqueue_script('empc-debug', get_template_directory_uri() . '/test-react-mounting.js', [], '1.0.0', true);
+    }
+}
+add_action('wp_enqueue_scripts', 'empc_debug_react_script', 1);
 
 // --- SHORTCODES ---
 
