@@ -44,7 +44,7 @@ const App: React.FC = () => {
           <BookingWidget />
         </main>
 
-        <footer className="mt-16 text-center text-sm text-slate-400">
+        <footer className="mt-16 text-center text-sm text-slate-300">
           <p>© {new Date().getFullYear()} La Posada Leonesa. Simulador desarrollado por EMPC.</p>
         </footer>
       </div>

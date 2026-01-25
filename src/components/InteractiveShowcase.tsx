@@ -27,7 +27,7 @@ const InteractiveShowcase: React.FC = () => {
                 Lo integramos en tu WordPress.
               </span>
             </h2>
-            <p className="text-slate-400 text-lg leading-relaxed">
+            <p className="text-slate-300 text-lg leading-relaxed">
               El problema de muchas webs en León es que son estáticas. Nosotros inyectamos micro-aplicaciones React (calculadoras, reservadores, configuradores) dentro de tu WordPress para convertir visitantes en clientes.
             </p>
           </div>
@@ -85,7 +85,7 @@ const InteractiveShowcase: React.FC = () => {
                         <button
                           key={u}
                           onClick={() => setUrgency(u)}
-                          className={`flex-1 py-2 text-xs rounded-lg border transition-all ${urgency === u ? 'bg-rose-500/20 border-rose-500 text-white' : 'border-slate-600 text-slate-400 hover:border-slate-500'}`}
+                          className={`flex-1 py-2 text-xs rounded-lg border transition-all ${urgency === u ? 'bg-rose-500/20 border-rose-500 text-white' : 'border-slate-600 text-slate-300 hover:border-slate-500'}`}
                         >
                           {idx === 0 ? 'Normal' : idx === 1 ? 'Rápido' : 'Urgente'}
                         </button>
@@ -95,7 +95,7 @@ const InteractiveShowcase: React.FC = () => {
 
                   <div className="bg-slate-900/50 p-4 rounded-xl flex items-center justify-between border border-slate-700">
                     <div className="flex items-center gap-3">
-                      <Printer className="w-5 h-5 text-slate-400" />
+                      <Printer className="w-5 h-5 text-slate-300" />
                       <span className="text-sm text-slate-300">Presupuesto estimado</span>
                     </div>
                     <span className="text-2xl font-bold text-white">
@@ -112,10 +112,10 @@ const InteractiveShowcase: React.FC = () => {
               {activeTab === 'booking' && (
                 <div className="flex flex-col items-center justify-center py-8 text-center animate-fadeIn">
                   <div className="w-12 h-12 rounded-full bg-slate-700 flex items-center justify-center mb-4">
-                    <RefreshCw className="w-6 h-6 text-slate-400 animate-spin" />
+                    <RefreshCw className="w-6 h-6 text-slate-300 animate-spin" />
                   </div>
                   <h4 className="text-white font-medium mb-2">Módulo de Reservas</h4>
-                  <p className="text-sm text-slate-400 max-w-xs">
+                  <p className="text-sm text-slate-300 max-w-xs">
                     Imagina un calendario sincronizado en tiempo real, sin recargas de página. Ideal para clínicas, peluquerías o consultorías en León.
                   </p>
                 </div>

@@ -43,7 +43,7 @@ const App: React.FC = () => {
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">¿No sabes qué necesita tu negocio?</h2>
-            <p className="text-slate-400 max-w-2xl mx-auto">
+            <p className="text-slate-300 max-w-2xl mx-auto">
               Usa nuestra IA entrenada para analizar tu sector en León y recibir una propuesta técnica gratuita al instante.
             </p>
           </div>
@@ -56,7 +56,7 @@ const App: React.FC = () => {
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Hablemos de tu Proyecto</h2>
-            <p className="text-slate-400">
+            <p className="text-slate-300">
               Cuéntanos qué necesitas y diseñaremos una arquitectura a medida.
             </p>
           </div>

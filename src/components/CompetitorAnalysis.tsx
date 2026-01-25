@@ -12,7 +12,7 @@ const CompetitorAnalysis: React.FC = () => {
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
             Análisis de Competencia
           </h2>
-          <p className="text-slate-400 max-w-2xl mx-auto">
+          <p className="text-slate-300 max-w-2xl mx-auto">
             Hemos analizado a tus referentes (AgenciaSP, Villarin, ManitasWP...). Son excelentes en Mantenimiento y Formación, pero dejan libre el nicho de <strong>"Ingeniería Web a Medida"</strong>.
           </p>
         </div>
@@ -29,20 +29,20 @@ const CompetitorAnalysis: React.FC = () => {
               <div className="absolute left-0 right-0 top-1/2 h-px bg-slate-600/50"></div>
               
               {/* Labels */}
-              <div className="absolute top-2 left-1/2 -translate-x-1/2 text-[10px] text-slate-400 uppercase tracking-widest bg-slate-900 px-2">Alta Tecnología (React/App)</div>
+              <div className="absolute top-2 left-1/2 -translate-x-1/2 text-[10px] text-slate-300 uppercase tracking-widest bg-slate-900 px-2">Alta Tecnología (React/App)</div>
               <div className="absolute bottom-2 left-1/2 -translate-x-1/2 text-[10px] text-slate-500 uppercase tracking-widest bg-slate-900 px-2">Web Estándar</div>
               <div className="absolute left-2 top-1/2 -translate-y-1/2 -rotate-90 text-[10px] text-slate-500 uppercase tracking-widest bg-slate-900 px-2">Remoto / Nacional</div>
-              <div className="absolute right-2 top-1/2 -translate-y-1/2 rotate-90 text-[10px] text-slate-400 uppercase tracking-widest bg-slate-900 px-2">Local (León) / Cercano</div>
+              <div className="absolute right-2 top-1/2 -translate-y-1/2 rotate-90 text-[10px] text-slate-300 uppercase tracking-widest bg-slate-900 px-2">Local (León) / Cercano</div>
 
               {/* Competitors Dots */}
               <div className="absolute top-[70%] left-[30%] group">
                 <div className="w-4 h-4 bg-slate-500 rounded-full border-2 border-slate-300"></div>
-                <div className="absolute top-full left-1/2 -translate-x-1/2 mt-1 text-[10px] text-slate-400 whitespace-nowrap bg-slate-900 px-1 rounded opacity-0 group-hover:opacity-100 transition-opacity">ManitasWP / AgenciaSP</div>
+                <div className="absolute top-full left-1/2 -translate-x-1/2 mt-1 text-[10px] text-slate-300 whitespace-nowrap bg-slate-900 px-1 rounded opacity-0 group-hover:opacity-100 transition-opacity">ManitasWP / AgenciaSP</div>
               </div>
               
               <div className="absolute top-[60%] left-[20%] group">
                 <div className="w-4 h-4 bg-slate-500 rounded-full border-2 border-slate-300"></div>
-                <div className="absolute top-full left-1/2 -translate-x-1/2 mt-1 text-[10px] text-slate-400 whitespace-nowrap bg-slate-900 px-1 rounded opacity-0 group-hover:opacity-100 transition-opacity">Villarin / Borja</div>
+                <div className="absolute top-full left-1/2 -translate-x-1/2 mt-1 text-[10px] text-slate-300 whitespace-nowrap bg-slate-900 px-1 rounded opacity-0 group-hover:opacity-100 transition-opacity">Villarin / Borja</div>
               </div>
 
               {/* YOU */}
@@ -57,11 +57,11 @@ const CompetitorAnalysis: React.FC = () => {
           <div className="space-y-6">
              <div className="flex gap-4">
                 <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-slate-800 flex items-center justify-center border border-slate-700">
-                  <Shield className="w-6 h-6 text-slate-400" />
+                  <Shield className="w-6 h-6 text-slate-300" />
                 </div>
                 <div>
                   <h4 className="text-lg font-bold text-white">Competencia: "Te mantengo la web"</h4>
-                  <p className="text-slate-400 text-sm mt-1">
+                  <p className="text-slate-300 text-sm mt-1">
                     Se centran en actualizaciones, seguridad y soporte técnico básico. Es un servicio "commodity" (guerra de precios).
                   </p>
                 </div>
@@ -73,7 +73,7 @@ const CompetitorAnalysis: React.FC = () => {
                 </div>
                 <div>
                   <h4 className="text-lg font-bold text-white">EMPC: "Te construyo herramientas"</h4>
-                  <p className="text-slate-400 text-sm mt-1">
+                  <p className="text-slate-300 text-sm mt-1">
                     Tú ofreces desarrollo. Calculadoras de hipoteca para inmobiliarias, reservas visuales para peluquerías. <strong>Eso se vende más caro.</strong>
                   </p>
                 </div>
@@ -85,7 +85,7 @@ const CompetitorAnalysis: React.FC = () => {
                 </div>
                 <div>
                   <h4 className="text-lg font-bold text-white">Factor Local: León</h4>
-                  <p className="text-slate-400 text-sm mt-1">
+                  <p className="text-slate-300 text-sm mt-1">
                     Tus competidores son entes digitales abstractos. Tú eres el ingeniero que puede ir a tomar un café a la Plaza Mayor con el cliente.
                   </p>
                 </div>

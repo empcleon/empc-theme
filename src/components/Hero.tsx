@@ -21,7 +21,7 @@ const Hero: React.FC = () => {
         </h1>
 
         {/* Subtitle */}
-        <p className="text-xl md:text-2xl text-slate-400 max-w-3xl mx-auto mb-10 font-light leading-relaxed">
+        <p className="text-xl md:text-2xl text-slate-300 max-w-3xl mx-auto mb-10 font-light leading-relaxed">
           Creamos <strong>arquitecturas híbridas</strong>: la facilidad de gestión de WordPress combinada con la potencia de ventas de las aplicaciones <strong>React</strong>.
         </p>
 
@@ -32,7 +32,7 @@ const Hero: React.FC = () => {
             <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
           </a>
           <a href="#demos" className="w-full sm:w-auto px-8 py-4 bg-slate-800 text-white border border-slate-700 rounded-full font-bold text-lg hover:bg-slate-700 transition-all flex items-center gap-2">
-            <Code2 className="w-5 h-5 text-slate-400" />
+            <Code2 className="w-5 h-5 text-slate-300" />
             Ver Demos Técnicas
           </a>
         </div>

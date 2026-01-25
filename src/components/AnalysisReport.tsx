@@ -26,19 +26,19 @@ const AnalysisReport: React.FC = () => {
             <ul className="space-y-4">
               <li className="flex items-start gap-3">
                 <span className="w-1.5 h-1.5 bg-red-500 rounded-full mt-2" />
-                <p className="text-slate-400 text-sm">
+                <p className="text-slate-300 text-sm">
                   <strong className="text-slate-200">Ruido Visual:</strong> El uso excesivo de líneas discontinuas, bordes y cajas de colores contrastantes (rojo/amarillo) fatiga la vista y resta profesionalidad técnica.
                 </p>
               </li>
               <li className="flex items-start gap-3">
                 <span className="w-1.5 h-1.5 bg-red-500 rounded-full mt-2" />
-                <p className="text-slate-400 text-sm">
+                <p className="text-slate-300 text-sm">
                   <strong className="text-slate-200">Propuesta de Valor Difusa:</strong> Aunque mencionas React, la estética "Theme Forest 2015" grita "Solo WordPress". No visualizas tu capacidad de programación a medida.
                 </p>
               </li>
               <li className="flex items-start gap-3">
                 <span className="w-1.5 h-1.5 bg-red-500 rounded-full mt-2" />
-                <p className="text-slate-400 text-sm">
+                <p className="text-slate-300 text-sm">
                   <strong className="text-slate-200">Jerarquía Tipográfica:</strong> Los textos son densos y los CTAs (llamadas a la acción) compiten entre sí.
                 </p>
               </li>
@@ -56,19 +56,19 @@ const AnalysisReport: React.FC = () => {
             <ul className="space-y-4">
               <li className="flex items-start gap-3">
                 <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full mt-2" />
-                <p className="text-slate-400 text-sm">
+                <p className="text-slate-300 text-sm">
                   <strong className="text-slate-200">Estética "Dev-First":</strong> Un diseño oscuro, limpio y minimalista que sugiere tecnología avanzada, diferenciándote de las agencias de marketing tradicionales en León.
                 </p>
               </li>
               <li className="flex items-start gap-3">
                 <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full mt-2" />
-                <p className="text-slate-400 text-sm">
+                <p className="text-slate-300 text-sm">
                   <strong className="text-slate-200">WordPress Invisible, React Visible:</strong> Usar WordPress como motor (headless o tradicional) pero mostrar componentes React interactivos en la propia landing para demostrar capacidad (ver demo abajo).
                 </p>
               </li>
               <li className="flex items-start gap-3">
                 <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full mt-2" />
-                <p className="text-slate-400 text-sm">
+                <p className="text-slate-300 text-sm">
                   <strong className="text-slate-200">Enfoque Local Premium:</strong> Elevar el discurso de "Diseño Freelance" a "Consultoría Tecnológica para PYMES".
                 </p>
               </li>

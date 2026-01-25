@@ -62,8 +62,8 @@ const AiConsultant: React.FC = () => {
       <div className="md:w-7/12 p-8 md:p-12 bg-white relative">
         {!result && !loading && (
           <div className="h-full flex flex-col items-center justify-center text-center opacity-30">
-            <Send className="w-16 h-16 mb-4 text-slate-400" />
-            <p className="text-xl font-medium text-slate-400">Esperando tu consulta...</p>
+            <Send className="w-16 h-16 mb-4 text-slate-300" />
+            <p className="text-xl font-medium text-slate-300">Esperando tu consulta...</p>
           </div>
         )}
 
@@ -91,7 +91,7 @@ const AiConsultant: React.FC = () => {
             </div>
 
             <div className="bg-slate-50 p-6 rounded-xl border border-slate-100">
-              <h4 className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-2">Tip SEO Local (León)</h4>
+              <h4 className="text-xs font-bold text-slate-300 uppercase tracking-widest mb-2">Tip SEO Local (León)</h4>
               <p className="text-slate-600 italic">
                 "{result.localSeoTip}"
               </p>

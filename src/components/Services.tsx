@@ -32,7 +32,7 @@ const Services: React.FC = () => {
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
             Servicios de Ingeniería Web
           </h2>
-          <p className="text-slate-400 max-w-2xl mx-auto">
+          <p className="text-slate-300 max-w-2xl mx-auto">
             No somos una agencia de marketing 360º. Somos desarrolladores especialistas en código. 
             Hacemos que las cosas funcionen, rápido y bien.
           </p>
@@ -52,7 +52,7 @@ const Services: React.FC = () => {
               <h3 className="text-xl font-bold text-white mb-3 group-hover:text-rose-400 transition-colors">
                 {service.title}
               </h3>
-              <p className="text-slate-400 leading-relaxed">
+              <p className="text-slate-300 leading-relaxed">
                 {service.description}
               </p>
             </div>

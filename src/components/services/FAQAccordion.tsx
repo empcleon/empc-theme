@@ -34,7 +34,7 @@ const FAQAccordion: React.FC<FAQAccordionProps> = ({
                             {title}
                         </h2>
                     </div>
-                    <span className="text-slate-400 font-medium tracking-wide text-sm">{subtitle}</span>
+                    <span className="text-slate-300 font-medium tracking-wide text-sm">{subtitle}</span>
                 </div>
 
                 <div className="space-y-4">

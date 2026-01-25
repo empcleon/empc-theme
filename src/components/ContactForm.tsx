@@ -58,7 +58,7 @@ const ContactForm = () => {
                     <Check className="w-8 h-8 text-emerald-500" />
                 </div>
                 <h3 className="text-2xl font-bold text-white mb-2">¡Mensaje Recibido!</h3>
-                <p className="text-slate-400">Gracias {formData.name}, te responderemos a {formData.email} en menos de 24h.</p>
+                <p className="text-slate-300">Gracias {formData.name}, te responderemos a {formData.email} en menos de 24h.</p>
                 <button
                     onClick={() => { setIsSuccess(false); setStep(1); setFormData({ name: '', email: '', service: '', message: '' }); }}
                     className="mt-6 text-emerald-400 hover:text-emerald-300 font-medium"
@@ -144,7 +144,7 @@ const ContactForm = () => {
                                         key={service}
                                         className={`p-4 rounded-xl border cursor-pointer transition-all ${formData.service === service
                                             ? 'bg-rose-500/10 border-rose-500 text-white'
-                                            : 'bg-slate-800 border-slate-700 text-slate-400 hover:border-slate-500'
+                                            : 'bg-slate-800 border-slate-700 text-slate-300 hover:border-slate-500'
                                             }`}
                                     >
                                         <input
@@ -164,7 +164,7 @@ const ContactForm = () => {
                                 <button
                                     type="button"
                                     onClick={prevStep}
-                                    className="text-slate-400 hover:text-white font-medium px-4 py-2"
+                                    className="text-slate-300 hover:text-white font-medium px-4 py-2"
                                 >
                                     Atrás
                                 </button>
@@ -202,7 +202,7 @@ const ContactForm = () => {
                                 <button
                                     type="button"
                                     onClick={prevStep}
-                                    className="text-slate-400 hover:text-white font-medium px-4 py-2"
+                                    className="text-slate-300 hover:text-white font-medium px-4 py-2"
                                 >
                                     Atrás
                                 </button>

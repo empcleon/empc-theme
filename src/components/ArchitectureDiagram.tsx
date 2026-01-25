@@ -11,9 +11,9 @@ const ArchitectureDiagram: React.FC = () => {
           </div>
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
             Potencia React, <br/>
-            <span className="text-slate-400">Hosting WordPress Estándar.</span>
+            <span className="text-slate-300">Hosting WordPress Estándar.</span>
           </h2>
-          <p className="text-slate-400 max-w-2xl mx-auto">
+          <p className="text-slate-300 max-w-2xl mx-auto">
             No necesitas servidores Node.js costosos. Nuestra arquitectura híbrida se integra en tu hosting actual (cPanel, SiteGround, etc.) manteniendo el SEO intacto.
           </p>
         </div>
@@ -31,7 +31,7 @@ const ArchitectureDiagram: React.FC = () => {
                 <div className="absolute -bottom-2 -right-2 bg-blue-600 text-[10px] font-bold px-2 py-0.5 rounded text-white">PHP</div>
               </div>
               <h3 className="text-xl font-bold text-white mb-2">1. Hosting WordPress</h3>
-              <p className="text-slate-400 text-sm">
+              <p className="text-slate-300 text-sm">
                 El servidor entrega el HTML base, maneja el SEO (Yoast) y la base de datos. Carga instantánea y barata.
               </p>
             </div>
@@ -43,7 +43,7 @@ const ArchitectureDiagram: React.FC = () => {
                 <div className="absolute -bottom-2 -right-2 bg-purple-600 text-[10px] font-bold px-2 py-0.5 rounded text-white">JSON</div>
               </div>
               <h3 className="text-xl font-bold text-white mb-2">2. El Puente (API REST)</h3>
-              <p className="text-slate-400 text-sm">
+              <p className="text-slate-300 text-sm">
                 WordPress expone tus productos y posts vía API. React consume estos datos sin recargar la página.
               </p>
             </div>
@@ -55,7 +55,7 @@ const ArchitectureDiagram: React.FC = () => {
                 <div className="absolute -bottom-2 -right-2 bg-rose-500 text-[10px] font-bold px-2 py-0.5 rounded text-white">REACT</div>
               </div>
               <h3 className="text-xl font-bold text-white mb-2">3. Hidratación React</h3>
-              <p className="text-slate-400 text-sm">
+              <p className="text-slate-300 text-sm">
                 Nuestros componentes (Reservas, Calculadoras) toman el control del navegador para una experiencia tipo App nativa.
               </p>
             </div>

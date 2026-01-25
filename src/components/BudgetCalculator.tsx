@@ -204,7 +204,7 @@ const BudgetCalculator = () => {
                 <h3 className="text-2xl font-bold text-white mb-2">¡Presupuesto Enviado!</h3>
                 <p className="text-emerald-200 mb-6">Hemos enviado los detalles a <strong>{lead.email}</strong>.</p>
                 <div className="text-white bg-slate-800 p-4 rounded-lg inline-block">
-                    <span className="text-slate-400 text-sm block">Tu rango estimado</span>
+                    <span className="text-slate-300 text-sm block">Tu rango estimado</span>
                     <span className="text-3xl font-bold text-emerald-400">{est.min}€ - {est.max}€</span>
                 </div>
             </div>
@@ -244,7 +244,7 @@ const BudgetCalculator = () => {
                                         <Icon className="text-rose-500" />
                                     </div>
                                     <h4 className="font-bold text-white mb-1">{t.label}</h4>
-                                    <p className="text-sm text-slate-400">{t.desc}</p>
+                                    <p className="text-sm text-slate-300">{t.desc}</p>
                                     <div className="mt-3 text-xs font-bold text-rose-400">Desde {t.price}€</div>
                                 </button>
                             );
@@ -270,7 +270,7 @@ const BudgetCalculator = () => {
                                             {f.label}
                                             {f.highlight && <span className="ml-2 text-[10px] bg-rose-600/20 text-rose-300 px-2 py-0.5 rounded-full">Recomendado</span>}
                                         </span>
-                                        <span className="text-xs text-slate-400">{f.desc}</span>
+                                        <span className="text-xs text-slate-300">{f.desc}</span>
                                     </div>
                                     <div className="text-sm font-bold text-slate-300 mr-2">+{f.price}€</div>
                                     {isSelected && <Check className="text-rose-500 w-5 h-5" />}
@@ -280,7 +280,7 @@ const BudgetCalculator = () => {
                     </div>
 
                     <div className="flex justify-between pt-4">
-                        <button onClick={() => setStep(1)} className="text-slate-400 hover:text-white transition-colors">Atrás</button>
+                        <button onClick={() => setStep(1)} className="text-slate-300 hover:text-white transition-colors">Atrás</button>
                         <button
                             onClick={() => setStep(3)}
                             className="bg-white text-slate-900 px-6 py-2 rounded-lg font-bold hover:bg-slate-200 transition-colors flex items-center"
@@ -295,11 +295,11 @@ const BudgetCalculator = () => {
             {step === 3 && (
                 <div className="text-center animate-fade-in space-y-6">
                     <div>
-                        <span className="text-slate-400 text-sm uppercase tracking-wider">Inversión Estimada (León)</span>
+                        <span className="text-slate-300 text-sm uppercase tracking-wider">Inversión Estimada (León)</span>
                         <div className="text-4xl md:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-rose-400 to-orange-400 my-2">
                             {est.min}€ - {est.max}€
                         </div>
-                        <p className="text-slate-400 text-sm max-w-xs mx-auto">
+                        <p className="text-slate-300 text-sm max-w-xs mx-auto">
                             IVA no incluido. Presupuesto válido por 15 días.
                         </p>
                     </div>

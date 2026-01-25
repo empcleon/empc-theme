@@ -33,7 +33,7 @@ const MethodPage = () => {
                     <h1 className="text-5xl md:text-7xl font-black mb-8 leading-tight">
                         Nuestro Método <span className="text-slate-500">Antigravity.</span>
                     </h1>
-                    <p className="text-xl text-slate-400 leading-relaxed max-w-2xl">
+                    <p className="text-xl text-slate-300 leading-relaxed max-w-2xl">
                         Hemos redefinido el desarrollo web en León. Combinamos la gestión sencilla de WordPress con la velocidad extrema de React.
                     </p>
                 </div>
@@ -84,7 +84,7 @@ const MethodPage = () => {
             <section className="py-20 px-6 border-t border-slate-800">
                 <div className="max-w-4xl mx-auto text-center">
                     <h2 className="text-3xl font-bold mb-6">¿Preparado para la transformación?</h2>
-                    <p className="text-slate-400 mb-8 max-w-2xl mx-auto">
+                    <p className="text-slate-300 mb-8 max-w-2xl mx-auto">
                         Solicita una auditoría técnica gratuita y descubre el potencial real de tu proyecto digital en León.
                     </p>
                     <a
