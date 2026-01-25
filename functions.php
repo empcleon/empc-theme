@@ -67,8 +67,10 @@ function empc_load_scripts()
 
     if (is_front_page()) {
         $should_load_react = true; // Home suele tener Calculadora o Contacto
-    } elseif (is_home()) {
-        $should_load_react = true; // Blog necesita Tailwind para estilos
+    } elseif (is_home() || is_archive() || is_search()) {
+        $should_load_react = true; // Blog y listados necesitan Tailwind
+    } elseif (is_singular('post')) {
+        $should_load_react = true; // Los posts necesitan Tailwind para las clases prose
     } elseif (is_page_template('page-tiendas-online.php')) {
         $should_load_react = true; // Tiendas Online usa React Islands
     } elseif (is_page_template('page-service.php')) {
@@ -80,6 +82,20 @@ function empc_load_scripts()
         // Si el post tiene configuración de React explícita, cargamos
         if (get_post_meta($post->ID, '_empc_react_config', true) || get_post_meta($post->ID, '_empc_service_config', true)) {
             $should_load_react = true;
+        } else {
+            // Verificar si el contenido tiene React islands (shortcodes o divs específicos)
+            $post_content = isset($post->post_content) ? $post->post_content : '';
+            if (
+                strpos($post_content, '[empc_booking') !== false || // Shortcode de booking
+                strpos($post_content, 'id="island-') !== false || // React islands genéricas
+                strpos($post_content, 'id="empc-booking-root') !== false || // Booking root
+                strpos($post_content, 'id="island-budget-calculator') !== false || // Calculator
+                strpos($post_content, 'id="island-booking') !== false || // Booking island
+                strpos($post_content, 'id="island-method-page') !== false || // Method island
+                strpos($post_content, 'id="island-pricing-calculator') !== false // Pricing calculator
+            ) {
+                $should_load_react = true;
+            }
         }
     }
 
@@ -91,10 +107,10 @@ function empc_load_scripts()
             wp_enqueue_script('empc-react-main', $vite_dev_server . '/wp-content/themes/empc-theme/react-app/src/main.tsx', [], null, true);
         } else {
             // MODO PRODUCCIÓN: Cargar assets compilados
-            $react_css = get_template_directory_uri() . '/react-app/assets/styles.css';
+            $react_css = get_template_directory_uri() . '/react-app/assets/main.css';
             $react_js = get_template_directory_uri() . '/react-app/assets/app.js';
 
-            $react_css_path = EMPC_THEME_DIR . '/react-app/assets/styles.css';
+            $react_css_path = EMPC_THEME_DIR . '/react-app/assets/main.css';
             $react_js_path = EMPC_THEME_DIR . '/react-app/assets/app.js';
 
             // CSS - Preload para mejorar LCP
@@ -109,7 +125,7 @@ function empc_load_scripts()
             // JS - Con defer para no bloquear renderizado
             if (file_exists($react_js_path)) {
                 wp_enqueue_script('empc-react', $react_js, [], filemtime($react_js_path), [
-                'strategy' => 'defer',
+                    'strategy' => 'defer',
                     'in_footer' => true
                 ]);
             }
@@ -153,42 +169,32 @@ function empc_load_scripts()
 add_action('wp_enqueue_scripts', 'empc_load_scripts', 5); // Carga ultra-temprana de Tailwind
 
 /**
- * Limpieza Quirúrgica de Estilos WordPress - Prioridad 999
- * Eliminamos todos los estilos globales que compiten con Tailwind
+ * RESTAURACIÓN QUIRÚRGICA DEL BLOG - Limpieza Extrema de Estilos WP
+ * Eliminamos selectivamente lo que rompe Tailwind pero mantenemos lo necesario
  */
-function empc_cleanup_wordpress_styles() {
-    if (is_admin()) return; // No queremos romper el panel de administración
-    
-    // Desactivamos la librería de bloques y temas clásicos
+function empc_force_cleanup_blog()
+{
+    if (is_admin())
+        return;
+
+    // 1. Matamos los estilos globales que rompen la jerarquía
     wp_dequeue_style('wp-block-library');
-    wp_dequeue_style('wp-block-library-theme'); 
-    wp_dequeue_style('wc-blocks-style');
-    wp_dequeue_style('global-styles'); // El principal culpable
+    wp_dequeue_style('wp-block-library-theme');
+    wp_dequeue_style('global-styles');
     wp_dequeue_style('classic-theme-styles');
-    
-    // Eliminamos estilos extra que siguen cargando
-    wp_dequeue_style('empc-theme-style'); // Nuestro propio style.css base
-    wp_dequeue_style('wp-img-auto-sizes-contain'); // Estilos inline de imágenes
-    wp_dequeue_style('wp-emoji-styles'); // Estilos de emojis
-    
-    // Matamos los estilos inline que WP inyecta a la fuerza
+
+    // 2. Eliminamos la inyección de SVGs y filtros que ensucian el header
     remove_action('wp_enqueue_scripts', 'wp_enqueue_global_styles');
-    remove_action('wp_footer', 'wp_enqueue_global_styles', 1);
+    remove_action('wp_head', 'wp_generator');
     remove_action('wp_head', 'wp_global_styles_render_svg_filters');
-    
-    // Remover estilos inline específicos
-    add_action('wp_head', function() {
-        ob_start(function($buffer) {
-            $buffer = preg_replace('/<style[^>]*>wp-img-auto-sizes.*?<\/style>/s', '', $buffer);
-            $buffer = preg_replace('/<style[^>]*>wp-emoji-styles.*?<\/style>/s', '', $buffer);
-            return $buffer;
-        });
-    }, 0);
+
+    // 3. Ya no usamos limpieza por Regex, confiamos en la prioridad de Tailwind y reset.css
 }
-add_action('wp_enqueue_scripts', 'empc_cleanup_wordpress_styles', 999); // La última palabra la tenemos nosotros
+add_action('wp_enqueue_scripts', 'empc_force_cleanup_blog', 999);
 
 // Script de diagnóstico temporal para React mounting
-function empc_debug_react_script() {
+function empc_debug_react_script()
+{
     if (is_front_page()) {
         wp_enqueue_script('empc-debug', get_template_directory_uri() . '/test-react-mounting.js', [], '1.0.0', true);
     }
@@ -225,7 +231,7 @@ function empc_booking_shortcode($atts)
     ob_start();
     ?>
     <script>
-        window.empcConfig = <?php echo $json_config; ?>;
+            window.empcConfig = <?php echo $json_config; ?>;
     </script>
     <div id="empc-booking-root" class="my-8 min-h-[400px]"></div>
     <?php
@@ -653,7 +659,51 @@ add_action('admin_init', function () {
     });
     */
 
+    // ASIGNAR IMÁGENES DESTACADAS AUTOMÁTICAMENTE
+    $assign_featured_images = function () use ($insert_empc_post, $cat_ids) {
+        $posts_with_images = [
+            'cuanto-cuesta-web-leon' => 'https://images.unsplash.com/photo-1467232004588-a341f5b41f0b?w=800&h=400&fit=crop',
+            'seo-local-leon' => 'https://images.unsplash.com/photo-1566477334886-7a2c6c8c7b8b?w=800&h=400&fit=crop',
+            'reservas-online-clinicas-leon' => 'https://images.unsplash.com/photo-1536924940846-227afb31e2a5?w=800&h=400&fit=crop',
+            'webs-para-imprentas-leon' => 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=800&h=400&fit=crop',
+            'wpo-wordpress-leon' => 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&h=400&fit=crop',
+            'webs-restaurantes-leon-booking' => 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800&h=400&fit=crop',
+            'comercio-local-panaderia-leon' => 'https://images.unsplash.com/photo-1509440159596-0249088772ff?w=800&h=400&fit=crop',
+            'demo-reservas-restaurantes-leon' => 'https://images.unsplash.com/photo-1552566626-52f8b828add9?w=800&h=400&fit=crop'
+        ];
+
+        foreach ($posts_with_images as $slug => $image_url) {
+            $args = [
+                'name' => $slug,
+                'post_type' => 'post',
+                'post_status' => 'any',
+                'numberposts' => 1
+            ];
+            $existing_posts = get_posts($args);
+
+            if (!empty($existing_posts)) {
+                $post = $existing_posts[0];
+                if (!has_post_thumbnail($post->ID)) {
+                    // Descargar y asignar imagen
+                    $image_id = media_sideload_image($image_url, $post->ID, '', 'id');
+                    if (!is_wp_error($image_id)) {
+                        set_post_thumbnail($post->ID, $image_id);
+                    }
+                }
+            }
+        }
+    };
+
+    $assign_featured_images();
+
     // Marcar versión
     update_option('empc_content_version', $content_version);
 });
+
+
+/**
+ * Debug helper for React loading (comment out in production)
+ * Uncomment the line below to see debug info in browser console
+ */
+// add_action('wp_head', function() { echo '<script>console.log("EMPC Debug: React loading condition:", ' . ($should_load_react ? 'true' : 'false') . ');</script>'; });
 
