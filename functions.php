@@ -91,10 +91,10 @@ function empc_load_scripts()
             wp_enqueue_script('empc-react-main', $vite_dev_server . '/wp-content/themes/empc-theme/react-app/src/main.tsx', [], null, true);
         } else {
             // MODO PRODUCCIÓN: Cargar assets compilados
-            $react_css = get_template_directory_uri() . '/react-app/assets/main.css';
+            $react_css = get_template_directory_uri() . '/react-app/assets/styles.css';
             $react_js = get_template_directory_uri() . '/react-app/assets/app.js';
 
-            $react_css_path = EMPC_THEME_DIR . '/react-app/assets/main.css';
+            $react_css_path = EMPC_THEME_DIR . '/react-app/assets/styles.css';
             $react_js_path = EMPC_THEME_DIR . '/react-app/assets/app.js';
 
             // CSS - Preload para mejorar LCP
