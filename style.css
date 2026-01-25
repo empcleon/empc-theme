@@ -21,8 +21,24 @@ Text Domain: empc-theme
 
 body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
-    background-color: #0f172a;
-    color: #f8fafc;
+    background-color: #0f172a !important; /* Slate 900 - Forzamos contra WP */
+    color: #f8fafc !important;           /* Slate 50 - Forzamos contra WP */
+    margin: 0;
+    padding: 0;
+}
+
+/* Aniquilamos cualquier residuo de layout de bloques de WP */
+.wp-block-button__link,
+.is-layout-flex,
+.is-layout-grid,
+.wp-site-blocks {
+    all: unset;
+    display: block; /* O el display que necesite tu island */
+}
+
+/* Aseguramos que el contenedor de React ocupe su sitio */
+#root, #service-hero-island, #cta-form-island, #main-nav {
+    isolation: isolate;
 }
 
 .empc-react-container {

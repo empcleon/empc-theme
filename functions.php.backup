@@ -150,28 +150,7 @@ function empc_load_scripts()
         wp_dequeue_style('global-styles'); // El inline CSS gigante de WP 5.9+
     }
 }
-add_action('wp_enqueue_scripts', 'empc_load_scripts', 5); // Carga ultra-temprana de Tailwind
-
-/**
- * Limpieza Quirúrgica de Estilos WordPress - Prioridad 999
- * Eliminamos todos los estilos globales que compiten con Tailwind
- */
-function empc_cleanup_wordpress_styles() {
-    if (is_admin()) return; // No queremos romper el panel de administración
-    
-    // Desactivamos la librería de bloques y temas clásicos
-    wp_dequeue_style('wp-block-library');
-    wp_dequeue_style('wp-block-library-theme'); 
-    wp_dequeue_style('wc-blocks-style');
-    wp_dequeue_style('global-styles'); // El principal culpable
-    wp_dequeue_style('classic-theme-styles');
-    
-    // Matamos los estilos inline que WP inyecta a la fuerza
-    remove_action('wp_enqueue_scripts', 'wp_enqueue_global_styles');
-    remove_action('wp_footer', 'wp_enqueue_global_styles', 1);
-    remove_action('wp_head', 'wp_global_styles_render_svg_filters');
-}
-add_action('wp_enqueue_scripts', 'empc_cleanup_wordpress_styles', 999); // La última palabra la tenemos nosotros
+add_action('wp_enqueue_scripts', 'empc_load_scripts');
 
 // --- SHORTCODES ---
 
