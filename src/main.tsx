@@ -1,4 +1,4 @@
-import React, { lazy, Suspense } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
 import WhatsAppBubble from './components/WhatsAppBubble';
@@ -68,7 +68,7 @@ if (bookingElement) {
 const empcBookingElement = document.getElementById('empc-booking-root');
 if (empcBookingElement) {
     // Dynamic import to split code
-    import('./islands/booking/BookingIsland').then(({ default: BookingIsland }) => {
+    import('./components/islands/booking/BookingIsland').then(({ default: BookingIsland }) => {
         ReactDOM.createRoot(empcBookingElement).render(
             <React.StrictMode>
                 <BookingIsland />
@@ -87,9 +87,6 @@ if (methodElement) {
     );
 }
 
-// 7. Service Page Islands - Dynamic mounting from data attributes
-// These islands read their configuration from data-config attributes set by WordPress
-
 // Helper function to mount service islands
 function mountServiceIsland(elementId: string, Component: React.ComponentType<any>) {
     const element = document.getElementById(elementId);
@@ -103,6 +100,7 @@ function mountServiceIsland(elementId: string, Component: React.ComponentType<an
             </React.StrictMode>
         );
     }
+}
 }
 
 // Import service components
