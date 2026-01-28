@@ -86,40 +86,45 @@ const CTAForm: React.FC<CTAFormProps> = ({
     };
 
     return (
-        <section className="py-24 bg-gradient-to-br from-blue-600 to-purple-600" id="presupuesto">
-            <div className="max-w-4xl mx-auto px-4 sm:px-6">
+        <section className="py-24 relative overflow-hidden" id="presupuesto">
+            {/* Background elements */}
+            <div className="absolute inset-0 bg-[#050505]"></div>
+            <div className="absolute top-0 left-1/4 w-96 h-96 bg-[#FF007A]/10 rounded-full blur-[100px]"></div>
+            <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-purple-900/10 rounded-full blur-[100px]"></div>
+
+            <div className="max-w-4xl mx-auto px-4 sm:px-6 relative z-10">
                 <div className="text-center mb-12">
-                    <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+                    <h2 className="text-3xl md:text-5xl font-bold text-white mb-6 font-syne">
                         {title}
                     </h2>
-                    <p className="text-blue-100 text-lg">
+                    <p className="text-slate-400 text-lg font-inter">
                         {description}
                     </p>
                 </div>
 
-                <form onSubmit={handleSubmit} className="bg-white/10 backdrop-blur rounded-2xl p-8 md:p-12">
+                <form onSubmit={handleSubmit} className="card-soberana rounded-2xl p-8 md:p-12 border border-white/5 backdrop-blur-md">
                     <div className="grid md:grid-cols-2 gap-6 mb-6">
                         <div>
-                            <label className="block text-white/80 text-sm mb-2">Nombre *</label>
+                            <label className="block text-slate-300 text-sm mb-2">Nombre *</label>
                             <input
                                 type="text"
                                 name="nombre"
                                 required
                                 value={formData.nombre}
                                 onChange={handleChange}
-                                className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white placeholder:text-white/50 focus:border-white focus:ring-1 focus:ring-white outline-none transition"
+                                className="w-full bg-black/40 border border-slate-700 rounded-xl px-4 py-3 text-white placeholder:text-slate-500 focus:border-[#FF007A] focus:ring-1 focus:ring-[#FF007A] outline-none transition"
                                 placeholder="Tu nombre"
                             />
                         </div>
                         <div>
-                            <label className="block text-white/80 text-sm mb-2">Email *</label>
+                            <label className="block text-slate-300 text-sm mb-2">Email *</label>
                             <input
                                 type="email"
                                 name="email"
                                 required
                                 value={formData.email}
                                 onChange={handleChange}
-                                className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white placeholder:text-white/50 focus:border-white focus:ring-1 focus:ring-white outline-none transition"
+                                className="w-full bg-black/40 border border-slate-700 rounded-xl px-4 py-3 text-white placeholder:text-slate-500 focus:border-[#FF007A] focus:ring-1 focus:ring-[#FF007A] outline-none transition"
                                 placeholder="tu@email.com"
                             />
                         </div>
@@ -127,64 +132,64 @@ const CTAForm: React.FC<CTAFormProps> = ({
 
                     <div className="grid md:grid-cols-2 gap-6 mb-6">
                         <div>
-                            <label className="block text-white/80 text-sm mb-2">Teléfono</label>
+                            <label className="block text-slate-300 text-sm mb-2">Teléfono</label>
                             <input
                                 type="tel"
                                 name="telefono"
                                 value={formData.telefono}
                                 onChange={handleChange}
-                                className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white placeholder:text-white/50 focus:border-white focus:ring-1 focus:ring-white outline-none transition"
+                                className="w-full bg-black/40 border border-slate-700 rounded-xl px-4 py-3 text-white placeholder:text-slate-500 focus:border-[#FF007A] focus:ring-1 focus:ring-[#FF007A] outline-none transition"
                                 placeholder="600 000 000"
                             />
                         </div>
                         {showProjectType && (
                             <div>
-                                <label className="block text-white/80 text-sm mb-2">Tipo de proyecto *</label>
+                                <label className="block text-slate-300 text-sm mb-2">Tipo de proyecto *</label>
                                 <select
                                     name="tipo"
                                     required
                                     value={formData.tipo}
                                     onChange={handleChange}
-                                    className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white focus:border-white focus:ring-1 focus:ring-white outline-none transition"
+                                    className="w-full bg-black/40 border border-slate-700 rounded-xl px-4 py-3 text-white focus:border-[#FF007A] focus:ring-1 focus:ring-[#FF007A] outline-none transition"
                                 >
-                                    <option value="" className="text-gray-900">Selecciona...</option>
-                                    <option value="web-corporativa" className="text-gray-900">Web corporativa</option>
-                                    <option value="tienda-online" className="text-gray-900">Tienda online</option>
-                                    <option value="landing-page" className="text-gray-900">Landing page</option>
-                                    <option value="rediseno" className="text-gray-900">Rediseño web existente</option>
-                                    <option value="otro" className="text-gray-900">Otro</option>
+                                    <option value="" className="text-gray-400">Selecciona...</option>
+                                    <option value="web-corporativa" className="text-black">Web corporativa</option>
+                                    <option value="tienda-online" className="text-black">Tienda online</option>
+                                    <option value="landing-page" className="text-black">Landing page</option>
+                                    <option value="rediseno" className="text-black">Rediseño web existente</option>
+                                    <option value="otro" className="text-black">Otro</option>
                                 </select>
                             </div>
                         )}
                     </div>
 
                     <div className="mb-6">
-                        <label className="block text-white/80 text-sm mb-2">Cuéntame tu proyecto *</label>
+                        <label className="block text-slate-300 text-sm mb-2">Cuéntame tu proyecto *</label>
                         <textarea
                             name="mensaje"
                             rows={4}
                             required
                             value={formData.mensaje}
                             onChange={handleChange}
-                            className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white placeholder:text-white/50 focus:border-white focus:ring-1 focus:ring-white outline-none transition resize-none"
+                            className="w-full bg-black/40 border border-slate-700 rounded-xl px-4 py-3 text-white placeholder:text-slate-500 focus:border-[#FF007A] focus:ring-1 focus:ring-[#FF007A] outline-none transition resize-none"
                             placeholder="Describe brevemente qué necesitas: tipo de negocio, objetivos, funcionalidades..."
                         ></textarea>
                     </div>
 
                     {showBudgetField && (
                         <div className="mb-6">
-                            <label className="block text-white/80 text-sm mb-2">Presupuesto aproximado</label>
+                            <label className="block text-slate-300 text-sm mb-2">Presupuesto aproximado</label>
                             <select
                                 name="presupuesto"
                                 value={formData.presupuesto}
                                 onChange={handleChange}
-                                className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white focus:border-white focus:ring-1 focus:ring-white outline-none transition"
+                                className="w-full bg-black/40 border border-slate-700 rounded-xl px-4 py-3 text-white focus:border-[#FF007A] focus:ring-1 focus:ring-[#FF007A] outline-none transition"
                             >
-                                <option value="" className="text-gray-900">No lo tengo definido</option>
-                                <option value="500-1000" className="text-gray-900">500€ - 1.000€</option>
-                                <option value="1000-2000" className="text-gray-900">1.000€ - 2.000€</option>
-                                <option value="2000-5000" className="text-gray-900">2.000€ - 5.000€</option>
-                                <option value="5000+" className="text-gray-900">Más de 5.000€</option>
+                                <option value="" className="text-gray-400">No lo tengo definido</option>
+                                <option value="500-1000" className="text-black">500€ - 1.000€</option>
+                                <option value="1000-2000" className="text-black">1.000€ - 2.000€</option>
+                                <option value="2000-5000" className="text-black">2.000€ - 5.000€</option>
+                                <option value="5000+" className="text-black">Más de 5.000€</option>
                             </select>
                         </div>
                     )}
@@ -192,7 +197,7 @@ const CTAForm: React.FC<CTAFormProps> = ({
                     <button
                         type="submit"
                         disabled={isSubmitting}
-                        className="w-full bg-white text-blue-600 py-4 rounded-xl font-bold text-lg hover:bg-blue-50 transition shadow-lg disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                        className="w-full bg-[#FF007A] text-black py-4 rounded-xl font-bold text-lg hover:bg-[#FB7185] hover:shadow-[0_0_20px_rgba(255,0,122,0.6)] transition shadow-lg disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 uppercase tracking-wide"
                     >
                         {isSubmitting ? (
                             <>
@@ -211,18 +216,18 @@ const CTAForm: React.FC<CTAFormProps> = ({
                     </button>
 
                     {submitStatus === 'success' && (
-                        <p className="text-center text-green-200 mt-4 font-medium">
+                        <p className="text-center text-[#FF007A] mt-4 font-medium">
                             ✓ Mensaje enviado correctamente. Te responderemos pronto.
                         </p>
                     )}
 
                     {submitStatus === 'error' && (
-                        <p className="text-center text-red-200 mt-4 font-medium">
+                        <p className="text-center text-red-400 mt-4 font-medium">
                             ✗ Error al enviar. Por favor, inténtalo de nuevo.
                         </p>
                     )}
 
-                    <p className="text-white/60 text-sm text-center mt-4">
+                    <p className="text-slate-500 text-sm text-center mt-4">
                         Sin compromiso. Respuesta garantizada en menos de 24 horas.
                     </p>
                 </form>

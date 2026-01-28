@@ -697,3 +697,302 @@ function get_tiendas_online_config(): array
         ]
     ];
 }
+
+/**
+ * Configuración de la página: SEO Local en León
+ */
+function get_seo_local_leon_config(): array
+{
+    return [
+        // ============================================
+        // HERO
+        // ============================================
+        'hero' => [
+            'badge' => [
+                'icon' => 'map-pin',
+                'text' => 'SEO Local para negocios de León',
+                'subtext' => 'Google Business Profile · reseñas · Local Pack',
+            ],
+            'title' => 'SEO Local en León',
+            'highlight' => 'para aparecer en el mapa',
+            'description' => 'Te ayudo a que tu negocio salga en el <strong>Local Pack de Google</strong> (el bloque con mapa y 3 resultados) cuando tus clientes buscan tu servicio en León.',
+            'bulletPoints' => [
+                ['text' => 'Optimización completa de Google Business Profile'],
+                ['text' => 'Estrategia de reseñas y reputación'],
+                ['text' => 'On-page SEO local en tu web existente'],
+            ],
+            'ctaPrimary' => [
+                'text' => 'Quiero salir en el mapa',
+                'href' => '#presupuesto',
+                'icon' => 'map',
+            ],
+            'ctaSecondary' => [
+                'text' => 'Simular impacto del Local Pack',
+                'href' => '#simulador-local-pack',
+                'icon' => 'activity',
+            ],
+            'stats' => [
+                ['number' => '76%', 'label' => 'de clics van al Local Pack y top 3'],
+                ['number' => '3x', 'label' => 'más llamadas desde Google Maps'],
+                ['number' => '30+', 'label' => 'fichas optimizadas en León'],
+            ],
+            'theme' => 'emerald', // para los degradados en el hero
+        ],
+
+        // ============================================
+        // FEATURES / BENEFICIOS
+        // ============================================
+        'features' => [
+            'badge' => 'Qué incluye',
+            'title' => 'SEO local más allá de rellenar la ficha',
+            'description' => 'No se trata solo de verificar tu negocio en Google. Trabajamos estrategia, contenidos, reseñas y autoridad local.',
+            'features' => [
+                [
+                    'icon' => 'map-pin',
+                    'title' => 'Optimización de ficha',
+                    'description' => 'Categorías correctas, descripción optimizada, servicios, productos, fotos y configuración avanzada.',
+                    'iconColor' => 'emerald'
+                ],
+                [
+                    'icon' => 'star',
+                    'title' => 'Estrategia de reseñas',
+                    'description' => 'Sistema sencillo para pedir reseñas reales a tus clientes y responder de forma profesional a todas.',
+                    'iconColor' => 'emerald'
+                ],
+                [
+                    'icon' => 'file-text',
+                    'title' => 'SEO on-page local',
+                    'description' => 'Páginas específicas por servicio y zona, marcado schema local y textos orientados a búsquedas locales.',
+                    'iconColor' => 'emerald'
+                ],
+                [
+                    'icon' => 'route',
+                    'title' => 'Citas y menciones locales',
+                    'description' => 'Presencia en directorios relevantes y medios locales que refuercen tu autoridad en la ciudad.',
+                    'iconColor' => 'emerald'
+                ],
+                [
+                    'icon' => 'phone-call',
+                    'title' => 'Más llamadas, no solo clics',
+                    'description' => 'Medimos llamadas y solicitudes desde Google Business Profile, no solo posiciones.',
+                    'iconColor' => 'emerald'
+                ],
+                [
+                    'icon' => 'radar',
+                    'title' => 'Mapas de calor de visibilidad',
+                    'description' => 'Opcionalmente, escaneamos en qué barrios de León sales o no sales para tus keywords clave.',
+                    'iconColor' => 'emerald'
+                ],
+            ],
+        ],
+
+        // ============================================
+        // SIMULADOR LOCAL PACK (ISLAND REACT)
+        // ============================================
+        'localPackSimulator' => [
+            'id' => 'local-pack-simulator-island', // ID del div donde montas el island
+            'title' => 'Simulador de impacto del Local Pack',
+            'subtitle' => 'Calcula cuántos clientes podrías ganar saliendo en el Top 3 del mapa',
+            'description' => 'Introduce cuántas búsquedas mensuales tiene tu servicio y te muestro la diferencia entre <strong>no salir en el Local Pack</strong> y aparecer en el <strong>puesto #1</strong> del mapa.',
+            'defaultValues' => [
+                'monthlySearches' => 800,   // Búsquedas mensuales por defecto
+                'conversionRate' => 0.08,  // 8% (se mostrará como 8 en el input)
+                'avgTicket' => 70,    // 70€ por cliente
+                'currentPosition' => 'no_pack', // 'no_pack' | 'pack_3' | 'pack_2' | 'pack_1'
+            ],
+            'notes' => [
+                'Son estimaciones basadas en CTR medios del Local Pack.',
+                'Los resultados reales dependen de tu sector, reseñas y competencia.',
+            ],
+        ],
+
+        // ============================================
+        // PRICING
+        // ============================================
+        'pricing' => [
+            'badge' => 'Planes',
+            'title' => 'Planes de SEO Local',
+            'description' => 'Trabajo siempre sobre negocios reales en León y alrededores. Planes pensados para pymes y autónomos.',
+            'tiers' => [
+                [
+                    'title' => 'Setup Inicial',
+                    'price' => '450€',
+                    'description' => 'De cero a tener presencia local sólida',
+                    'features' => [
+                        'Alta y verificación de ficha (si hace falta)',
+                        'Optimización completa de Google Business Profile',
+                        'Configuración de categorías, servicios y productos',
+                        'Revisión on-page básica de tu web',
+                        'Plantilla para pedir reseñas a clientes',
+                    ],
+                    'idealFor' => 'Negocios que no tienen ficha o la tienen muy abandonada',
+                    'ctaText' => 'Quiero poner en orden mi presencia local',
+                    'ctaHref' => '#presupuesto',
+                ],
+                [
+                    'title' => 'SEO Local Mensual',
+                    'price' => '350€/mes',
+                    'description' => 'Trabajamos posiciones y reputación mes a mes',
+                    'highlighted' => true,
+                    'badge' => '⭐ RECOMENDADO',
+                    'features' => [
+                        'Todo lo del Setup Inicial',
+                        'Publicación mensual de posts en la ficha',
+                        'Revisión y respuesta a reseñas',
+                        'Ajustes on-page en tu web (SEO local)',
+                        'Informe mensual con posiciones y llamadas',
+                    ],
+                    'idealFor' => 'Clínicas, restaurantes, talleres y negocios con competencia fuerte',
+                    'ctaText' => 'Quiero mejorar en el mapa',
+                    'ctaHref' => '#presupuesto',
+                ],
+                [
+                    'title' => 'Multi-ubicación',
+                    'price' => 'Desde 600€/mes',
+                    'description' => 'Para franquicias o negocios con varias sedes',
+                    'features' => [
+                        'Estrategia global de SEO local',
+                        'Optimización por sede',
+                        'Coordinación de reseñas por centros',
+                        'Informes comparativos entre ubicaciones',
+                    ],
+                    'idealFor' => 'Cadenas de clínicas, academias, etc.',
+                    'ctaText' => 'Hablar de mi caso',
+                    'ctaHref' => '#presupuesto',
+                ],
+            ],
+            'note' => 'Sin permanencias largas. Si no ves progreso en 3-4 meses, revisamos estrategia juntos.',
+        ],
+
+        // ============================================
+        // PROCESO
+        // ============================================
+        'process' => [
+            'badge' => 'Metodología',
+            'title' => 'Cómo trabajo el SEO local',
+            'description' => 'Proceso pensado para que entiendas qué estamos haciendo y por qué.',
+            'steps' => [
+                [
+                    'number' => '01',
+                    'title' => 'Auditoría local',
+                    'duration' => '1 semana',
+                    'description' => 'Revisamos tu ficha actual, web, reseñas, menciones y competencia en León.',
+                    'deliverables' => ['Informe de situación', 'Lista de oportunidades rápidas'],
+                ],
+                [
+                    'number' => '02',
+                    'title' => 'Acciones de base',
+                    'duration' => '2-3 semanas',
+                    'description' => 'Ponemos en orden ficha, web y datos de negocio en todos los sitios importantes.',
+                    'deliverables' => ['Ficha optimizada', 'On-page local implementado'],
+                ],
+                [
+                    'number' => '03',
+                    'title' => 'Reputación y contenidos',
+                    'duration' => 'Continuo',
+                    'description' => 'Sistema de reseñas y publicaciones periódicas orientadas a tus servicios clave.',
+                    'deliverables' => ['Calendario de reseñas', 'Posts en ficha'],
+                ],
+                [
+                    'number' => '04',
+                    'title' => 'Seguimiento y mejora',
+                    'duration' => 'Mensual',
+                    'description' => 'Monitorizamos palabras clave, llamadas y rutas para ajustar la estrategia.',
+                    'deliverables' => ['Informe mensual', 'Ajustes tácticos'],
+                ],
+            ],
+        ],
+
+        // ============================================
+        // FAQ
+        // ============================================
+        'faq' => [
+            'badge' => 'FAQ',
+            'title' => 'Preguntas frecuentes sobre SEO local',
+            'description' => 'Lo que solemos aclarar antes de empezar a trabajar juntos.',
+            'faqs' => [
+                [
+                    'question' => '¿En cuánto tiempo se ven resultados?',
+                    'answer' => 'En negocios sin casi presencia, solemos ver mejoras en visibilidad y llamadas en 4-8 semanas. Para sectores muy competidos, el trabajo es más de medio plazo (3-6 meses).',
+                ],
+                [
+                    'question' => '¿Garantizas salir el primero?',
+                    'answer' => 'No. Nadie serio puede garantizar posiciones concretas. Lo que sí garantizo es aplicar buenas prácticas, transparencia y revisar juntos los datos mes a mes.',
+                ],
+                [
+                    'question' => '¿Necesito una web para hacer SEO local?',
+                    'answer' => 'Tener una buena web ayuda mucho, pero podemos mejorar tu ficha de Google incluso aunque tu web sea básica. A medio plazo, lo ideal es alinear web + SEO local.',
+                ],
+                [
+                    'question' => '¿Trabajas solo en León?',
+                    'answer' => 'Estoy especializado en León y provincia, pero también trabajo con negocios de otras ciudades si encaja el proyecto.',
+                ],
+            ],
+            'ctaText' => '¿Dudas sobre tu caso concreto?',
+            'ctaDescription' => 'Mándame un mensaje y vemos juntos si el SEO local tiene sentido para tu negocio.',
+            'ctaLink' => ['text' => 'Contactar', 'href' => '#presupuesto'],
+        ],
+
+        // ============================================
+        // CTA / FORMULARIO FINAL
+        // ============================================
+        'cta' => [
+            'title' => '¿Quieres salir en el mapa cuando te busquen en León?',
+            'description' => 'Cuéntame qué tipo de negocio tienes y para qué búsquedas locales quieres aparecer.',
+            'theme' => 'emerald',
+            'fields' => [
+                ['name' => 'nombre', 'label' => 'Nombre', 'type' => 'text', 'required' => true, 'placeholder' => 'Tu nombre'],
+                ['name' => 'email', 'label' => 'Email', 'type' => 'email', 'required' => true, 'placeholder' => 'tu@email.com'],
+                ['name' => 'telefono', 'label' => 'Teléfono', 'type' => 'tel', 'required' => false, 'placeholder' => '600 000 000'],
+                [
+                    'name' => 'tipo_negocio',
+                    'label' => 'Tipo de negocio',
+                    'type' => 'select',
+                    'required' => true,
+                    'options' => [
+                        ['value' => '', 'label' => 'Selecciona...'],
+                        ['value' => 'restaurante', 'label' => 'Restaurante / Bar'],
+                        ['value' => 'clinica', 'label' => 'Clínica / Salud'],
+                        ['value' => 'taller', 'label' => 'Taller mecánico'],
+                        ['value' => 'tienda', 'label' => 'Tienda física'],
+                        ['value' => 'servicios', 'label' => 'Servicios a domicilio'],
+                        ['value' => 'otro', 'label' => 'Otro'],
+                    ],
+                ],
+                [
+                    'name' => 'palabras_clave',
+                    'label' => '¿Para qué búsquedas te gustaría salir?',
+                    'type' => 'textarea',
+                    'required' => true,
+                    'placeholder' => 'Ej: "dentista en León", "fisioterapeuta en Eras de Renueva", etc.',
+                    'rows' => 3,
+                ],
+            ],
+            'submitText' => 'Analizar mi visibilidad local',
+            'submitNote' => 'Te responderé con una mini auditoría gratuita en menos de 72 horas.',
+        ],
+
+        // ============================================
+        // SEO META / SCHEMA
+        // ============================================
+        'seo' => [
+            'title' => 'SEO Local en León | Sal en el mapa de Google - EMPC',
+            'description' => 'Optimización de Google Business Profile y SEO local en León. Más visibilidad en el mapa, más llamadas y más clientes cerca de ti.',
+            'schema' => [
+                '@context' => 'https://schema.org',
+                '@type' => 'Service',
+                'name' => 'SEO Local en León',
+                'provider' => [
+                    '@type' => 'LocalBusiness',
+                    'name' => 'EMPC',
+                    'address' => [
+                        '@type' => 'PostalAddress',
+                        'addressLocality' => 'León',
+                        'addressCountry' => 'ES',
+                    ],
+                ],
+                'serviceType' => 'Local SEO',
+            ],
+        ],
+    ];
+}

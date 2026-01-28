@@ -77,6 +77,8 @@ function empc_load_scripts()
         $should_load_react = true; // Páginas de servicios usan React Islands
     } elseif (is_page_template('page-calculator.php')) {
         $should_load_react = true; // Calculadora de presupuestos
+    } elseif (is_page_template('page-test-soberana.php')) {
+        $should_load_react = true; // Test Soberana Theme
     } elseif (is_singular()) {
         global $post;
         // Si el post tiene configuración de React explícita, cargamos
@@ -231,7 +233,7 @@ function empc_booking_shortcode($atts)
     ob_start();
     ?>
     <script>
-            window.empcConfig = <?php echo $json_config; ?>;
+        window.empcConfig = <?php echo $json_config; ?>;
     </script>
     <div id="empc-booking-root" class="my-8 min-h-[400px]"></div>
     <?php
@@ -619,6 +621,22 @@ add_action('admin_init', function () {
             get_tiendas_online_config(),
             'page-tiendas-online.php'
         );
+    }
+
+    // SERVICE PAGE: SEO Local León
+    if (function_exists('get_seo_local_leon_config')) {
+        empc_insert_service_page(
+            'SEO Local en León',
+            'seo-local-leon',
+            get_seo_local_leon_config()
+        );
+
+        // Ensure permalinks work immediately
+        if (get_option('empc_seo_local_flushed') !== 'yes') {
+            flush_rewrite_rules();
+            update_option('empc_seo_local_flushed', 'yes');
+        }
+
     }
 
     // Página dedicada de Calculadora de Presupuestos

@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom/client';
 import App from './App';
 import WhatsAppBubble from './components/WhatsAppBubble';
 import MethodPage from './components/MethodPage'; // New import
+import EmpcHeroProMax from './components/EmpcHeroProMax';
+import EmpcFullSystemLocal from './components/EmpcFullSystemLocal';
 import './index.css';
 
 // 1. Montar App principal (si existe el contenedor)
@@ -122,6 +124,7 @@ import('./components/services').then((services) => {
     mountServiceIsland('ecommerce-process', services.EcommerceProcess);
     mountServiceIsland('ecommerce-cases', services.CaseStudyCards);
     mountServiceIsland('ecommerce-cta', services.EcommerceCTAForm);
+    mountServiceIsland('local-pack-simulator-island', services.LocalPackSimulator);
 
     // Note: FAQ for ecommerce might use a different component or different props. 
     // The data structure in get_tiendas_online_config() uses 'items' instead of 'faqs' for questions.
@@ -167,5 +170,27 @@ import('./components/services').then((services) => {
                 </React.StrictMode>
             );
         });
+    }
+
+
+    // 7. Montar Island: Hero Pro Max (Soberana V2)
+    const heroProMaxElement = document.getElementById('island-hero-pro-max');
+    if (heroProMaxElement) {
+        ReactDOM.createRoot(heroProMaxElement).render(
+            <React.StrictMode>
+                <EmpcHeroProMax />
+            </React.StrictMode>
+        );
+
+    }
+
+    // 8. Montar Island: Full System Local (Soberana V3)
+    const fullSystemElement = document.getElementById('island-full-system-local');
+    if (fullSystemElement) {
+        ReactDOM.createRoot(fullSystemElement).render(
+            <React.StrictMode>
+                <EmpcFullSystemLocal />
+            </React.StrictMode>
+        );
     }
 });

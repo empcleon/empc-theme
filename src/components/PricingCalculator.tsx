@@ -89,16 +89,16 @@ const PricingCalculator: React.FC = () => {
         <div className="max-w-6xl mx-auto px-4 py-12">
             {/* Header */}
             <div className="text-center mb-16">
-                <h1 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                    Calculadora de Presupuesto Web
+                <h1 className="text-4xl md:text-5xl font-bold mb-4 text-white font-syne">
+                    Calculadora de Presupuesto
                 </h1>
-                <p className="text-xl text-slate-600 max-w-3xl mx-auto">
-                    Calcula al instante el presupuesto para tu proyecto web en León. Precios reales del mercado 2026.
+                <p className="text-xl text-slate-400 max-w-3xl mx-auto font-inter">
+                    Calcula el coste de tu dominación digital. Precios transparentes 2026.
                 </p>
-                <div className="mt-6 inline-block p-4 bg-gradient-to-r from-blue-50 to-purple-50 rounded-xl border border-blue-200">
-                    <p className="text-slate-700">
-                        <MapPin className="inline w-5 h-5 text-purple-600 mr-2" />
-                        <strong>Para tu bar en el Húmedo, esto sería ideal</strong> - diseños web que destacan en León
+                <div className="mt-6 inline-block p-4 bg-[#FF007A]/10 rounded-xl border border-[#FF007A]/20 backdrop-blur-sm">
+                    <p className="text-[#FF007A]">
+                        <MapPin className="inline w-5 h-5 mr-2" />
+                        <strong>Territorio: León</strong> - Estrategias validadas para el mercado local.
                     </p>
                 </div>
             </div>
@@ -106,8 +106,8 @@ const PricingCalculator: React.FC = () => {
             <div className="grid lg:grid-cols-3 gap-8">
                 {/* Left: Calculator Form */}
                 <div className="lg:col-span-2">
-                    <div className="bg-white rounded-2xl shadow-xl border border-slate-200 p-8">
-                        <h2 className="text-2xl font-bold mb-8 text-slate-800">Configura tu proyecto</h2>
+                    <div className="card-soberana rounded-2xl p-8 mb-8">
+                        <h2 className="text-2xl font-bold mb-8 text-white font-syne">Configura tu arma digital</h2>
 
                         {/* Project Type */}
                         <div className="mb-10">
@@ -116,25 +116,25 @@ const PricingCalculator: React.FC = () => {
                                 {/* Web Básica */}
                                 <button
                                     onClick={() => handleProjectChange('web-basica', 375)}
-                                    className={`text-left p-6 rounded-xl border-2 transition-all ${projectType === 'web-basica'
-                                        ? 'border-purple-500 bg-purple-50 ring-2 ring-purple-200'
-                                        : 'border-slate-200 hover:border-purple-300'
+                                    className={`text-left p-6 rounded-xl border transition-all ${projectType === 'web-basica'
+                                        ? 'border-[#FF007A] bg-[#FF007A]/10 shadow-[0_0_15px_rgba(255,0,122,0.3)]'
+                                        : 'border-slate-800 bg-black/20 hover:border-[#FF007A]/50'
                                         }`}
                                 >
                                     <div className="flex justify-between items-start mb-3">
                                         <div className="flex-1">
-                                            <h4 className="font-bold text-lg text-slate-800">Web Básica</h4>
-                                            <p className="text-slate-600 text-sm mt-1">Hasta 4 páginas, WordPress estándar, responsive</p>
+                                            <h4 className="font-bold text-lg text-white">Web Básica</h4>
+                                            <p className="text-slate-400 text-sm mt-1">Hasta 4 páginas, WordPress estándar, responsive</p>
                                             <div className="mt-3">
-                                                <span className="text-2xl font-bold text-blue-600">375€</span>
+                                                <span className="text-2xl font-bold text-[#FF007A]">375€</span>
                                                 <span className="text-slate-500 text-sm ml-2">+ IVA</span>
                                             </div>
                                         </div>
                                     </div>
-                                    <div className="mt-4 pt-4 border-t border-slate-100">
-                                        <p className="text-slate-700 text-sm flex items-start">
-                                            <Check className="w-4 h-4 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
-                                            Ideal para pymes que inician su presencia online
+                                    <div className="mt-4 pt-4 border-t border-slate-800">
+                                        <p className="text-slate-400 text-sm flex items-start">
+                                            <Check className="w-4 h-4 text-[#FF007A] mr-2 mt-0.5 flex-shrink-0" />
+                                            Start small, think big.
                                         </p>
                                     </div>
                                 </button>
@@ -142,25 +142,25 @@ const PricingCalculator: React.FC = () => {
                                 {/* Web Media */}
                                 <button
                                     onClick={() => handleProjectChange('web-media', 525)}
-                                    className={`text-left p-6 rounded-xl border-2 transition-all ${projectType === 'web-media'
-                                        ? 'border-purple-500 bg-purple-50 ring-2 ring-purple-200'
-                                        : 'border-slate-200 hover:border-purple-300'
+                                    className={`text-left p-6 rounded-xl border transition-all ${projectType === 'web-media'
+                                        ? 'border-[#FF007A] bg-[#FF007A]/10 shadow-[0_0_15px_rgba(255,0,122,0.3)]'
+                                        : 'border-slate-800 bg-black/20 hover:border-[#FF007A]/50'
                                         }`}
                                 >
                                     <div className="flex justify-between items-start mb-3">
                                         <div className="flex-1">
-                                            <h4 className="font-bold text-lg text-slate-800">Web Media</h4>
-                                            <p className="text-slate-600 text-sm mt-1">Hasta 9 páginas, blog o formulario custom</p>
+                                            <h4 className="font-bold text-lg text-white">Web Media</h4>
+                                            <p className="text-slate-400 text-sm mt-1">Hasta 9 páginas, blog o formulario custom</p>
                                             <div className="mt-3">
-                                                <span className="text-2xl font-bold text-blue-600">525€</span>
+                                                <span className="text-2xl font-bold text-[#FF007A]">525€</span>
                                                 <span className="text-slate-500 text-sm ml-2">+ IVA</span>
                                             </div>
                                         </div>
                                     </div>
-                                    <div className="mt-4 pt-4 border-t border-slate-100">
-                                        <p className="text-slate-700 text-sm flex items-start">
-                                            <Check className="w-4 h-4 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
-                                            Perfecto para negocios con más contenido
+                                    <div className="mt-4 pt-4 border-t border-slate-800">
+                                        <p className="text-slate-400 text-sm flex items-start">
+                                            <Check className="w-4 h-4 text-[#FF007A] mr-2 mt-0.5 flex-shrink-0" />
+                                            Para los que tienen algo que decir.
                                         </p>
                                     </div>
                                 </button>
@@ -168,25 +168,25 @@ const PricingCalculator: React.FC = () => {
                                 {/* Tienda Online */}
                                 <button
                                     onClick={() => handleProjectChange('tienda-online', 1000)}
-                                    className={`text-left p-6 rounded-xl border-2 transition-all ${projectType === 'tienda-online'
-                                        ? 'border-purple-500 bg-purple-50 ring-2 ring-purple-200'
-                                        : 'border-slate-200 hover:border-purple-300'
+                                    className={`text-left p-6 rounded-xl border transition-all ${projectType === 'tienda-online'
+                                        ? 'border-[#FF007A] bg-[#FF007A]/10 shadow-[0_0_15px_rgba(255,0,122,0.3)]'
+                                        : 'border-slate-800 bg-black/20 hover:border-[#FF007A]/50'
                                         }`}
                                 >
                                     <div className="flex justify-between items-start mb-3">
                                         <div className="flex-1">
-                                            <h4 className="font-bold text-lg text-slate-800">Tienda Online</h4>
-                                            <p className="text-slate-600 text-sm mt-1">WooCommerce con pagos, stock y SEO básico</p>
+                                            <h4 className="font-bold text-lg text-white">Tienda Online</h4>
+                                            <p className="text-slate-400 text-sm mt-1">WooCommerce con pagos, stock y SEO básico</p>
                                             <div className="mt-3">
-                                                <span className="text-2xl font-bold text-blue-600">800-1200€</span>
+                                                <span className="text-2xl font-bold text-[#FF007A]">800-1200€</span>
                                                 <span className="text-slate-500 text-sm ml-2">+ IVA</span>
                                             </div>
                                         </div>
                                     </div>
-                                    <div className="mt-4 pt-4 border-t border-slate-100">
-                                        <p className="text-slate-700 text-sm flex items-start">
-                                            <Check className="w-4 h-4 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
-                                            Para vender online desde León a toda España
+                                    <div className="mt-4 pt-4 border-t border-slate-800">
+                                        <p className="text-slate-400 text-sm flex items-start">
+                                            <Check className="w-4 h-4 text-[#FF007A] mr-2 mt-0.5 flex-shrink-0" />
+                                            Vende mientras duermes.
                                         </p>
                                     </div>
                                 </button>
@@ -194,25 +194,25 @@ const PricingCalculator: React.FC = () => {
                                 {/* SEO/Mantenimiento */}
                                 <button
                                     onClick={() => handleProjectChange('seo-mantenimiento', 0)}
-                                    className={`text-left p-6 rounded-xl border-2 transition-all ${projectType === 'seo-mantenimiento'
-                                        ? 'border-purple-500 bg-purple-50 ring-2 ring-purple-200'
-                                        : 'border-slate-200 hover:border-purple-300'
+                                    className={`text-left p-6 rounded-xl border transition-all ${projectType === 'seo-mantenimiento'
+                                        ? 'border-[#FF007A] bg-[#FF007A]/10 shadow-[0_0_15px_rgba(255,0,122,0.3)]'
+                                        : 'border-slate-800 bg-black/20 hover:border-[#FF007A]/50'
                                         }`}
                                 >
                                     <div className="flex justify-between items-start mb-3">
                                         <div className="flex-1">
-                                            <h4 className="font-bold text-lg text-slate-800">Solo SEO o Mantenimiento</h4>
-                                            <p className="text-slate-600 text-sm mt-1">Servicios específicos sin desarrollo completo</p>
+                                            <h4 className="font-bold text-lg text-white">Solo SEO o Mantenimiento</h4>
+                                            <p className="text-slate-400 text-sm mt-1">Servicios específicos sin desarrollo completo</p>
                                             <div className="mt-3">
-                                                <span className="text-2xl font-bold text-blue-600">Desde 39€</span>
+                                                <span className="text-2xl font-bold text-[#FF007A]">Desde 39€</span>
                                                 <span className="text-slate-500 text-sm ml-2">/mes + IVA</span>
                                             </div>
                                         </div>
                                     </div>
-                                    <div className="mt-4 pt-4 border-t border-slate-100">
-                                        <p className="text-slate-700 text-sm flex items-start">
-                                            <Check className="w-4 h-4 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
-                                            Para mejorar o mantener un sitio existente
+                                    <div className="mt-4 pt-4 border-t border-slate-800">
+                                        <p className="text-slate-400 text-sm flex items-start">
+                                            <Check className="w-4 h-4 text-[#FF007A] mr-2 mt-0.5 flex-shrink-0" />
+                                            Optimización continua.
                                         </p>
                                     </div>
                                 </button>
@@ -221,44 +221,41 @@ const PricingCalculator: React.FC = () => {
 
                         {/* Additional Pages */}
                         <div className="mb-10">
-                            <h3 className="text-xl font-semibold mb-4 text-slate-700">2. Páginas adicionales</h3>
-                            <div className="flex items-center justify-between p-5 bg-slate-50 rounded-xl">
+                            <h3 className="text-xl font-semibold mb-4 text-white font-syne">2. Páginas adicionales</h3>
+                            <div className="flex items-center justify-between p-5 bg-black/20 border border-slate-800 rounded-xl">
                                 <div className="flex-1">
-                                    <p className="text-slate-700 font-medium">Cada página extra (+15€)</p>
-                                    <p className="text-sm text-slate-500">Páginas estándar como "Sobre Nosotros", "Servicios", "Contacto"</p>
+                                    <p className="text-white font-medium">Cada página extra (+15€)</p>
+                                    <p className="text-sm text-slate-400">Páginas estándar como "Sobre Nosotros", "Servicios", "Contacto"</p>
                                 </div>
                                 <div className="flex items-center gap-2">
                                     <button
                                         onClick={() => setExtraPages(Math.max(0, extraPages - 1))}
-                                        className="w-10 h-10 bg-white border border-slate-300 rounded-lg flex items-center justify-center font-bold text-slate-700 hover:bg-slate-100 transition"
+                                        className="w-10 h-10 bg-black border border-slate-700 rounded-lg flex items-center justify-center font-bold text-white hover:border-[#FF007A] transition"
                                         aria-label="Disminuir número de páginas adicionales"
                                     >
                                         -
                                     </button>
-                                    <div className="w-16 h-10 bg-white border border-slate-300 rounded-lg flex items-center justify-center font-bold text-slate-800" role="status" aria-live="polite" aria-label={`${extraPages} páginas adicionales seleccionadas`}>
+                                    <div className="w-16 h-10 bg-black border border-slate-700 rounded-lg flex items-center justify-center font-bold text-white" role="status" aria-live="polite" aria-label={`${extraPages} páginas adicionales seleccionadas`}>
                                         {extraPages}
                                     </div>
                                     <button
                                         onClick={() => setExtraPages(extraPages + 1)}
-                                        className="w-10 h-10 bg-white border border-slate-300 rounded-lg flex items-center justify-center font-bold text-slate-700 hover:bg-slate-100 transition"
+                                        className="w-10 h-10 bg-black border border-slate-700 rounded-lg flex items-center justify-center font-bold text-white hover:border-[#FF007A] transition"
                                         aria-label="Aumentar número de páginas adicionales"
                                     >
                                         +
                                     </button>
                                 </div>
                             </div>
-                            <div className="mt-3 text-sm text-slate-600 bg-purple-50 p-3 rounded-lg border border-purple-100">
-                                <strong className="text-purple-700">💡 Recomendación para León:</strong> Incluye página específica de tu zona (Barrio Húmedo, Centro Histórico) para conectar con clientes locales.
-                            </div>
                         </div>
 
                         {/* Additional Services */}
                         <div className="mb-10">
-                            <h3 className="text-xl font-semibold mb-4 text-slate-700">3. Servicios adicionales</h3>
+                            <h3 className="text-xl font-semibold mb-4 text-white font-syne">3. Servicios adicionales</h3>
                             <div className="grid md:grid-cols-2 gap-4">
                                 {/* SEO Local */}
                                 <label
-                                    className={`p-5 rounded-xl border-2 cursor-pointer transition-all ${services.seo ? 'border-purple-400 bg-purple-50' : 'border-slate-200 hover:border-slate-300'
+                                    className={`p-5 rounded-xl border cursor-pointer transition-all ${services.seo ? 'border-[#FF007A] bg-[#FF007A]/10' : 'border-slate-800 bg-black/20 hover:border-slate-600'
                                         }`}
                                 >
                                     <input
@@ -271,24 +268,24 @@ const PricingCalculator: React.FC = () => {
                                     />
                                     <div className="flex items-center justify-between">
                                         <div className="flex items-center gap-3">
-                                            <div className={`w-6 h-6 border-2 rounded-md flex items-center justify-center flex-shrink-0 ${services.seo ? 'border-purple-500 bg-purple-500' : 'border-slate-300'
+                                            <div className={`w-6 h-6 border rounded-md flex items-center justify-center flex-shrink-0 ${services.seo ? 'border-[#FF007A] bg-[#FF007A]' : 'border-slate-600'
                                                 }`} aria-hidden="true">
-                                                {services.seo && <Check className="w-4 h-4 text-white" />}
+                                                {services.seo && <Check className="w-4 h-4 text-black" />}
                                             </div>
                                             <div>
-                                                <h4 className="font-bold text-slate-800">SEO Local León</h4>
-                                                <p className="text-slate-300 text-sm">Optimización para búsquedas locales</p>
+                                                <h4 className="font-bold text-white">SEO Local León</h4>
+                                                <p className="text-slate-400 text-sm">Domina las búsquedas</p>
                                             </div>
                                         </div>
                                         <div className="text-right">
-                                            <span className="font-bold text-blue-600">200€</span>
+                                            <span className="font-bold text-[#FF007A]">200€</span>
                                         </div>
                                     </div>
                                 </label>
 
                                 {/* Mantenimiento */}
                                 <label
-                                    className={`p-5 rounded-xl border-2 cursor-pointer transition-all ${services.mantenimiento ? 'border-purple-400 bg-purple-50' : 'border-slate-200 hover:border-slate-300'
+                                    className={`p-5 rounded-xl border cursor-pointer transition-all ${services.mantenimiento ? 'border-[#FF007A] bg-[#FF007A]/10' : 'border-slate-800 bg-black/20 hover:border-slate-600'
                                         }`}
                                 >
                                     <input
@@ -301,17 +298,17 @@ const PricingCalculator: React.FC = () => {
                                     />
                                     <div className="flex items-center justify-between">
                                         <div className="flex items-center gap-3">
-                                            <div className={`w-6 h-6 border-2 rounded-md flex items-center justify-center flex-shrink-0 ${services.mantenimiento ? 'border-purple-500 bg-purple-500' : 'border-slate-300'
+                                            <div className={`w-6 h-6 border rounded-md flex items-center justify-center flex-shrink-0 ${services.mantenimiento ? 'border-[#FF007A] bg-[#FF007A]' : 'border-slate-600'
                                                 }`} aria-hidden="true">
-                                                {services.mantenimiento && <Check className="w-4 h-4 text-white" />}
+                                                {services.mantenimiento && <Check className="w-4 h-4 text-black" />}
                                             </div>
                                             <div>
-                                                <h4 className="font-bold text-slate-800">Mantenimiento Web</h4>
-                                                <p className="text-slate-300 text-sm">Seguridad, backups, actualizaciones</p>
+                                                <h4 className="font-bold text-white">Mantenimiento Web</h4>
+                                                <p className="text-slate-400 text-sm">Duerme tranquilo</p>
                                             </div>
                                         </div>
                                         <div className="text-right">
-                                            <span className="font-bold text-blue-600">39€</span>
+                                            <span className="font-bold text-[#FF007A]">39€</span>
                                             <span className="text-slate-500 text-sm ml-1">/mes</span>
                                         </div>
                                     </div>
@@ -319,7 +316,7 @@ const PricingCalculator: React.FC = () => {
 
                                 {/* Diseño Gráfico */}
                                 <label
-                                    className={`p-5 rounded-xl border-2 cursor-pointer transition-all ${services.diseno ? 'border-purple-400 bg-purple-50' : 'border-slate-200 hover:border-slate-300'
+                                    className={`p-5 rounded-xl border cursor-pointer transition-all ${services.diseno ? 'border-[#FF007A] bg-[#FF007A]/10' : 'border-slate-800 bg-black/20 hover:border-slate-600'
                                         }`}
                                 >
                                     <input
@@ -332,24 +329,24 @@ const PricingCalculator: React.FC = () => {
                                     />
                                     <div className="flex items-center justify-between">
                                         <div className="flex items-center gap-3">
-                                            <div className={`w-6 h-6 border-2 rounded-md flex items-center justify-center flex-shrink-0 ${services.diseno ? 'border-purple-500 bg-purple-500' : 'border-slate-300'
+                                            <div className={`w-6 h-6 border rounded-md flex items-center justify-center flex-shrink-0 ${services.diseno ? 'border-[#FF007A] bg-[#FF007A]' : 'border-slate-600'
                                                 }`} aria-hidden="true">
-                                                {services.diseno && <Check className="w-4 h-4 text-white" />}
+                                                {services.diseno && <Check className="w-4 h-4 text-black" />}
                                             </div>
                                             <div>
-                                                <h4 className="font-bold text-slate-800">Diseño Gráfico</h4>
-                                                <p className="text-slate-300 text-sm">Logos, carteles, material promocional</p>
+                                                <h4 className="font-bold text-white">Diseño Gráfico</h4>
+                                                <p className="text-slate-400 text-sm">Branding impecable</p>
                                             </div>
                                         </div>
                                         <div className="text-right">
-                                            <span className="font-bold text-blue-600">200€</span>
+                                            <span className="font-bold text-[#FF007A]">200€</span>
                                         </div>
                                     </div>
                                 </label>
 
                                 {/* React Islands */}
                                 <label
-                                    className={`p-5 rounded-xl border-2 cursor-pointer transition-all ${services.react ? 'border-purple-400 bg-purple-50' : 'border-slate-200 hover:border-slate-300'
+                                    className={`p-5 rounded-xl border cursor-pointer transition-all ${services.react ? 'border-[#FF007A] bg-[#FF007A]/10' : 'border-slate-800 bg-black/20 hover:border-slate-600'
                                         }`}
                                 >
                                     <input
@@ -362,17 +359,17 @@ const PricingCalculator: React.FC = () => {
                                     />
                                     <div className="flex items-center justify-between">
                                         <div className="flex items-center gap-3">
-                                            <div className={`w-6 h-6 border-2 rounded-md flex items-center justify-center flex-shrink-0 ${services.react ? 'border-purple-500 bg-purple-500' : 'border-slate-300'
+                                            <div className={`w-6 h-6 border rounded-md flex items-center justify-center flex-shrink-0 ${services.react ? 'border-[#FF007A] bg-[#FF007A]' : 'border-slate-600'
                                                 }`} aria-hidden="true">
-                                                {services.react && <Check className="w-4 h-4 text-white" />}
+                                                {services.react && <Check className="w-4 h-4 text-black" />}
                                             </div>
                                             <div>
-                                                <h4 className="font-bold text-slate-800">Integración React</h4>
-                                                <p className="text-slate-300 text-sm">Componentes interactivos en WordPress</p>
+                                                <h4 className="font-bold text-white">Integración React</h4>
+                                                <p className="text-slate-400 text-sm">Velocidad extrema</p>
                                             </div>
                                         </div>
                                         <div className="text-right">
-                                            <span className="font-bold text-blue-600">150€</span>
+                                            <span className="font-bold text-[#FF007A]">150€</span>
                                         </div>
                                     </div>
                                 </label>
@@ -386,13 +383,12 @@ const PricingCalculator: React.FC = () => {
                                     type="checkbox"
                                     checked={includeVat}
                                     onChange={() => setIncludeVat(!includeVat)}
-                                    className="w-5 h-5 text-purple-600 rounded"
+                                    className="w-5 h-5 text-[#FF007A] rounded bg-black border-slate-700"
                                     id="include-vat"
                                     aria-label="Incluir IVA del 21 por ciento en el presupuesto"
                                 />
                                 <div className="ml-3">
-                                    <span className="text-slate-700 font-medium">Incluir IVA (21%) en el presupuesto</span>
-                                    <p className="text-sm text-slate-500">Recomendado para pymes y autónomos</p>
+                                    <span className="text-white font-medium">Incluir IVA (21%)</span>
                                 </div>
                             </label>
                         </div>
@@ -400,135 +396,106 @@ const PricingCalculator: React.FC = () => {
                         {/* Calculate Button */}
                         <button
                             onClick={() => setShowResults(true)}
-                            className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white font-bold py-4 px-10 rounded-xl text-lg hover:shadow-lg hover:-translate-y-0.5 transition-all flex items-center justify-center gap-2"
+                            className="w-full bg-[#FF007A] text-black font-bold py-4 px-10 rounded-xl text-lg hover:bg-[#FB7185] hover:shadow-[0_0_20px_rgba(255,0,122,0.6)] transition-all flex items-center justify-center gap-2 uppercase tracking-wide"
                         >
                             <Calculator className="w-5 h-5" />
-                            Calcular Presupuesto
+                            Calcular Ahora
                         </button>
                     </div>
 
-                    {/* Leon Info */}
-                    <div className="mt-8 bg-gradient-to-r from-blue-50 to-purple-50 rounded-2xl p-6 border border-blue-100">
-                        <div className="flex flex-col md:flex-row gap-6">
-                            <div className="flex-1">
-                                <h3 className="text-xl font-bold mb-2 text-slate-800 flex items-center gap-2">
-                                    <MapPin className="w-5 h-5 text-purple-600" />
-                                    Especialistas web en León
-                                </h3>
-                                <p className="text-slate-700 mb-4">
-                                    En empc.es diseñamos sitios web que conectan con el público leonés. Sabemos lo que funciona para negocios en el Barrio Húmedo, Centro Histórico y toda la provincia.
-                                </p>
-                                <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                                    <div>
-                                        <p className="font-semibold text-slate-800 text-sm">💰 Sin sorpresas</p>
-                                        <p className="text-xs text-slate-600">Precios claros</p>
-                                    </div>
-                                    <div>
-                                        <p className="font-semibold text-slate-800 text-sm">🚀 Rápidos</p>
-                                        <p className="text-xs text-slate-600">Entregas 7-15 días</p>
-                                    </div>
-                                    <div>
-                                        <p className="font-semibold text-slate-800 text-sm">🎧 Soporte local</p>
-                                        <p className="text-xs text-slate-600">Asistencia en León</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+
                 </div>
 
                 {/* Right: Results Sidebar */}
                 <div className="lg:col-span-1">
-                    <div className="sticky top-8 bg-white rounded-2xl shadow-xl border border-slate-200 p-6">
-                        <h2 className="text-2xl font-bold mb-6 text-slate-800">Tu Presupuesto</h2>
+                    <div className="sticky top-8 card-soberana rounded-2xl p-6">
+                        <h2 className="text-2xl font-bold mb-6 text-white font-syne">Tu Inversión</h2>
 
                         {!showResults ? (
                             <div className="text-center py-12">
-                                <div className="w-16 h-16 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                                    <Calculator className="w-8 h-8 text-slate-300" />
+                                <div className="w-16 h-16 bg-white/5 rounded-full flex items-center justify-center mx-auto mb-4 border border-white/10">
+                                    <Calculator className="w-8 h-8 text-slate-500" />
                                 </div>
-                                <h3 className="text-xl font-bold text-slate-600 mb-2">Configura tu proyecto</h3>
-                                <p className="text-slate-500">Selecciona las opciones y haz clic en "Calcular Presupuesto"</p>
+                                <h3 className="text-xl font-bold text-slate-400 mb-2 font-syne">Esperando datos...</h3>
                             </div>
                         ) : (
                             <div>
                                 {/* Breakdown */}
                                 <div className="mb-6">
-                                    <h3 className="font-bold text-slate-700 mb-3 text-lg">Desglose del presupuesto</h3>
+                                    <h3 className="font-bold text-white mb-3 text-lg">Desglose</h3>
                                     <div className="space-y-3 mb-4">
-                                        <div className="flex justify-between text-slate-600">
+                                        <div className="flex justify-between text-slate-400">
                                             <span>Proyecto base ({getProjectName()}):</span>
-                                            <span className="font-medium">{basePrice}€</span>
+                                            <span className="font-medium text-white">{basePrice}€</span>
                                         </div>
                                         {extraPages > 0 && (
-                                            <div className="flex justify-between text-slate-600">
+                                            <div className="flex justify-between text-slate-400">
                                                 <span>Páginas extra ({extraPages}):</span>
-                                                <span className="font-medium">{extraPages * 15}€</span>
+                                                <span className="font-medium text-white">{extraPages * 15}€</span>
                                             </div>
                                         )}
                                         {services.seo && (
-                                            <div className="flex justify-between text-slate-600">
+                                            <div className="flex justify-between text-slate-400">
                                                 <span>SEO Local:</span>
-                                                <span className="font-medium">{servicePrices.seo}€</span>
+                                                <span className="font-medium text-white">{servicePrices.seo}€</span>
                                             </div>
                                         )}
                                         {services.mantenimiento && (
-                                            <div className="flex justify-between text-slate-600">
-                                                <span>Mantenimiento (primer mes):</span>
-                                                <span className="font-medium">{servicePrices.mantenimiento}€</span>
+                                            <div className="flex justify-between text-slate-400">
+                                                <span>Mantenimiento:</span>
+                                                <span className="font-medium text-white">{servicePrices.mantenimiento}€</span>
                                             </div>
                                         )}
                                         {services.diseno && (
-                                            <div className="flex justify-between text-slate-600">
-                                                <span>Diseño gráfico:</span>
-                                                <span className="font-medium">{servicePrices.diseno}€</span>
+                                            <div className="flex justify-between text-slate-400">
+                                                <span>Diseño:</span>
+                                                <span className="font-medium text-white">{servicePrices.diseno}€</span>
                                             </div>
                                         )}
                                         {services.react && (
-                                            <div className="flex justify-between text-slate-600">
-                                                <span>Integración React:</span>
-                                                <span className="font-medium">{servicePrices.react}€</span>
+                                            <div className="flex justify-between text-slate-400">
+                                                <span>React:</span>
+                                                <span className="font-medium text-white">{servicePrices.react}€</span>
                                             </div>
                                         )}
                                     </div>
 
-                                    <div className="border-t border-slate-200 pt-3">
-                                        <div className="flex justify-between text-slate-700">
+                                    <div className="border-t border-slate-700 pt-3">
+                                        <div className="flex justify-between text-slate-300">
                                             <span className="font-medium">Subtotal:</span>
                                             <span className="font-medium">{subtotal}€</span>
                                         </div>
                                         {includeVat && (
-                                            <div className="flex justify-between text-slate-700 mt-2">
+                                            <div className="flex justify-between text-slate-300 mt-2">
                                                 <span>IVA (21%):</span>
                                                 <span>{vat}€</span>
                                             </div>
                                         )}
-                                        <div className="flex justify-between text-slate-800 text-xl font-bold mt-3 pt-3 border-t border-slate-200">
+                                        <div className="flex justify-between text-white text-xl font-bold mt-3 pt-3 border-t border-slate-700">
                                             <span>Total:</span>
-                                            <span>{total}€</span>
+                                            <span className="text-[#FF007A] glow-text">{total}€</span>
                                         </div>
                                     </div>
                                 </div>
 
                                 {/* Monthly Cost */}
                                 {monthlyCost > 0 && (
-                                    <div className="mb-6 p-4 bg-blue-50 rounded-lg border border-blue-100">
-                                        <h4 className="font-bold text-slate-700 mb-1">Coste mensual de mantenimiento:</h4>
-                                        <p className="text-2xl font-bold text-blue-600">{monthlyCost}€/mes</p>
-                                        <p className="text-sm text-slate-600 mt-1">A partir del segundo mes</p>
+                                    <div className="mb-6 p-4 bg-[#FF007A]/10 rounded-lg border border-[#FF007A]/30">
+                                        <h4 className="font-bold text-white mb-1">Mantenimiento mensual:</h4>
+                                        <p className="text-2xl font-bold text-[#FF007A]">{monthlyCost}€/mes</p>
                                     </div>
                                 )}
 
                                 {/* Timeline */}
                                 <div className="mb-8">
-                                    <h3 className="font-bold text-slate-700 mb-3">Plazo estimado</h3>
+                                    <h3 className="font-bold text-white mb-3">Plazo estimado</h3>
                                     <div className="flex items-center gap-4">
-                                        <div className="bg-purple-100 text-purple-600 p-3 rounded-lg">
+                                        <div className="bg-[#FF007A]/20 text-[#FF007A] p-3 rounded-lg">
                                             <Clock className="w-5 h-5" />
                                         </div>
                                         <div>
-                                            <p className="font-medium text-slate-800">{getTimeline()}</p>
-                                            <p className="text-sm text-slate-600">Dependiendo de la complejidad</p>
+                                            <p className="font-medium text-white">{getTimeline()}</p>
+                                            <p className="text-sm text-slate-400">Rapidez ejecutiva</p>
                                         </div>
                                     </div>
                                 </div>
@@ -536,13 +503,10 @@ const PricingCalculator: React.FC = () => {
                                 {/* CTA */}
                                 <a
                                     href={`/contacto?presupuesto=${total}&tipo=${projectType}`}
-                                    className="block text-center bg-gradient-to-r from-blue-600 to-purple-600 text-white font-bold py-4 px-6 rounded-xl hover:shadow-lg hover:-translate-y-0.5 transition-all"
+                                    className="block text-center bg-[#FF007A] text-black font-bold py-4 px-6 rounded-xl hover:bg-[#FB7185] hover:shadow-[0_0_20px_rgba(255,0,122,0.6)] transition-all uppercase tracking-wide"
                                 >
-                                    🎁 Solicita tu auditoría gratis
+                                    Solicitar Auditoría
                                 </a>
-                                <p className="text-slate-500 text-sm mt-3 text-center">
-                                    Incluye análisis de competencia en León y recomendaciones personalizadas
-                                </p>
                             </div>
                         )}
                     </div>
@@ -550,22 +514,12 @@ const PricingCalculator: React.FC = () => {
             </div>
 
             {/* Leon-specific CTA */}
-            <div className="mt-12 bg-gradient-to-r from-blue-50 to-purple-50 rounded-2xl p-8 border border-blue-100">
+            <div className="mt-12 bg-black/20 rounded-2xl p-8 border border-white/5 backdrop-blur-sm">
                 <div className="max-w-3xl mx-auto text-center">
-                    <h3 className="text-2xl font-bold text-slate-800 mb-4">¿Eres autónomo en León?</h3>
-                    <p className="text-lg text-slate-700 mb-6">
-                        Este presupuesto es <strong>100% deducible</strong>. Además, incluimos el alta en Google Maps gratis
-                        para que te encuentren en el Barrio Húmedo desde el primer día.
+                    <h3 className="text-2xl font-bold text-white mb-4 font-syne">¿Eres autónomo en León?</h3>
+                    <p className="text-lg text-slate-400 mb-6">
+                        Este presupuesto es <strong>100% deducible</strong>. Incluimos alta en Google Maps para que domines tu barrio local.
                     </p>
-                    < div className="flex flex-col sm:flex-row gap-4 justify-center">
-                        <a
-                            href="/contacto"
-                            className="inline-flex items-center justify-center gap-2 bg-slate-800 text-white font-semibold py-3 px-6 rounded-lg hover:bg-slate-900 transition"
-                        >
-                            <Phone className="w-5 h-5" />
-                            Consulta Personalizada
-                        </a>
-                    </div>
                 </div>
             </div>
         </div>

@@ -10,7 +10,7 @@ export default defineConfig(({ command }) => ({
     build: {
         manifest: true,
         outDir: 'react-app',
-        emptyOutDir: true,
+        emptyOutDir: false,
         rollupOptions: {
             input: 'src/main.tsx',
             output: {

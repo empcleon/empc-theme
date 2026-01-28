@@ -1,4 +1,19 @@
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=Archivo+Black&family=Inter:wght@400;500;600;700&display=swap');
+
+@layer base {
+  .theme-soberana {
+    --color-background: #121826;
+    /* Slate Deep */
+    --color-primary: #E29595;
+    /* Dusty Rose */
+    --color-secondary: #FCE7F3;
+    /* Soft Pink */
+    --color-text: #E2E8F0;
+    --font-heading: 'Cormorant Garamond', serif;
+    --font-body: 'Inter', sans-serif;
+  }
+}
 
 @tailwind base;
 @tailwind components;
@@ -8,17 +23,20 @@
 ::-webkit-scrollbar {
   width: 8px;
 }
+
 ::-webkit-scrollbar-track {
   background: #1e293b;
 }
+
 ::-webkit-scrollbar-thumb {
   background: #475569;
   border-radius: 4px;
 }
+
 ::-webkit-scrollbar-thumb:hover {
   background: #64748b;
 }
 
 body {
-  background-color: #0f172a;
+  background-color: #121826;
 }

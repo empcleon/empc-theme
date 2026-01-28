@@ -20,7 +20,7 @@
         function loadCrisp() {
             if (window.crispLoaded) return;
             window.crispLoaded = true;
-            (function(){
+            (function () {
                 d = document;
                 s = d.createElement("script");
                 s.src = "https://client.crisp.chat/l.js";
@@ -39,7 +39,7 @@
     <?php wp_head(); ?>
 </head>
 
-<body <?php body_class('bg-slate-900 text-slate-50 font-sans selection:bg-rose-500 selection:text-white'); ?>>
+<body <?php body_class('bg-slate-deep text-slate-50 font-sans selection:bg-dusty-rose selection:text-slate-deep'); ?>>
     <?php wp_body_open(); ?>
 
     <!-- Navigation (Ported from React) -->
@@ -69,13 +69,13 @@
                     $is_method_page = (is_page('nuestro-metodo') || (isset($current_page->post_name) && $current_page->post_name === 'nuestro-metodo'));
                     $is_services_page = (is_page('diseno-web-leon') || is_page('tiendas-online-leon'));
 
-                    // Clases para cada enlace
-                    $active_class = "text-white font-medium text-sm border-b-2 border-rose-500 pb-1";
-                    $inactive_class = "text-slate-300 hover:text-white transition-colors text-sm font-medium";
+                    // Clases para cada enlace (Soberana V3)
+                    $active_class = "text-white font-medium text-sm border-b-2 border-dusty-rose pb-1";
+                    $inactive_class = "text-slate-300 hover:text-dusty-rose transition-colors text-sm font-medium";
 
                     $method_class = $is_method_page ? $active_class : $inactive_class;
                     $blog_class = $is_blog ? $active_class : $inactive_class;
-                    $services_class = $is_services_page ? "text-white font-medium text-sm" : "text-slate-300 hover:text-white transition-colors text-sm font-medium";
+                    $services_class = $is_services_page ? "text-white font-medium text-sm" : "text-slate-300 hover:text-dusty-rose transition-colors text-sm font-medium";
                     ?>
                     <a href="<?php echo home_url('/#metodo'); ?>" class="<?php echo $inactive_class; ?>">Nuestro
                         Método</a>
@@ -92,18 +92,29 @@
                         </button>
                         <!-- Dropdown Content -->
                         <div
-                            class="absolute left-1/2 -translate-x-1/2 top-full mt-2 w-64 bg-slate-800 rounded-xl shadow-xl border border-slate-700 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform origin-top overflow-hidden z-50">
+                            class="absolute left-1/2 -translate-x-1/2 top-full mt-2 w-64 bg-slate-900 rounded-xl shadow-xl border border-slate-700 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform origin-top overflow-hidden z-50">
                             <div class="py-2">
                                 <a href="<?php echo home_url('/diseno-web-leon'); ?>"
-                                    class="block px-4 py-3 hover:bg-slate-700 transition-colors">
-                                    <span class="block text-white font-medium text-sm">Diseño Web</span>
-                                    <span class="block text-slate-300 text-xs mt-0.5">Landing pages y
+                                    class="block px-4 py-3 hover:bg-slate-800 transition-colors group/item">
+                                    <span
+                                        class="block text-white font-medium text-sm group-hover/item:text-dusty-rose transition-colors">Diseño
+                                        Web</span>
+                                    <span class="block text-slate-400 text-xs mt-0.5">Landing pages y
                                         corporativas</span>
                                 </a>
                                 <a href="<?php echo home_url('/tiendas-online-leon'); ?>"
-                                    class="block px-4 py-3 hover:bg-slate-700 transition-colors border-t border-slate-700/50">
-                                    <span class="block text-white font-medium text-sm">Tiendas Online</span>
-                                    <span class="block text-slate-300 text-xs mt-0.5">E-commerce y catálogos</span>
+                                    class="block px-4 py-3 hover:bg-slate-800 transition-colors border-t border-slate-700/50 group/item">
+                                    <span
+                                        class="block text-white font-medium text-sm group-hover/item:text-dusty-rose transition-colors">Tiendas
+                                        Online</span>
+                                    <span class="block text-slate-400 text-xs mt-0.5">E-commerce y catálogos</span>
+                                </a>
+                                <a href="<?php echo home_url('/seo-local-leon'); ?>"
+                                    class="block px-4 py-3 hover:bg-slate-800 transition-colors border-t border-slate-700/50 group/item">
+                                    <span
+                                        class="block text-white font-medium text-sm group-hover/item:text-dusty-rose transition-colors">SEO
+                                        Local</span>
+                                    <span class="block text-slate-400 text-xs mt-0.5">Posicionamiento en Mapas</span>
                                 </a>
                             </div>
                         </div>
@@ -113,18 +124,19 @@
                     <a href="<?php echo home_url('/#demos'); ?>" class="<?php echo $inactive_class; ?>">Demos</a>
                     <a href="<?php echo home_url('/#consultor-ia'); ?>"
                         class="<?php echo $inactive_class; ?> flex items-center gap-2">
-                        <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+                        <span class="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></span>
                         Consultor IA
                     </a>
                     <a href="<?php echo home_url('/#contacto'); ?>"
-                        class="bg-white text-slate-900 px-5 py-2.5 rounded-full font-bold text-sm hover:bg-slate-200 transition-colors shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
+                        class="bg-dusty-rose text-slate-900 px-5 py-2.5 rounded-full font-bold text-sm hover:bg-white transition-colors shadow-lg hover:shadow-[0_0_15px_rgba(226,149,149,0.4)] transform hover:-translate-y-0.5">
                         Contactar
                     </a>
                 </div>
 
                 <!-- Mobile Button -->
                 <div class="md:hidden">
-                    <button id="mobile-menu-btn" class="text-white p-2" aria-label="Abrir menú de navegación">
+                    <button id="mobile-menu-btn" class="text-white p-2 hover:text-dusty-rose transition-colors"
+                        aria-label="Abrir menú de navegación">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                             class="lucide lucide-menu">
@@ -155,6 +167,10 @@
                 <a href="<?php echo home_url('/tiendas-online-leon'); ?>"
                     class="mobile-link block text-xl font-medium text-white">
                     Tiendas Online
+                </a>
+                <a href="<?php echo home_url('/seo-local-leon'); ?>"
+                    class="mobile-link block text-xl font-medium text-white">
+                    SEO Local
                 </a>
             </div>
 

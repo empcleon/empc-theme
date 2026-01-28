@@ -49,3 +49,4 @@ export type { CaseStudyCardsProps } from './CaseStudyCards';
 
 export { EcommerceCTAForm } from './EcommerceCTAForm';
 export type { EcommerceCTAFormProps } from './EcommerceCTAForm';
+export * from './LocalPackSimulator';

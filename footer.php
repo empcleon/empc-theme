@@ -1,85 +1,41 @@
-<!-- Footer (Ported from React) -->
-<footer class="bg-slate-950 py-16 border-t border-slate-900 mt-auto">
+<!-- Footer Pro Max (Soberana V3) -->
+<footer class="bg-slate-deep border-t border-white/5 pt-20 pb-10 mt-auto">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
-            <!-- Col 1: Branding -->
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-8 mb-12">
             <div>
-                <div class="flex items-center mb-6">
-                    <img src="<?php echo get_template_directory_uri(); ?>/react-app/assets/logo-transparent.png"
-                        alt="EMPC Logo" class="h-10 w-auto">
+                <!-- Logo Typography -->
+                <div class="flex items-center gap-3 mb-4">
+                    <span class="text-2xl font-heading font-bold text-white tracking-tighter">EMPC<span
+                            class="text-dusty-rose">.es</span></span>
                 </div>
-                <p class="text-slate-500 text-sm leading-relaxed">
-                    Desarrollo web artesanal desde León. <br>
-                    Combinamos código robusto con diseño estratégico para ayudar al comercio local a escalar.
+                <p class="text-sm text-slate-400 max-w-xs">
+                    Tu socio tecnológico para la era de la autoridad digital.
+                    <br>
+                    <a href="mailto:info@empc.es"
+                        class="text-dusty-rose hover:underline decoration-dusty-rose/30">info@empc.es</a>
                 </p>
             </div>
 
-            <!-- Col 2: Services -->
-            <div>
-                <h4 class="text-white font-bold mb-4">Servicios</h4>
-                <ul class="space-y-2 text-sm text-slate-500">
-                    <li><a href="<?php echo home_url('/#servicios'); ?>"
-                            class="hover:text-rose-400 transition-colors">Desarrollo React</a></li>
-                    <li><a href="<?php echo home_url('/#servicios'); ?>"
-                            class="hover:text-rose-400 transition-colors">WordPress Avanzado</a></li>
-                    <li><a href="<?php echo home_url('/#servicios'); ?>"
-                            class="hover:text-rose-400 transition-colors">Auditoría WPO</a></li>
-                    <li><a href="<?php echo home_url('/#servicios'); ?>"
-                            class="hover:text-rose-400 transition-colors">Mantenimiento Técnico</a></li>
-                </ul>
-            </div>
-
-            <!-- Col 3: Contact -->
-            <div>
-                <h4 class="text-white font-bold mb-4">Contacto</h4>
-                <div class="flex gap-4 mb-6">
-                    <a href="https://github.com/empcleon" target="_blank"
-                        class="w-10 h-10 bg-slate-900 rounded-full flex items-center justify-center text-slate-400 hover:text-white hover:bg-rose-600 transition-all">
-                        <!-- Github Icon -->
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                            class="lucide lucide-github">
-                            <path
-                                d="M15 22v-4a4.8 18 0 0 0-1-3.5c3 6 3 9 3 14 3 19.8 1.6 19.8 1.6-9-2.26-15.5 0-15.5 1 0-1.6 0-3.5 .4-5 .8-3.4 3-1.6 6-1.6 7-2.6 15.5 0 15.5 2 15.5 1 0 1.6 0 3.5-.4 5-.8 3.4 3 1.6 6 1.6 7 2.6V20a2 2 0 0 1-2 2h-18a2 2 0 0 1-2-2z" />
-                        </svg>
-                    </a>
-                    <a href="#"
-                        class="w-10 h-10 bg-slate-900 rounded-full flex items-center justify-center text-slate-400 hover:text-white hover:bg-blue-600 transition-all">
-                        <!-- Linkedin Icon -->
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                            class="lucide lucide-linkedin">
-                            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
-                            <rect width="4" height="12" x="2" y="9" />
-                            <circle cx="4" cy="4" r="2" />
-                        </svg>
-                    </a>
-                    <a href="mailto:empcleon@gmail.com"
-                        class="w-10 h-10 bg-slate-900 rounded-full flex items-center justify-center text-slate-400 hover:text-white hover:bg-emerald-600 transition-all">
-                        <!-- Mail Icon -->
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                            class="lucide lucide-mail">
-                            <rect width="20" height="16" x="2" y="4" rx="2" />
-                            <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
-                        </svg>
-                    </a>
+            <nav class="grid grid-cols-2 gap-x-12 gap-y-4 text-[10px] font-bold uppercase tracking-[0.2em] font-sans">
+                <div>
+                    <p class="text-white mb-4 opacity-50">Legal</p>
+                    <a href="<?php echo home_url('/aviso-legal'); ?>"
+                        class="block hover:text-dusty-rose transition-colors text-slate-500 mb-2">Aviso Legal</a>
+                    <a href="<?php echo home_url('/politica-privacidad'); ?>"
+                        class="block hover:text-dusty-rose transition-colors text-slate-500">Privacidad</a>
                 </div>
-                <p class="text-slate-600 text-xs">
-                    León, España. <br>
-                    Disponible para proyectos remotos.
-                </p>
-            </div>
+            </nav>
         </div>
 
-        <div class="pt-8 border-t border-slate-900 flex flex-col md:flex-row justify-between items-center gap-4">
-            <div class="text-slate-600 text-xs">
-                &copy; <?php echo date('Y'); ?> EMPC Desarrollo Web. Todos los derechos reservados.
-            </div>
-            <div class="flex gap-6 text-xs text-slate-600">
-                <a href="#" class="hover:text-slate-400">Aviso Legal</a>
-                <a href="#" class="hover:text-slate-400">Privacidad</a>
-                <a href="#" class="hover:text-slate-400">Cookies</a>
+        <div
+            class="border-t border-white/5 pt-8 flex flex-col md:flex-row justify-between items-center opacity-40 hover:opacity-100 transition-opacity duration-300">
+            <p class="text-[10px] font-mono tracking-widest uppercase text-slate-500">© <?php echo date('Y'); ?> Vibe
+                Coding Edition.</p>
+            <div class="flex gap-6 mt-6 md:mt-0">
+                <div class="flex items-center gap-2">
+                    <div class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></div>
+                    <span class="text-[10px] font-mono text-slate-400">Local_Dev_Env</span>
+                </div>
             </div>
         </div>
     </div>

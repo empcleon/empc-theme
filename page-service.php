@@ -15,8 +15,13 @@ get_header();
         // Get service page configuration from post meta
         $service_config = get_post_meta(get_the_ID(), '_empc_service_config', true);
 
+        echo "<!-- DEBUG SERVICE CONFIG LENGTH: " . strlen($service_config) . " -->";
+
         if ($service_config) {
             $config = json_decode($service_config, true);
+            if (json_last_error() !== JSON_ERROR_NONE) {
+                echo "<!-- JSON DECODE ERROR: " . json_last_error_msg() . " -->";
+            }
 
             // Output islands containers with data attributes
             ?>
@@ -72,6 +77,13 @@ get_header();
             <?php if (isset($config['cta'])): ?>
                 <div id="service-cta-island"
                     data-config='<?php echo esc_attr(json_encode($config['cta'], JSON_UNESCAPED_UNICODE)); ?>'>
+                </div>
+            <?php endif; ?>
+
+            <!-- Local Pack Simulator Island -->
+            <?php if (isset($config['localPackSimulator'])): ?>
+                <div id="local-pack-simulator-island"
+                    data-config='<?php echo esc_attr(json_encode($config['localPackSimulator'], JSON_UNESCAPED_UNICODE)); ?>'>
                 </div>
             <?php endif; ?>
 

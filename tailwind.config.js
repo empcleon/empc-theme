@@ -9,6 +9,9 @@ export default {
     theme: {
         extend: {
             colors: {
+                'slate-deep': '#121826',
+                'dusty-rose': '#E29595',
+                'soft-pink': '#FCE7F3',
                 primary: {
                     50: '#fef2f2',
                     100: '#fee2e2',
@@ -23,9 +26,17 @@ export default {
                 },
                 brand: colors.emerald,
                 slate: colors.slate,
+                soberana: {
+                    bg: 'var(--color-background)',
+                    primary: 'var(--color-primary)',
+                    secondary: 'var(--color-secondary)',
+                    text: 'var(--color-text)',
+                },
             },
             fontFamily: {
                 sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+                soberana: ['var(--font-heading)', 'sans-serif'],
+                inter: ['var(--font-body)', 'sans-serif'],
             }
         },
     },
