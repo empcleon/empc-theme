@@ -4,44 +4,42 @@ import { ArrowRight, ShieldCheck, Sparkles } from 'lucide-react';
 const EmpcHeroProMax: React.FC = () => {
     return (
         <div className="relative min-h-[80vh] bg-[#121826] overflow-hidden font-sans selection:bg-[#E29595] selection:text-[#121826]">
-            {/* Background Decor (Anti-generic Pattern) */}
-            <div className="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none">
-                <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-[#E29595] blur-[120px] rounded-full"></div>
-                <div className="absolute bottom-[-10%] right-[-10%] w-[30%] h-[30%] bg-[#FB7185] blur-[100px] rounded-full opacity-20"></div>
-            </div>
+            {/* Background Decor */}
+            <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#E29595]/10 blur-[120px] rounded-full -z-10 pointer-events-none"></div>
 
             <div className="max-w-7xl mx-auto px-6 pt-32 pb-20 relative z-10">
                 <div className="grid lg:grid-cols-2 gap-16 items-center">
 
-                    {/* Lado A: Mensaje de Autoridad (Pilar 11) */}
+                    {/* Lado A: Mensaje de Autoridad */}
                     <div className="space-y-8 animate-fade-in-up">
+                        {/* Badge */}
                         <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-md">
                             <Sparkles size={16} className="text-[#E29595]" />
                             <span className="text-xs font-bold tracking-widest text-[#E29595] uppercase">Vibe Coding v9.0 Active</span>
                         </div>
 
-                        <h1 className="text-6xl md:text-7xl font-serif text-white leading-[1.1]">
-                            Tu visión es <span className="italic text-[#E29595]">imparable</span>. <br />
-                            Tu código debe <span className="underline decoration-white/20 underline-offset-8">seguirte</span>.
+                        <h1 className="text-7xl md:text-8xl font-serif text-white leading-[0.9]">
+                            Ingeniería Web <br />
+                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#E29595] to-[#FCE7F3] italic">de Alto Impacto</span>
                         </h1>
 
-                        <p className="text-xl text-slate-400 max-w-lg leading-relaxed">
-                            No construimos webs; creamos ecosistemas de alta conversión.
-                            <strong> EMPC.es</strong> es la intersección entre el lujo visual y la ingeniería de élite.
+                        <p className="text-xl text-slate-400 max-w-lg leading-relaxed font-light">
+                            Transformamos negocios de León en infraestructuras tecnológicas soberanas. <br />
+                            <span className="text-[#E29595] font-medium">Sin bloatware. Sin excusas.</span>
                         </p>
 
                         <div className="flex flex-col sm:flex-row gap-4">
-                            <button className="px-10 py-5 bg-[#E29595] text-[#121826] font-bold rounded-2xl hover:scale-105 transition-all shadow-[0_20px_40px_-10px_rgba(226,149,149,0.4)] flex items-center justify-center gap-2">
-                                Iniciar Consultoría <ArrowRight size={20} />
+                            <button className="px-10 py-5 bg-[#E29595] text-[#121826] font-bold rounded-2xl hover:scale-105 transition-all shadow-[0_20px_40px_-10px_rgba(226,149,149,0.4)] flex items-center justify-center gap-2 uppercase tracking-widest text-sm">
+                                Iniciar Proyecto <ArrowRight size={20} />
                             </button>
-                            <button className="px-10 py-5 bg-white/5 text-white font-bold rounded-2xl border border-white/10 hover:bg-white/10 transition-all flex items-center justify-center gap-2 backdrop-blur-xl">
-                                Ver Laboratorio
+                            <button className="px-10 py-5 bg-white/5 text-white font-bold rounded-2xl border border-white/10 hover:bg-white/10 transition-all flex items-center justify-center gap-2 backdrop-blur-xl uppercase tracking-widest text-sm">
+                                Ver Demos
                             </button>
                         </div>
                     </div>
 
-                    {/* Lado B: El "Packaging" (Inspirado en la Terminal de Vera [00:06:41]) */}
-                    <div className="relative group animate-fade-in-left">
+                    {/* Lado B: El "Packaging" (Terminal Hacker) */}
+                    <div className="relative group animate-fade-in-left mt-10 lg:mt-0">
                         <div className="absolute -inset-1 bg-gradient-to-r from-[#E29595] to-[#FB7185] rounded-3xl blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
 
                         <div className="relative bg-[#1F2937]/80 backdrop-blur-2xl border border-white/10 rounded-3xl p-8 shadow-2xl">
@@ -74,14 +72,14 @@ const EmpcHeroProMax: React.FC = () => {
                             </div>
                         </div>
 
-                        {/* Floating Card (Social Proof/Trust) */}
+                        {/* Floating Card */}
                         <div className="absolute -bottom-6 -left-6 bg-white p-4 rounded-2xl shadow-2xl flex items-center gap-4 animate-bounce-slow">
                             <div className="p-3 bg-emerald-100 rounded-xl text-emerald-600">
                                 <ShieldCheck size={24} />
                             </div>
                             <div>
-                                <p className="text-[10px] text-slate-400 uppercase font-bold tracking-widest">Sello de Calidad</p>
-                                <p className="text-sm font-bold text-[#121826]">Sin Bloatware Garantizado</p>
+                                <p className="text-[10px] text-slate-400 uppercase font-bold tracking-widest">Garantía</p>
+                                <p className="text-sm font-bold text-[#121826]">Sin Bloatware</p>
                             </div>
                         </div>
                     </div>

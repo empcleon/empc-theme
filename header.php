@@ -42,8 +42,9 @@
 <body <?php body_class('bg-slate-deep text-slate-50 font-sans selection:bg-dusty-rose selection:text-slate-deep'); ?>>
     <?php wp_body_open(); ?>
 
-    <!-- Navigation (Ported from React) -->
-    <nav id="main-nav" class="fixed w-full z-50 transition-all duration-300 bg-transparent">
+    <!-- Navigation (Soberana V3) -->
+    <nav id="main-nav"
+        class="sticky top-0 z-50 w-full transition-all duration-300 backdrop-blur-xl border-b border-white/5 bg-[#121826]/80">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-20 items-center">
                 <!-- Logo optimizado WebP -->
@@ -54,82 +55,46 @@
                                 srcset="<?php echo get_template_directory_uri(); ?>/react-app/assets/logo-transparent.webp"
                                 type="image/webp">
                             <img src="<?php echo get_template_directory_uri(); ?>/react-app/assets/logo-transparent.png"
-                                alt="EMPC Logo" class="h-12 w-auto" width="305" height="84" fetchpriority="high">
+                                alt="EMPC.es" class="h-10 w-auto hover:rotate-2 transition-transform duration-300"
+                                width="305" height="84" fetchpriority="high">
                         </picture>
                     </a>
                 </div>
 
-                <!-- Desktop Menu -->
-                <div class="hidden md:flex space-x-8 items-center">
+                <!-- Desktop Menu (Soberana V3) -->
+                <div class="hidden md:flex gap-8 text-[11px] font-bold uppercase tracking-[0.2em] items-center">
                     <?php
-                    // Detectar página activa
-                    $current_page = get_queried_object();
-                    $is_home = is_front_page();
-                    $is_blog = (is_home() || is_single() || is_archive() || is_search());
-                    $is_method_page = (is_page('nuestro-metodo') || (isset($current_page->post_name) && $current_page->post_name === 'nuestro-metodo'));
-                    $is_services_page = (is_page('diseno-web-leon') || is_page('tiendas-online-leon'));
-
-                    // Clases para cada enlace (Soberana V3)
-                    $active_class = "text-white font-medium text-sm border-b-2 border-dusty-rose pb-1";
-                    $inactive_class = "text-slate-300 hover:text-dusty-rose transition-colors text-sm font-medium";
-
-                    $method_class = $is_method_page ? $active_class : $inactive_class;
-                    $blog_class = $is_blog ? $active_class : $inactive_class;
-                    $services_class = $is_services_page ? "text-white font-medium text-sm" : "text-slate-300 hover:text-dusty-rose transition-colors text-sm font-medium";
+                    // Clases V3
+                    $link_base = "hover:text-dusty-rose transition-colors";
+                    $link_active = "text-dusty-rose border-b-2 border-dusty-rose pb-1";
                     ?>
-                    <a href="<?php echo home_url('/#metodo'); ?>" class="<?php echo $inactive_class; ?>">Nuestro
-                        Método</a>
+                    
+                    <a href="<?php echo home_url('/#metodo'); ?>" class="<?php echo $link_base; ?>">Ingeniería</a>
 
-                    <!-- Servicios Dropdown -->
+                    <!-- Servicios Dropdown (Simplificado para V3) -->
                     <div class="relative group">
-                        <button class="<?php echo $services_class; ?> flex items-center gap-1 focus:outline-none">
+                        <button class="<?php echo $link_base; ?> flex items-center gap-1 focus:outline-none">
                             Servicios
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round" class="w-4 h-4 transition-transform group-hover:rotate-180">
-                                <path d="m6 9 6 6 6-6" />
-                            </svg>
                         </button>
-                        <!-- Dropdown Content -->
-                        <div
-                            class="absolute left-1/2 -translate-x-1/2 top-full mt-2 w-64 bg-slate-900 rounded-xl shadow-xl border border-slate-700 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform origin-top overflow-hidden z-50">
-                            <div class="py-2">
-                                <a href="<?php echo home_url('/diseno-web-leon'); ?>"
-                                    class="block px-4 py-3 hover:bg-slate-800 transition-colors group/item">
-                                    <span
-                                        class="block text-white font-medium text-sm group-hover/item:text-dusty-rose transition-colors">Diseño
-                                        Web</span>
-                                    <span class="block text-slate-400 text-xs mt-0.5">Landing pages y
-                                        corporativas</span>
-                                </a>
-                                <a href="<?php echo home_url('/tiendas-online-leon'); ?>"
-                                    class="block px-4 py-3 hover:bg-slate-800 transition-colors border-t border-slate-700/50 group/item">
-                                    <span
-                                        class="block text-white font-medium text-sm group-hover/item:text-dusty-rose transition-colors">Tiendas
-                                        Online</span>
-                                    <span class="block text-slate-400 text-xs mt-0.5">E-commerce y catálogos</span>
-                                </a>
-                                <a href="<?php echo home_url('/seo-local-leon'); ?>"
-                                    class="block px-4 py-3 hover:bg-slate-800 transition-colors border-t border-slate-700/50 group/item">
-                                    <span
-                                        class="block text-white font-medium text-sm group-hover/item:text-dusty-rose transition-colors">SEO
-                                        Local</span>
-                                    <span class="block text-slate-400 text-xs mt-0.5">Posicionamiento en Mapas</span>
-                                </a>
-                            </div>
+                        <div class="absolute left-1/2 -translate-x-1/2 top-full mt-4 w-56 bg-[#121826]/95 backdrop-blur-xl border border-white/10 rounded-xl p-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 shadow-2xl">
+                            <a href="<?php echo home_url('/diseno-web-leon'); ?>" class="block px-4 py-3 hover:bg-white/5 rounded-lg text-slate-300 hover:text-dusty-rose text-[10px] tracking-widest uppercase mb-1">
+                                Diseño Web
+                            </a>
+                            <a href="<?php echo home_url('/tiendas-online-leon'); ?>" class="block px-4 py-3 hover:bg-white/5 rounded-lg text-slate-300 hover:text-dusty-rose text-[10px] tracking-widest uppercase mb-1">
+                                Tiendas Online
+                            </a>
+                            <a href="<?php echo home_url('/seo-local-leon'); ?>" class="block px-4 py-3 hover:bg-white/5 rounded-lg text-slate-300 hover:text-dusty-rose text-[10px] tracking-widest uppercase">
+                                SEO Local
+                            </a>
                         </div>
                     </div>
 
-                    <a href="<?php echo home_url('/blog'); ?>" class="<?php echo $blog_class; ?>">Blog</a>
-                    <a href="<?php echo home_url('/#demos'); ?>" class="<?php echo $inactive_class; ?>">Demos</a>
-                    <a href="<?php echo home_url('/#consultor-ia'); ?>"
-                        class="<?php echo $inactive_class; ?> flex items-center gap-2">
-                        <span class="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></span>
-                        Consultor IA
-                    </a>
+                    <a href="<?php echo home_url('/blog'); ?>" class="<?php echo $link_base; ?>">Blog</a>
+                    <a href="<?php echo home_url('/#demos'); ?>" class="<?php echo $link_base; ?>">Demos</a>
+                    
                     <a href="<?php echo home_url('/#contacto'); ?>"
-                        class="bg-dusty-rose text-slate-900 px-5 py-2.5 rounded-full font-bold text-sm hover:bg-white transition-colors shadow-lg hover:shadow-[0_0_15px_rgba(226,149,149,0.4)] transform hover:-translate-y-0.5">
-                        Contactar
+                        class="px-6 py-2 border border-dusty-rose text-dusty-rose rounded-lg hover:bg-dusty-rose hover:text-[#121826] transition-all">
+                        Consultoría
                     </a>
                 </div>
 
