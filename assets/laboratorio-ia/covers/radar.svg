@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">Portada del radar externo</title>
+  <desc id="desc">Ilustración azul y cian con nodos conectados y una brújula de investigación.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#152033"/>
+      <stop offset="100%" stop-color="#0a1220"/>
+    </linearGradient>
+    <linearGradient id="cyan" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#8dd7ff"/>
+      <stop offset="100%" stop-color="#60c8ff"/>
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="900" fill="url(#bg)"/>
+  <circle cx="1200" cy="200" r="220" fill="#60c8ff" fill-opacity="0.08"/>
+  <circle cx="330" cy="660" r="190" fill="#8dd7ff" fill-opacity="0.07"/>
+  <rect x="170" y="160" width="1260" height="580" rx="42" fill="#0d1524" stroke="#8dd7ff" stroke-opacity="0.18"/>
+  <path d="M340 270h340c24 0 44 20 44 44v0c0 24-20 44-44 44H340c-24 0-44-20-44-44v0c0-24 20-44 44-44Z" fill="#60c8ff" fill-opacity="0.18"/>
+  <circle cx="420" cy="520" r="118" fill="#60c8ff" fill-opacity="0.12" stroke="#8dd7ff" stroke-opacity="0.5" stroke-width="6"/>
+  <path d="M420 405 454 545 420 520 386 545Z" fill="url(#cyan)"/>
+  <circle cx="420" cy="520" r="18" fill="#f8fafc"/>
+  <g stroke="#8dd7ff" stroke-opacity="0.55" stroke-width="5" fill="none">
+    <path d="M580 355h250"/>
+    <path d="M580 410h300"/>
+    <path d="M580 465h200"/>
+    <path d="M580 520h280"/>
+    <path d="M580 575h240"/>
+  </g>
+  <g fill="#8dd7ff" fill-opacity="0.82">
+    <circle cx="880" cy="355" r="10"/><circle cx="820" cy="410" r="10"/>
+    <circle cx="730" cy="465" r="10"/><circle cx="860" cy="520" r="10"/>
+    <circle cx="780" cy="575" r="10"/>
+  </g>
+  <rect x="980" y="275" width="320" height="250" rx="30" fill="#09111d" stroke="#8dd7ff" stroke-opacity="0.18"/>
+  <text x="1028" y="344" fill="#d9f2ff" font-size="52" font-family="Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, sans-serif" font-weight="700">RADAR</text>
+  <text x="1028" y="396" fill="#8dd7ff" font-size="24" font-family="Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, sans-serif">Recursos externos</text>
+  <text x="1028" y="438" fill="#cbd5e1" font-size="20" font-family="Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, sans-serif">Revisión, límites y fuente oficial</text>
+</svg>

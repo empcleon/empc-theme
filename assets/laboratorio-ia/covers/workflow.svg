@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">Portada de workflows</title>
+  <desc id="desc">Ilustración verde con pasos conectados, validación y una secuencia editorial.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#10201a"/>
+      <stop offset="100%" stop-color="#0b1410"/>
+    </linearGradient>
+    <linearGradient id="green" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#9cf0b3"/>
+      <stop offset="100%" stop-color="#66d28a"/>
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="900" fill="url(#bg)"/>
+  <circle cx="1240" cy="210" r="220" fill="#66d28a" fill-opacity="0.09"/>
+  <circle cx="330" cy="700" r="220" fill="#9cf0b3" fill-opacity="0.06"/>
+  <rect x="180" y="160" width="1240" height="580" rx="42" fill="#0b1813" stroke="#9cf0b3" stroke-opacity="0.16"/>
+  <g stroke="#9cf0b3" stroke-opacity="0.48" stroke-width="8" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M300 310H470"/>
+    <path d="M560 310H740"/>
+    <path d="M830 310H1020"/>
+    <path d="M300 465H470"/>
+    <path d="M560 465H740"/>
+    <path d="M830 465H1020"/>
+    <path d="M300 620H470"/>
+    <path d="M560 620H740"/>
+    <path d="M830 620H1020"/>
+  </g>
+  <g>
+    <rect x="260" y="260" width="180" height="100" rx="24" fill="#9cf0b3" fill-opacity="0.16" stroke="#9cf0b3" stroke-opacity="0.35"/>
+    <rect x="520" y="260" width="180" height="100" rx="24" fill="#9cf0b3" fill-opacity="0.12" stroke="#9cf0b3" stroke-opacity="0.3"/>
+    <rect x="790" y="260" width="180" height="100" rx="24" fill="#9cf0b3" fill-opacity="0.10" stroke="#9cf0b3" stroke-opacity="0.3"/>
+    <rect x="260" y="415" width="180" height="100" rx="24" fill="#9cf0b3" fill-opacity="0.10" stroke="#9cf0b3" stroke-opacity="0.3"/>
+    <rect x="520" y="415" width="180" height="100" rx="24" fill="#9cf0b3" fill-opacity="0.14" stroke="#9cf0b3" stroke-opacity="0.34"/>
+    <rect x="790" y="415" width="180" height="100" rx="24" fill="#9cf0b3" fill-opacity="0.12" stroke="#9cf0b3" stroke-opacity="0.28"/>
+    <rect x="260" y="570" width="180" height="100" rx="24" fill="#9cf0b3" fill-opacity="0.10" stroke="#9cf0b3" stroke-opacity="0.3"/>
+    <rect x="520" y="570" width="180" height="100" rx="24" fill="#9cf0b3" fill-opacity="0.12" stroke="#9cf0b3" stroke-opacity="0.3"/>
+    <rect x="790" y="570" width="180" height="100" rx="24" fill="#9cf0b3" fill-opacity="0.18" stroke="#9cf0b3" stroke-opacity="0.38"/>
+  </g>
+  <circle cx="1130" cy="455" r="128" fill="#66d28a" fill-opacity="0.11" stroke="#66d28a" stroke-opacity="0.35" stroke-width="6"/>
+  <path d="M1075 455l32 32 72-84" stroke="url(#green)" stroke-width="14" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="1038" y="585" fill="#d7ffe2" font-size="46" font-family="Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, sans-serif" font-weight="700">WORKFLOW</text>
+  <text x="1038" y="630" fill="#9cf0b3" font-size="24" font-family="Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, sans-serif">EMPC · Validación</text>
+</svg>

@@ -1,3 +1,6 @@
+<?php 
+$is_blog = is_home() || is_archive() || is_singular('post') || is_search();
+?>
 <!DOCTYPE html>
 <html <?php language_attributes(); ?>>
 
@@ -36,7 +39,9 @@
         setTimeout(loadCrisp, 5000);
     </script>
 
-    <?php wp_head(); ?>
+    <?php 
+    wp_head(); 
+    ?>
 </head>
 
 <body <?php body_class('bg-slate-deep text-slate-50 font-sans selection:bg-dusty-rose selection:text-slate-deep'); ?>>
