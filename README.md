@@ -39,7 +39,8 @@ Este proyecto implementa una **Arquitectura de Islas** que combina la robustez S
 
 #### Despliegue (CI/CD)
 Gestionado por GitHub Actions (`.github/workflows/deploy.yml`):
-- Push a `main` -> `npm install` -> `npm run build` -> FTP Upload a Raiola.
+- Push a `main` -> `npm ci` -> `npm run build` -> FTP Upload al servidor.
+- Guía de trabajo remoto: `GITHUB_WORKFLOW.md`
 
 ## 🚀 Roadmap de Componentes
 

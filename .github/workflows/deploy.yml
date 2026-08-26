@@ -1,47 +1,51 @@
-name: Deploy to Raiola
+name: Deploy EMPC Theme
 
 on:
   push:
-    branches: [main]
+    branches:
+      - main
   workflow_dispatch:
 
 jobs:
-  build-and-deploy:
+  deploy:
     runs-on: ubuntu-latest
-    
+
     steps:
-      - name: Checkout code
+      - name: Checkout
         uses: actions/checkout@v4
-      
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
-          cache: 'npm'
-      
+          node-version: 20
+          cache: npm
+
       - name: Install dependencies
         run: npm ci
-      
-      - name: Build React app
+
+      - name: Build assets
         run: npm run build
-      
-      
-      - name: Deploy to Raiola via FTP
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+
+      - name: Deploy theme via FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
           server: ${{ secrets.FTP_SERVER }}
-          username: ${{ secrets.FTP_USER }}
-          password: ${{ secrets.FTP_PASS }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          server-dir: ${{ secrets.FTP_SERVER_DIR }}
+          port: ${{ secrets.FTP_PORT || 21 }}
           local-dir: ./
-          server-dir: /wp-content/themes/empc-theme/
           exclude: |
-            **/.git*
             **/.git*/**
+            **/.github/**
             **/node_modules/**
             **/src/**
-            **/.github/**
-            **/package-lock.json
-            **/vite.config.ts
-            **/tsconfig.json
-            **/tailwind.config.js
-            **/postcss.config.js
+            **/*.md
+            **/*.bak
+            **/*.zip
+            **/*.psd
+            **/*.ai
+            **/*.xcf
+            .DS_Store
+            .env
+            .env.*
