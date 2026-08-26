@@ -94,6 +94,7 @@ $is_blog = is_home() || is_archive() || is_singular('post') || is_search();
                         </div>
                     </div>
 
+                    <a href="<?php echo home_url('/laboratorio-ia/'); ?>" class="<?php echo $link_base; ?>">Laboratorio IA</a>
                     <a href="<?php echo home_url('/blog'); ?>" class="<?php echo $link_base; ?>">Blog</a>
                     <a href="<?php echo home_url('/#demos'); ?>" class="<?php echo $link_base; ?>">Demos</a>
                     
@@ -144,6 +145,8 @@ $is_blog = is_home() || is_archive() || is_singular('post') || is_search();
                 </a>
             </div>
 
+            <a href="<?php echo home_url('/laboratorio-ia/'); ?>"
+                class="mobile-link text-2xl font-medium text-slate-200">Laboratorio IA</a>
             <?php
             $mobile_blog_class = $is_blog
                 ? "mobile-link text-2xl font-medium text-white"
