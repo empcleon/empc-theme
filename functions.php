@@ -128,16 +128,29 @@ function empc_enqueue_react_assets()
 }
 add_action('wp_enqueue_scripts', 'empc_enqueue_react_assets');
 
-add_filter('template_include', function ($template) {
-    if (is_page('contacta-conmigo')) {
-        $contact_template = locate_template('page-contacta-conmigo.php');
-        if ($contact_template) {
-            return $contact_template;
-        }
-    }
+if (!function_exists('empc_force_specific_page_templates')) {
+    function empc_force_specific_page_templates(string $template): string
+    {
+        $routes = [
+            'contacta-conmigo' => 'page-contacta-conmigo.php',
+            'mantenimiento-wordpress-leon' => 'page-mantenimiento-wordpress-leon.php',
+            'alquiler-pagina-web-empresas-y-autonomos' => 'page-alquiler-pagina-web-empresas-y-autonomos.php',
+        ];
 
-    return $template;
-});
+        foreach ($routes as $slug => $file) {
+            if (is_page($slug)) {
+                $located = locate_template($file);
+                if ($located) {
+                    return $located;
+                }
+            }
+        }
+
+        return $template;
+    }
+}
+
+add_filter('template_include', 'empc_force_specific_page_templates');
 
 /**
  * REST helpers for the public forms.
@@ -295,6 +308,14 @@ if (!function_exists('empc_get_meta_description')) {
 
         if (empc_is_laboratorio_ia_request()) {
             return 'Laboratorio IA EMPC: prompts, workflows y recursos prácticos para explorar ideas con una interfaz compacta y clara.';
+        }
+
+        if (is_page('mantenimiento-wordpress-leon')) {
+            return 'Mantenimiento WordPress en León con planes mensuales, copias de seguridad, actualizaciones, seguridad, soporte y tareas avanzadas para sitios WordPress y WooCommerce.';
+        }
+
+        if (is_page('alquiler-pagina-web-empresas-y-autonomos')) {
+            return 'Alquiler de página web para empresas y autónomos con planes escalables, hosting, dominio y mantenimiento según el contenido publicado en la página.';
         }
 
         if (is_front_page() || is_home()) {
