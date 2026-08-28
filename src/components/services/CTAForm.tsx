@@ -17,6 +17,7 @@ interface FormData {
     tipo?: string;
     mensaje: string;
     presupuesto?: string;
+    website?: string;
 }
 
 const CTAForm: React.FC<CTAFormProps> = ({
@@ -33,7 +34,8 @@ const CTAForm: React.FC<CTAFormProps> = ({
         telefono: '',
         tipo: '',
         mensaje: '',
-        presupuesto: ''
+        presupuesto: '',
+        website: ''
     });
 
     const [isSubmitting, setIsSubmitting] = useState(false);
@@ -76,7 +78,8 @@ const CTAForm: React.FC<CTAFormProps> = ({
                 telefono: '',
                 tipo: '',
                 mensaje: '',
-                presupuesto: ''
+                presupuesto: '',
+                website: ''
             });
         } catch (error) {
             console.error('Error:', error);
@@ -104,6 +107,18 @@ const CTAForm: React.FC<CTAFormProps> = ({
                 </div>
 
                 <form onSubmit={handleSubmit} className="card-soberana rounded-2xl p-8 md:p-12 border border-white/5 backdrop-blur-md">
+                    <div className="sr-only" aria-hidden="true">
+                        <label htmlFor="cta-website">Website</label>
+                        <input
+                            id="cta-website"
+                            type="text"
+                            name="website"
+                            value={formData.website}
+                            onChange={handleChange}
+                            autoComplete="off"
+                            tabIndex={-1}
+                        />
+                    </div>
                     <div className="grid md:grid-cols-2 gap-6 mb-6">
                         <div>
                             <label className="block text-slate-300 text-sm mb-2">Nombre *</label>

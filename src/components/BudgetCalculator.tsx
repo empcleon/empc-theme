@@ -109,6 +109,7 @@ const BudgetCalculator = () => {
     const [lead, setLead] = useState({ name: '', email: '' });
     const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
     const [errorMessage, setErrorMessage] = useState('');
+    const [website, setWebsite] = useState('');
 
     // === Inicialización (Bridge PHP -> React) ===
     useEffect(() => {
@@ -165,6 +166,7 @@ const BudgetCalculator = () => {
         const payload = {
             name: lead.name,
             email: lead.email,
+            website,
             budget_data: {
                 type: typeLabel,
                 features: selectedFeatures, // Enviamos IDs, el backend puede mapearlos si quiere textos
@@ -315,6 +317,18 @@ const BudgetCalculator = () => {
 
                     <form onSubmit={handleSubmit} className="bg-slate-800/50 p-6 rounded-xl border border-slate-700 text-left">
                         <h4 className="text-white font-bold mb-4">¿Quieres esta propuesta en PDF?</h4>
+                        <div className="sr-only" aria-hidden="true">
+                            <label htmlFor="bc-website">Website</label>
+                            <input
+                                id="bc-website"
+                                type="text"
+                                name="website"
+                                value={website}
+                                onChange={e => setWebsite(e.target.value)}
+                                autoComplete="off"
+                                tabIndex={-1}
+                            />
+                        </div>
                         <div className="space-y-4">
                             <div>
                                 <label htmlFor="bc-name" className="block text-sm font-medium text-slate-300 mb-1">Nombre</label>

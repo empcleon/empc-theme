@@ -161,34 +161,236 @@ if (!function_exists('empc_rest_error')) {
     }
 }
 
+if (!function_exists('empc_get_request_text')) {
+    function empc_get_request_text($value, int $max_length = 0): ?string
+    {
+        if (is_array($value) || is_object($value)) {
+            return null;
+        }
+
+        $value = sanitize_text_field((string) $value);
+        $value = preg_replace('/\s+/u', ' ', trim($value)) ?? trim($value);
+
+        if ($max_length > 0) {
+            $length = function_exists('mb_strlen') ? mb_strlen($value) : strlen($value);
+            if ($length > $max_length) {
+                return null;
+            }
+        }
+
+        return $value;
+    }
+}
+
+if (!function_exists('empc_get_request_textarea')) {
+    function empc_get_request_textarea($value, int $max_length = 0): ?string
+    {
+        if (is_array($value) || is_object($value)) {
+            return null;
+        }
+
+        $value = sanitize_textarea_field((string) $value);
+        $value = trim($value);
+
+        if ($max_length > 0) {
+            $length = function_exists('mb_strlen') ? mb_strlen($value) : strlen($value);
+            if ($length > $max_length) {
+                return null;
+            }
+        }
+
+        return $value;
+    }
+}
+
+if (!function_exists('empc_mail_header_value')) {
+    function empc_mail_header_value(string $value, int $max_length = 0): string
+    {
+        $value = preg_replace('/[\r\n<>]+/', ' ', $value) ?? $value;
+        $value = preg_replace('/\s+/u', ' ', trim($value)) ?? trim($value);
+
+        if ($max_length > 0) {
+            if (function_exists('mb_substr')) {
+                $value = mb_substr($value, 0, $max_length);
+            } elseif (strlen($value) > $max_length) {
+                $value = substr($value, 0, $max_length);
+            }
+        }
+
+        return $value;
+    }
+}
+
+if (!function_exists('empc_has_declined_consent')) {
+    function empc_has_declined_consent(array $data): bool
+    {
+        foreach (['consent', 'privacyConsent', 'acceptPrivacy', 'acepto', 'acceptance'] as $key) {
+            if (array_key_exists($key, $data)) {
+                $value = filter_var($data[$key], FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE);
+                if ($value !== true) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+}
+
+if (!function_exists('empc_rate_limit_request')) {
+    function empc_rate_limit_request(string $endpoint, int $limit, int $window_seconds): ?WP_REST_Response
+    {
+        $fingerprint_source = implode('|', [
+            $endpoint,
+            (string) ($_SERVER['REMOTE_ADDR'] ?? 'unknown'),
+            (string) ($_SERVER['HTTP_USER_AGENT'] ?? 'unknown'),
+        ]);
+        $fingerprint = hash_hmac('sha256', $fingerprint_source, wp_salt('auth'));
+        $transient_key = 'empc_rl_' . substr($fingerprint, 0, 24);
+        $bucket = get_transient($transient_key);
+        $now = time();
+
+        if (!is_array($bucket) || empty($bucket['window_start']) || ($now - (int) $bucket['window_start']) >= $window_seconds) {
+            set_transient($transient_key, [
+                'count' => 1,
+                'window_start' => $now,
+            ], $window_seconds);
+
+            return null;
+        }
+
+        $count = (int) ($bucket['count'] ?? 0) + 1;
+        if ($count > $limit) {
+            return new WP_REST_Response([
+                'success' => false,
+                'message' => 'Demasiadas solicitudes. Espera un momento e inténtalo de nuevo.',
+            ], 429);
+        }
+
+        $bucket['count'] = $count;
+        $bucket['window_start'] = (int) $bucket['window_start'];
+        set_transient($transient_key, $bucket, $window_seconds);
+
+        return null;
+    }
+}
+
+if (!function_exists('empc_get_meta_description')) {
+    function empc_get_meta_description(): string
+    {
+        if (defined('RANK_MATH_VERSION')) {
+            return '';
+        }
+
+        if (empc_is_laboratorio_ia_request()) {
+            return 'Laboratorio IA EMPC: prompts, workflows y recursos prácticos para explorar ideas con una interfaz compacta y clara.';
+        }
+
+        if (is_front_page() || is_home()) {
+            return 'Diseño web y mantenimiento WordPress en León. EMPC crea webs rápidas, claras y orientadas a captar clientes.';
+        }
+
+        if (is_singular()) {
+            $post = get_queried_object();
+            if ($post instanceof WP_Post) {
+                $excerpt = trim(wp_strip_all_tags(get_the_excerpt($post)));
+                if ($excerpt !== '') {
+                    return wp_trim_words($excerpt, 26, '…');
+                }
+
+                $content = trim(wp_strip_all_tags((string) $post->post_content));
+                if ($content !== '') {
+                    return wp_trim_words($content, 26, '…');
+                }
+
+                $title = trim((string) get_the_title($post));
+                if ($title !== '') {
+                    return $title . ' | EMPC';
+                }
+            }
+        }
+
+        $site_description = trim((string) get_bloginfo('description'));
+        return $site_description !== '' ? $site_description : (string) get_bloginfo('name');
+    }
+}
+
+if (!function_exists('empc_output_meta_description')) {
+    function empc_output_meta_description(): void
+    {
+        if (empc_is_laboratorio_ia_request()) {
+            return;
+        }
+
+        $description = empc_get_meta_description();
+        if ($description === '') {
+            return;
+        }
+
+        echo '<meta name="description" content="' . esc_attr($description) . '" />' . "\n";
+    }
+}
+
+add_action('wp_head', 'empc_output_meta_description', 1);
+
 add_action('rest_api_init', function () {
     register_rest_route('empc/v1', '/contact', [
         'methods' => WP_REST_Server::CREATABLE,
         'permission_callback' => '__return_true',
         'callback' => function (WP_REST_Request $request) {
-            $data = empc_normalize_frontend_payload($request);
-
-            $name = sanitize_text_field((string) ($data['name'] ?? $data['nombre'] ?? ''));
-            $email = sanitize_email((string) ($data['email'] ?? ''));
-            $phone = sanitize_text_field((string) ($data['telefono'] ?? $data['phone'] ?? ''));
-            $service = sanitize_text_field((string) ($data['service'] ?? $data['tipo'] ?? ''));
-            $message = sanitize_textarea_field((string) ($data['message'] ?? $data['mensaje'] ?? ''));
-            $budget = sanitize_text_field((string) ($data['presupuesto'] ?? ''));
-            $consent = !empty($data['consent']) || !empty($data['privacyConsent']) || !empty($data['acceptPrivacy']) || !empty($data['acepto']);
-
-            if ($name === '' || $email === '' || $service === '' || $message === '') {
-                return empc_rest_error('Faltan campos obligatorios en el formulario de contacto.', 400);
+            $rate_limit = empc_rate_limit_request('contact', 5, 600);
+            if ($rate_limit instanceof WP_REST_Response) {
+                return $rate_limit;
             }
 
+            $data = empc_normalize_frontend_payload($request);
+            if (!is_array($data)) {
+                return empc_rest_error('Solicitud no válida.', 400);
+            }
+
+            if (empc_has_declined_consent($data)) {
+                return empc_rest_error('Debes aceptar la política de privacidad para continuar.', 400);
+            }
+
+            $honeypot = empc_get_request_text($data['website'] ?? $data['company_website'] ?? '', 120);
+            if ($honeypot === null) {
+                return empc_rest_error('Solicitud no válida.', 400);
+            }
+            if ($honeypot !== '') {
+                return empc_rest_error('No se ha podido procesar la solicitud.', 400);
+            }
+
+            $name = empc_get_request_text($data['name'] ?? $data['nombre'] ?? '', 80);
+            $email_input = empc_get_request_text($data['email'] ?? '', 120);
+            $phone = empc_get_request_text($data['telefono'] ?? $data['phone'] ?? '', 30);
+            $service = empc_get_request_text($data['service'] ?? $data['tipo'] ?? '', 120);
+            $message = empc_get_request_textarea($data['message'] ?? $data['mensaje'] ?? '', 3000);
+            $budget = empc_get_request_text($data['presupuesto'] ?? '', 20);
+
+            if ($name === null || $email_input === null || $phone === null || $service === null || $message === null || $budget === null) {
+                return empc_rest_error('Solicitud no válida.', 400);
+            }
+
+            $email = sanitize_email($email_input);
             if (!is_email($email)) {
                 return empc_rest_error('El correo electrónico no es válido.', 400);
             }
 
-            if (!$consent && isset($data['consent']) || !$consent && isset($data['privacyConsent'])) {
-                return empc_rest_error('Debes aceptar la política de privacidad para continuar.', 400);
+            if ($name === '' || $service === '' || $message === '') {
+                return empc_rest_error('Faltan campos obligatorios en el formulario de contacto.', 400);
             }
 
-            $subject = sprintf('[EMPC] Nuevo contacto: %s', $service);
+            if (mb_strlen($name) > 80 || mb_strlen($email) > 120 || mb_strlen($phone) > 30 || mb_strlen($service) > 120 || mb_strlen($message) > 3000 || mb_strlen($budget) > 20) {
+                return empc_rest_error('Algunos campos superan la longitud permitida.', 400);
+            }
+
+            $subject = empc_mail_header_value(sprintf('[EMPC] Nuevo contacto: %s', $service), 120);
+            $reply_to_name = empc_mail_header_value($name, 80);
+            $headers = [
+                'Content-Type: text/plain; charset=UTF-8',
+                sprintf('Reply-To: %s <%s>', $reply_to_name !== '' ? $reply_to_name : 'EMPC', $email),
+            ];
+
             $body = implode("\n", array_filter([
                 'Nuevo mensaje recibido desde la web EMPC.',
                 'Nombre: ' . $name,
@@ -200,11 +402,6 @@ add_action('rest_api_init', function () {
                 'Mensaje:',
                 $message,
             ]));
-
-            $headers = [
-                'Content-Type: text/plain; charset=UTF-8',
-                'Reply-To: ' . $name . ' <' . $email . '>',
-            ];
 
             $sent = wp_mail(empc_mail_recipient(), $subject, $body, $headers);
 
@@ -223,59 +420,94 @@ add_action('rest_api_init', function () {
         'methods' => WP_REST_Server::CREATABLE,
         'permission_callback' => '__return_true',
         'callback' => function (WP_REST_Request $request) {
+            $rate_limit = empc_rate_limit_request('budget', 3, 600);
+            if ($rate_limit instanceof WP_REST_Response) {
+                return $rate_limit;
+            }
+
             $data = empc_normalize_frontend_payload($request);
-
-            $name = sanitize_text_field((string) ($data['name'] ?? $data['nombre'] ?? ''));
-            $email = sanitize_email((string) ($data['email'] ?? ''));
-            $budget_data = $data['budget_data'] ?? [];
-            if (!is_array($budget_data)) {
-                $budget_data = [];
+            if (!is_array($data)) {
+                return empc_rest_error('Solicitud no válida.', 400);
             }
 
-            $type = sanitize_text_field((string) ($budget_data['type'] ?? ''));
-            $mode = sanitize_text_field((string) ($budget_data['mode'] ?? ''));
-            $estimated_range = $budget_data['estimated_range'] ?? [];
+            if (empc_has_declined_consent($data)) {
+                return empc_rest_error('Debes aceptar la política de privacidad para continuar.', 400);
+            }
+
+            $honeypot = empc_get_request_text($data['website'] ?? $data['company_website'] ?? '', 120);
+            if ($honeypot === null) {
+                return empc_rest_error('Solicitud no válida.', 400);
+            }
+            if ($honeypot !== '') {
+                return empc_rest_error('No se ha podido procesar la solicitud.', 400);
+            }
+
+            $name = empc_get_request_text($data['name'] ?? $data['nombre'] ?? '', 80);
+            $email_input = empc_get_request_text($data['email'] ?? '', 120);
+            $budget_data = $data['budget_data'] ?? null;
+
+            if ($name === null || $email_input === null || !is_array($budget_data)) {
+                return empc_rest_error('Solicitud no válida.', 400);
+            }
+
+            $type = empc_get_request_text($budget_data['type'] ?? '', 120);
+            $mode = empc_get_request_text($budget_data['mode'] ?? '', 60);
             $features = $budget_data['features'] ?? [];
+            $estimated_range = $budget_data['estimated_range'] ?? [];
 
-            if ($name === '' || $email === '' || $type === '') {
-                return empc_rest_error('Faltan campos obligatorios para calcular el presupuesto.', 400);
+            if ($type === null || $mode === null || !is_array($features) || !is_array($estimated_range)) {
+                return empc_rest_error('Solicitud no válida.', 400);
             }
 
+            $email = sanitize_email($email_input);
             if (!is_email($email)) {
                 return empc_rest_error('El correo electrónico no es válido.', 400);
             }
 
-            $features_text = '';
-            if (is_array($features)) {
-                $features_text = implode(', ', array_map('sanitize_text_field', $features));
-            } else {
-                $features_text = sanitize_text_field((string) $features);
+            if ($name === '' || $type === '') {
+                return empc_rest_error('Faltan campos obligatorios para calcular el presupuesto.', 400);
             }
 
-            $range_text = '';
-            if (is_array($estimated_range)) {
-                $min = isset($estimated_range['min']) ? (int) $estimated_range['min'] : null;
-                $max = isset($estimated_range['max']) ? (int) $estimated_range['max'] : null;
-                if ($min !== null && $max !== null) {
-                    $range_text = $min . '€ - ' . $max . '€';
+            if (mb_strlen($name) > 80 || mb_strlen($email) > 120 || mb_strlen($type) > 120 || mb_strlen($mode) > 60) {
+                return empc_rest_error('Algunos campos superan la longitud permitida.', 400);
+            }
+
+            $clean_features = [];
+            foreach ($features as $feature) {
+                $clean_feature = empc_get_request_text($feature, 40);
+                if ($clean_feature === null) {
+                    return empc_rest_error('Solicitud no válida.', 400);
+                }
+                if ($clean_feature !== '') {
+                    $clean_features[] = $clean_feature;
                 }
             }
+            if (count($clean_features) > 15) {
+                return empc_rest_error('Demasiadas funcionalidades seleccionadas.', 400);
+            }
 
-            $subject = sprintf('[EMPC] Presupuesto solicitado: %s', $type);
+            $min = isset($estimated_range['min']) ? filter_var($estimated_range['min'], FILTER_VALIDATE_INT) : null;
+            $max = isset($estimated_range['max']) ? filter_var($estimated_range['max'], FILTER_VALIDATE_INT) : null;
+            if ($min === false || $max === false || $min === null || $max === null || $min < 0 || $max < 0 || $max < $min) {
+                return empc_rest_error('El rango estimado no es válido.', 400);
+            }
+
+            $subject = empc_mail_header_value(sprintf('[EMPC] Presupuesto solicitado: %s', $type), 120);
+            $reply_to_name = empc_mail_header_value($name, 80);
+            $headers = [
+                'Content-Type: text/plain; charset=UTF-8',
+                sprintf('Reply-To: %s <%s>', $reply_to_name !== '' ? $reply_to_name : 'EMPC', $email),
+            ];
+
             $body = implode("\n", array_filter([
                 'Nueva solicitud de presupuesto desde la web EMPC.',
                 'Nombre: ' . $name,
                 'Email: ' . $email,
                 'Tipo: ' . $type,
                 $mode !== '' ? 'Modo: ' . $mode : '',
-                $features_text !== '' ? 'Extras: ' . $features_text : '',
-                $range_text !== '' ? 'Rango estimado: ' . $range_text : '',
+                !empty($clean_features) ? 'Extras: ' . implode(', ', $clean_features) : '',
+                'Rango estimado: ' . $min . '€ - ' . $max . '€',
             ]));
-
-            $headers = [
-                'Content-Type: text/plain; charset=UTF-8',
-                'Reply-To: ' . $name . ' <' . $email . '>',
-            ];
 
             $sent = wp_mail(empc_mail_recipient(), $subject, $body, $headers);
 
@@ -328,8 +560,16 @@ add_action('wp_enqueue_scripts', function () {
 }, 4);
 
 add_filter('pre_get_document_title', function ($title) {
+    if (defined('RANK_MATH_VERSION')) {
+        return $title;
+    }
+
     if (empc_is_laboratorio_ia_request()) {
         return 'Laboratorio IA: prompts y workflows en español | EMPC';
+    }
+
+    if (is_front_page() || is_home()) {
+        return 'Diseño Web y Mantenimiento WordPress en León | EMPC';
     }
 
     return $title;

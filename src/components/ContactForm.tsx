@@ -7,7 +7,8 @@ const ContactForm = () => {
         name: '',
         email: '',
         service: '',
-        message: ''
+        message: '',
+        website: ''
     });
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [isSuccess, setIsSuccess] = useState(false);
@@ -64,7 +65,7 @@ const ContactForm = () => {
                 <h3 className="text-2xl font-bold text-white mb-2">¡Mensaje Recibido!</h3>
                 <p className="text-slate-300">Gracias {formData.name}, te responderemos a {formData.email} en menos de 24h.</p>
                 <button
-                    onClick={() => { setIsSuccess(false); setStep(1); setFormData({ name: '', email: '', service: '', message: '' }); }}
+                    onClick={() => { setIsSuccess(false); setStep(1); setFormData({ name: '', email: '', service: '', message: '', website: '' }); }}
                     className="mt-6 text-emerald-400 hover:text-emerald-300 font-medium"
                 >
                     Enviar otro mensaje
@@ -85,6 +86,18 @@ const ContactForm = () => {
 
             <div className="p-8 md:p-12">
                 <form onSubmit={handleSubmit}>
+                    <div className="sr-only" aria-hidden="true">
+                        <label htmlFor="cf-website">Website</label>
+                        <input
+                            id="cf-website"
+                            type="text"
+                            name="website"
+                            value={formData.website}
+                            onChange={handleChange}
+                            autoComplete="off"
+                            tabIndex={-1}
+                        />
+                    </div>
                     {/* Step 1: Identificación */}
                     {step === 1 && (
                         <div className="space-y-6 animate-fade-in">
@@ -123,12 +136,6 @@ const ContactForm = () => {
                                     />
                                 </div>
                             </div>
-
-                            {errorMessage && (
-                                <p className="text-center text-red-400 font-medium bg-red-500/10 border border-red-500/30 rounded-xl px-4 py-3">
-                                    {errorMessage}
-                                </p>
-                            )}
 
                             <div className="pt-4 flex justify-end">
                                 <button
@@ -225,6 +232,12 @@ const ContactForm = () => {
                                 </button>
                             </div>
                         </div>
+                    )}
+
+                    {errorMessage && (
+                        <p className="text-center text-red-400 font-medium bg-red-500/10 border border-red-500/30 rounded-xl px-4 py-3">
+                            {errorMessage}
+                        </p>
                     )}
                 </form>
             </div>
