@@ -88,7 +88,7 @@ const MethodPage = () => {
                         Solicita una auditoría técnica gratuita y descubre el potencial real de tu proyecto digital en León.
                     </p>
                     <a
-                        href="/contacto"
+                        href="/contacta-conmigo/"
                         className="inline-block bg-blue-500 hover:bg-blue-600 text-white font-bold px-8 py-4 rounded-lg transition duration-300"
                     >
                         Solicitar Auditoría Técnica

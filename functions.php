@@ -7,6 +7,15 @@
 define('EMPC_THEME_DIR', get_template_directory());
 define('EMPC_THEME_URI', get_template_directory_uri());
 
+foreach ([
+    EMPC_THEME_DIR . '/inc/service-pages-data.php',
+    EMPC_THEME_DIR . '/inc/service-pages-config.php',
+] as $empc_include_file) {
+    if (file_exists($empc_include_file)) {
+        require_once $empc_include_file;
+    }
+}
+
 /**
  * Configuración básica del tema
  */
@@ -98,15 +107,189 @@ function empc_enqueue_react_assets()
                 'in_footer' => true
             ]);
 
-            wp_localize_script('empc-react', 'empcData', [
-                'apiUrl' => get_rest_url(null, 'wp/v2/'),
-                'themeUri' => get_template_directory_uri(),
-                'siteUrl' => home_url()
-            ]);
+            $shared_frontend_data = [
+                'themeUri'  => get_template_directory_uri(),
+                'siteUrl'   => home_url('/'),
+                'restUrl'   => esc_url_raw(rest_url()),
+                'nonce'     => wp_create_nonce('wp_rest'),
+                'isLoggedIn' => is_user_logged_in(),
+                'postConfig' => null,
+            ];
+
+            wp_localize_script('empc-react', 'empcData', array_merge($shared_frontend_data, [
+                'apiUrl' => esc_url_raw(rest_url('wp/v2/')),
+            ]));
+
+            wp_localize_script('empc-react', 'empcConfig', array_merge($shared_frontend_data, [
+                'apiUrl' => esc_url_raw(rest_url()),
+            ]));
         }
     }
 }
 add_action('wp_enqueue_scripts', 'empc_enqueue_react_assets');
+
+/**
+ * REST helpers for the public forms.
+ */
+if (!function_exists('empc_normalize_frontend_payload')) {
+    function empc_normalize_frontend_payload(WP_REST_Request $request): array
+    {
+        $payload = $request->get_json_params();
+        if (!is_array($payload)) {
+            $payload = [];
+        }
+
+        return array_merge($request->get_params(), $payload);
+    }
+}
+
+if (!function_exists('empc_mail_recipient')) {
+    function empc_mail_recipient(): string
+    {
+        $recipient = get_option('admin_email');
+        return is_email($recipient) ? $recipient : get_bloginfo('admin_email');
+    }
+}
+
+if (!function_exists('empc_rest_error')) {
+    function empc_rest_error(string $message, int $status = 400): WP_REST_Response
+    {
+        return new WP_REST_Response([
+            'success' => false,
+            'message' => $message,
+        ], $status);
+    }
+}
+
+add_action('rest_api_init', function () {
+    register_rest_route('empc/v1', '/contact', [
+        'methods' => WP_REST_Server::CREATABLE,
+        'permission_callback' => '__return_true',
+        'callback' => function (WP_REST_Request $request) {
+            $data = empc_normalize_frontend_payload($request);
+
+            $name = sanitize_text_field((string) ($data['name'] ?? $data['nombre'] ?? ''));
+            $email = sanitize_email((string) ($data['email'] ?? ''));
+            $phone = sanitize_text_field((string) ($data['telefono'] ?? $data['phone'] ?? ''));
+            $service = sanitize_text_field((string) ($data['service'] ?? $data['tipo'] ?? ''));
+            $message = sanitize_textarea_field((string) ($data['message'] ?? $data['mensaje'] ?? ''));
+            $budget = sanitize_text_field((string) ($data['presupuesto'] ?? ''));
+            $consent = !empty($data['consent']) || !empty($data['privacyConsent']) || !empty($data['acceptPrivacy']) || !empty($data['acepto']);
+
+            if ($name === '' || $email === '' || $service === '' || $message === '') {
+                return empc_rest_error('Faltan campos obligatorios en el formulario de contacto.', 400);
+            }
+
+            if (!is_email($email)) {
+                return empc_rest_error('El correo electrónico no es válido.', 400);
+            }
+
+            if (!$consent && isset($data['consent']) || !$consent && isset($data['privacyConsent'])) {
+                return empc_rest_error('Debes aceptar la política de privacidad para continuar.', 400);
+            }
+
+            $subject = sprintf('[EMPC] Nuevo contacto: %s', $service);
+            $body = implode("\n", array_filter([
+                'Nuevo mensaje recibido desde la web EMPC.',
+                'Nombre: ' . $name,
+                'Email: ' . $email,
+                $phone !== '' ? 'Teléfono: ' . $phone : '',
+                'Servicio: ' . $service,
+                $budget !== '' ? 'Presupuesto: ' . $budget : '',
+                '',
+                'Mensaje:',
+                $message,
+            ]));
+
+            $headers = [
+                'Content-Type: text/plain; charset=UTF-8',
+                'Reply-To: ' . $name . ' <' . $email . '>',
+            ];
+
+            $sent = wp_mail(empc_mail_recipient(), $subject, $body, $headers);
+
+            if (!$sent) {
+                return empc_rest_error('No se ha podido enviar el mensaje. Inténtalo de nuevo más tarde.', 500);
+            }
+
+            return rest_ensure_response([
+                'success' => true,
+                'message' => 'Mensaje enviado correctamente.',
+            ]);
+        },
+    ]);
+
+    register_rest_route('empc/v1', '/budget', [
+        'methods' => WP_REST_Server::CREATABLE,
+        'permission_callback' => '__return_true',
+        'callback' => function (WP_REST_Request $request) {
+            $data = empc_normalize_frontend_payload($request);
+
+            $name = sanitize_text_field((string) ($data['name'] ?? $data['nombre'] ?? ''));
+            $email = sanitize_email((string) ($data['email'] ?? ''));
+            $budget_data = $data['budget_data'] ?? [];
+            if (!is_array($budget_data)) {
+                $budget_data = [];
+            }
+
+            $type = sanitize_text_field((string) ($budget_data['type'] ?? ''));
+            $mode = sanitize_text_field((string) ($budget_data['mode'] ?? ''));
+            $estimated_range = $budget_data['estimated_range'] ?? [];
+            $features = $budget_data['features'] ?? [];
+
+            if ($name === '' || $email === '' || $type === '') {
+                return empc_rest_error('Faltan campos obligatorios para calcular el presupuesto.', 400);
+            }
+
+            if (!is_email($email)) {
+                return empc_rest_error('El correo electrónico no es válido.', 400);
+            }
+
+            $features_text = '';
+            if (is_array($features)) {
+                $features_text = implode(', ', array_map('sanitize_text_field', $features));
+            } else {
+                $features_text = sanitize_text_field((string) $features);
+            }
+
+            $range_text = '';
+            if (is_array($estimated_range)) {
+                $min = isset($estimated_range['min']) ? (int) $estimated_range['min'] : null;
+                $max = isset($estimated_range['max']) ? (int) $estimated_range['max'] : null;
+                if ($min !== null && $max !== null) {
+                    $range_text = $min . '€ - ' . $max . '€';
+                }
+            }
+
+            $subject = sprintf('[EMPC] Presupuesto solicitado: %s', $type);
+            $body = implode("\n", array_filter([
+                'Nueva solicitud de presupuesto desde la web EMPC.',
+                'Nombre: ' . $name,
+                'Email: ' . $email,
+                'Tipo: ' . $type,
+                $mode !== '' ? 'Modo: ' . $mode : '',
+                $features_text !== '' ? 'Extras: ' . $features_text : '',
+                $range_text !== '' ? 'Rango estimado: ' . $range_text : '',
+            ]));
+
+            $headers = [
+                'Content-Type: text/plain; charset=UTF-8',
+                'Reply-To: ' . $name . ' <' . $email . '>',
+            ];
+
+            $sent = wp_mail(empc_mail_recipient(), $subject, $body, $headers);
+
+            if (!$sent) {
+                return empc_rest_error('No se ha podido enviar el presupuesto. Inténtalo de nuevo más tarde.', 500);
+            }
+
+            return rest_ensure_response([
+                'success' => true,
+                'message' => 'Presupuesto enviado correctamente.',
+            ]);
+        },
+    ]);
+});
 
 /**
  * Compatibilidad con módulos ESM de React Islands en WP 7.0

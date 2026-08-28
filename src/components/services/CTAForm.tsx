@@ -56,11 +56,12 @@ const CTAForm: React.FC<CTAFormProps> = ({
                 await onSubmit(formData);
             } else {
                 // Default: enviar a WordPress REST API o email
-                const response = await fetch(window.empcConfig?.apiUrl + '/empc/v1/contact', {
+                const restBase = window.empcData?.restUrl || window.empcConfig?.restUrl || window.empcConfig?.apiUrl || `${window.location.origin}/wp-json/`;
+                const response = await fetch(new URL('empc/v1/contact', restBase).toString(), {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
-                        'X-WP-Nonce': window.empcConfig?.nonce || ''
+                        'X-WP-Nonce': window.empcData?.nonce || window.empcConfig?.nonce || ''
                     },
                     body: JSON.stringify(formData)
                 });

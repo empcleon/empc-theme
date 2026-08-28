@@ -38,25 +38,25 @@ const Services: React.FC = () => {
           </div>
 
           {/* Card 3: Auditoría WPO */}
-          <div className="bg-[#1F2937]/30 border border-white/5 rounded-[3rem] p-10 flex items-center justify-between hover:border-[#E29595]/40 transition-all">
+          <div className="bg-[#202B3F]/55 border border-white/10 rounded-[3rem] p-10 flex items-center justify-between shadow-[0_14px_40px_-28px_rgba(0,0,0,0.85)] hover:border-[#E29595]/45 hover:bg-[#243047]/65 transition-all">
             <div>
               <h3 className="text-xl font-bold text-white mb-2">Auditoría WPO</h3>
-              <p className="text-xs text-slate-500 uppercase tracking-widest">Optimización extrema</p>
+              <p className="text-xs text-slate-400 uppercase tracking-widest">Optimización extrema</p>
             </div>
-            <div className="w-16 h-16 rounded-full border-2 border-[#E29595] flex items-center justify-center text-[#E29595] font-black">99</div>
+            <div className="w-16 h-16 rounded-full border-2 border-[#E29595] flex items-center justify-center text-[#E29595] font-black bg-[#121826]/70">99</div>
           </div>
 
           {/* Card 4: Seguridad */}
-          <div className="bg-[#1F2937]/30 border border-white/5 rounded-[3rem] p-10 flex items-center justify-between hover:border-[#E29595]/40 transition-all">
+          <div className="bg-[#202B3F]/55 border border-white/10 rounded-[3rem] p-10 flex items-center justify-between shadow-[0_14px_40px_-28px_rgba(0,0,0,0.85)] hover:border-[#E29595]/45 hover:bg-[#243047]/65 transition-all">
             <Shield className="text-[#E29595]" size={32} />
             <div className="text-right">
               <h3 className="text-xl font-bold text-white mb-2">Seguridad Soberana</h3>
-              <p className="text-xs text-slate-500 uppercase tracking-widest text-[#E29595]">Búnker activo</p>
+              <p className="text-xs text-slate-400 uppercase tracking-widest text-[#E29595]">Búnker activo</p>
             </div>
           </div>
 
           {/* Card 5: Link */}
-          <div className="bg-[#1F2937]/30 border border-white/5 rounded-[3rem] p-10 flex items-center justify-between hover:border-[#E29595]/40 transition-all cursor-pointer group">
+          <div className="bg-[#202B3F]/55 border border-white/10 rounded-[3rem] p-10 flex items-center justify-between shadow-[0_14px_40px_-28px_rgba(0,0,0,0.85)] hover:border-[#E29595]/45 hover:bg-[#243047]/65 transition-all cursor-pointer group">
             <div className="p-4 bg-[#E29595]/10 rounded-2xl text-[#E29595] group-hover:scale-110 transition-transform">
               <ArrowRight />
             </div>

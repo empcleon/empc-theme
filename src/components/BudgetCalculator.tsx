@@ -108,6 +108,7 @@ const BudgetCalculator = () => {
     const [selectedFeatures, setSelectedFeatures] = useState<string[]>([]);
     const [lead, setLead] = useState({ name: '', email: '' });
     const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
+    const [errorMessage, setErrorMessage] = useState('');
 
     // === Inicialización (Bridge PHP -> React) ===
     useEffect(() => {
@@ -158,6 +159,7 @@ const BudgetCalculator = () => {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setStatus('submitting');
+        setErrorMessage('');
         const typeLabel = config.types.find(t => t.id === selectedType)?.label || selectedType;
 
         const payload = {
@@ -173,9 +175,10 @@ const BudgetCalculator = () => {
 
         try {
             // @ts-ignore
-            const apiUrl = window.empcData?.restUrl + 'empc/v1/budget';
+            const restBase = window.empcData?.restUrl || window.empcConfig?.restUrl || window.empcConfig?.apiUrl || `${window.location.origin}/wp-json/`;
+            const apiUrl = new URL('empc/v1/budget', restBase).toString();
             // @ts-ignore
-            const nonce = window.empcData?.nonce;
+            const nonce = window.empcData?.nonce || window.empcConfig?.nonce;
 
             const res = await fetch(apiUrl, {
                 method: 'POST',
@@ -186,10 +189,16 @@ const BudgetCalculator = () => {
                 body: JSON.stringify(payload)
             });
 
-            if (res.ok) setStatus('success');
-            else setStatus('error');
+            if (res.ok) {
+                setStatus('success');
+            } else {
+                const payloadError = await res.json().catch(() => null);
+                setErrorMessage(payloadError?.message || 'No se ha podido enviar el presupuesto.');
+                setStatus('error');
+            }
         } catch (err) {
             console.error(err);
+            setErrorMessage(err instanceof Error ? err.message : 'No se ha podido enviar el presupuesto.');
             setStatus('error');
         }
     };
@@ -338,6 +347,12 @@ const BudgetCalculator = () => {
                             >
                                 {status === 'submitting' ? 'Procesando...' : 'Recibir Propuesta Detallada'}
                             </button>
+
+                            {status === 'error' && (
+                                <p className="mt-4 text-sm text-red-300 bg-red-500/10 border border-red-500/30 rounded-lg px-4 py-3">
+                                    {errorMessage || 'No se ha podido enviar el presupuesto. Por favor, inténtalo de nuevo.'}
+                                </p>
+                            )}
                         </div>
                     </form>
                     <button onClick={() => setStep(2)} className="text-slate-500 hover:text-white text-sm">Volver a editar configuración</button>

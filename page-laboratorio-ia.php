@@ -195,23 +195,45 @@ get_header();
 
 $accent_class = static function (string $type_key): string {
     return match ($type_key) {
-        'prompt' => 'border-[#E29595]/25 bg-[#E29595]/12 text-[#F8D6D6]',
-        'radar' => 'border-cyan-400/25 bg-cyan-400/12 text-cyan-100',
-        'workflow' => 'border-emerald-400/25 bg-emerald-400/12 text-emerald-100',
-        default => 'border-white/10 bg-white/8 text-slate-100',
+        'prompt' => 'border-[#F2A0A4]/25 bg-[#F2A0A4]/12 text-[#F7F8FC]',
+        'radar' => 'border-[#55C7E8]/25 bg-[#55C7E8]/12 text-[#F7F8FC]',
+        'workflow' => 'border-[#55D6A5]/25 bg-[#55D6A5]/12 text-[#F7F8FC]',
+        default => 'border-white/10 bg-white/5 text-slate-100',
     };
 };
 
 $card_frame_class = static function (string $type_key): string {
     return match ($type_key) {
-        'prompt' => 'ring-[#E29595]/12',
-        'radar' => 'ring-cyan-400/12',
-        'workflow' => 'ring-emerald-400/12',
-        default => 'ring-white/8',
+        'prompt' => 'border-[#F2A0A4]/25 bg-[radial-gradient(circle_at_88%_0%,rgba(242,160,164,0.12),transparent_30%),linear-gradient(180deg,#192132_0%,#141A28_34%)] shadow-[inset_0_1px_0_rgba(255,255,255,0.05),0_22px_60px_-34px_rgba(0,0,0,0.95)] hover:border-[#F2A0A4]/50 hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.06),0_26px_70px_-38px_rgba(0,0,0,1)]',
+        'radar' => 'border-[#55C7E8]/25 bg-[radial-gradient(circle_at_88%_0%,rgba(85,199,232,0.12),transparent_30%),linear-gradient(180deg,#192132_0%,#141A28_34%)] shadow-[inset_0_1px_0_rgba(255,255,255,0.05),0_22px_60px_-34px_rgba(0,0,0,0.95)] hover:border-[#55C7E8]/50 hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.06),0_26px_70px_-38px_rgba(0,0,0,1)]',
+        'workflow' => 'border-[#55D6A5]/25 bg-[radial-gradient(circle_at_88%_0%,rgba(85,214,165,0.12),transparent_30%),linear-gradient(180deg,#192132_0%,#141A28_34%)] shadow-[inset_0_1px_0_rgba(255,255,255,0.05),0_22px_60px_-34px_rgba(0,0,0,0.95)] hover:border-[#55D6A5]/50 hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.06),0_26px_70px_-38px_rgba(0,0,0,1)]',
+        default => 'border-white/12 bg-[radial-gradient(circle_at_88%_0%,rgba(170,180,200,0.08),transparent_30%),linear-gradient(180deg,#192132_0%,#141A28_34%)] shadow-[inset_0_1px_0_rgba(255,255,255,0.05),0_22px_60px_-34px_rgba(0,0,0,0.95)] hover:border-white/20 hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.06),0_26px_70px_-38px_rgba(0,0,0,1)]',
     };
 };
 
-$render_cover = static function (array $item, string $extra_class = '') use ($lab_asset_url): void {
+$cover_frame_class = static function (string $type_key): string {
+    return match ($type_key) {
+        'prompt' => 'overflow-hidden rounded-[1.25rem] border border-[#F2A0A4]/18 bg-[radial-gradient(circle_at_88%_0%,rgba(242,160,164,0.10),transparent_30%),linear-gradient(180deg,#111827_0%,#0D1320_100%)] p-[1px] shadow-[0_18px_40px_-28px_rgba(0,0,0,0.92)]',
+        'radar' => 'overflow-hidden rounded-[1.25rem] border border-[#55C7E8]/18 bg-[radial-gradient(circle_at_88%_0%,rgba(85,199,232,0.10),transparent_30%),linear-gradient(180deg,#111827_0%,#0D1320_100%)] p-[1px] shadow-[0_18px_40px_-28px_rgba(0,0,0,0.92)]',
+        'workflow' => 'overflow-hidden rounded-[1.25rem] border border-[#55D6A5]/18 bg-[radial-gradient(circle_at_88%_0%,rgba(85,214,165,0.10),transparent_30%),linear-gradient(180deg,#111827_0%,#0D1320_100%)] p-[1px] shadow-[0_18px_40px_-28px_rgba(0,0,0,0.92)]',
+        default => 'overflow-hidden rounded-[1.25rem] border border-white/15 bg-[radial-gradient(circle_at_88%_0%,rgba(170,180,200,0.08),transparent_30%),linear-gradient(180deg,#111827_0%,#0D1320_100%)] p-[1px] shadow-[0_18px_40px_-28px_rgba(0,0,0,0.92)]',
+    };
+};
+
+$primary_cta_class = static function (string $type_key): string {
+    return match ($type_key) {
+        'prompt' => 'bg-[#F2A0A4] text-[#121826] hover:bg-[#f4adb0] focus-visible:ring-[#F2A0A4]/35',
+        'radar' => 'bg-[#55C7E8] text-[#0B101A] hover:bg-[#74d1ec] focus-visible:ring-[#55C7E8]/35',
+        'workflow' => 'bg-[#55D6A5] text-[#0B101A] hover:bg-[#6bdeb0] focus-visible:ring-[#55D6A5]/35',
+        default => 'bg-[#F2A0A4] text-[#121826] hover:bg-[#f4adb0] focus-visible:ring-[#F2A0A4]/35',
+    };
+};
+
+$secondary_cta_class = static function (): string {
+    return 'border border-[#2C364B] bg-[#1D2536] text-[#F7F8FC] hover:border-white/20 hover:bg-[#242E42] focus-visible:ring-white/30';
+};
+
+$render_cover = static function (array $item, string $extra_class = '') use ($lab_asset_url, $cover_frame_class): void {
     $cover = $item['cover_image'] ?? '';
     if ($cover === '') {
         $cover = 'assets/laboratorio-ia/covers/' . ($item['cover_type'] ?? 'prompt') . '.svg';
@@ -219,24 +241,27 @@ $render_cover = static function (array $item, string $extra_class = '') use ($la
     $cover_url = str_starts_with($cover, 'http') ? $cover : $lab_asset_url($cover);
     $alt = $item['cover_alt'] ?? ($item['titulo'] ?? 'Portada del laboratorio IA');
     $position = $item['cover_focal_position'] ?? 'center';
+    $type_key = $item['cover_type'] ?? $item['tipo_key'] ?? 'prompt';
     ?>
-    <div class="overflow-hidden rounded-[1.4rem] border border-white/10 bg-slate-950/40">
-        <img
-            src="<?php echo esc_url($cover_url); ?>"
-            alt="<?php echo esc_attr($alt); ?>"
-            class="h-full w-full aspect-[16/9] object-cover <?php echo esc_attr($extra_class); ?>"
-            style="object-position: <?php echo esc_attr($position); ?>;"
-            loading="lazy"
-        >
+    <div class="<?php echo esc_attr($cover_frame_class($type_key)); ?>">
+        <div class="overflow-hidden rounded-[1.15rem] bg-[#0A0F1C]">
+            <img
+                src="<?php echo esc_url($cover_url); ?>"
+                alt="<?php echo esc_attr($alt); ?>"
+                class="h-full w-full aspect-[16/9] object-cover <?php echo esc_attr($extra_class); ?>"
+                style="object-position: <?php echo esc_attr($position); ?>;"
+                loading="lazy"
+            >
+        </div>
     </div>
     <?php
 };
 
 $render_meta_line = static function (string $label, string $value): void {
     ?>
-    <div class="rounded-2xl border border-white/10 bg-white/[0.035] p-4">
-        <p class="text-[11px] uppercase tracking-[0.22em] text-slate-500"><?php echo esc_html($label); ?></p>
-        <p class="mt-2 text-sm text-slate-100"><?php echo esc_html($value); ?></p>
+    <div class="bg-[#1D2536] p-4">
+        <p class="text-[11px] uppercase tracking-[0.22em] text-slate-400"><?php echo esc_html($label); ?></p>
+        <p class="mt-2 text-sm text-[#F7F8FC]"><?php echo esc_html($value); ?></p>
     </div>
     <?php
 };
@@ -267,7 +292,7 @@ $js_config = [
 ?>
 
 <?php if ($is_unknown_detail): ?>
-    <main class="min-h-screen bg-[#121826] text-slate-100">
+    <main class="min-h-screen bg-[#0A0F1C] text-slate-100">
         <section class="mx-auto max-w-4xl px-4 py-20 sm:px-6 lg:px-8">
             <div class="rounded-[2rem] border border-white/10 bg-white/5 p-8 text-center">
                 <p class="text-[11px] font-semibold uppercase tracking-[0.22em] text-[#F4C7C7]">404 · Ficha no encontrada</p>
@@ -283,25 +308,50 @@ $js_config = [
     <?php get_footer(); return; ?>
 <?php endif; ?>
 
-<main class="min-h-screen bg-[#121826] text-slate-100">
+<main class="min-h-screen bg-[#0A0F1C] text-slate-100">
     <section class="relative overflow-hidden border-b border-white/5">
         <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(226,149,149,0.18),transparent_32%),radial-gradient(circle_at_bottom_left,rgba(96,200,255,0.13),transparent_35%)] pointer-events-none"></div>
         <div class="relative mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
-            <div class="grid gap-10 lg:items-center" style="grid-template-columns:minmax(0,1.05fr) minmax(0,0.95fr);">
+            <div class="grid grid-cols-1 gap-10 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:items-center">
                 <div>
-                    <div class="inline-flex items-center gap-2 rounded-full border border-[#E29595]/20 bg-[#E29595]/10 px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.24em] text-[#F4C7C7]">
-                        Laboratorio IA · EMPC
-                    </div>
-                    <h1 class="mt-5 max-w-3xl text-4xl font-semibold leading-tight text-white sm:text-5xl lg:text-6xl">
-                        <?php echo esc_html($current_item ? $current_item['titulo'] : 'Laboratorio IA de EMPC'); ?>
-                    </h1>
-                    <p class="mt-6 max-w-3xl text-lg leading-8 text-slate-300">
-                        <?php echo esc_html($current_item ? ($current_item['descripcion_corta'] ?? '') : 'Prompts, herramientas y workflows de inteligencia artificial en español, explicados paso a paso, probados en plataformas reales y actualizados cuando los modelos cambian.'); ?>
-                    </p>
-                    <div class="mt-5 max-w-3xl text-sm leading-7 text-slate-400">
-                        <?php echo wp_kses_post($meta['hero_note_html'] ?? ''); ?>
-                    </div>
-                    <?php if (!$current_item): ?>
+                    <?php if ($current_item): ?>
+                        <a href="<?php echo esc_url($build_catalog_url($current_context_filters, 1)); ?>"
+                           class="inline-flex min-h-11 items-center justify-start rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm font-semibold text-white transition hover:border-white/20 hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/30 w-full sm:w-auto">
+                            ← Volver al catálogo
+                        </a>
+                        <div class="mt-4 flex flex-wrap gap-2">
+                            <span class="inline-flex items-center rounded-full border px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] <?php echo esc_attr($accent_class($current_item['tipo_key'] ?? '')); ?>">
+                                <?php echo esc_html($current_item['tipo_label'] ?? ''); ?>
+                            </span>
+                            <span class="inline-flex items-center rounded-full border border-[#2C364B] bg-[#20283A] px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-slate-300">
+                                <?php echo esc_html($current_item['nivel'] ?? ''); ?>
+                            </span>
+                            <span class="inline-flex items-center rounded-full border border-emerald-400/18 bg-emerald-400/8 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-emerald-100">
+                                <?php echo esc_html($current_item['estado'] ?? ''); ?>
+                            </span>
+                        </div>
+                        <h1 class="mt-5 max-w-4xl text-3xl font-semibold leading-tight text-white sm:text-4xl lg:text-5xl"><?php echo esc_html($current_item['titulo'] ?? ''); ?></h1>
+                        <p class="mt-4 max-w-4xl text-base leading-8 text-[#AAB4C8]"><?php echo esc_html($current_item['descripcion_corta'] ?? ''); ?></p>
+                        <div class="mt-5 flex flex-wrap gap-1.5">
+                            <?php foreach (($current_item['plataformas'] ?? []) as $platform): ?>
+                                <span class="inline-flex items-center rounded-full border border-white/10 bg-transparent px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-slate-300">
+                                    <?php echo esc_html($platform); ?>
+                                </span>
+                            <?php endforeach; ?>
+                        </div>
+                    <?php else: ?>
+                        <div class="inline-flex items-center gap-2 rounded-full border border-[#E29595]/20 bg-[#E29595]/10 px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.24em] text-[#F4C7C7]">
+                            Laboratorio IA · EMPC
+                        </div>
+                        <h1 class="mt-5 max-w-3xl text-4xl font-semibold leading-tight text-white sm:text-5xl lg:text-6xl">
+                            Laboratorio IA de EMPC
+                        </h1>
+                        <p class="mt-6 max-w-3xl text-lg leading-8 text-slate-300">
+                            Prompts, herramientas y workflows de inteligencia artificial en español, explicados paso a paso, probados en plataformas reales y actualizados cuando los modelos cambian.
+                        </p>
+                        <div class="mt-5 max-w-3xl text-sm leading-7 text-slate-400">
+                            <?php echo wp_kses_post($meta['hero_note_html'] ?? ''); ?>
+                        </div>
                         <div class="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
                             <a href="#fichas"
                                class="inline-flex min-h-11 items-center justify-center rounded-xl bg-[#E29595] px-6 py-3.5 text-sm font-semibold text-[#121826] transition hover:scale-[1.01] hover:bg-[#f0aaaa] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#E29595]/40">
@@ -312,19 +362,9 @@ $js_config = [
                                 Ver cómo probamos los recursos
                             </a>
                         </div>
-                    <?php else: ?>
-                        <div class="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-                            <a href="<?php echo esc_url($build_catalog_url($current_context_filters, 1)); ?>"
-                               class="inline-flex min-h-11 items-center justify-center rounded-xl bg-[#E29595] px-6 py-3.5 text-sm font-semibold text-[#121826] transition hover:scale-[1.01] hover:bg-[#f0aaaa] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#E29595]/40">
-                                Volver al catálogo
-                            </a>
-                            <a href="<?php echo esc_url($build_catalog_url($current_context_filters, 1) . '#como-probamos'); ?>"
-                               class="inline-flex min-h-11 items-center justify-center rounded-xl border border-white/10 bg-white/5 px-6 py-3.5 text-sm font-semibold text-white transition hover:border-white/20 hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/30">
-                                Ver cómo probamos los recursos
-                            </a>
-                        </div>
                     <?php endif; ?>
                 </div>
+                <?php if (!$current_item): ?>
                 <div class="lg:justify-self-end w-full max-w-2xl">
                     <div class="rounded-[2rem] border border-white/10 bg-white/5 p-5 shadow-[0_24px_80px_-40px_rgba(0,0,0,0.85)] backdrop-blur-md lg:p-6">
                         <?php if ($current_item): ?>
@@ -350,131 +390,118 @@ $js_config = [
                         <?php endif; ?>
                     </div>
                 </div>
+                <?php endif; ?>
             </div>
         </div>
     </section>
 
     <?php if ($current_item): ?>
-        <section class="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
-            <div class="rounded-[2rem] border border-white/10 bg-white/5 p-7 backdrop-blur-md lg:p-10">
-                <div class="grid gap-8 lg:items-start" style="grid-template-columns:minmax(0,1.15fr) minmax(0,0.85fr);">
-                    <div>
-                        <div class="flex flex-wrap gap-2">
-                            <span class="inline-flex items-center rounded-full border px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] <?php echo esc_attr($accent_class($current_item['tipo_key'] ?? '')); ?>">
-                                <?php echo esc_html($current_item['tipo_label'] ?? ''); ?>
-                            </span>
-                            <span class="inline-flex items-center rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-slate-100">
-                                <?php echo esc_html($current_item['nivel'] ?? ''); ?>
-                            </span>
-                            <span class="inline-flex items-center rounded-full border border-emerald-400/20 bg-emerald-400/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-emerald-100">
-                                <?php echo esc_html($current_item['estado'] ?? ''); ?>
-                            </span>
+        <section class="mx-auto max-w-7xl px-4 pb-12 sm:px-6 lg:px-8">
+            <div class="grid gap-6 lg:grid-cols-[minmax(0,0.72fr)_minmax(0,1.28fr)] lg:items-start">
+                <aside class="space-y-6">
+                    <div class="rounded-[2rem] border border-white/10 bg-white/5 p-5 shadow-[0_24px_80px_-40px_rgba(0,0,0,0.85)]">
+                        <?php $render_cover($current_item); ?>
+                    </div>
+
+                    <div class="rounded-[2rem] border border-white/10 bg-white/5 p-6 shadow-[0_20px_60px_-44px_rgba(0,0,0,0.95)]">
+                        <p class="text-[11px] font-semibold uppercase tracking-[0.22em] text-[#F4C7C7]">Ficha técnica</p>
+                        <div class="mt-5 grid gap-px sm:grid-cols-2">
+                            <?php $render_meta_line('Publicación', $lab_date_label($current_item['publication_date'] ?? null)); ?>
+                            <?php $render_meta_line('Última revisión', $lab_date_label($current_item['last_review_date'] ?? null)); ?>
+                            <?php $render_meta_line('Última prueba', !empty($current_item['last_test_date']) ? $lab_date_label($current_item['last_test_date']) : 'Pendiente'); ?>
+                            <?php $render_meta_line('Fuente', $current_item['source_name'] ?? ''); ?>
                         </div>
-                        <h2 class="mt-5 text-3xl font-semibold text-white"><?php echo esc_html($current_item['titulo'] ?? ''); ?></h2>
-                        <div class="mt-4 text-base leading-8 text-slate-300">
-                            <?php echo esc_html($current_item['descripcion_corta'] ?? ''); ?>
+                    </div>
+
+                    <div class="rounded-[2rem] border border-white/10 bg-white/5 p-6 shadow-[0_20px_60px_-44px_rgba(0,0,0,0.95)]">
+                        <div class="grid gap-4">
+                            <div class="rounded-2xl border border-white/10 bg-[#1D2536] p-5">
+                                <p class="text-[11px] font-semibold uppercase tracking-[0.22em] text-[#F4C7C7]">Para qué sirve</p>
+                                <p class="mt-4 leading-7 text-slate-300"><?php echo esc_html($current_item['objetivo'] ?? ''); ?></p>
+                            </div>
+                            <div class="grid gap-4 sm:grid-cols-2">
+                                <div class="rounded-2xl border border-white/10 bg-[#1D2536] p-5">
+                                    <p class="text-[11px] font-semibold uppercase tracking-[0.22em] text-[#F4C7C7]">Qué necesita</p>
+                                    <p class="mt-4 leading-7 text-slate-300"><?php echo esc_html($current_item['material_necesario'] ?? ''); ?></p>
+                                </div>
+                                <div class="rounded-2xl border border-white/10 bg-[#1D2536] p-5">
+                                    <p class="text-[11px] font-semibold uppercase tracking-[0.22em] text-[#F4C7C7]">Resultado esperado</p>
+                                    <p class="mt-4 leading-7 text-slate-300"><?php echo esc_html($current_item['resultado_esperado'] ?? ''); ?></p>
+                                </div>
+                            </div>
+                            <?php if (!empty($current_item['variables'])): ?>
+                                <div class="rounded-2xl border border-white/10 bg-[#1D2536] p-5">
+                                    <p class="text-[11px] font-semibold uppercase tracking-[0.22em] text-[#F4C7C7]">Variables</p>
+                                    <div class="mt-4 flex flex-wrap gap-2">
+                                        <?php foreach ($current_item['variables'] as $variable): ?>
+                                            <span class="inline-flex items-center rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-slate-200">
+                                                <?php echo esc_html($variable); ?>
+                                            </span>
+                                        <?php endforeach; ?>
+                                    </div>
+                                </div>
+                            <?php endif; ?>
                         </div>
-                        <div class="mt-6 flex flex-wrap gap-2">
-                            <?php foreach (($current_item['plataformas'] ?? []) as $platform): ?>
-                                <span class="inline-flex items-center rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.2em] text-slate-200">
-                                    <?php echo esc_html($platform); ?>
-                                </span>
-                            <?php endforeach; ?>
-                        </div>
-                        <div class="mt-7 flex flex-wrap gap-2 sm:gap-3">
-                            <?php if (!empty($current_item['prompt'])): ?>
+                    </div>
+                </aside>
+
+                <div class="space-y-6">
+                    <?php if (!empty($current_item['prompt'])): ?>
+                        <section class="rounded-[2rem] border border-white/10 bg-[#0f1624] p-6 shadow-[0_24px_80px_-40px_rgba(0,0,0,0.85)] lg:p-8">
+                            <div class="flex flex-col gap-3 border-b border-white/10 pb-4 sm:flex-row sm:items-center sm:justify-between">
+                                <p class="text-[11px] font-semibold uppercase tracking-[0.22em] text-[#F4C7C7]">Prompt</p>
                                 <button type="button"
                                         data-copy-button
                                         data-copy-target="copy-<?php echo esc_attr($current_item['slug']); ?>"
-                                        class="inline-flex min-h-11 items-center justify-center rounded-xl bg-[#E29595] px-5 py-3 text-sm font-semibold text-[#121826] transition hover:scale-[1.01] hover:bg-[#f0aaaa] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#E29595]/40">
+                                        class="inline-flex min-h-11 w-full items-center justify-center rounded-xl px-5 py-3 text-sm font-semibold transition hover:scale-[1.01] focus-visible:outline-none focus-visible:ring-2 motion-reduce:transform-none sm:w-auto <?php echo esc_attr($primary_cta_class($current_item['tipo_key'] ?? '')); ?>">
                                     Copiar prompt
                                 </button>
-                            <?php elseif (!empty($current_item['workflow_steps'])): ?>
+                            </div>
+                            <pre class="mt-5 overflow-x-auto whitespace-pre-wrap rounded-2xl border border-white/10 bg-black/30 p-5 text-sm leading-7 text-slate-200" id="copy-<?php echo esc_attr($current_item['slug']); ?>"><?php echo esc_html($current_item['copy_text'] ?: $current_item['prompt']); ?></pre>
+                        </section>
+                    <?php elseif (!empty($current_item['workflow_steps'])): ?>
+                        <section class="rounded-[2rem] border border-white/10 bg-[#0f1624] p-6 shadow-[0_24px_80px_-40px_rgba(0,0,0,0.85)] lg:p-8">
+                            <div class="flex flex-col gap-3 border-b border-white/10 pb-4 sm:flex-row sm:items-center sm:justify-between">
+                                <p class="text-[11px] font-semibold uppercase tracking-[0.22em] text-[#F4C7C7]">Workflow</p>
                                 <button type="button"
                                         data-copy-button
                                         data-copy-target="copy-<?php echo esc_attr($current_item['slug']); ?>"
-                                        class="inline-flex min-h-11 items-center justify-center rounded-xl bg-[#E29595] px-5 py-3 text-sm font-semibold text-[#121826] transition hover:scale-[1.01] hover:bg-[#f0aaaa] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#E29595]/40">
+                                        class="inline-flex min-h-11 w-full items-center justify-center rounded-xl px-5 py-3 text-sm font-semibold transition hover:scale-[1.01] focus-visible:outline-none focus-visible:ring-2 motion-reduce:transform-none sm:w-auto <?php echo esc_attr($primary_cta_class($current_item['tipo_key'] ?? '')); ?>">
                                     Copiar workflow
                                 </button>
-                            <?php endif; ?>
-                            <?php if (!empty($current_item['external']) && !empty($current_item['source_url'])): ?>
+                            </div>
+                            <ol class="mt-5 space-y-4 text-slate-200">
+                                <?php foreach ($current_item['workflow_steps'] as $index => $step): ?>
+                                    <li class="rounded-2xl border border-white/10 bg-white/5 px-5 py-4 leading-7">
+                                        <span class="mr-2 font-semibold text-[#F4C7C7]"><?php echo esc_html($index + 1); ?>.</span>
+                                        <?php echo esc_html($step); ?>
+                                    </li>
+                                <?php endforeach; ?>
+                            </ol>
+                            <textarea id="copy-<?php echo esc_attr($current_item['slug']); ?>" class="sr-only"><?php echo esc_textarea(implode("\n", array_map(static fn($i, $s) => ($i + 1) . '. ' . $s, array_keys($current_item['workflow_steps']), $current_item['workflow_steps']))); ?></textarea>
+                        </section>
+                    <?php endif; ?>
+
+                    <?php if (!empty($current_item['source_url'])): ?>
+                        <section class="rounded-[2rem] border border-cyan-400/20 bg-cyan-400/10 p-6 text-cyan-50 shadow-[0_24px_80px_-40px_rgba(0,0,0,0.85)] lg:p-8">
+                            <p class="text-[11px] font-semibold uppercase tracking-[0.22em] text-cyan-100">Fuente externa</p>
+                            <p class="mt-4 text-sm leading-7 text-cyan-50/90">
+                                Esta ficha lleva a un recurso externo. Al pulsar <strong>Abrir recurso oficial ↗</strong> abandonas EMPC y accedes al dominio original.
+                            </p>
+                            <div class="mt-5 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
                                 <a href="<?php echo esc_url($current_item['source_url']); ?>" target="_blank" rel="noopener noreferrer"
-                                   class="inline-flex min-h-11 items-center justify-center rounded-xl border border-cyan-400/20 bg-cyan-400/10 px-5 py-3 text-sm font-semibold text-cyan-100 transition hover:border-cyan-400/30 hover:bg-cyan-400/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300/35">
+                                   class="inline-flex min-h-11 w-full items-center justify-center rounded-xl px-5 py-3 text-sm font-semibold transition hover:scale-[1.01] focus-visible:outline-none focus-visible:ring-2 motion-reduce:transform-none sm:w-auto <?php echo esc_attr($primary_cta_class($current_item['tipo_key'] ?? '')); ?>">
                                     Abrir recurso oficial ↗
                                 </a>
-                            <?php endif; ?>
-                        </div>
-                    </div>
-                    <div class="grid gap-4 text-sm">
-                        <?php $render_meta_line('Publicación', $lab_date_label($current_item['publication_date'] ?? null)); ?>
-                        <?php $render_meta_line('Última revisión', $lab_date_label($current_item['last_review_date'] ?? null)); ?>
-                        <?php $render_meta_line('Última prueba', !empty($current_item['last_test_date']) ? $lab_date_label($current_item['last_test_date']) : 'Pendiente'); ?>
-                        <?php $render_meta_line('Fuente', $current_item['source_name'] ?? ''); ?>
-                    </div>
+                                <span class="text-xs uppercase tracking-[0.22em] text-cyan-100/80">
+                                    <?php echo esc_html($current_item['source_name'] ?? ''); ?>
+                                </span>
+                            </div>
+                        </section>
+                    <?php endif; ?>
                 </div>
             </div>
         </section>
-
-        <section class="mx-auto max-w-7xl px-4 pb-12 sm:px-6 lg:px-8">
-            <div class="grid gap-6 lg:grid-cols-3">
-                <div class="rounded-[1.5rem] border border-white/10 bg-white/5 p-7">
-                    <p class="text-[11px] font-semibold uppercase tracking-[0.22em] text-[#F4C7C7]">Para qué sirve</p>
-                    <p class="mt-4 leading-7 text-slate-300"><?php echo esc_html($current_item['objetivo'] ?? ''); ?></p>
-                </div>
-                <div class="rounded-[1.5rem] border border-white/10 bg-white/5 p-7">
-                    <p class="text-[11px] font-semibold uppercase tracking-[0.22em] text-[#F4C7C7]">Qué necesita</p>
-                    <p class="mt-4 leading-7 text-slate-300"><?php echo esc_html($current_item['material_necesario'] ?? ''); ?></p>
-                </div>
-                <div class="rounded-[1.5rem] border border-white/10 bg-white/5 p-7">
-                    <p class="text-[11px] font-semibold uppercase tracking-[0.22em] text-[#F4C7C7]">Resultado esperado</p>
-                    <p class="mt-4 leading-7 text-slate-300"><?php echo esc_html($current_item['resultado_esperado'] ?? ''); ?></p>
-                </div>
-            </div>
-        </section>
-
-        <?php if (!empty($current_item['prompt'])): ?>
-            <section class="mx-auto max-w-7xl px-4 pb-12 sm:px-6 lg:px-8">
-                <div class="rounded-[2rem] border border-white/10 bg-[#0f1624] p-7 lg:p-9">
-                    <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-                        <p class="text-[11px] font-semibold uppercase tracking-[0.22em] text-[#F4C7C7]">Prompt</p>
-                        <button type="button"
-                                data-copy-button
-                                data-copy-target="copy-<?php echo esc_attr($current_item['slug']); ?>"
-                                class="inline-flex min-h-11 items-center justify-center rounded-xl bg-[#E29595] px-5 py-3 text-sm font-semibold text-[#121826] transition hover:scale-[1.01] hover:bg-[#f0aaaa] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#E29595]/40">
-                            Copiar prompt
-                        </button>
-                    </div>
-                    <pre class="mt-5 overflow-x-auto whitespace-pre-wrap rounded-2xl border border-white/10 bg-black/30 p-5 text-sm leading-7 text-slate-200" id="copy-<?php echo esc_attr($current_item['slug']); ?>"><?php echo esc_html($current_item['copy_text'] ?: $current_item['prompt']); ?></pre>
-                </div>
-            </section>
-        <?php endif; ?>
-
-        <?php if (!empty($current_item['workflow_steps'])): ?>
-            <section class="mx-auto max-w-7xl px-4 pb-12 sm:px-6 lg:px-8">
-                <div class="rounded-[2rem] border border-white/10 bg-[#0f1624] p-7 lg:p-9">
-                    <p class="text-[11px] font-semibold uppercase tracking-[0.22em] text-[#F4C7C7]">Workflow</p>
-                    <ol class="mt-5 space-y-4 text-slate-200">
-                        <?php foreach ($current_item['workflow_steps'] as $index => $step): ?>
-                            <li class="rounded-2xl border border-white/10 bg-white/5 px-5 py-4">
-                                <span class="mr-2 font-semibold text-[#F4C7C7]"><?php echo esc_html($index + 1); ?>.</span>
-                                <?php echo esc_html($step); ?>
-                            </li>
-                        <?php endforeach; ?>
-                    </ol>
-                    <textarea id="copy-<?php echo esc_attr($current_item['slug']); ?>" class="sr-only"><?php echo esc_textarea(implode("\n", array_map(static fn($i, $s) => ($i + 1) . '. ' . $s, array_keys($current_item['workflow_steps']), $current_item['workflow_steps']))); ?></textarea>
-                </div>
-            </section>
-        <?php endif; ?>
-
-        <?php if (!empty($current_item['source_url'])): ?>
-            <section class="mx-auto max-w-7xl px-4 pb-12 sm:px-6 lg:px-8">
-                <div class="rounded-[2rem] border border-cyan-400/20 bg-cyan-400/10 p-6 text-cyan-50">
-                    <p class="text-sm leading-7">
-                        Esta ficha lleva a un recurso externo. Al pulsar <strong>Abrir recurso oficial ↗</strong> abandonas EMPC y accedes al dominio original.
-                    </p>
-                </div>
-            </section>
-        <?php endif; ?>
 
         <section class="mx-auto max-w-7xl px-4 pb-16 sm:px-6 lg:px-8">
             <a href="<?php echo esc_url($build_catalog_url($current_context_filters, 1)); ?>" class="inline-flex min-h-11 items-center rounded-xl border border-white/10 bg-white/5 px-5 py-3 text-sm font-semibold text-white transition hover:border-white/20 hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/30">
@@ -516,8 +543,8 @@ $js_config = [
             </div>
 
             <form id="lab-filter-form" class="rounded-[1.5rem] border border-white/10 bg-[#0f1624] p-5 lg:p-6" method="get" action="<?php echo esc_url($catalog_link); ?>" data-state='<?php echo esc_attr(wp_json_encode($js_config)); ?>'>
-                <div class="grid gap-5 lg:grid-cols-6">
-                    <label class="lg:col-span-2">
+                <div class="grid gap-5 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-7">
+                    <label class="md:col-span-2 lg:col-span-3 xl:col-span-2">
                         <span class="mb-2 block text-xs font-semibold uppercase tracking-[0.18em] text-slate-400">Buscar</span>
                         <input id="lab-search" name="q" value="<?php echo esc_attr($lab_current_filters['q']); ?>" type="search" placeholder="Buscar por título, idea o detalle" class="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white placeholder:text-slate-500 focus:border-[#E29595] focus:outline-none focus:ring-2 focus:ring-[#E29595]/30" />
                     </label>
@@ -557,7 +584,7 @@ $js_config = [
                             <?php endforeach; ?>
                         </select>
                     </label>
-                    <label>
+                    <label class="md:col-span-2 lg:col-span-2 xl:col-span-1">
                         <span class="mb-2 block text-xs font-semibold uppercase tracking-[0.18em] text-slate-400">Orden</span>
                         <select name="sort" data-auto-submit class="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white focus:border-[#E29595] focus:outline-none focus:ring-2 focus:ring-[#E29595]/30">
                             <?php foreach ($sort_options as $slug => $label): ?>
@@ -566,11 +593,11 @@ $js_config = [
                         </select>
                     </label>
                 </div>
-                <div class="mt-5 flex flex-col gap-3 border-t border-white/10 pt-4 sm:flex-row sm:items-center sm:justify-between">
+                <div class="mt-6 flex flex-col gap-4 border-t border-white/10 pt-5 sm:flex-row sm:items-center sm:justify-between">
                     <button type="submit" class="inline-flex min-h-11 items-center justify-center rounded-xl bg-[#E29595] px-5 py-3 text-sm font-semibold text-[#121826] transition hover:scale-[1.01] hover:bg-[#f0aaaa] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#E29595]/40">
                         Aplicar filtros
                     </button>
-                    <div class="flex flex-wrap items-center gap-3">
+                    <div class="flex flex-col items-start gap-3 sm:flex-row sm:flex-wrap sm:items-center">
                         <a href="<?php echo esc_url($clear_link); ?>" class="inline-flex min-h-11 items-center justify-center rounded-xl border border-white/10 bg-white/5 px-5 py-3 text-sm font-semibold text-white transition hover:border-white/20 hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/30">
                             Limpiar filtros
                         </a>
@@ -588,7 +615,7 @@ $js_config = [
                 <div class="mt-6 rounded-[1.5rem] border border-white/10 bg-white/5 p-8 text-center">
                     <p class="text-xl font-semibold text-white">No hay resultados para esos filtros.</p>
                     <p class="mt-2 text-sm leading-7 text-slate-400">Prueba a limpiar filtros o cambiar la búsqueda.</p>
-                    <a href="<?php echo esc_url($clear_link); ?>" class="mt-5 inline-flex items-center justify-center rounded-xl bg-[#E29595] px-5 py-3 text-sm font-semibold text-[#121826] transition hover:bg-[#f0aaaa]">
+                    <a href="<?php echo esc_url($clear_link); ?>" class="mt-5 inline-flex min-h-11 items-center justify-center rounded-xl bg-[#E29595] px-5 py-3 text-sm font-semibold text-[#121826] transition hover:bg-[#f0aaaa] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#E29595]/40">
                         Limpiar filtros
                     </a>
                 </div>
@@ -600,41 +627,41 @@ $js_config = [
                         $type_badge_class = $accent_class($item['tipo_key'] ?? '');
                         $frame_class = $card_frame_class($item['tipo_key'] ?? '');
                         ?>
-                        <article data-lab-card data-title="<?php echo esc_attr($lab_normalize(implode(' ', [$item['titulo'] ?? '', $item['descripcion_corta'] ?? '', $item['objetivo'] ?? '']))); ?>" class="group flex h-full flex-col rounded-[1.75rem] border border-white/10 bg-white/5 p-6 shadow-[0_24px_70px_-45px_rgba(0,0,0,0.85)] backdrop-blur-md transition-all duration-300 hover:-translate-y-1 hover:border-white/20 <?php echo esc_attr($frame_class); ?>">
+                        <article data-lab-card data-title="<?php echo esc_attr($lab_normalize(implode(' ', [$item['titulo'] ?? '', $item['descripcion_corta'] ?? '', $item['objetivo'] ?? '']))); ?>" class="group flex h-full flex-col rounded-[1.5rem] p-6 transition-[transform,border-color,box-shadow] duration-300 hover:-translate-y-0.5 motion-reduce:transform-none <?php echo esc_attr($frame_class); ?>">
                             <?php $render_cover($item); ?>
                             <div class="mt-6 flex flex-wrap gap-2">
                                 <span class="inline-flex items-center rounded-full border px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] <?php echo esc_attr($type_badge_class); ?>">
                                     <?php echo esc_html($item['tipo_label'] ?? ''); ?>
                                 </span>
-                                <span class="inline-flex items-center rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-slate-100">
+                                <span class="inline-flex items-center rounded-full border border-[#2C364B] bg-[#20283A] px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-slate-300">
                                     <?php echo esc_html($item['nivel'] ?? ''); ?>
                                 </span>
-                                <span class="inline-flex items-center rounded-full border border-emerald-400/20 bg-emerald-400/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-emerald-100">
+                                <span class="inline-flex items-center rounded-full border border-emerald-400/18 bg-emerald-400/8 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-emerald-100">
                                     <?php echo esc_html($item['estado'] ?? ''); ?>
                                 </span>
                             </div>
                             <h3 class="mt-5 text-2xl font-semibold leading-tight text-white"><?php echo esc_html($item['titulo'] ?? ''); ?></h3>
-                            <p class="mt-4 text-sm leading-6 text-slate-300"><?php echo wp_kses_post($item['summary_html'] ?? ($item['descripcion_corta'] ?? '')); ?></p>
-                            <div class="mt-5 flex flex-wrap gap-2">
+                            <p class="mt-4 text-sm leading-6 text-[#AAB4C8]"><?php echo wp_kses_post($item['summary_html'] ?? ($item['descripcion_corta'] ?? '')); ?></p>
+                            <div class="mt-5 flex flex-wrap gap-1.5">
                                 <?php foreach (($item['plataformas'] ?? []) as $platform): ?>
-                                    <span class="inline-flex items-center rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.2em] text-slate-200">
+                                    <span class="inline-flex items-center rounded-full border border-white/10 bg-transparent px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-slate-300">
                                         <?php echo esc_html($platform); ?>
                                     </span>
                                 <?php endforeach; ?>
                             </div>
-                            <div class="mt-6 grid gap-4 sm:grid-cols-2">
+                            <div class="mt-6 overflow-hidden rounded-2xl border border-white/10 bg-white/10 shadow-[inset_0_1px_0_rgba(255,255,255,0.05)] sm:grid sm:grid-cols-2 sm:gap-px">
                                 <?php $render_meta_line('Publicación', $lab_date_label($item['publication_date'] ?? null)); ?>
                                 <?php $render_meta_line('Última revisión', $lab_date_label($item['last_review_date'] ?? null)); ?>
                                 <?php $render_meta_line('Última prueba', !empty($item['last_test_date']) ? $lab_date_label($item['last_test_date']) : 'Pendiente'); ?>
                                 <?php $render_meta_line('Fuente', $item['source_name'] ?? ''); ?>
                             </div>
-                            <div class="mt-auto flex flex-wrap items-center gap-2 pt-6 sm:gap-3">
+                            <div class="mt-auto flex flex-wrap items-center gap-3 pt-6">
                                 <?php if (!empty($item['external']) && !empty($item['source_url'])): ?>
-                                    <a href="<?php echo esc_url($item['source_url']); ?>" target="_blank" rel="noopener noreferrer" class="inline-flex min-h-10 items-center justify-center rounded-xl border border-cyan-400/20 bg-cyan-400/10 px-4 py-2.5 text-sm font-semibold text-cyan-100 transition hover:border-cyan-400/30 hover:bg-cyan-400/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300/35">
+                                    <a href="<?php echo esc_url($item['source_url']); ?>" target="_blank" rel="noopener noreferrer" class="inline-flex min-h-11 w-full items-center justify-center rounded-xl px-4 py-2.5 text-sm font-semibold transition focus-visible:outline-none focus-visible:ring-2 motion-reduce:transform-none sm:w-auto <?php echo esc_attr($primary_cta_class($item['tipo_key'] ?? '')); ?>">
                                         Abrir recurso oficial ↗
                                     </a>
                                 <?php endif; ?>
-                                <a href="<?php echo esc_url($item_url); ?>" class="inline-flex min-h-10 items-center justify-center rounded-xl <?php echo !empty($item['external']) ? 'border border-white/10 bg-white/5 text-white hover:border-white/20 hover:bg-white/10' : 'bg-[#E29595] text-[#121826] hover:bg-[#f0aaaa]'; ?> px-4 py-2.5 text-sm font-semibold transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/30">
+                                <a href="<?php echo esc_url($item_url); ?>" class="inline-flex min-h-11 w-full items-center justify-center rounded-xl px-4 py-2.5 text-sm font-semibold transition focus-visible:outline-none focus-visible:ring-2 motion-reduce:transform-none sm:w-auto <?php echo !empty($item['external']) ? $secondary_cta_class() : $primary_cta_class($item['tipo_key'] ?? ''); ?>">
                                     <?php echo !empty($item['external']) ? 'Ver ficha ↗' : 'Ver ficha'; ?>
                                 </a>
                             </div>

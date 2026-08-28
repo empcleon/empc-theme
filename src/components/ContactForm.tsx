@@ -11,6 +11,7 @@ const ContactForm = () => {
     });
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [isSuccess, setIsSuccess] = useState(false);
+    const [errorMessage, setErrorMessage] = useState('');
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -22,12 +23,14 @@ const ContactForm = () => {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setIsSubmitting(true);
+        setErrorMessage('');
 
         try {
-            // @ts-ignore - empcData viene del global de WP injected en functions.php
-            const apiUrl = window.empcData?.restUrl + 'empc/v1/contact';
+            // @ts-ignore - los globals vienen de wp_localize_script en functions.php
+            const restBase = window.empcData?.restUrl || window.empcConfig?.restUrl || window.empcConfig?.apiUrl || `${window.location.origin}/wp-json/`;
+            const apiUrl = new URL('empc/v1/contact', restBase).toString();
             // @ts-ignore
-            const nonce = window.empcData?.nonce;
+            const nonce = window.empcData?.nonce || window.empcConfig?.nonce;
 
             const response = await fetch(apiUrl, {
                 method: 'POST',
@@ -41,11 +44,12 @@ const ContactForm = () => {
             if (response.ok) {
                 setIsSuccess(true);
             } else {
-                alert('Hubo un error al enviar el mensaje. Por favor, intenta de nuevo.');
+                const payload = await response.json().catch(() => null);
+                throw new Error(payload?.message || 'Hubo un error al enviar el mensaje. Por favor, intenta de nuevo.');
             }
         } catch (error) {
             console.error('Error enviando formulario:', error);
-            alert('Error de conexión. Comprueba tu internet.');
+            setErrorMessage(error instanceof Error ? error.message : 'Error de conexión. Comprueba tu internet.');
         } finally {
             setIsSubmitting(false);
         }
@@ -119,6 +123,12 @@ const ContactForm = () => {
                                     />
                                 </div>
                             </div>
+
+                            {errorMessage && (
+                                <p className="text-center text-red-400 font-medium bg-red-500/10 border border-red-500/30 rounded-xl px-4 py-3">
+                                    {errorMessage}
+                                </p>
+                            )}
 
                             <div className="pt-4 flex justify-end">
                                 <button

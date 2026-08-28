@@ -502,7 +502,7 @@ const PricingCalculator: React.FC = () => {
 
                                 {/* CTA */}
                                 <a
-                                    href={`/contacto?presupuesto=${total}&tipo=${projectType}`}
+                                    href={`/contacta-conmigo/?presupuesto=${encodeURIComponent(String(total))}&tipo=${encodeURIComponent(projectType)}`}
                                     className="block text-center bg-[#FF007A] text-black font-bold py-4 px-6 rounded-xl hover:bg-[#FB7185] hover:shadow-[0_0_20px_rgba(255,0,122,0.6)] transition-all uppercase tracking-wide"
                                 >
                                     Solicitar Auditoría
