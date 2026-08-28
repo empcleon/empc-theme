@@ -97,7 +97,7 @@ function empc_enqueue_react_assets()
     $template = get_post_meta(get_the_ID(), '_wp_page_template', true);
     $has_meta = get_post_meta(get_the_ID(), '_empc_service_config', true) || get_post_meta(get_the_ID(), '_empc_react_config', true);
 
-    if (is_front_page() || strpos($content, 'id="island-') !== false || $template === 'page-service.php' || $has_meta) {
+    if (is_front_page() || is_page('contacta-conmigo') || strpos($content, 'id="island-') !== false || $template === 'page-service.php' || $has_meta) {
         $react_js = get_template_directory_uri() . '/react-app/assets/app.js';
         $react_js_path = EMPC_THEME_DIR . '/react-app/assets/app.js';
         
@@ -127,6 +127,17 @@ function empc_enqueue_react_assets()
     }
 }
 add_action('wp_enqueue_scripts', 'empc_enqueue_react_assets');
+
+add_filter('template_include', function ($template) {
+    if (is_page('contacta-conmigo')) {
+        $contact_template = locate_template('page-contacta-conmigo.php');
+        if ($contact_template) {
+            return $contact_template;
+        }
+    }
+
+    return $template;
+});
 
 /**
  * REST helpers for the public forms.

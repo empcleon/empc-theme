@@ -62,8 +62,8 @@ const ContactForm = () => {
                 <div className="w-16 h-16 bg-emerald-500/20 rounded-full flex items-center justify-center mx-auto mb-6">
                     <Check className="w-8 h-8 text-emerald-500" />
                 </div>
-                <h3 className="text-2xl font-bold text-white mb-2">¡Mensaje Recibido!</h3>
-                <p className="text-slate-300">Gracias {formData.name}, te responderemos a {formData.email} en menos de 24h.</p>
+                <h3 className="text-2xl font-bold text-white mb-2">Mensaje recibido</h3>
+                <p className="text-slate-300">Gracias, Emma. Te responderé lo antes posible.</p>
                 <button
                     onClick={() => { setIsSuccess(false); setStep(1); setFormData({ name: '', email: '', service: '', message: '', website: '' }); }}
                     className="mt-6 text-emerald-400 hover:text-emerald-300 font-medium"

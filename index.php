@@ -4,7 +4,6 @@
     <!-- Main React App Container -->
     <div id="root"></div>
 
-    <div id="react-whatsapp-bubble"></div>
 </main>
 
 <?php get_footer(); ?>
