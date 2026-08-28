@@ -152,6 +152,203 @@ if (!function_exists('empc_force_specific_page_templates')) {
 
 add_filter('template_include', 'empc_force_specific_page_templates');
 
+if (!function_exists('empc_cleanup_request_path')) {
+    function empc_cleanup_request_path(): string
+    {
+        $path = parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH) ?: '/';
+        return '/' . trim($path, '/');
+    }
+}
+
+if (!function_exists('empc_cleanup_query_args')) {
+    function empc_cleanup_query_args(): array
+    {
+        $query = [];
+        parse_str(parse_url($_SERVER['REQUEST_URI'] ?? '', PHP_URL_QUERY) ?? '', $query);
+        return is_array($query) ? $query : [];
+    }
+}
+
+if (!function_exists('empc_canonical_blog_redirect')) {
+    function empc_canonical_blog_redirect(): void
+    {
+        if (is_admin() || wp_doing_ajax() || wp_doing_cron() || (defined('REST_REQUEST') && REST_REQUEST)) {
+            return;
+        }
+
+        $path = trim(empc_cleanup_request_path(), '/');
+        $query = empc_cleanup_query_args();
+
+        $needs_redirect = in_array($path, ['blog-nuevo', 'blog-empc'], true)
+            || (isset($query['page_id']) && (string) $query['page_id'] === '30607');
+
+        if (!$needs_redirect) {
+            return;
+        }
+
+        unset($query['page_id']);
+        $target = home_url('/blog/');
+        if (!empty($query)) {
+            $target = add_query_arg($query, $target);
+        }
+
+        wp_safe_redirect($target, 301);
+        exit;
+    }
+}
+
+add_action('template_redirect', 'empc_canonical_blog_redirect', 0);
+
+if (!function_exists('empc_seo_cleanup_robots_context')) {
+    function empc_seo_cleanup_robots_context(): array
+    {
+        $noindex_nofollow = [
+            'forums',
+            'members',
+            'dashboard',
+            'photos',
+            'groups',
+            'register',
+            'activate',
+            'news-feed',
+            'moderation',
+            'registrar-en-plataforma',
+        ];
+
+        $noindex_follow = [
+            'terms-of-service',
+            'privacy-policy',
+        ];
+
+        $path = trim(empc_cleanup_request_path(), '/');
+        if (in_array($path, $noindex_nofollow, true)) {
+            return ['index' => 'noindex', 'follow' => 'nofollow'];
+        }
+
+        if (in_array($path, $noindex_follow, true)) {
+            return ['index' => 'noindex'];
+        }
+
+        return [];
+    }
+}
+
+add_filter('wp_robots', function (array $robots): array {
+    if (defined('RANK_MATH_VERSION')) {
+        return $robots;
+    }
+
+    $cleanup = empc_seo_cleanup_robots_context();
+    if (empty($cleanup)) {
+        return $robots;
+    }
+
+    return array_merge($robots, $cleanup);
+});
+
+add_filter('rank_math/frontend/robots', function ($robots) {
+    $cleanup = empc_seo_cleanup_robots_context();
+    if (empty($cleanup) || !is_array($robots)) {
+        return $robots;
+    }
+
+    return array_merge($robots, $cleanup);
+});
+
+if (!function_exists('empc_archive_canonical_url')) {
+    function empc_archive_canonical_url(): string
+    {
+        if (is_home()) {
+            return home_url('/blog/');
+        }
+
+        if (is_category()) {
+            $term = get_queried_object();
+            if ($term instanceof WP_Term) {
+                $link = get_term_link($term);
+                if (!is_wp_error($link)) {
+                    return $link;
+                }
+            }
+        }
+
+        return '';
+    }
+}
+
+add_filter('rank_math/frontend/canonical', function ($canonical) {
+    $archive_canonical = empc_archive_canonical_url();
+    return $archive_canonical !== '' ? $archive_canonical : $canonical;
+});
+
+add_action('wp_head', function (): void {
+    if (defined('RANK_MATH_VERSION')) {
+        return;
+    }
+
+    $canonical = empc_archive_canonical_url();
+    if ($canonical === '') {
+        return;
+    }
+
+    echo '<link rel="canonical" href="' . esc_url($canonical) . '" />' . "\n";
+}, 2);
+
+if (!function_exists('empc_sitemap_excluded_page_ids')) {
+    function empc_sitemap_excluded_page_ids(): array
+    {
+        $slugs = [
+            'blog-nuevo',
+            'blog-empc',
+            'forums',
+            'members',
+            'dashboard',
+            'photos',
+            'groups',
+            'register',
+            'activate',
+            'news-feed',
+            'moderation',
+            'registrar-en-plataforma',
+            'terms-of-service',
+            'privacy-policy',
+        ];
+
+        $ids = [];
+        foreach ($slugs as $slug) {
+            $page = get_page_by_path($slug);
+            if ($page instanceof WP_Post && 'page' === $page->post_type) {
+                $ids[] = (int) $page->ID;
+            }
+        }
+
+        return array_values(array_unique(array_filter($ids)));
+    }
+}
+
+add_filter('wp_sitemaps_posts_query_args', function (array $args, string $post_type): array {
+    if ('page' !== $post_type) {
+        return $args;
+    }
+
+    $excluded = empc_sitemap_excluded_page_ids();
+    if (empty($excluded)) {
+        return $args;
+    }
+
+    $args['post__not_in'] = array_values(array_unique(array_merge($args['post__not_in'] ?? [], $excluded)));
+    return $args;
+}, 10, 2);
+
+add_filter('rank_math/sitemap/posts_to_exclude', function ($posts_to_exclude) {
+    $excluded = empc_sitemap_excluded_page_ids();
+    if (empty($excluded)) {
+        return $posts_to_exclude;
+    }
+
+    return array_values(array_unique(array_merge(wp_parse_id_list($posts_to_exclude), $excluded)));
+});
+
 /**
  * REST helpers for the public forms.
  */
