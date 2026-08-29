@@ -243,6 +243,17 @@ if (!function_exists('empc_remove_front_page_pagination_canonical')) {
 
 add_filter('rank_math/frontend/canonical', 'empc_remove_front_page_pagination_canonical', 999);
 
+if (!function_exists('empc_remove_front_page_pagination_core_canonical')) {
+    function empc_remove_front_page_pagination_core_canonical(): void
+    {
+        if (!empty($GLOBALS['empc_front_page_pagination_404'])) {
+            remove_action('wp_head', 'rel_canonical');
+        }
+    }
+}
+
+add_action('wp_head', 'empc_remove_front_page_pagination_core_canonical', 0);
+
 if (!function_exists('empc_seo_cleanup_robots_context')) {
     function empc_seo_cleanup_robots_context(): array
     {
