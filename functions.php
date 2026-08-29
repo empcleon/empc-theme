@@ -200,6 +200,36 @@ if (!function_exists('empc_canonical_blog_redirect')) {
 
 add_action('template_redirect', 'empc_canonical_blog_redirect', 0);
 
+if (!function_exists('empc_reject_front_page_pagination')) {
+    function empc_reject_front_page_pagination(): void
+    {
+        if (!is_front_page() || !is_paged()) {
+            return;
+        }
+
+        global $wp_query;
+        $wp_query->set_404();
+        $GLOBALS['empc_front_page_pagination_404'] = true;
+        status_header(404);
+        nocache_headers();
+    }
+}
+
+add_action('template_redirect', 'empc_reject_front_page_pagination', 1);
+
+if (!function_exists('empc_disable_front_page_pagination_canonical_redirect')) {
+    function empc_disable_front_page_pagination_canonical_redirect($redirect_url, $requested_url)
+    {
+        if (!empty($GLOBALS['empc_front_page_pagination_404'])) {
+            return false;
+        }
+
+        return $redirect_url;
+    }
+}
+
+add_filter('redirect_canonical', 'empc_disable_front_page_pagination_canonical_redirect', 10, 2);
+
 if (!function_exists('empc_seo_cleanup_robots_context')) {
     function empc_seo_cleanup_robots_context(): array
     {
