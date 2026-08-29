@@ -372,6 +372,29 @@ add_filter('rank_math/sitemap/posts_to_exclude', function ($posts_to_exclude) {
     return array_values(array_unique(array_merge(wp_parse_id_list($posts_to_exclude), $excluded)));
 });
 
+if (!function_exists('empc_rank_math_exclude_post_tag_sitemap')) {
+    function empc_rank_math_exclude_post_tag_sitemap($exclude, $type)
+    {
+        if ('post_tag' === $type) {
+            return true;
+        }
+
+        return $exclude;
+    }
+}
+
+add_filter('rank_math/sitemap/exclude_taxonomy', 'empc_rank_math_exclude_post_tag_sitemap', 10, 2);
+
+if (!function_exists('empc_exclude_post_tag_from_wp_sitemaps')) {
+    function empc_exclude_post_tag_from_wp_sitemaps(array $taxonomies): array
+    {
+        unset($taxonomies['post_tag']);
+        return $taxonomies;
+    }
+}
+
+add_filter('wp_sitemaps_taxonomies', 'empc_exclude_post_tag_from_wp_sitemaps');
+
 /**
  * REST helpers for the public forms.
  */
