@@ -71,6 +71,7 @@ if (!function_exists('empc_seo_title_override')) {
             'comercio-local-panaderia-leon' => 'Tiendas de barrio en León: venta online local | EMPC',
             'webs-restaurantes-leon-booking' => 'Webs para restaurantes en León: reservas online | EMPC',
             'seo-local-leon' => 'SEO local en León: mejora tu posición en Google Maps | EMPC',
+            'pedido-a-un-cliente-con-enlace-directo-al-pago' => 'Crear pedidos WooCommerce con enlace de pago | EMPC',
         ];
 
         return $overrides[$slug] ?? '';
