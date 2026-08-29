@@ -614,7 +614,8 @@ if (!function_exists('empc_seo_rank_math_filters')) {
             }
         }
 
-        if (is_singular('post') && !$blog_posting_found) {
+        $is_real_post = get_post_type(get_queried_object_id()) === 'post';
+        if ($is_real_post && !$blog_posting_found) {
             foreach ($data as $key => $node) {
                 if (!is_array($node) || ($node['@type'] ?? null) !== '') {
                     continue;
