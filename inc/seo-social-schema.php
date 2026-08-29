@@ -601,6 +601,36 @@ if (!function_exists('empc_seo_rank_math_filters')) {
             }
         }
 
+        $blog_posting_found = false;
+        foreach ($data as $node) {
+            if (!is_array($node)) {
+                continue;
+            }
+
+            $types = (array) ($node['@type'] ?? []);
+            if (in_array('BlogPosting', $types, true)) {
+                $blog_posting_found = true;
+                break;
+            }
+        }
+
+        if (is_singular('post') && !$blog_posting_found) {
+            foreach ($data as $key => $node) {
+                if (!is_array($node) || ($node['@type'] ?? null) !== '') {
+                    continue;
+                }
+
+                $node_id = (string) ($node['@id'] ?? '');
+                $has_editorial_fields = isset($node['headline'], $node['datePublished'], $node['author'])
+                    && str_contains($node_id, '#richSnippet');
+                if ($has_editorial_fields) {
+                    $data[$key]['@type'] = 'BlogPosting';
+                    $blog_posting_found = true;
+                    break;
+                }
+            }
+        }
+
         $organization_found = false;
         foreach ($data as $key => $node) {
             if (!is_array($node) || ($node['@id'] ?? '') !== $organization_id) {
