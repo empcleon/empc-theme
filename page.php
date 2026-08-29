@@ -64,6 +64,9 @@ get_header();
 
             <?php else : ?>
                 <section class="prose prose-invert prose-lg max-w-4xl mx-auto text-slate-300">
+                    <?php if ($slug === 'consultor-wordpress') : ?>
+                        <h1 class="text-4xl md:text-5xl font-bold text-white mb-8">Consultor WordPress en León</h1>
+                    <?php endif; ?>
                     <?php the_content(); ?>
                 </section>
             <?php endif; ?>
