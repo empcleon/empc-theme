@@ -246,13 +246,26 @@ add_filter('rank_math/frontend/canonical', 'empc_remove_front_page_pagination_ca
 if (!function_exists('empc_remove_front_page_pagination_core_canonical')) {
     function empc_remove_front_page_pagination_core_canonical(): void
     {
-        if (!empty($GLOBALS['empc_front_page_pagination_404'])) {
-            remove_action('wp_head', 'rel_canonical');
+        if (empty($GLOBALS['empc_front_page_pagination_404'])) {
+            return;
+        }
+
+        remove_action('wp_head', 'rel_canonical');
+
+        global $wp_filter;
+        $callbacks = $wp_filter['rank_math/head']->callbacks ?? [];
+        foreach ($callbacks as $priority => $hooks) {
+            foreach ($hooks as $hook) {
+                $callback = $hook['function'] ?? null;
+                if (is_array($callback) && isset($callback[1]) && $callback[1] === 'canonical') {
+                    remove_action('rank_math/head', $callback, $priority);
+                }
+            }
         }
     }
 }
 
-add_action('wp_head', 'empc_remove_front_page_pagination_core_canonical', 0);
+add_action('wp_head', 'empc_remove_front_page_pagination_core_canonical', -1);
 
 if (!function_exists('empc_seo_cleanup_robots_context')) {
     function empc_seo_cleanup_robots_context(): array
