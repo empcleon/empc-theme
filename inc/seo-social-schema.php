@@ -575,6 +575,9 @@ if (!function_exists('empc_seo_rank_math_filters')) {
         $organization_found = false;
         foreach ($data as $key => $node) {
             if (!is_array($node) || ($node['@id'] ?? '') !== $organization_id) {
+                if (is_front_page() && ($node['@id'] ?? '') === rtrim(home_url('/'), '/') . '/#webpage') {
+                    $data[$key]['@type'] = 'HomePage';
+                }
                 continue;
             }
 
