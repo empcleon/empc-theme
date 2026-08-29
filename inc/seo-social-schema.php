@@ -100,7 +100,15 @@ if (!function_exists('empc_seo_preferred_title')) {
             return get_the_title() . ' | ' . $site_name;
         }
 
-        return wp_get_document_title();
+        if (is_tag()) {
+            return single_tag_title('', false) . ' | ' . $site_name;
+        }
+
+        if (is_404()) {
+            return 'Página no encontrada | ' . $site_name;
+        }
+
+        return $site_name;
     }
 }
 
