@@ -56,6 +56,22 @@ if (!function_exists('empc_seo_current_service_config')) {
     }
 }
 
+if (!function_exists('empc_seo_title_override')) {
+    function empc_seo_title_override(): string
+    {
+        if (!is_singular('post')) {
+            return '';
+        }
+
+        $slug = (string) get_post_field('post_name', get_the_ID());
+        $overrides = [
+            'pedidos-en-woocommerce-mediante-pasarelas-de-pago' => 'Cambiar estado de pedidos WooCommerce por pasarela | EMPC',
+        ];
+
+        return $overrides[$slug] ?? '';
+    }
+}
+
 if (!function_exists('empc_seo_preferred_title')) {
     function empc_seo_preferred_title(): string
     {
@@ -73,7 +89,8 @@ if (!function_exists('empc_seo_preferred_title')) {
         }
 
         if (is_singular('post')) {
-            return get_the_title() . ' | ' . $site_name;
+            $title_override = empc_seo_title_override();
+            return $title_override !== '' ? $title_override : get_the_title() . ' | ' . $site_name;
         }
 
         if (is_category()) {
