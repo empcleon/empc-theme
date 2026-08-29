@@ -395,6 +395,25 @@ if (!function_exists('empc_exclude_post_tag_from_wp_sitemaps')) {
 
 add_filter('wp_sitemaps_taxonomies', 'empc_exclude_post_tag_from_wp_sitemaps');
 
+if (!function_exists('empc_refresh_rank_math_sitemap_cache_once')) {
+    function empc_refresh_rank_math_sitemap_cache_once(): void
+    {
+        if (!class_exists('RankMath\\Sitemap\\Cache')) {
+            return;
+        }
+
+        $cache_version = 'post-tag-exclusion-20260829';
+        if ($cache_version === get_option('empc_sitemap_cache_version')) {
+            return;
+        }
+
+        \RankMath\Sitemap\Cache::invalidate_storage();
+        update_option('empc_sitemap_cache_version', $cache_version, false);
+    }
+}
+
+add_action('init', 'empc_refresh_rank_math_sitemap_cache_once', 20);
+
 /**
  * REST helpers for the public forms.
  */
