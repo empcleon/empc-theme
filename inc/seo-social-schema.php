@@ -559,6 +559,19 @@ if (!function_exists('empc_seo_rank_math_filters')) {
             'areaServed' => $site['areaServed'],
         ];
 
+        if (is_front_page()) {
+            foreach ($data as $key => $node) {
+                if (!is_array($node)) {
+                    continue;
+                }
+
+                $types = (array) ($node['@type'] ?? []);
+                if (array_intersect(['Article', 'BlogPosting', 'NewsArticle'], $types)) {
+                    unset($data[$key]);
+                }
+            }
+        }
+
         $organization_found = false;
         foreach ($data as $key => $node) {
             if (!is_array($node) || ($node['@id'] ?? '') !== $organization_id) {
