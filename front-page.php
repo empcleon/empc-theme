@@ -16,8 +16,8 @@ get_header();
 
             <div class="space-y-4 max-w-2xl">
                 <h1 class="text-5xl md:text-7xl font-serif text-white leading-tight">
-                    Ingeniería Web <br>
-                    <span class="text-[#E29595] italic">de Alto Impacto</span>
+                    Diseño web y WordPress <br>
+                    <span class="text-[#E29595] italic">en León</span>
                 </h1>
                 <p class="text-xl text-slate-400 max-w-xl leading-relaxed font-light">
                     Transformamos negocios de León en infraestructuras tecnológicas soberanas.
