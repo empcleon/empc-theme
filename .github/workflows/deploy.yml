@@ -49,3 +49,75 @@ jobs:
             .DS_Store
             .env
             .env.*
+            **/*.backup
+            **/*.sql
+            functions-fix.php
+            create_test_page.php
+            force-update-seo.php
+            verify-wp7-islands.php
+            index.html
+            package.json
+            package-lock.json
+            vite.config.ts
+            tsconfig*.json
+            tailwind.config.*
+            postcss.config.*
+
+      - name: Remove approved exposed files from FTP
+        if: "${{ startsWith(github.event.head_commit.message, 'fix(deploy): retirar archivos operativos del tema publicado') }}"
+        env:
+          FTP_SERVER: ${{ secrets.FTP_SERVER }}
+          FTP_USER: ${{ secrets.FTP_USER }}
+          FTP_PASS: ${{ secrets.FTP_PASS }}
+          FTP_PORT: ${{ secrets.FTP_PORT || 21 }}
+        run: |
+          python3 - <<'PY'
+          import ftplib
+          import os
+          import posixpath
+
+          remote_dir = '/wp-content/themes/empc-theme/'
+          approved = [
+              'functions.php.backup',
+              'functions-fix.php',
+              'create_test_page.php',
+              'force-update-seo.php',
+              'verify-wp7-islands.php',
+              'insert_booking_post_production.sql',
+              'index.html',
+              'package.json',
+              'package-lock.json',
+              'vite.config.ts',
+              'tsconfig.json',
+              'tailwind.config.js',
+              'postcss.config.js',
+          ]
+
+          ftp = ftplib.FTP()
+          ftp.connect(os.environ['FTP_SERVER'], int(os.environ.get('FTP_PORT', '21')), timeout=30)
+          ftp.login(os.environ['FTP_USER'], os.environ['FTP_PASS'])
+          ftp.cwd(remote_dir)
+          resolved = posixpath.normpath(ftp.pwd())
+          expected = posixpath.normpath(remote_dir)
+          if resolved != expected:
+              raise RuntimeError(f'Unexpected FTP directory: {resolved!r}')
+
+          before = set(ftp.nlst())
+          print('FTP directory verified:', resolved)
+          print('Approved remote entries before cleanup:')
+          for name in approved:
+              print(f'  {name}: {"present" if name in before else "absent"}')
+
+          for name in approved:
+              if name in before:
+                  ftp.delete(name)
+
+          after = set(ftp.nlst())
+          remaining = [name for name in approved if name in after]
+          print('Approved remote entries after cleanup:')
+          for name in approved:
+              print(f'  {name}: {"present" if name in after else "absent"}')
+          if remaining:
+              raise RuntimeError('Approved files still present: ' + ', '.join(remaining))
+          ftp.quit()
+          PY
