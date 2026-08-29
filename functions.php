@@ -230,6 +230,19 @@ if (!function_exists('empc_disable_front_page_pagination_canonical_redirect')) {
 
 add_filter('redirect_canonical', 'empc_disable_front_page_pagination_canonical_redirect', 10, 2);
 
+if (!function_exists('empc_remove_front_page_pagination_canonical')) {
+    function empc_remove_front_page_pagination_canonical($canonical)
+    {
+        if (!empty($GLOBALS['empc_front_page_pagination_404'])) {
+            return '';
+        }
+
+        return $canonical;
+    }
+}
+
+add_filter('rank_math/frontend/canonical', 'empc_remove_front_page_pagination_canonical', 999);
+
 if (!function_exists('empc_seo_cleanup_robots_context')) {
     function empc_seo_cleanup_robots_context(): array
     {

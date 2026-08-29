@@ -496,6 +496,10 @@ if (!function_exists('empc_seo_json_ld_entities')) {
 if (!function_exists('empc_seo_render_json_ld')) {
     function empc_seo_render_json_ld(): void
     {
+        if (!empty($GLOBALS['empc_front_page_pagination_404'])) {
+            return;
+        }
+
         $graph = empc_seo_json_ld_entities();
         if (empty($graph)) {
             return;
@@ -626,6 +630,10 @@ if (!function_exists('empc_seo_rank_math_filters')) {
         add_filter('rank_math/json_ld/disable_search', '__return_true');
 
         add_filter('rank_math/json_ld', function (array $data, $jsonld = null): array {
+            if (!empty($GLOBALS['empc_front_page_pagination_404'])) {
+                return [];
+            }
+
             return empc_seo_merge_rank_math_organization($data);
         }, 99, 1);
 
