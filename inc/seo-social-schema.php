@@ -67,6 +67,7 @@ if (!function_exists('empc_seo_title_override')) {
         $overrides = [
             'pedidos-en-woocommerce-mediante-pasarelas-de-pago' => 'Cambiar estado de pedidos WooCommerce por pasarela | EMPC',
             'webs-para-imprentas-leon' => 'Web para imprentas en León: presupuestos y archivos | EMPC',
+            'reservas-online-clinicas-leon' => 'Sistema de reservas online para clínicas en León | EMPC',
         ];
 
         return $overrides[$slug] ?? '';
