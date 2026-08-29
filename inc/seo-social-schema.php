@@ -72,6 +72,7 @@ if (!function_exists('empc_seo_title_override')) {
             'webs-restaurantes-leon-booking' => 'Webs para restaurantes en León: reservas online | EMPC',
             'seo-local-leon' => 'SEO local en León: mejora tu posición en Google Maps | EMPC',
             'pedido-a-un-cliente-con-enlace-directo-al-pago' => 'Crear pedidos WooCommerce con enlace de pago | EMPC',
+            'formato-condicional-de-una-celda-excel' => 'Formato condicional en Excel según otra celda | EMPC',
         ];
 
         return $overrides[$slug] ?? '';
