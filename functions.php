@@ -98,7 +98,7 @@ function empc_enqueue_react_assets()
     $template = get_post_meta(get_the_ID(), '_wp_page_template', true);
     $has_meta = get_post_meta(get_the_ID(), '_empc_service_config', true) || get_post_meta(get_the_ID(), '_empc_react_config', true);
 
-    if (is_front_page() || is_page('contacta-conmigo') || strpos($content, 'id="island-') !== false || $template === 'page-service.php' || $has_meta) {
+    if (is_front_page() || is_page('contacta-conmigo') || is_page('reparacion-mantenimiento-en-leon') || strpos($content, 'id="island-') !== false || $template === 'page-service.php' || $has_meta) {
         $react_js = get_template_directory_uri() . '/react-app/assets/app.js';
         $react_js_path = EMPC_THEME_DIR . '/react-app/assets/app.js';
         
@@ -136,6 +136,7 @@ if (!function_exists('empc_force_specific_page_templates')) {
             'contacta-conmigo' => 'page-contacta-conmigo.php',
             'mantenimiento-wordpress-leon' => 'page-mantenimiento-wordpress-leon.php',
             'alquiler-pagina-web-empresas-y-autonomos' => 'page-alquiler-pagina-web-empresas-y-autonomos.php',
+            'reparacion-mantenimiento-en-leon' => 'page-reparacion-mantenimiento-en-leon.php',
         ];
 
         foreach ($routes as $slug => $file) {

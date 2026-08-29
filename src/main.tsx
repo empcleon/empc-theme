@@ -25,6 +25,18 @@ if (contactElement) {
     });
 }
 
+// 3. Montar isla: solicitud de presupuesto de equipos
+const equipmentQuoteElement = document.getElementById('island-equipment-quote-form');
+if (equipmentQuoteElement) {
+    import('./components/EquipmentQuoteForm').then(({ default: EquipmentQuoteForm }) => {
+        ReactDOM.createRoot(equipmentQuoteElement).render(
+            <React.StrictMode>
+                <EquipmentQuoteForm />
+            </React.StrictMode>
+        );
+    });
+}
+
 // 4. Montar isla: Budget Calculator
 const calculatorElement = document.getElementById('island-budget-calculator');
 if (calculatorElement) {
