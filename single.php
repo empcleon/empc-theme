@@ -51,7 +51,19 @@ get_header(); ?>
                 <!-- Usamos 'prose prose-invert' para estilizar el contenido automático de WP -->
                 <div
                     class="prose prose-invert prose-lg max-w-none text-slate-300 prose-headings:text-white prose-a:text-rose-400 prose-a:no-underline hover:prose-a:underline prose-strong:text-white prose-code:text-rose-300 prose-pre:bg-slate-900 prose-pre:border prose-pre:border-slate-800">
-                    <?php the_content(); ?>
+                    <?php if (get_post_field('post_name', get_the_ID()) === 'que-es-wordpress') : ?>
+                        <?php
+                        $que_es_wordpress_content = apply_filters('the_content', get_the_content());
+                        $que_es_wordpress_content = preg_replace(
+                            ['#<h1(\b[^>]*)>#i', '#</h1>#i'],
+                            ['<h2$1>', '</h2>'],
+                            $que_es_wordpress_content
+                        );
+                        echo $que_es_wordpress_content;
+                        ?>
+                    <?php else : ?>
+                        <?php the_content(); ?>
+                    <?php endif; ?>
                 </div>
 
                 <!-- Footer del Post -->
