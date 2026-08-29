@@ -567,7 +567,7 @@ if (!function_exists('empc_seo_rank_math_filters')) {
 
             if (!$organization_found) {
                 $data[$key] = array_merge($node, $organization);
-                unset($data[$key]['address'], $data[$key]['location'], $data[$key]['openingHours']);
+                unset($data[$key]['address'], $data[$key]['location'], $data[$key]['openingHours'], $data[$key]['image']);
                 $organization_found = true;
             } else {
                 unset($data[$key]);
@@ -578,7 +578,7 @@ if (!function_exists('empc_seo_rank_math_filters')) {
             $data['Organization'] = $organization;
         }
 
-        $place_id = rtrim($site['url'], '/') . '#place';
+        $place_id = rtrim($site['url'], '/') . '/#place';
         foreach ($data as $key => $node) {
             if (!is_array($node) || ($node['@id'] ?? '') !== $place_id) {
                 continue;
