@@ -66,6 +66,7 @@ if (!function_exists('empc_seo_title_override')) {
         $slug = (string) get_post_field('post_name', get_the_ID());
         $overrides = [
             'pedidos-en-woocommerce-mediante-pasarelas-de-pago' => 'Cambiar estado de pedidos WooCommerce por pasarela | EMPC',
+            'webs-para-imprentas-leon' => 'Web para imprentas en León: presupuestos y archivos | EMPC',
         ];
 
         return $overrides[$slug] ?? '';
