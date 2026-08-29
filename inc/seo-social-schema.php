@@ -299,6 +299,7 @@ if (!function_exists('empc_seo_site_data')) {
         return [
             'name' => 'EMPC',
             'url' => $home,
+            'email' => 'info@empc.es',
             'website_id' => rtrim($home, '/') . '/#website',
             'organization_id' => rtrim($home, '/') . '/#organization',
             'logo' => [
@@ -308,8 +309,8 @@ if (!function_exists('empc_seo_site_data')) {
                 'height' => $logo_size[1],
             ],
             'sameAs' => [
+                'https://www.facebook.com/empcleon',
                 'https://github.com/empcleon',
-                'https://www.linkedin.com/in/emma-pecharroman-clemente/',
             ],
             'areaServed' => [
                 '@type' => 'Place',
@@ -395,6 +396,7 @@ if (!function_exists('empc_seo_json_ld_entities')) {
             '@id' => $organization_id,
             'name' => $site['name'],
             'url' => $site['url'],
+            'email' => $site['email'],
             'logo' => $site['logo'],
             'sameAs' => $site['sameAs'],
             'areaServed' => $site['areaServed'],
@@ -542,12 +544,73 @@ if (!function_exists('empc_seo_render_social_meta')) {
 }
 
 if (!function_exists('empc_seo_rank_math_filters')) {
+    function empc_seo_merge_rank_math_organization(array $data): array
+    {
+        $site = empc_seo_site_data();
+        $organization_id = $site['organization_id'];
+        $organization = [
+            '@type' => ['Organization', 'ProfessionalService'],
+            '@id' => $organization_id,
+            'name' => $site['name'],
+            'url' => $site['url'],
+            'email' => $site['email'],
+            'logo' => $site['logo'],
+            'sameAs' => $site['sameAs'],
+            'areaServed' => $site['areaServed'],
+        ];
+
+        $organization_found = false;
+        foreach ($data as $key => $node) {
+            if (!is_array($node) || ($node['@id'] ?? '') !== $organization_id) {
+                continue;
+            }
+
+            if (!$organization_found) {
+                $data[$key] = array_merge($node, $organization);
+                unset($data[$key]['address'], $data[$key]['location'], $data[$key]['openingHours']);
+                $organization_found = true;
+            } else {
+                unset($data[$key]);
+            }
+        }
+
+        if (!$organization_found) {
+            $data['Organization'] = $organization;
+        }
+
+        $place_id = rtrim($site['url'], '/') . '#place';
+        foreach ($data as $key => $node) {
+            if (!is_array($node) || ($node['@id'] ?? '') !== $place_id) {
+                continue;
+            }
+
+            $referenced = false;
+            foreach ($data as $reference_key => $reference_node) {
+                if ($reference_key === $key || !is_array($reference_node)) {
+                    continue;
+                }
+
+                $encoded = wp_json_encode($reference_node);
+                if (is_string($encoded) && str_contains($encoded, '"@id":"' . $place_id . '"')) {
+                    $referenced = true;
+                    break;
+                }
+            }
+
+            if (!$referenced) {
+                unset($data[$key]);
+            }
+        }
+
+        return $data;
+    }
+
     function empc_seo_rank_math_filters(): void
     {
         add_filter('rank_math/json_ld/disable_search', '__return_true');
 
         add_filter('rank_math/json_ld', function (array $data, $jsonld = null): array {
-            return array_merge($data, empc_seo_json_ld_entities());
+            return empc_seo_merge_rank_math_organization($data);
         }, 99, 1);
 
         add_filter('rank_math/frontend/title', function ($title) {
