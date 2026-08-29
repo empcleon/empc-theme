@@ -234,7 +234,7 @@ if (!function_exists('empc_remove_front_page_pagination_canonical')) {
     function empc_remove_front_page_pagination_canonical($canonical)
     {
         if (!empty($GLOBALS['empc_front_page_pagination_404'])) {
-            return '';
+            return false;
         }
 
         return $canonical;
