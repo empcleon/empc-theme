@@ -614,7 +614,25 @@ if (!function_exists('empc_seo_rank_math_filters')) {
             }
         }
 
-        $is_real_post = get_post_type(get_the_ID()) === 'post';
+        $is_real_post = false;
+        foreach ($data as $node) {
+            if (!is_array($node) || ($node['@type'] ?? null) !== '') {
+                continue;
+            }
+
+            $node_id = (string) ($node['@id'] ?? '');
+            $editorial_url = strstr($node_id, '#', true);
+            if ($editorial_url === false || !function_exists('url_to_postid')) {
+                continue;
+            }
+
+            $editorial_post_id = url_to_postid($editorial_url);
+            if ($editorial_post_id > 0 && get_post_type($editorial_post_id) === 'post') {
+                $is_real_post = true;
+                break;
+            }
+        }
+
         if ($is_real_post && !$blog_posting_found) {
             foreach ($data as $key => $node) {
                 if (!is_array($node) || ($node['@type'] ?? null) !== '') {
