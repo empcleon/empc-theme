@@ -17,6 +17,7 @@ foreach ($items as $item) {
 }
 
 $is_unknown_detail = $current_slug !== '' && $current_item === null;
+$GLOBALS['empc_laboratorio_ia_is_404'] = $is_unknown_detail;
 
 $lab_asset_url = static function (string $relative): string {
     return trailingslashit(get_template_directory_uri()) . ltrim($relative, '/');
@@ -167,23 +168,63 @@ $landing_meta_description = $current_item
     ? ($current_item['descripcion_corta'] ?? 'Ficha del Laboratorio IA de EMPC.')
     : 'Explora prompts, recursos y workflows de inteligencia artificial probados por EMPC, con ejemplos, compatibilidad, fecha de revisión y límites conocidos.';
 
-add_filter('pre_get_document_title', function ($title) use ($current_item) {
-    if ($current_item) {
-        return $current_item['titulo'] . ' | Laboratorio IA | EMPC';
-    }
-
-    return 'Laboratorio IA: prompts y workflows en español | EMPC';
-}, 20);
-
-add_action('wp_head', function () use ($landing_meta_description, $current_item, $catalog_url) {
-    $canonical = $current_item
+$GLOBALS['empc_laboratorio_ia_context'] = [
+    'title' => $current_item
+        ? ($current_item['titulo'] . ' | Laboratorio IA | EMPC')
+        : 'Laboratorio IA: prompts y workflows en español | EMPC',
+    'description' => $landing_meta_description,
+    'canonical' => $current_item
         ? home_url('/laboratorio-ia/' . $current_item['slug'] . '/')
-        : $catalog_url;
+        : $catalog_url,
+];
 
-    echo '<meta name="description" content="' . esc_attr($landing_meta_description) . '">';
-    echo '<link rel="canonical" href="' . esc_url($canonical) . '">';
-    echo '<meta name="robots" content="index,follow">';
-}, 20);
+if (!function_exists('empc_laboratorio_ia_title')) {
+    function empc_laboratorio_ia_title(): string
+    {
+        return $GLOBALS['empc_laboratorio_ia_context']['title'] ?? 'Laboratorio IA: prompts y workflows en español | EMPC';
+    }
+}
+
+if (!function_exists('empc_laboratorio_ia_description')) {
+    function empc_laboratorio_ia_description(): string
+    {
+        return $GLOBALS['empc_laboratorio_ia_context']['description'] ?? 'Explora prompts, recursos y workflows de inteligencia artificial probados por EMPC, con ejemplos, compatibilidad, fecha de revisión y límites conocidos.';
+    }
+}
+
+if (!function_exists('empc_laboratorio_ia_canonical')) {
+    function empc_laboratorio_ia_canonical(): string
+    {
+        if (!empty($GLOBALS['empc_laboratorio_ia_is_404'])) {
+            return '';
+        }
+
+        return $GLOBALS['empc_laboratorio_ia_context']['canonical'] ?? home_url('/laboratorio-ia/');
+    }
+}
+
+if (!empc_seo_rank_math_active()) {
+    add_filter('pre_get_document_title', function ($title) use ($current_item) {
+        if ($current_item) {
+            return $current_item['titulo'] . ' | Laboratorio IA | EMPC';
+        }
+
+        return 'Laboratorio IA: prompts y workflows en español | EMPC';
+    }, 20);
+
+    add_action('wp_head', function () use ($landing_meta_description, $current_item, $catalog_url, $is_unknown_detail) {
+        $canonical = $is_unknown_detail
+            ? ''
+            : ($current_item
+                ? home_url('/laboratorio-ia/' . $current_item['slug'] . '/')
+                : $catalog_url);
+
+        echo '<meta name="description" content="' . esc_attr($landing_meta_description) . '">';
+        if ($canonical !== '') {
+            echo '<link rel="canonical" href="' . esc_url($canonical) . '">';
+        }
+    }, 20);
+}
 
 if ($is_unknown_detail) {
     status_header(404);

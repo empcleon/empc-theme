@@ -10,6 +10,7 @@ define('EMPC_THEME_URI', get_template_directory_uri());
 foreach ([
     EMPC_THEME_DIR . '/inc/service-pages-data.php',
     EMPC_THEME_DIR . '/inc/service-pages-config.php',
+    EMPC_THEME_DIR . '/inc/seo-social-schema.php',
 ] as $empc_include_file) {
     if (file_exists($empc_include_file)) {
         require_once $empc_include_file;
@@ -222,38 +223,60 @@ if (!function_exists('empc_seo_cleanup_robots_context')) {
 
         $path = trim(empc_cleanup_request_path(), '/');
         if (in_array($path, $noindex_nofollow, true)) {
-            return ['index' => 'noindex', 'follow' => 'nofollow'];
+            return ['noindex' => true, 'nofollow' => true];
         }
 
         if (in_array($path, $noindex_follow, true)) {
-            return ['index' => 'noindex'];
+            return ['noindex' => true, 'follow' => true];
         }
 
         return [];
     }
 }
 
-add_filter('wp_robots', function (array $robots): array {
-    if (defined('RANK_MATH_VERSION')) {
+if (!function_exists('empc_theme_wp_robots')) {
+    function empc_theme_wp_robots(array $robots): array
+    {
+        $cleanup = empc_seo_cleanup_robots_context();
+        if (!empty($cleanup)) {
+            $robots = array_merge($robots, $cleanup);
+        }
+
+        if (empc_is_laboratorio_ia_request() && !empty($GLOBALS['empc_laboratorio_ia_is_404'])) {
+            $robots['noindex'] = true;
+            $robots['follow'] = true;
+            unset($robots['index'], $robots['nofollow']);
+        }
+
         return $robots;
     }
+}
 
-    $cleanup = empc_seo_cleanup_robots_context();
-    if (empty($cleanup)) {
+add_filter('wp_robots', 'empc_theme_wp_robots', 20);
+
+if (!function_exists('empc_theme_rank_math_robots')) {
+    function empc_theme_rank_math_robots($robots)
+    {
+        if (!is_array($robots)) {
+            return $robots;
+        }
+
+        $cleanup = empc_seo_cleanup_robots_context();
+        if (!empty($cleanup)) {
+            $robots = array_merge($robots, $cleanup);
+        }
+
+        if (empc_is_laboratorio_ia_request() && !empty($GLOBALS['empc_laboratorio_ia_is_404'])) {
+            $robots['noindex'] = true;
+            $robots['follow'] = true;
+            unset($robots['index'], $robots['nofollow']);
+        }
+
         return $robots;
     }
+}
 
-    return array_merge($robots, $cleanup);
-});
-
-add_filter('rank_math/frontend/robots', function ($robots) {
-    $cleanup = empc_seo_cleanup_robots_context();
-    if (empty($cleanup) || !is_array($robots)) {
-        return $robots;
-    }
-
-    return array_merge($robots, $cleanup);
-});
+add_filter('rank_math/frontend/robots', 'empc_theme_rank_math_robots', 20);
 
 if (!function_exists('empc_archive_canonical_url')) {
     function empc_archive_canonical_url(): string
@@ -547,7 +570,7 @@ if (!function_exists('empc_get_meta_description')) {
 if (!function_exists('empc_output_meta_description')) {
     function empc_output_meta_description(): void
     {
-        if (empc_is_laboratorio_ia_request()) {
+        if (empc_is_laboratorio_ia_request() || empc_seo_rank_math_active()) {
             return;
         }
 
@@ -793,12 +816,8 @@ add_filter('pre_get_document_title', function ($title) {
         return $title;
     }
 
-    if (empc_is_laboratorio_ia_request()) {
-        return 'Laboratorio IA: prompts y workflows en español | EMPC';
-    }
-
-    if (is_front_page() || is_home()) {
-        return 'Diseño Web y Mantenimiento WordPress en León | EMPC';
+    if (function_exists('empc_seo_preferred_title')) {
+        return empc_seo_preferred_title();
     }
 
     return $title;
