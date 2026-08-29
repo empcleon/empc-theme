@@ -691,7 +691,7 @@ if (!function_exists('empc_seo_rank_math_filters')) {
             }
 
             return empc_seo_merge_rank_math_organization($data);
-        }, 99, 1);
+        }, 9999, 1);
 
         add_filter('rank_math/frontend/title', function ($title) {
             $context = empc_seo_current_context();
