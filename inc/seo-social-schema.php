@@ -622,12 +622,9 @@ if (!function_exists('empc_seo_rank_math_filters')) {
 
             $node_id = (string) ($node['@id'] ?? '');
             $editorial_url = strstr($node_id, '#', true);
-            if ($editorial_url === false || !function_exists('url_to_postid')) {
-                continue;
-            }
-
-            $editorial_post_id = url_to_postid($editorial_url);
-            if ($editorial_post_id > 0 && get_post_type($editorial_post_id) === 'post') {
+            $editorial_path = (string) wp_parse_url($editorial_url, PHP_URL_PATH);
+            $editorial_post = get_page_by_path(trim($editorial_path, '/'), OBJECT, ['post', 'page']);
+            if ($editorial_post instanceof WP_Post && $editorial_post->post_type === 'post') {
                 $is_real_post = true;
                 break;
             }
