@@ -51,14 +51,19 @@ get_header(); ?>
                 <!-- Usamos 'prose prose-invert' para estilizar el contenido automático de WP -->
                 <div
                     class="prose prose-invert prose-lg max-w-none text-slate-300 prose-headings:text-white prose-a:text-rose-400 prose-a:no-underline hover:prose-a:underline prose-strong:text-white prose-code:text-rose-300 prose-pre:bg-slate-900 prose-pre:border prose-pre:border-slate-800">
-                    <?php if (in_array(get_post_field('post_name', get_the_ID()), ['que-es-wordpress', 'webs-restaurantes-leon-booking'], true)) : ?>
+                    <?php if (in_array(get_post_field('post_name', get_the_ID()), ['que-es-wordpress', 'webs-restaurantes-leon-booking', 'seo-local-leon'], true)) : ?>
                         <?php
+                        $post_slug = get_post_field('post_name', get_the_ID());
                         $post_content = apply_filters('the_content', get_the_content());
-                        $post_content = preg_replace(
-                            ['#<h1(\b[^>]*)>#i', '#</h1>#i'],
-                            ['<h2$1>', '</h2>'],
-                            $post_content
-                        );
+                        if ($post_slug === 'seo-local-leon') {
+                            $post_content = preg_replace('#<h1\b[^>]*>.*?</h1>#is', '', $post_content, 1);
+                        } else {
+                            $post_content = preg_replace(
+                                ['#<h1(\b[^>]*)>#i', '#</h1>#i'],
+                                ['<h2$1>', '</h2>'],
+                                $post_content
+                            );
+                        }
                         echo $post_content;
                         ?>
                     <?php else : ?>
