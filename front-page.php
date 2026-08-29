@@ -49,34 +49,54 @@ get_header();
         </div>
     </section>
 
-    <section id="metodo" class="py-24 border-t border-white/5 relative overflow-hidden">
-        <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-16 items-center relative z-10">
-            <div class="aspect-[4/5] bg-[#1F2937]/50 rounded-[3rem] border border-white/10 overflow-hidden relative">
-                <div class="absolute inset-0 bg-[#E29595]/10 mix-blend-overlay"></div>
-                <div class="w-full h-full bg-gradient-to-br from-[#121826] via-[#1F2937] to-[#E29595]/20 flex items-center justify-center p-10 text-center">
-                    <p class="text-slate-400 font-mono text-sm max-w-xs">
-                        [Foto profesional / imagen corporativa opcional]
-                    </p>
+    <section id="metodo" class="py-24 bg-slate-900 border-t border-white/5">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/10 text-indigo-400 text-xs font-semibold uppercase mb-4">
+                    Estrategia de Implementación
                 </div>
+                <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">
+                    Potencia React, <br>
+                    <span class="text-slate-300">Hosting WordPress Estándar.</span>
+                </h2>
+                <p class="text-slate-300 max-w-2xl mx-auto leading-relaxed">
+                    No necesitas servidores Node.js costosos. Nuestra arquitectura híbrida se integra en tu hosting actual (cPanel, SiteGround, etc.) manteniendo el SEO intacto.
+                </p>
             </div>
 
-            <div class="space-y-8">
-                <h2 class="text-4xl font-serif text-white">Más que código: <span class="text-[#E29595]">estrategia</span></h2>
-                <p class="text-slate-400 text-lg leading-relaxed">
-                    Soy Emma, arquitecta de software y CEO. No vendo horas de programación: diseño soluciones de negocio basadas en tecnología robusta.
-                    Mi enfoque combina rapidez de prototipado con una base técnica sólida.
-                </p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <article class="bg-slate-800 p-8 rounded-2xl border border-slate-700 shadow-xl text-center">
+                    <div class="w-16 h-16 bg-slate-700 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                        <span class="text-2xl text-blue-400">01</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-2">1. Hosting WordPress</h3>
+                    <p class="text-slate-300 text-sm leading-relaxed">
+                        El servidor entrega el HTML base, maneja el SEO (Yoast) y la base de datos. Carga instantánea y barata.
+                    </p>
+                    <span class="inline-block mt-5 bg-blue-600 text-[10px] font-bold px-2 py-1 rounded text-white">PHP</span>
+                </article>
 
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                    <div class="p-6 bg-[#E29595]/10 border border-[#E29595]/20 rounded-3xl hover:bg-[#E29595]/20 transition-colors duration-300">
-                        <h3 class="text-white font-bold mb-2">CTO-as-a-Service</h3>
-                        <p class="text-sm text-slate-400">Dirección técnica interina para negocios que necesitan criterio y ejecución.</p>
+                <article class="bg-slate-800 p-8 rounded-2xl border border-slate-700 shadow-xl text-center">
+                    <div class="w-16 h-16 bg-slate-700 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                        <span class="text-2xl text-purple-400">02</span>
                     </div>
-                    <div class="p-6 bg-[#1F2937]/50 border border-white/5 rounded-3xl hover:border-white/20 transition-colors duration-300">
-                        <h3 class="text-white font-bold mb-2">Stack moderno</h3>
-                        <p class="text-sm text-slate-400">WordPress, React e integraciones pensadas para mantener el control.</p>
+                    <h3 class="text-xl font-bold text-white mb-2">2. El Puente (API REST)</h3>
+                    <p class="text-slate-300 text-sm leading-relaxed">
+                        WordPress expone tus productos y posts vía API. React consume estos datos sin recargar la página.
+                    </p>
+                    <span class="inline-block mt-5 bg-purple-600 text-[10px] font-bold px-2 py-1 rounded text-white">JSON</span>
+                </article>
+
+                <article class="bg-slate-800 p-8 rounded-2xl border border-slate-700 shadow-xl text-center">
+                    <div class="w-16 h-16 bg-slate-700 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                        <span class="text-2xl text-rose-400">03</span>
                     </div>
-                </div>
+                    <h3 class="text-xl font-bold text-white mb-2">3. Hidratación React</h3>
+                    <p class="text-slate-300 text-sm leading-relaxed">
+                        Nuestros componentes (Reservas, Calculadoras) toman el control del navegador para una experiencia tipo App nativa.
+                    </p>
+                    <span class="inline-block mt-5 bg-rose-500 text-[10px] font-bold px-2 py-1 rounded text-white">REACT</span>
+                </article>
             </div>
         </div>
     </section>
@@ -126,19 +146,34 @@ get_header();
                 </p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <article class="bg-slate-800 rounded-2xl p-8 border border-slate-700 shadow-2xl">
-                    <h3 class="text-white text-2xl font-bold mb-3">Calculadoras y configuradores</h3>
-                    <p class="text-slate-300 leading-relaxed">
-                        La lógica compleja se mantiene en React para que el usuario tenga respuesta inmediata sin recargas.
-                    </p>
-                </article>
-                <article class="bg-slate-800 rounded-2xl p-8 border border-slate-700 shadow-2xl">
-                    <h3 class="text-white text-2xl font-bold mb-3">Flujos de contacto</h3>
-                    <p class="text-slate-300 leading-relaxed">
-                        Los formularios siguen siendo interactivos, con mensajes de error accesibles y protección antispam ya aplicada.
-                    </p>
-                </article>
+            <div class="space-y-10">
+                <section aria-labelledby="budget-calculator-heading" class="rounded-[2rem] border border-white/10 bg-[#1F2937]/35 p-3 md:p-6 shadow-2xl shadow-black/20">
+                    <div class="flex flex-col gap-2 border-b border-white/10 px-3 pb-5 md:px-5">
+                        <div class="flex flex-wrap items-center gap-3">
+                            <span class="text-[10px] font-bold uppercase tracking-[0.22em] text-[#E29595]">Demo 01 · Presupuesto inteligente</span>
+                            <span class="rounded-full border border-white/10 bg-white/5 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-slate-400">Configurador por pasos</span>
+                        </div>
+                        <h3 id="budget-calculator-heading" class="text-2xl font-serif text-white md:text-3xl">Define el alcance antes de hablar</h3>
+                        <p class="max-w-2xl text-sm leading-relaxed text-slate-400">Selecciona el tipo de proyecto y las funcionalidades que realmente necesitas. Sin formularios interminables ni estimaciones opacas.</p>
+                    </div>
+                    <div class="pt-3 md:pt-5">
+                        <div id="island-budget-calculator"></div>
+                    </div>
+                </section>
+
+                <section aria-labelledby="pricing-calculator-heading" class="rounded-[2rem] border border-white/10 bg-[#1F2937]/35 p-3 md:p-6 shadow-2xl shadow-black/20">
+                    <div class="flex flex-col gap-2 border-b border-white/10 px-3 pb-5 md:px-5">
+                        <div class="flex flex-wrap items-center gap-3">
+                            <span class="text-[10px] font-bold uppercase tracking-[0.22em] text-[#E29595]">Demo 02 · Inversión orientativa</span>
+                            <span class="rounded-full border border-white/10 bg-white/5 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-slate-400">Calculadora en tiempo real</span>
+                        </div>
+                        <h3 id="pricing-calculator-heading" class="text-2xl font-serif text-white md:text-3xl">Compara opciones y extras</h3>
+                        <p class="max-w-2xl text-sm leading-relaxed text-slate-400">Explora cómo cambian la inversión, los servicios adicionales y el plazo estimado según tu elección.</p>
+                    </div>
+                    <div class="pt-3 md:pt-5">
+                        <div id="island-pricing-calculator"></div>
+                    </div>
+                </section>
             </div>
         </div>
     </section>

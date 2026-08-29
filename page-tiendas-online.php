@@ -192,11 +192,28 @@ $config = function_exists('get_tiendas_online_config') ? get_tiendas_online_conf
             </section>
         <?php endif; ?>
 
-        <?php if (!empty($config['localPackSimulator'])) : ?>
-            <section class="pt-8">
-                <div id="local-pack-simulator-island" data-config='<?php echo esc_attr(json_encode($config['localPackSimulator'], JSON_UNESCAPED_UNICODE)); ?>'></div>
-            </section>
-        <?php endif; ?>
+        <?php // Island React: simulador de impacto del Local Pack ?>
+        <?php
+        $local_pack = $config['localPackSimulator'] ?? [
+            'id' => 'local-pack-simulator-island',
+            'title' => 'Simulador de impacto del Local Pack',
+            'subtitle' => 'Calcula cuántos clientes podrías ganar saliendo en el Top 3 del mapa',
+            'description' => 'Introduce cuántas búsquedas mensuales tiene tu servicio y te muestro la diferencia entre <strong>no salir en el Local Pack</strong> y aparecer en el <strong>puesto #1</strong> del mapa.',
+            'defaultValues' => [
+                'monthlySearches' => 800,
+                'conversionRate' => 0.08,
+                'avgTicket' => 70,
+                'currentPosition' => 'no_pack',
+            ],
+            'notes' => [
+                'Son estimaciones basadas en CTR medios del Local Pack.',
+                'Los resultados reales dependen de tu sector, reseñas y competencia.',
+            ],
+        ];
+        ?>
+        <section class="pt-8">
+            <div id="local-pack-simulator-island" data-config='<?php echo esc_attr(json_encode($local_pack, JSON_UNESCAPED_UNICODE)); ?>'></div>
+        </section>
     </article>
 </main>
 

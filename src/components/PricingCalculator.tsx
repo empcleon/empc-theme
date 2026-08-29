@@ -34,6 +34,10 @@ const PricingCalculator: React.FC = () => {
     const [total, setTotal] = useState(0);
     const [monthlyCost, setMonthlyCost] = useState(0);
 
+    const handleCalculate = () => {
+        setShowResults(true);
+    };
+
     // Calculate budget whenever inputs change
     useEffect(() => {
         let calculatedSubtotal = basePrice + (extraPages * 15);
@@ -395,7 +399,8 @@ const PricingCalculator: React.FC = () => {
 
                         {/* Calculate Button */}
                         <button
-                            onClick={() => setShowResults(true)}
+                            type="button"
+                            onClick={handleCalculate}
                             className="w-full bg-[#FF007A] text-black font-bold py-4 px-10 rounded-xl text-lg hover:bg-[#FB7185] hover:shadow-[0_0_20px_rgba(255,0,122,0.6)] transition-all flex items-center justify-center gap-2 uppercase tracking-wide"
                         >
                             <Calculator className="w-5 h-5" />
@@ -416,7 +421,8 @@ const PricingCalculator: React.FC = () => {
                                 <div className="w-16 h-16 bg-white/5 rounded-full flex items-center justify-center mx-auto mb-4 border border-white/10">
                                     <Calculator className="w-8 h-8 text-slate-500" />
                                 </div>
-                                <h3 className="text-xl font-bold text-slate-400 mb-2 font-syne">Esperando datos...</h3>
+                                <h3 className="text-xl font-bold text-slate-400 mb-2 font-syne">Pulsa «Calcular Ahora»</h3>
+                                <p className="text-sm text-slate-500">Verás aquí el desglose, el total y el plazo estimado.</p>
                             </div>
                         ) : (
                             <div>
