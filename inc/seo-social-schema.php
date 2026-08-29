@@ -70,6 +70,7 @@ if (!function_exists('empc_seo_title_override')) {
             'reservas-online-clinicas-leon' => 'Sistema de reservas online para clínicas en León | EMPC',
             'comercio-local-panaderia-leon' => 'Tiendas de barrio en León: venta online local | EMPC',
             'webs-restaurantes-leon-booking' => 'Webs para restaurantes en León: reservas online | EMPC',
+            'seo-local-leon' => 'SEO local en León: mejora tu posición en Google Maps | EMPC',
         ];
 
         return $overrides[$slug] ?? '';
