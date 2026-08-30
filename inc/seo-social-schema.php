@@ -777,7 +777,7 @@ if (!function_exists('empc_seo_rank_math_filters')) {
             }
 
             return $data;
-        }, 9999, 1);
+        }, 99999, 1);
 
         add_filter('rank_math/frontend/title', function ($title) {
             $context = empc_seo_current_context();
