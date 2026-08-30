@@ -23,18 +23,6 @@ if (have_posts()) {
     if (is_page('diseno-web-leon') && function_exists('empc_diseno_web_leon_safe_config')) {
         $config = empc_diseno_web_leon_safe_config();
     }
-    if (is_page('tiendas-online-leon') && function_exists('empc_commercial_price')) {
-        $config['pricing'] = [
-            'title' => 'Precios orientativos de tiendas WooCommerce',
-            'description' => 'Importes para nuevos proyectos. El presupuesto final concreta el alcance y se muestra sin IVA.',
-            'tiers' => [
-                ['title' => 'Tienda WooCommerce inicial', 'price' => empc_price_label(empc_commercial_price('ecommerce', 'initial', 'price')), 'description' => 'Una base de comercio electrónico según el alcance acordado.', 'features' => ['WooCommerce', 'Catálogo, carrito y proceso de compra']],
-                ['title' => 'Tienda avanzada', 'price' => empc_price_label(empc_commercial_price('ecommerce', 'advanced', 'price')), 'description' => 'Para sincronizaciones o integraciones.', 'features' => ['Integraciones según alcance', 'Presupuesto detallado']],
-                ['title' => 'Proyecto a medida', 'price' => 'Presupuesto a medida', 'description' => 'Necesidades complejas o dependencias externas.', 'features' => ['ERP/CRM', 'Sincronización de stock', 'Automatizaciones']],
-            ],
-            'note' => 'Las pasarelas, transportistas, licencias, fiscalidad y asesoramiento legal se valoran según el proyecto.',
-        ];
-    }
 }
 ?>
 

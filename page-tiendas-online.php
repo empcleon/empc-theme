@@ -39,6 +39,15 @@ get_header();
             </section>
 
             <section class="space-y-6">
+                <div class="max-w-3xl space-y-3"><p class="text-[11px] font-bold uppercase tracking-[0.25em] text-emerald-300">Precios orientativos</p><h2 class="text-3xl md:text-4xl font-bold text-white">Una referencia inicial para tu tienda</h2><p class="text-slate-400 leading-relaxed">Precios para nuevos proyectos. El presupuesto final concreta el alcance y los importes se muestran sin IVA.</p></div>
+                <div class="grid md:grid-cols-3 gap-4">
+                    <div class="rounded-2xl border border-emerald-300/20 bg-emerald-400/5 p-6"><h3 class="text-xl font-bold text-white">Tienda WooCommerce inicial</h3><p class="mt-3 text-2xl font-bold text-emerald-300"><?php echo esc_html(empc_price_label(empc_commercial_price('ecommerce', 'initial', 'price'))); ?></p><p class="mt-3 text-sm text-slate-400">Una base de comercio electrónico según el alcance acordado.</p></div>
+                    <div class="rounded-2xl border border-white/10 bg-[#1F2937]/50 p-6"><h3 class="text-xl font-bold text-white">Tienda avanzada</h3><p class="mt-3 text-2xl font-bold text-emerald-300"><?php echo esc_html(empc_price_label(empc_commercial_price('ecommerce', 'advanced', 'price'))); ?></p><p class="mt-3 text-sm text-slate-400">Para sincronizaciones o integraciones concretas.</p></div>
+                    <div class="rounded-2xl border border-white/10 bg-[#1F2937]/50 p-6"><h3 class="text-xl font-bold text-white">Proyecto a medida</h3><p class="mt-3 text-2xl font-bold text-emerald-300">Presupuesto a medida</p><p class="mt-3 text-sm text-slate-400">ERP, CRM, automatizaciones o sincronización de stock.</p></div>
+                </div>
+            </section>
+
+            <section class="space-y-6">
                 <div class="max-w-3xl space-y-3">
                     <p class="text-[11px] font-bold uppercase tracking-[0.25em] text-emerald-300">La decisión</p>
                     <h2 class="text-3xl md:text-4xl font-bold text-white">Qué problema puede resolver una tienda propia</h2>
