@@ -19,12 +19,17 @@ if (have_posts()) {
         }
     }
     rewind_posts();
+
+    if (is_page('diseno-web-leon') && function_exists('empc_diseno_web_leon_safe_config')) {
+        $config = empc_diseno_web_leon_safe_config();
+    }
 }
 ?>
 
 <main id="primary" class="site-main bg-[#121826] text-slate-300">
     <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
         <article class="max-w-7xl mx-auto px-6 py-20 space-y-20">
+            <?php $slug = (string) get_post_field('post_name', get_the_ID()); ?>
             <?php $hero = $config['hero'] ?? []; ?>
             <section class="grid lg:grid-cols-2 gap-12 items-center">
                 <div class="space-y-6">
@@ -55,7 +60,8 @@ if (have_posts()) {
 
                     <div class="flex flex-col sm:flex-row gap-4 pt-4">
                         <?php if (!empty($hero['ctaPrimary'])) : ?>
-                            <a href="<?php echo esc_url(home_url('/contacta-conmigo/')); ?>" class="px-8 py-4 bg-[#E29595] text-[#121826] font-bold rounded-2xl uppercase tracking-widest text-sm text-center">
+                            <?php $cta_href = $slug === 'diseno-web-leon' ? home_url('/contacta-conmigo/?tipo=diseno-web') : home_url('/contacta-conmigo/'); ?>
+                            <a href="<?php echo esc_url($cta_href); ?>" class="px-8 py-4 bg-[#E29595] text-[#121826] font-bold rounded-2xl uppercase tracking-widest text-sm text-center">
                                 <?php echo esc_html($hero['ctaPrimary']['text'] ?? 'Solicitar presupuesto'); ?>
                             </a>
                         <?php endif; ?>
@@ -171,6 +177,27 @@ if (have_posts()) {
                 </section>
             <?php endif; ?>
 
+            <?php if ($slug === 'diseno-web-leon') : ?>
+                <section>
+                    <div class="mb-8">
+                        <h2 class="text-3xl font-bold text-white mb-3">Servicios relacionados</h2>
+                        <p class="text-slate-400 max-w-3xl">Si tu proyecto ya existe o necesita una solución distinta, estas páginas explican servicios separados del diseño de una web nueva.</p>
+                    </div>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div class="bg-[#1F2937]/30 border border-white/5 rounded-3xl p-6">
+                            <h3 class="text-white text-xl font-bold mb-2">Mantenimiento WordPress</h3>
+                            <p class="text-slate-400 leading-relaxed mb-4">Para webs que ya están publicadas y necesitan actualizaciones, seguridad, copias o soporte recurrente.</p>
+                            <a class="text-[#E29595] font-bold" href="<?php echo esc_url(home_url('/mantenimiento-wordpress-leon/')); ?>">Ver mantenimiento WordPress</a>
+                        </div>
+                        <div class="bg-[#1F2937]/30 border border-white/5 rounded-3xl p-6">
+                            <h3 class="text-white text-xl font-bold mb-2">Tiendas online</h3>
+                            <p class="text-slate-400 leading-relaxed mb-4">Para proyectos que necesitan catálogo, carrito, pagos y gestión de pedidos mediante una solución de comercio electrónico.</p>
+                            <a class="text-[#E29595] font-bold" href="<?php echo esc_url(home_url('/tiendas-online-leon/')); ?>">Ver tiendas online</a>
+                        </div>
+                    </div>
+                </section>
+            <?php endif; ?>
+
             <?php if (!empty($config['faq']['faqs']) && is_array($config['faq']['faqs'])) : ?>
                 <section id="faq">
                     <div class="mb-8">
@@ -190,6 +217,9 @@ if (have_posts()) {
             <?php if (!empty($config['cta'])) : ?>
                 <section class="pt-8">
                     <div id="service-cta-island" data-config='<?php echo esc_attr(json_encode($config['cta'], JSON_UNESCAPED_UNICODE)); ?>'></div>
+                    <?php if ($slug === 'diseno-web-leon') : ?>
+                        <p class="text-center mt-6"><a class="text-[#E29595] font-bold" href="<?php echo esc_url(home_url('/contacta-conmigo/?tipo=diseno-web')); ?>">Ir al formulario de diseño web</a></p>
+                    <?php endif; ?>
                 </section>
             <?php endif; ?>
         </article>

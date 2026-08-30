@@ -28,6 +28,11 @@ if (!function_exists('empc_seo_current_service_config')) {
             return [];
         }
 
+        $slug = (string) get_post_field('post_name', get_the_ID());
+        if ($slug === 'diseno-web-leon' && function_exists('empc_diseno_web_leon_safe_config')) {
+            return empc_diseno_web_leon_safe_config();
+        }
+
         $raw = get_post_meta(get_the_ID(), '_empc_service_config', true);
         if (is_string($raw) && $raw !== '') {
             $decoded = json_decode($raw, true);
