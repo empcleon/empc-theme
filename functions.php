@@ -474,7 +474,7 @@ if (!function_exists('empc_refresh_rank_math_sitemap_cache_once')) {
             return;
         }
 
-        $cache_version = 'post-tag-exclusion-20260829';
+        $cache_version = 'content-landing-redaccion-20260830';
         if ($cache_version === get_option('empc_sitemap_cache_version')) {
             return;
         }
