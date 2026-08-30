@@ -280,6 +280,11 @@ if (!function_exists('empc_seo_preferred_title')) {
                     $context['description'] = 'Mantenimiento WordPress en León con actualizaciones, copias de seguridad, seguridad y soporte técnico para webs de empresas y autónomos.';
                 }
 
+                if (is_page('tiendas-online-leon')) {
+                    $context['title'] = 'Diseño de tiendas online en León | WooCommerce | EMPC';
+                    $context['description'] = 'Diseño de tiendas online en León con WooCommerce para empresas y autónomos. Catálogo, pagos, envíos y gestión de pedidos.';
+                }
+
                 $context['schema_page_name'] = get_the_title();
                 $context['schema_page_description'] = $context['description'];
             }
@@ -764,6 +769,27 @@ if (!function_exists('empc_seo_rank_math_filters')) {
                     '@id' => rtrim($canonical, '/') . '#service',
                     'name' => 'Mantenimiento WordPress en León',
                     'serviceType' => 'Mantenimiento WordPress y WooCommerce',
+                    'url' => $canonical,
+                    'description' => $context['description'] ?? '',
+                    'provider' => [
+                        '@id' => $site['organization_id'],
+                    ],
+                    'areaServed' => $site['areaServed'],
+                    'mainEntityOfPage' => [
+                        '@id' => rtrim($canonical, '/') . '#webpage',
+                    ],
+                ];
+            }
+
+            if (is_page('tiendas-online-leon')) {
+                $site = empc_seo_site_data();
+                $context = empc_seo_current_context();
+                $canonical = !empty($context['canonical']) ? $context['canonical'] : get_permalink();
+                $data['EMPCOnlineStoreService'] = [
+                    '@type' => 'Service',
+                    '@id' => rtrim($canonical, '/') . '#service',
+                    'name' => 'Diseño de tiendas online en León con WooCommerce',
+                    'serviceType' => 'Diseño de tiendas online con WooCommerce',
                     'url' => $canonical,
                     'description' => $context['description'] ?? '',
                     'provider' => [
