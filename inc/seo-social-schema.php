@@ -18,6 +18,7 @@ if (!function_exists('empc_seo_service_slugs')) {
             'mantenimiento-wordpress-leon',
             'alquiler-pagina-web-empresas-y-autonomos',
             'reparacion-wordpress-leon',
+            'redaccion-contenidos-web-leon',
         ];
     }
 }
@@ -118,6 +119,10 @@ if (!function_exists('empc_seo_preferred_title')) {
         if (is_page()) {
             if (is_page('reparacion-wordpress-leon')) {
                 return 'Reparación WordPress en León y WooCommerce | EMPC';
+            }
+
+            if (is_page('redaccion-contenidos-web-leon')) {
+                return 'Redacción de contenidos web en León | Textos y blog | EMPC';
             }
 
             $service_config = empc_seo_current_service_config();
@@ -307,6 +312,12 @@ if (!function_exists('empc_seo_preferred_title')) {
                     $context['title'] = 'Reparación WordPress en León y WooCommerce | EMPC';
                     $context['description'] = '¿Error crítico, pantalla blanca o fallos tras actualizar? Reviso y reparo tu WordPress o WooCommerce en León, con presupuesto previo confirmado.';
                     $context['service_type'] = 'Reparación WordPress y WooCommerce';
+                }
+
+                if (is_page('redaccion-contenidos-web-leon')) {
+                    $context['title'] = 'Redacción de contenidos web en León | Textos y blog | EMPC';
+                    $context['description'] = 'Redacción de páginas de servicio, landings y artículos de blog en León. Textos claros, estructurados y listos para WordPress. Solicita presupuesto.';
+                    $context['service_type'] = 'Redacción de contenidos web';
                 }
 
                 $context['schema_page_name'] = get_the_title();
@@ -873,6 +884,41 @@ if (!function_exists('empc_seo_rank_math_filters')) {
                     '@id' => $service_id,
                     'name' => 'Reparación de WordPress y WooCommerce en León',
                     'serviceType' => 'Reparación WordPress y WooCommerce',
+                    'url' => $canonical,
+                    'description' => $context['description'] ?? '',
+                    'provider' => [
+                        '@id' => $site['organization_id'],
+                    ],
+                    'areaServed' => $site['areaServed'],
+                    'mainEntityOfPage' => [
+                        '@id' => rtrim($canonical, '/') . '#webpage',
+                    ],
+                ];
+            }
+
+            if (is_page('redaccion-contenidos-web-leon')) {
+                $site = empc_seo_site_data();
+                $context = empc_seo_current_context();
+                $canonical = !empty($context['canonical']) ? $context['canonical'] : get_permalink();
+                $service_id = rtrim($canonical, '/') . '#service';
+                foreach ($data as $key => $node) {
+                    if (!is_array($node)) {
+                        continue;
+                    }
+                    $types = (array) ($node['@type'] ?? []);
+                    if (($node['@type'] ?? null) === '' || array_intersect(['Article', 'BlogPosting', 'NewsArticle'], $types)) {
+                        unset($data[$key]);
+                        continue;
+                    }
+                    if (($node['@id'] ?? '') === $service_id) {
+                        unset($data[$key]);
+                    }
+                }
+                $data['EMPCWebContentService'] = [
+                    '@type' => 'Service',
+                    '@id' => $service_id,
+                    'name' => 'Redacción de contenidos web y artículos de blog en León',
+                    'serviceType' => 'Redacción de contenidos web',
                     'url' => $canonical,
                     'description' => $context['description'] ?? '',
                     'provider' => [

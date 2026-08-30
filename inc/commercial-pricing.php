@@ -26,6 +26,9 @@ function empc_commercial_price(string ...$keys): ?float
         }
         $value = $value[$key];
     }
+    if (is_array($value) && array_key_exists('price', $value)) {
+        $value = $value['price'];
+    }
     return is_numeric($value) ? (float) $value : null;
 }
 

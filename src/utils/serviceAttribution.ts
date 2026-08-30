@@ -5,7 +5,8 @@ export const SERVICE_TYPES = {
     'consultoria-wordpress': 'Consultoría WordPress',
     'reparacion-wordpress': 'Reparación WordPress',
     wpo: 'Optimización WPO',
-    'alquiler-web': 'Alquiler de página web'
+    'alquiler-web': 'Alquiler de página web',
+    'contenidos-web': 'Redacción de contenidos web'
 } as const;
 
 export type ServiceType = keyof typeof SERVICE_TYPES;

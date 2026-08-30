@@ -195,6 +195,7 @@ if (have_posts()) {
                             <a class="text-[#E29595] font-bold" href="<?php echo esc_url(home_url('/tiendas-online-leon/')); ?>">Ver tiendas online</a>
                         </div>
                     </div>
+                    <p class="mt-6 text-slate-400">También puedo ayudarte con la <a class="text-[#E29595] font-semibold" href="<?php echo esc_url(home_url('/redaccion-contenidos-web-leon/')); ?>">redacción de los contenidos de tu web</a>.</p>
                 </section>
             <?php endif; ?>
 

@@ -32,6 +32,12 @@
     "content": { "label": "Web de contenidos", "price": null },
     "commerce": { "label": "Comercio electrónico", "price": null }
   },
+  "content": {
+    "blogArticle": { "label": "Artículo de blog hasta 1.000 palabras", "price": 120 },
+    "servicePage": { "label": "Página de servicio", "price": 250 },
+    "commercialLanding": { "label": "Landing comercial", "price": 300 },
+    "standardWebsite": { "label": "Sitio web estándar de 4–5 páginas", "price": 850 }
+  },
   "closedScopeExtras": [
     "Integración React",
     "Diseño gráfico",
