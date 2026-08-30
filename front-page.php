@@ -11,17 +11,17 @@ get_header();
         <div class="space-y-8">
             <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#E29595]/10 border border-[#E29595]/20 text-[#E29595]">
                 <span class="w-1.5 h-1.5 rounded-full bg-[#E29595] animate-pulse"></span>
-                <span class="text-[10px] font-bold uppercase tracking-widest">Ingeniería de autoridad</span>
+                <span class="text-[10px] font-bold uppercase tracking-widest">Desarrollo web y soporte técnico local</span>
             </div>
 
             <div class="space-y-4 max-w-2xl">
                 <h1 class="text-5xl md:text-7xl font-serif text-white leading-tight">
-                    Diseño web y WordPress <br>
-                    <span class="text-[#E29595] italic">en León</span>
+                    Desarrollo web WordPress y <br>
+                    <span class="text-[#E29595] italic">mantenimiento técnico en León</span>
                 </h1>
                 <p class="text-xl text-slate-400 max-w-xl leading-relaxed font-light">
-                    Transformamos negocios de León en infraestructuras tecnológicas soberanas.
-                    <span class="text-[#E29595] font-medium"> Sin bloatware. Sin excusas.</span>
+                    Webs claras, tiendas online y soporte técnico para empresas y autónomos de León.
+                    <span class="text-[#E29595] font-medium"> Trato directo y sin jerga innecesaria.</span>
                 </p>
             </div>
 
@@ -43,7 +43,7 @@ get_header();
                     Diseño web, mantenimiento y automatización con un enfoque técnico y directo.
                 </p>
                 <p class="text-xs text-slate-500 uppercase tracking-[0.2em]">
-                    Arquitectura pensada para convertir
+                    Soluciones web pensadas para tu negocio
                 </p>
             </div>
         </div>
@@ -56,11 +56,11 @@ get_header();
                     Estrategia de Implementación
                 </div>
                 <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">
-                    Potencia React, <br>
-                    <span class="text-slate-300">Hosting WordPress Estándar.</span>
+                    Una base técnica clara, <br>
+                    <span class="text-slate-300">fácil de mantener.</span>
                 </h2>
                 <p class="text-slate-300 max-w-2xl mx-auto leading-relaxed">
-                    No necesitas servidores Node.js costosos. Nuestra arquitectura híbrida se integra en tu hosting actual (cPanel, SiteGround, etc.) manteniendo el SEO intacto.
+                    Ajustamos la base técnica al proyecto y al alojamiento disponible, con una estructura clara y fácil de mantener.
                 </p>
             </div>
 
@@ -69,9 +69,9 @@ get_header();
                     <div class="w-16 h-16 bg-slate-700 rounded-2xl flex items-center justify-center mx-auto mb-6">
                         <span class="text-2xl text-blue-400">01</span>
                     </div>
-                    <h3 class="text-xl font-bold text-white mb-2">1. Hosting WordPress</h3>
+                    <h3 class="text-xl font-bold text-white mb-2">1. WordPress</h3>
                     <p class="text-slate-300 text-sm leading-relaxed">
-                        El servidor entrega el HTML base, maneja el SEO (Yoast) y la base de datos. Carga instantánea y barata.
+                        WordPress permite gestionar el contenido y mantener una base clara para el proyecto.
                     </p>
                     <span class="inline-block mt-5 bg-blue-600 text-[10px] font-bold px-2 py-1 rounded text-white">PHP</span>
                 </article>
@@ -80,9 +80,9 @@ get_header();
                     <div class="w-16 h-16 bg-slate-700 rounded-2xl flex items-center justify-center mx-auto mb-6">
                         <span class="text-2xl text-purple-400">02</span>
                     </div>
-                    <h3 class="text-xl font-bold text-white mb-2">2. El Puente (API REST)</h3>
+                    <h3 class="text-xl font-bold text-white mb-2">2. Integraciones</h3>
                     <p class="text-slate-300 text-sm leading-relaxed">
-                        WordPress expone tus productos y posts vía API. React consume estos datos sin recargar la página.
+                        Cuando hace falta, conectamos los datos y servicios necesarios para que cada parte cumpla su función.
                     </p>
                     <span class="inline-block mt-5 bg-purple-600 text-[10px] font-bold px-2 py-1 rounded text-white">JSON</span>
                 </article>
@@ -91,9 +91,9 @@ get_header();
                     <div class="w-16 h-16 bg-slate-700 rounded-2xl flex items-center justify-center mx-auto mb-6">
                         <span class="text-2xl text-rose-400">03</span>
                     </div>
-                    <h3 class="text-xl font-bold text-white mb-2">3. Hidratación React</h3>
+                    <h3 class="text-xl font-bold text-white mb-2">3. Interacción</h3>
                     <p class="text-slate-300 text-sm leading-relaxed">
-                        Nuestros componentes (Reservas, Calculadoras) toman el control del navegador para una experiencia tipo App nativa.
+                        Añadimos componentes interactivos solo cuando aportan utilidad real al usuario.
                     </p>
                     <span class="inline-block mt-5 bg-rose-500 text-[10px] font-bold px-2 py-1 rounded text-white">REACT</span>
                 </article>
@@ -103,31 +103,42 @@ get_header();
 
     <section id="servicios" class="max-w-7xl mx-auto px-6 py-24 border-t border-white/5">
         <div class="mb-16">
-            <h2 class="text-4xl font-serif text-white mb-4">Servicios de <span class="text-[#E29595]">ingeniería</span></h2>
-            <p class="max-w-2xl text-slate-400 italic">Arquitectura modular para el crecimiento digital.</p>
+            <h2 class="text-4xl font-serif text-white mb-4">Servicios web para <span class="text-[#E29595]">empresas y autónomos</span></h2>
+            <p class="max-w-2xl text-slate-400 italic">Diseño, tiendas online, mantenimiento y consultoría con un enfoque directo.</p>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <article class="md:col-span-2 bg-[#1F2937]/30 border border-white/5 rounded-[2.5rem] p-10 hover:border-[#E29595]/30 transition-all duration-300 relative overflow-hidden">
                 <div class="relative z-10 space-y-4">
-                    <h3 class="text-3xl font-serif text-white">Desarrollo Full-Stack <span class="text-[#E29595]">WP + React</span></h3>
+                    <h3 class="text-3xl font-serif text-white">Diseño y desarrollo <span class="text-[#E29595]">WordPress</span></h3>
                     <p class="text-slate-400 max-w-md leading-relaxed">
-                        Mantén WordPress como base editorial y añade componentes React solo donde aportan valor real: calculadoras, formularios y demos interactivas.
+                        Páginas web claras, fáciles de administrar y adaptadas a las necesidades reales de tu negocio.
                     </p>
+                    <a href="<?php echo esc_url(home_url('/diseno-web-leon/')); ?>" class="inline-flex mt-2 text-[#E29595] font-bold">Ver diseño web →</a>
                 </div>
             </article>
 
             <article class="bg-[#E29595] rounded-[2.5rem] p-10 shadow-[0_20px_40px_-15px_rgba(226,149,149,0.3)] flex flex-col justify-between">
                 <div>
-                    <h3 class="text-2xl font-bold text-[#121826] leading-tight">Auditoría WPO</h3>
-                    <p class="text-sm text-[#121826]/80 mt-4">Optimización de rendimiento y orden técnico.</p>
+                    <h3 class="text-2xl font-bold text-[#121826] leading-tight">Mantenimiento WordPress</h3>
+                    <p class="text-sm text-[#121826]/80 mt-4">Actualizaciones, copias y soporte técnico para webs ya publicadas.</p>
+                    <a href="<?php echo esc_url(home_url('/mantenimiento-wordpress-leon/')); ?>" class="inline-flex mt-5 text-[#121826] font-bold">Ver mantenimiento →</a>
                 </div>
             </article>
 
             <article class="bg-[#1F2937]/30 border border-white/5 rounded-[2.5rem] p-8 hover:border-[#E29595]/30 transition-all duration-300">
-                <h3 class="text-2xl font-serif text-white mb-4">Arquitectura de datos</h3>
-                <p class="text-sm text-slate-400 leading-relaxed">Diseño de bases y flujos para negocio, integraciones y automatización.</p>
+                <h3 class="text-2xl font-serif text-white mb-4">Consultoría WordPress</h3>
+                <p class="text-sm text-slate-400 leading-relaxed">Orientación para entender problemas y ordenar decisiones antes de implementar.</p>
+                <a href="<?php echo esc_url(home_url('/consultor-wordpress/')); ?>" class="inline-flex mt-5 text-[#E29595] font-bold">Ver consultoría →</a>
             </article>
+
+            <article class="bg-[#1F2937]/30 border border-white/5 rounded-[2.5rem] p-8 hover:border-[#E29595]/30 transition-all duration-300">
+                <h3 class="text-2xl font-serif text-white mb-4">Tiendas online</h3>
+                <p class="text-sm text-slate-400 leading-relaxed">Catálogo, carrito y proceso de compra con WooCommerce según el alcance del proyecto.</p>
+                <a href="<?php echo esc_url(home_url('/tiendas-online-leon/')); ?>" class="inline-flex mt-5 text-[#E29595] font-bold">Ver tiendas online →</a>
+            </article>
+
+
         </div>
     </section>
 
