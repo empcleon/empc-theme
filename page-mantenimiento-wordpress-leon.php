@@ -118,7 +118,7 @@ get_header();
                         <ul class="space-y-2 text-slate-300 text-sm">
                             <li>• Optimización WPO</li>
                             <li>• Enlaces rotos y redirecciones</li>
-                            <li>• Pequeñas actualizaciones</li>
+                            <li>• Ajustes técnicos menores</li>
                             <li>• Informe mensual en los planes que lo contemplan</li>
                         </ul>
                     </div>
@@ -197,7 +197,7 @@ get_header();
                         <ul class="space-y-2 text-sm text-slate-300">
                             <li>• Todo lo del plan plus</li>
                             <li>• Copias de seguridad e intervención técnica según alcance</li>
-                            <li>• Gestión para WooCommerce e informe mensual</li>
+                            <li>• Mantenimiento técnico de tiendas WooCommerce e informe mensual</li>
                         </ul>
                         <p class="text-xs text-slate-400">Frecuencia: mensual</p>
                         <a href="<?php echo esc_url(home_url('/contacta-conmigo/?tipo=mantenimiento-wordpress')); ?>" class="inline-flex min-h-11 items-center justify-center px-4 py-3 rounded-xl bg-[#E29595] text-[#121826] font-bold text-sm">
