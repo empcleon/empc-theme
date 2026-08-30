@@ -54,6 +54,34 @@ get_header();
                     </div>
                 </section>
 
+            <?php elseif ($slug === 'diseno-web-wordpress-creativa-leon') : ?>
+                <section class="space-y-10">
+                    <div class="max-w-4xl space-y-5">
+                        <p class="text-[11px] font-bold uppercase tracking-[0.25em] text-[#E29595]">Diseño web en León</p>
+                        <h1 class="text-4xl md:text-6xl font-bold text-white leading-tight">Diseño web WordPress para empresas y autónomos</h1>
+                        <p class="text-xl text-slate-400 leading-relaxed">Páginas web claras, administrables y adaptadas al alcance real de cada proyecto.</p>
+                    </div>
+                    <section class="space-y-5">
+                        <h2 class="text-3xl font-bold text-white">Precios orientativos para nuevos proyectos</h2>
+                        <p class="text-slate-400 leading-relaxed">El presupuesto final concreta páginas, contenidos, funcionalidades e integraciones. Importes sin IVA.</p>
+                        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+                            <div class="rounded-2xl border border-white/10 bg-[#1F2937]/50 p-5"><h3 class="text-lg font-bold text-white">Landing o una página</h3><p class="mt-3 text-2xl font-bold text-[#E29595]">Desde 600 € + IVA</p></div>
+                            <div class="rounded-2xl border border-white/10 bg-[#1F2937]/50 p-5"><h3 class="text-lg font-bold text-white">Web corporativa básica</h3><p class="mt-3 text-2xl font-bold text-[#E29595]">Desde 900 € + IVA</p></div>
+                            <div class="rounded-2xl border border-white/10 bg-[#1F2937]/50 p-5"><h3 class="text-lg font-bold text-white">Web corporativa profesional</h3><p class="mt-3 text-2xl font-bold text-[#E29595]">Desde 1.300 € + IVA</p></div>
+                            <div class="rounded-2xl border border-white/10 bg-[#1F2937]/50 p-5"><h3 class="text-lg font-bold text-white">Página adicional</h3><p class="mt-3 text-2xl font-bold text-[#E29595]">Desde 75 € + IVA</p></div>
+                        </div>
+                        <p class="text-sm text-slate-400">Multiidioma, videotutoriales, newsletter, textos legales, SEO y otras ampliaciones se valoran según alcance. Los proyectos personalizados o con integraciones se presupuesta a medida.</p>
+                    </section>
+                    <section class="rounded-3xl border border-[#E29595]/20 bg-[#E29595]/5 p-6 md:p-8"><h2 class="text-2xl font-bold text-white mb-3">Solicitar una valoración</h2><p class="text-slate-400 mb-5">Cuéntame qué necesitas y prepararé una propuesta ajustada al alcance real.</p><a href="<?php echo esc_url(home_url('/contacta-conmigo/?tipo=diseno-web')); ?>" class="inline-flex items-center justify-center px-6 py-3 rounded-xl bg-[#E29595] text-slate-950 font-bold">Solicitar presupuesto</a></section>
+                </section>
+
+            <?php elseif ($slug === 'optimizacion-de-velocidad-wordpress-freelance') : ?>
+                <section class="space-y-10">
+                    <div class="max-w-4xl space-y-5"><p class="text-[11px] font-bold uppercase tracking-[0.25em] text-[#E29595]">Rendimiento WordPress</p><h1 class="text-4xl md:text-6xl font-bold text-white leading-tight">Optimización de velocidad WordPress</h1><p class="text-xl text-slate-400 leading-relaxed">Reviso la carga, los recursos y la configuración para identificar mejoras técnicas con un alcance concreto.</p></div>
+                    <section class="space-y-5"><h2 class="text-3xl font-bold text-white">Un servicio con valoración previa</h2><p class="text-slate-400 leading-relaxed">La optimización depende del hosting, tema, plugins, contenidos y objetivos de la web. La valoración inicial define las tareas necesarias.</p><p class="text-2xl font-bold text-[#E29595]">Desde 300 € + IVA</p><p class="text-sm text-slate-400">Proyectos complejos o intervenciones con dependencias externas: presupuesto a medida.</p></section>
+                    <section class="rounded-3xl border border-[#E29595]/20 bg-[#E29595]/5 p-6 md:p-8"><h2 class="text-2xl font-bold text-white mb-3">Solicitar una valoración</h2><a href="<?php echo esc_url(home_url('/contacta-conmigo/?tipo=wpo')); ?>" class="inline-flex items-center justify-center px-6 py-3 rounded-xl bg-[#E29595] text-slate-950 font-bold">Solicitar presupuesto</a></section>
+                </section>
+
             <?php elseif ($slug === 'mantenimiento-wordpress-leon' || $slug === 'alquiler-pagina-web-empresas-y-autonomos') : ?>
                 <section class="prose prose-invert prose-lg max-w-4xl mx-auto text-slate-300">
                     <?php if ($slug === 'alquiler-pagina-web-empresas-y-autonomos') : ?>

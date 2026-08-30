@@ -124,7 +124,7 @@ get_header();
                             <li>• Formulario de contacto</li>
                             <li>• Blog o blog + newsletter</li>
                             <li>• Enlaces a redes sociales</li>
-                            <li>• Localización y atención al cliente en el contenido original</li>
+                            <li>• Localización y atención al cliente según el alcance acordado</li>
                         </ul>
                     </div>
                     <div class="rounded-2xl border border-white/10 bg-[#1F2937]/50 p-6 space-y-3">
@@ -151,9 +151,9 @@ get_header();
             <section id="planes-alquiler" class="space-y-6">
                 <div class="max-w-3xl space-y-3">
                     <p class="text-[11px] font-bold uppercase tracking-[0.25em] text-[#E29595]">Planes</p>
-                    <h2 class="text-3xl md:text-4xl font-bold text-white">Tarjetas comparables con los datos publicados</h2>
+                    <h2 class="text-3xl md:text-4xl font-bold text-white">Opciones de alquiler web</h2>
                     <p class="text-slate-400 leading-relaxed">
-                        El contenido original mezcla cuotas mensuales, referencias a pago único y mensajes de "sin entrada ni permanencia". No lo cierro por mi cuenta: lo dejo señalado como punto a confirmar.
+                        Estas opciones se preparan mediante una propuesta individual. La cuota, el alcance, la propiedad, el dominio, el hosting, el soporte y cualquier condición de permanencia se concretan antes de contratar.
                     </p>
                 </div>
 
@@ -202,7 +202,7 @@ get_header();
                             <li>• 4 publicaciones de contenido al mes</li>
                             <li>• Copia de seguridad semanal y soporte técnico</li>
                         </ul>
-                        <p class="text-xs text-slate-400">Condición: revisar el bloque original antes de cerrar la contratación</p>
+                        <p class="text-xs text-slate-400">Alcance y condiciones: se concretan en la propuesta.</p>
                         <a href="<?php echo esc_url(home_url('/contacta-conmigo/?tipo=alquiler-web')); ?>" class="inline-flex min-h-11 items-center justify-center px-4 py-3 rounded-xl bg-[#E29595] text-[#121826] font-bold text-sm">Contratar plan</a>
                     </div>
 
@@ -218,14 +218,12 @@ get_header();
                             <li>• Conexión con TPV virtual</li>
                             <li>• 4 publicaciones al mes, backups 24h y soporte</li>
                         </ul>
-                        <p class="text-xs text-slate-400">Condición publicada: presupuesto personalizado</p>
+                        <p class="text-xs text-slate-400">Alcance y condiciones: se concretan en la propuesta.</p>
                         <a href="<?php echo esc_url(home_url('/contacta-conmigo/?tipo=alquiler-web')); ?>" class="inline-flex min-h-11 items-center justify-center px-4 py-3 rounded-xl bg-[#E29595] text-[#121826] font-bold text-sm">Solicitar presupuesto</a>
                     </div>
                 </div>
 
-                <div class="rounded-2xl border border-amber-400/20 bg-amber-400/10 p-5 text-amber-100 text-sm leading-relaxed">
-                    Nota: el contenido original mezcla referencias a cuota mensual, pago único y “sin permanencia”. Esa combinación queda pendiente de confirmación.
-                </div>
+
             </section>
 
             <section class="space-y-6">
@@ -269,7 +267,7 @@ get_header();
             <section class="space-y-6">
                 <div class="max-w-3xl space-y-3">
                     <p class="text-[11px] font-bold uppercase tracking-[0.25em] text-[#E29595]">Preguntas frecuentes</p>
-                    <h2 class="text-3xl md:text-4xl font-bold text-white">Lo que sí aparece en el contenido actual</h2>
+                    <h2 class="text-3xl md:text-4xl font-bold text-white">Preguntas sobre la propuesta</h2>
                 </div>
 
                 <div class="space-y-3">
@@ -277,10 +275,7 @@ get_header();
                         <summary class="cursor-pointer list-none text-white font-bold">¿Incluye hosting y dominio?</summary>
                         <p class="mt-3 text-sm text-slate-400 leading-relaxed">Sí, aparecen como incluidos en los planes publicados.</p>
                     </details>
-                    <details class="rounded-2xl border border-white/10 bg-[#1F2937]/50 p-5">
-                        <summary class="cursor-pointer list-none text-white font-bold">¿Hay permanencia?</summary>
-                        <p class="mt-3 text-sm text-slate-400 leading-relaxed">El contenido original mezcla referencias a permanencia y a ausencia de permanencia; se deja esa parte pendiente de confirmación.</p>
-                    </details>
+
                     <details class="rounded-2xl border border-white/10 bg-[#1F2937]/50 p-5">
                         <summary class="cursor-pointer list-none text-white font-bold">¿Se puede escalar el plan?</summary>
                         <p class="mt-3 text-sm text-slate-400 leading-relaxed">Sí, el texto insiste en un modelo escalable que puede crecer según necesidades.</p>

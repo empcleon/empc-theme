@@ -294,10 +294,7 @@ get_header();
                         <summary class="cursor-pointer list-none text-white font-bold">¿Realizas mantenimiento de hosting?</summary>
                         <p class="mt-3 text-sm text-slate-400 leading-relaxed">No. El hosting se contrata por tu cuenta, aunque se puede ayudar con la gestión si hace falta.</p>
                     </details>
-                    <details class="rounded-2xl border border-white/10 bg-[#1F2937]/50 p-5">
-                        <summary class="cursor-pointer list-none text-white font-bold">¿Es necesario contrato de permanencia?</summary>
-                        <p class="mt-3 text-sm text-slate-400 leading-relaxed">La fuente heredada menciona periodicidades mensual, trimestral, semestral y anual, pero la duración y las condiciones concretas deben confirmarse en el presupuesto. No se presenta aquí una permanencia cerrada.</p>
-                    </details>
+
                     <details class="rounded-2xl border border-white/10 bg-[#1F2937]/50 p-5">
                         <summary class="cursor-pointer list-none text-white font-bold">¿Cuándo se paga el servicio?</summary>
                         <p class="mt-3 text-sm text-slate-400 leading-relaxed">Por adelantado, según los meses contratados.</p>
