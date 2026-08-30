@@ -39,6 +39,17 @@ if (!function_exists('empc_diseno_web_leon_safe_config')) {
                     ['title' => 'Base para captar contactos', 'description' => 'La web se estructura con llamadas a la acción, formularios y páginas de servicio que pueden medirse y mejorarse con el tiempo.'],
                 ],
             ],
+            'pricing' => [
+                'title' => 'Precios orientativos de diseño web',
+                'description' => 'Importes para nuevos proyectos. El presupuesto final concreta el alcance y se muestra sin IVA.',
+                'tiers' => [
+                    ['title' => 'Landing o web de una página', 'price' => empc_price_label(empc_commercial_price('design', 'landing', 'price')), 'description' => 'Una página comercial clara.', 'features' => ['Diseño y estructura de una página']],
+                    ['title' => 'Web corporativa básica', 'price' => empc_price_label(empc_commercial_price('design', 'basic', 'price')), 'description' => 'La base para presentar tu negocio.', 'features' => ['Estructura corporativa', 'WordPress administrable']],
+                    ['title' => 'Web corporativa profesional', 'price' => empc_price_label(empc_commercial_price('design', 'professional', 'price')), 'description' => 'Más profundidad y contenido.', 'features' => ['Alcance ampliado', 'Estructura preparada para crecer']],
+                    ['title' => 'Página adicional', 'price' => empc_price_label(empc_commercial_price('design', 'additionalPage', 'price')), 'description' => 'Cuando el alcance se puede separar.', 'features' => ['Desde 75 € + IVA por página']],
+                ],
+                'note' => 'Los proyectos personalizados o con integraciones se presupuesta a medida.',
+            ],
             'process' => [
                 'title' => 'Cómo trabajo',
                 'description' => 'Un proceso sencillo para que conozcas el siguiente paso y no tengas que adivinar qué está ocurriendo con tu proyecto.',

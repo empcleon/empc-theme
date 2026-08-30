@@ -1,0 +1,45 @@
+{
+  "vatRate": 0.21,
+  "design": {
+    "landing": { "label": "Landing o web de una página", "price": 600 },
+    "basic": { "label": "Web corporativa básica", "price": 900 },
+    "professional": { "label": "Web corporativa profesional", "price": 1300 },
+    "custom": { "label": "Proyecto personalizado o con integraciones", "price": null },
+    "additionalPage": { "label": "Página adicional", "price": 75 }
+  },
+  "ecommerce": {
+    "initial": { "label": "Tienda WooCommerce inicial", "price": 1800 },
+    "advanced": { "label": "Tienda avanzada, sincronizaciones o integraciones", "price": 2500 },
+    "custom": { "label": "Proyecto WooCommerce a medida", "price": null }
+  },
+  "maintenance": {
+    "basic": { "label": "Básico", "price": 49, "period": "mes" },
+    "medium": { "label": "Medio", "price": 75, "period": "mes" },
+    "plus": { "label": "Plus", "price": 119, "period": "mes" },
+    "premium": { "label": "Premium", "price": 199, "period": "mes" }
+  },
+  "consulting": { "label": "Consultoría WordPress", "price": 75, "unit": "hora", "maxHours": 2 },
+  "technicalHour": { "label": "Trabajos técnicos fuera de plan", "price": 60, "unit": "hora" },
+  "wpo": { "label": "Auditoría y optimización WPO", "price": 300, "qualifier": "desde" },
+  "localSeo": {
+    "initial": { "label": "Auditoría y configuración inicial", "price": 300, "qualifier": "desde" },
+    "recurring": { "label": "Seguimiento recurrente", "price": 300, "period": "mes", "qualifier": "desde" },
+    "custom": { "label": "Alcance SEO avanzado", "price": null }
+  },
+  "rental": {
+    "essential": { "label": "Web esencial", "price": null },
+    "catalog": { "label": "Web catálogo", "price": null },
+    "content": { "label": "Web de contenidos", "price": null },
+    "commerce": { "label": "Comercio electrónico", "price": null }
+  },
+  "closedScopeExtras": [
+    "Integración React",
+    "Diseño gráfico",
+    "Reservas",
+    "Formularios avanzados",
+    "Automatizaciones",
+    "Copywriting",
+    "ERP o CRM",
+    "Sincronización de stock"
+  ]
+}

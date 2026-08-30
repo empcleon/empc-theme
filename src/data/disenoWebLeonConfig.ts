@@ -49,7 +49,7 @@ export const disenoWebLeonConfig = {
         tiers: [
             {
                 title: 'Web Corporativa',
-                price: 'desde 800€',
+                price: 'desde 900€',
                 description: 'Presencia profesional para tu empresa',
                 features: ['Diseño personalizado', '5-8 páginas', 'Responsive 100%', 'Formulario de contacto', 'SEO básico', 'Alta en Google Business'],
                 idealFor: 'Empresas y autónomos que necesitan presencia online profesional',
@@ -58,7 +58,7 @@ export const disenoWebLeonConfig = {
             },
             {
                 title: 'Web Premium',
-                price: 'desde 1.500€',
+                price: 'desde 1.300€',
                 description: 'Máximo rendimiento y conversión',
                 highlighted: true,
                 badge: 'Más popular',

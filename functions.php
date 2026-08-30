@@ -8,6 +8,7 @@ define('EMPC_THEME_DIR', get_template_directory());
 define('EMPC_THEME_URI', get_template_directory_uri());
 
 foreach ([
+    EMPC_THEME_DIR . '/inc/commercial-pricing.php',
     EMPC_THEME_DIR . '/inc/service-pages-data.php',
     EMPC_THEME_DIR . '/inc/service-pages-config.php',
     EMPC_THEME_DIR . '/inc/diseno-web-leon-safe-config.php',

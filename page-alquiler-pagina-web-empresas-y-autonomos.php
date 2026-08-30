@@ -161,39 +161,39 @@ get_header();
                     <div class="rounded-3xl border border-white/10 bg-[#1F2937]/60 p-6 space-y-4">
                         <div>
                             <p class="text-xs uppercase tracking-[0.25em] text-[#E29595]">EMPC&amp;SITE</p>
-                            <h3 class="text-2xl font-bold text-white">40€ / mes</h3>
+                            <h3 class="text-2xl font-bold text-white">Consultar propuesta</h3>
                             <p class="text-sm text-slate-400">Web corporativa</p>
                         </div>
                         <ul class="space-y-2 text-sm text-slate-300">
                             <li>• Hosting y dominio incluidos</li>
                             <li>• 10 páginas, formulario, blog y redes</li>
                             <li>• 1 actualización de contenido mensual</li>
-                            <li>• Copia de seguridad mensual y SEO desde 100€/mes</li>
+                            <li>• Copia de seguridad mensual y SEO: consultar propuesta</li>
                         </ul>
-                        <p class="text-xs text-slate-400">Condición publicada: sin entrada ni permanencia</p>
+                        <p class="text-xs text-slate-400">Permanencia, propiedad, dominio, hosting, soporte y cuota inicial: consultar propuesta</p>
                         <a href="<?php echo esc_url(home_url('/contacta-conmigo/?tipo=alquiler-web')); ?>" class="inline-flex min-h-11 items-center justify-center px-4 py-3 rounded-xl bg-[#E29595] text-[#121826] font-bold text-sm">Contratar plan</a>
                     </div>
 
                     <div class="rounded-3xl border border-[#E29595]/30 bg-[#1F2937]/70 p-6 space-y-4 ring-1 ring-[#E29595]/10">
                         <div>
                             <p class="text-xs uppercase tracking-[0.25em] text-[#E29595]">EMPC&amp;CATALOG</p>
-                            <h3 class="text-2xl font-bold text-white">50€ / mes</h3>
+                            <h3 class="text-2xl font-bold text-white">Consultar propuesta</h3>
                             <p class="text-sm text-slate-400">Web con catálogo</p>
                         </div>
                         <ul class="space-y-2 text-sm text-slate-300">
                             <li>• Hosting y dominio incluidos</li>
                             <li>• 10 páginas, blog + newsletter y redes</li>
                             <li>• Catálogo de productos hasta 50 unidades</li>
-                            <li>• Backups quincenales, soporte y SEO desde 100€/mes</li>
+                            <li>• Backups quincenales, soporte y SEO: consultar propuesta</li>
                         </ul>
-                        <p class="text-xs text-slate-400">Condición publicada: sin entrada ni permanencia</p>
+                        <p class="text-xs text-slate-400">Permanencia, propiedad, dominio, hosting, soporte y cuota inicial: consultar propuesta</p>
                         <a href="<?php echo esc_url(home_url('/contacta-conmigo/?tipo=alquiler-web')); ?>" class="inline-flex min-h-11 items-center justify-center px-4 py-3 rounded-xl bg-[#E29595] text-[#121826] font-bold text-sm">Contratar plan</a>
                     </div>
 
                     <div class="rounded-3xl border border-white/10 bg-[#1F2937]/60 p-6 space-y-4">
                         <div>
                             <p class="text-xs uppercase tracking-[0.25em] text-[#E29595]">EMPC&amp;CONTENTS</p>
-                            <h3 class="text-2xl font-bold text-white">85€ / mes</h3>
+                            <h3 class="text-2xl font-bold text-white">Consultar propuesta</h3>
                             <p class="text-sm text-slate-400">Web y gestión de contenidos</p>
                         </div>
                         <ul class="space-y-2 text-sm text-slate-300">

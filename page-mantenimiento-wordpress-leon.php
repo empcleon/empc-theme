@@ -130,7 +130,7 @@ get_header();
                     <p class="text-[11px] font-bold uppercase tracking-[0.25em] text-[#E29595]">Planes</p>
                     <h2 class="text-3xl md:text-4xl font-bold text-white">Tarjetas comparables con el contenido publicado</h2>
                     <p class="text-slate-400 leading-relaxed">
-                        Los importes que aparecen abajo son los publicados en el contenido original. Los precios se muestran sin IVA porque así aparecen en la página heredada.
+                        Precios para nuevos contratos. Los importes se muestran sin IVA; el alcance de cada plan se mantiene separado y cualquier trabajo fuera de plan se presupuesta aparte.
                     </p>
                 </div>
 
@@ -138,7 +138,7 @@ get_header();
                     <div class="rounded-3xl border border-white/10 bg-[#1F2937]/60 p-6 space-y-4">
                         <div>
                             <p class="text-xs uppercase tracking-[0.25em] text-[#E29595]">Plan Básico</p>
-                            <h3 class="text-2xl font-bold text-white">39€ / mes</h3>
+                            <h3 class="text-2xl font-bold text-white"><?php echo esc_html(empc_price_label(empc_commercial_price('maintenance', 'basic', 'price'), '', 'mes')); ?></h3>
                             <p class="text-sm text-slate-400">Páginas Web</p>
                         </div>
                         <ul class="space-y-2 text-sm text-slate-300">
@@ -156,7 +156,7 @@ get_header();
                     <div class="rounded-3xl border border-white/10 bg-[#1F2937]/60 p-6 space-y-4">
                         <div>
                             <p class="text-xs uppercase tracking-[0.25em] text-[#E29595]">Plan Medio</p>
-                            <h3 class="text-2xl font-bold text-white">55€ / mes</h3>
+                            <h3 class="text-2xl font-bold text-white"><?php echo esc_html(empc_price_label(empc_commercial_price('maintenance', 'medium', 'price'), '', 'mes')); ?></h3>
                             <p class="text-sm text-slate-400">Páginas Web</p>
                         </div>
                         <ul class="space-y-2 text-sm text-slate-300">
@@ -174,7 +174,7 @@ get_header();
                     <div class="rounded-3xl border border-[#E29595]/30 bg-[#1F2937]/70 p-6 space-y-4 ring-1 ring-[#E29595]/10">
                         <div>
                             <p class="text-xs uppercase tracking-[0.25em] text-[#E29595]">Plan Plus</p>
-                            <h3 class="text-2xl font-bold text-white">100€ / mes</h3>
+                            <h3 class="text-2xl font-bold text-white"><?php echo esc_html(empc_price_label(empc_commercial_price('maintenance', 'plus', 'price'), '', 'mes')); ?></h3>
                             <p class="text-sm text-slate-400">Tienda online</p>
                         </div>
                         <ul class="space-y-2 text-sm text-slate-300">
@@ -191,7 +191,7 @@ get_header();
                     <div class="rounded-3xl border border-white/10 bg-[#1F2937]/60 p-6 space-y-4">
                         <div>
                             <p class="text-xs uppercase tracking-[0.25em] text-[#E29595]">Plan Premium</p>
-                            <h3 class="text-2xl font-bold text-white">199€ / mes</h3>
+                            <h3 class="text-2xl font-bold text-white"><?php echo esc_html(empc_price_label(empc_commercial_price('maintenance', 'premium', 'price'), '', 'mes')); ?></h3>
                             <p class="text-sm text-slate-400">Tienda online</p>
                         </div>
                         <ul class="space-y-2 text-sm text-slate-300">

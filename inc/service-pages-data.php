@@ -50,7 +50,7 @@ function get_diseno_web_leon_config()
             'tiers' => [
                 [
                     'title' => 'Web Corporativa',
-                    'price' => 'desde 800€',
+                    'price' => 'desde 900€',
                     'description' => 'Presencia profesional',
                     'features' => ['Diseño personalizado', '5-8 páginas', 'Responsive', 'Contacto', 'SEO básico', 'Google Business'],
                     'idealFor' => 'Empresas y autónomos',
@@ -59,7 +59,7 @@ function get_diseno_web_leon_config()
                 ],
                 [
                     'title' => 'Web Premium',
-                    'price' => 'desde 1.500€',
+                    'price' => 'desde 1.300€',
                     'description' => 'Máximo rendimiento',
                     'highlighted' => true,
                     'badge' => 'Más popular',
@@ -284,7 +284,7 @@ function get_tiendas_online_config(): array
             'plans' => [
                 [
                     'name' => 'Starter',
-                    'price' => '1.200',
+                    'price' => '1.800',
                     'currency' => '€',
                     'period' => null,
                     'description' => 'Perfecta para empezar a vender online',
@@ -341,7 +341,7 @@ function get_tiendas_online_config(): array
                 ],
                 [
                     'name' => 'Enterprise',
-                    'price' => 'Desde 5.000',
+                    'price' => 'consultar',
                     'currency' => '€',
                     'period' => null,
                     'description' => 'Solución completa para grandes operaciones',
@@ -687,12 +687,6 @@ function get_tiendas_online_config(): array
                     'name' => 'España'
                 ],
                 'serviceType' => 'E-commerce Development',
-                'offers' => [
-                    '@type' => 'AggregateOffer',
-                    'lowPrice' => '1200',
-                    'highPrice' => '10000',
-                    'priceCurrency' => 'EUR'
-                ]
             ]
         ]
     ];
@@ -816,7 +810,7 @@ function get_seo_local_leon_config(): array
             'tiers' => [
                 [
                     'title' => 'Setup Inicial',
-                    'price' => '450€',
+                    'price' => 'desde 300€ + IVA',
                     'description' => 'De cero a tener presencia local sólida',
                     'features' => [
                         'Alta y verificación de ficha (si hace falta)',
@@ -831,7 +825,7 @@ function get_seo_local_leon_config(): array
                 ],
                 [
                     'title' => 'SEO Local Mensual',
-                    'price' => '350€/mes',
+                    'price' => 'desde 300€/mes + IVA',
                     'description' => 'Trabajamos posiciones y reputación mes a mes',
                     'highlighted' => true,
                     'badge' => '⭐ RECOMENDADO',
@@ -848,7 +842,7 @@ function get_seo_local_leon_config(): array
                 ],
                 [
                     'title' => 'Multi-ubicación',
-                    'price' => 'Desde 600€/mes',
+                    'price' => 'presupuesto a medida',
                     'description' => 'Para franquicias o negocios con varias sedes',
                     'features' => [
                         'Estrategia global de SEO local',
