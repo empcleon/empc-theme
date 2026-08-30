@@ -246,6 +246,19 @@ if (!function_exists('empc_seo_preferred_title')) {
             $context['schema_page_name'] = get_the_title();
             $context['schema_page_description'] = $context['description'];
 
+            if (is_page('consultor-wordpress')) {
+                $context['kind'] = 'service';
+                $context['og_type'] = 'website';
+                $context['schema_main_type'] = 'Service';
+                $context['schema_page_type'] = 'WebPage';
+                $context['service_page'] = true;
+                $context['service_type'] = 'Consultoría WordPress';
+                $context['title'] = 'Consultor WordPress en León | Orientación técnica | EMPC';
+                $context['description'] = 'Consultor WordPress en León para entender problemas, revisar propuestas y ordenar decisiones técnicas antes de contratar cambios.';
+                $context['schema_page_name'] = get_the_title();
+                $context['schema_page_description'] = $context['description'];
+            }
+
             if (is_page('contacta-conmigo')) {
                 $context['kind'] = 'contact';
                 $context['og_type'] = 'website';
