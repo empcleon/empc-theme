@@ -703,6 +703,14 @@ if (!function_exists('empc_seo_rank_math_filters')) {
             }
         }
 
+        if (is_page('mantenimiento-wordpress-leon')) {
+            foreach ($data as $key => $node) {
+                if (is_array($node) && ($node['@type'] ?? null) === '') {
+                    $data[$key]['@type'] = 'WebPage';
+                }
+            }
+        }
+
         return $data;
     }
 
