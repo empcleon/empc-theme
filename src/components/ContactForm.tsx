@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import { Mail, ArrowRight, Check, User, MessageSquare, Send } from 'lucide-react';
+import { emitGenerateLead, readServiceAttribution, SERVICE_OPTIONS } from '../utils/serviceAttribution';
 
 const ContactForm = () => {
+    const initialAttribution = readServiceAttribution();
     const [step, setStep] = useState(1);
     const [formData, setFormData] = useState({
         name: '',
         email: '',
-        service: '',
+        service: initialAttribution?.label ?? '',
         message: '',
         website: ''
     });
@@ -42,12 +44,16 @@ const ContactForm = () => {
                 body: JSON.stringify(formData)
             });
 
-            if (response.ok) {
-                setIsSuccess(true);
-            } else {
-                const payload = await response.json().catch(() => null);
+            const payload = await response.json().catch(() => null);
+            if (!response.ok || payload?.success !== true) {
                 throw new Error(payload?.message || 'Hubo un error al enviar el mensaje. Por favor, intenta de nuevo.');
             }
+
+            const selectedService = SERVICE_OPTIONS.find((option) => option.label === formData.service);
+            if (selectedService) {
+                emitGenerateLead(selectedService.value, 'contact');
+            }
+            setIsSuccess(true);
         } catch (error) {
             console.error('Error enviando formulario:', error);
             setErrorMessage(error instanceof Error ? error.message : 'Error de conexión. Comprueba tu internet.');
@@ -65,7 +71,7 @@ const ContactForm = () => {
                 <h3 className="text-2xl font-bold text-white mb-2">Mensaje recibido</h3>
                 <p className="text-slate-300">Gracias, Emma. Te responderé lo antes posible.</p>
                 <button
-                    onClick={() => { setIsSuccess(false); setStep(1); setFormData({ name: '', email: '', service: '', message: '', website: '' }); }}
+                    onClick={() => { setIsSuccess(false); setStep(1); setFormData({ name: '', email: '', service: readServiceAttribution()?.label ?? '', message: '', website: '' }); }}
                     className="mt-6 text-emerald-400 hover:text-emerald-300 font-medium"
                 >
                     Enviar otro mensaje
@@ -156,10 +162,10 @@ const ContactForm = () => {
                             <h3 className="text-2xl font-bold text-white mb-6">¿En qué podemos ayudarte?</h3>
 
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                {['Desarrollo Web', 'E-commerce', 'Auditoría WPO', 'Consultoría IA'].map((service) => (
+                                {SERVICE_OPTIONS.map((option) => (
                                     <label
-                                        key={service}
-                                        className={`p-4 rounded-xl border cursor-pointer transition-all ${formData.service === service
+                                        key={option.value}
+                                        className={`p-4 rounded-xl border cursor-pointer transition-all ${formData.service === option.label
                                             ? 'bg-rose-500/10 border-rose-500 text-white'
                                             : 'bg-slate-800 border-slate-700 text-slate-300 hover:border-slate-500'
                                             }`}
@@ -167,12 +173,12 @@ const ContactForm = () => {
                                         <input
                                             type="radio"
                                             name="service"
-                                            value={service}
-                                            checked={formData.service === service}
+                                            value={option.label}
+                                            checked={formData.service === option.label}
                                             onChange={handleChange}
                                             className="hidden"
                                         />
-                                        <span className="font-medium">{service}</span>
+                                        <span className="font-medium">{option.label}</span>
                                     </label>
                                 ))}
                             </div>

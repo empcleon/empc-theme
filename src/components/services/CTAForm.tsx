@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Send } from 'lucide-react';
+import { emitGenerateLead, getServiceAttribution, readServiceAttribution } from '../../utils/serviceAttribution';
 
 export interface CTAFormProps {
     title: string;
@@ -18,6 +19,7 @@ interface FormData {
     mensaje: string;
     presupuesto?: string;
     website?: string;
+    service?: string;
 }
 
 const CTAForm: React.FC<CTAFormProps> = ({
@@ -28,6 +30,7 @@ const CTAForm: React.FC<CTAFormProps> = ({
     showBudgetField = true,
     showProjectType = true
 }) => {
+    const initialAttribution = readServiceAttribution();
     const [formData, setFormData] = useState<FormData>({
         nombre: '',
         email: '',
@@ -35,7 +38,8 @@ const CTAForm: React.FC<CTAFormProps> = ({
         tipo: '',
         mensaje: '',
         presupuesto: '',
-        website: ''
+        website: '',
+        service: initialAttribution?.value
     });
 
     const [isSubmitting, setIsSubmitting] = useState(false);
@@ -54,6 +58,7 @@ const CTAForm: React.FC<CTAFormProps> = ({
         setSubmitStatus('idle');
 
         try {
+            let endpointConfirmed = false;
             if (onSubmit) {
                 await onSubmit(formData);
             } else {
@@ -65,12 +70,20 @@ const CTAForm: React.FC<CTAFormProps> = ({
                         'Content-Type': 'application/json',
                         'X-WP-Nonce': window.empcData?.nonce || window.empcConfig?.nonce || ''
                     },
-                    body: JSON.stringify(formData)
+                    body: JSON.stringify({
+                        ...formData,
+                        service: formData.service ? getServiceAttribution(formData.service)?.label : undefined
+                    })
                 });
 
-                if (!response.ok) throw new Error('Error al enviar');
+                const payload = await response.json().catch(() => null);
+                if (!response.ok || payload?.success !== true) throw new Error(payload?.message || 'Error al enviar');
+                endpointConfirmed = true;
             }
 
+            if (endpointConfirmed && formData.service) {
+                emitGenerateLead(formData.service as Parameters<typeof emitGenerateLead>[0], 'service-cta');
+            }
             setSubmitStatus('success');
             setFormData({
                 nombre: '',
@@ -79,7 +92,8 @@ const CTAForm: React.FC<CTAFormProps> = ({
                 tipo: '',
                 mensaje: '',
                 presupuesto: '',
-                website: ''
+                website: '',
+                service: readServiceAttribution()?.value
             });
         } catch (error) {
             console.error('Error:', error);
@@ -178,6 +192,12 @@ const CTAForm: React.FC<CTAFormProps> = ({
                             </div>
                         )}
                     </div>
+
+                    {initialAttribution && (
+                        <p className="text-slate-400 text-sm mb-6" role="status">
+                            Consulta sobre: <span className="text-slate-200 font-medium">{initialAttribution.label}</span>
+                        </p>
+                    )}
 
                     <div className="mb-6">
                         <label className="block text-slate-300 text-sm mb-2">Cuéntame tu proyecto *</label>
