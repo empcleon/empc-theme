@@ -725,6 +725,14 @@ if (!function_exists('empc_seo_rank_math_filters')) {
 
             $data = empc_seo_merge_rank_math_organization($data);
 
+            if (is_page('mantenimiento-wordpress-leon')) {
+                foreach ($data as $key => $node) {
+                    if (is_array($node) && ($node['@type'] ?? null) === '') {
+                        $data[$key]['@type'] = 'WebPage';
+                    }
+                }
+            }
+
             if (is_page('diseno-web-leon')) {
                 $site = empc_seo_site_data();
                 $context = empc_seo_current_context();
