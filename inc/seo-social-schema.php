@@ -710,7 +710,31 @@ if (!function_exists('empc_seo_rank_math_filters')) {
                 return [];
             }
 
-            return empc_seo_merge_rank_math_organization($data);
+            $data = empc_seo_merge_rank_math_organization($data);
+
+            if (is_page('diseno-web-leon')) {
+                $site = empc_seo_site_data();
+                $context = empc_seo_current_context();
+                $canonical = !empty($context['canonical']) ? $context['canonical'] : get_permalink();
+                $service_id = rtrim($canonical, '/') . '#service';
+                $data['EMPCDesignWebService'] = [
+                    '@type' => 'Service',
+                    '@id' => $service_id,
+                    'name' => 'Diseño web en León para empresas y autónomos',
+                    'serviceType' => 'Diseño web',
+                    'url' => $canonical,
+                    'description' => $context['description'] ?? '',
+                    'provider' => [
+                        '@id' => $site['organization_id'],
+                    ],
+                    'areaServed' => $site['areaServed'],
+                    'mainEntityOfPage' => [
+                        '@id' => rtrim($canonical, '/') . '#webpage',
+                    ],
+                ];
+            }
+
+            return $data;
         }, 9999, 1);
 
         add_filter('rank_math/frontend/title', function ($title) {
