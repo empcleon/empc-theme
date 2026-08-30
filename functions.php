@@ -647,6 +647,10 @@ if (!function_exists('empc_get_meta_description')) {
             return 'Mantenimiento WordPress en León con planes mensuales, copias de seguridad, actualizaciones, seguridad, soporte y tareas avanzadas para sitios WordPress y WooCommerce.';
         }
 
+        if (is_page('reparacion-wordpress-leon')) {
+            return '¿Error crítico, pantalla blanca o fallos tras actualizar? Reviso y reparo tu WordPress o WooCommerce en León, con presupuesto previo confirmado.';
+        }
+
         if (is_page('alquiler-pagina-web-empresas-y-autonomos')) {
             return 'Alquiler de página web para empresas y autónomos con planes escalables, hosting, dominio y mantenimiento según el contenido publicado en la página.';
         }

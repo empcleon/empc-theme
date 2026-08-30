@@ -268,6 +268,7 @@ get_header();
                     <p class="text-[11px] font-bold uppercase tracking-[0.25em] text-[#E29595]">Servicios relacionados</p>
                     <h2 class="text-3xl md:text-4xl font-bold text-white">Cuando necesitas algo distinto</h2>
                     <p class="text-slate-400 leading-relaxed">El mantenimiento recurrente no sustituye a una web nueva ni a una sesión de asesoramiento puntual. Cada necesidad tiene su servicio y su alcance.</p>
+                    <p class="text-slate-400 leading-relaxed">¿Tu web ya tiene una avería concreta? <a class="text-[#E29595] font-bold" href="<?php echo esc_url(home_url('/reparacion-wordpress-leon/')); ?>">Consulta el servicio de reparación WordPress</a>.</p>
                 </div>
                 <div class="grid md:grid-cols-2 gap-4">
                     <div class="rounded-2xl border border-white/10 bg-[#1F2937]/50 p-5">

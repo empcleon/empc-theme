@@ -116,6 +116,10 @@ if (!function_exists('empc_seo_preferred_title')) {
         }
 
         if (is_page()) {
+            if (is_page('reparacion-wordpress-leon')) {
+                return 'Reparación WordPress en León y WooCommerce | EMPC';
+            }
+
             $service_config = empc_seo_current_service_config();
             if (!empty($service_config['seo']['title'])) {
                 return wp_strip_all_tags((string) $service_config['seo']['title']);
@@ -513,6 +517,9 @@ if (!function_exists('empc_seo_json_ld_entities')) {
                     '@id' => $organization_id,
                 ],
                 'areaServed' => $site['areaServed'],
+                'mainEntityOfPage' => [
+                    '@id' => rtrim($canonical, '/') . '#webpage',
+                ],
             ];
             $page_entity['mainEntity'] = [
                 '@id' => $service_id,
