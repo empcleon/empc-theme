@@ -17,6 +17,7 @@ if (!function_exists('empc_seo_service_slugs')) {
             'tiendas-online-leon',
             'mantenimiento-wordpress-leon',
             'alquiler-pagina-web-empresas-y-autonomos',
+            'reparacion-wordpress-leon',
         ];
     }
 }
@@ -296,6 +297,12 @@ if (!function_exists('empc_seo_preferred_title')) {
                 if (is_page('tiendas-online-leon')) {
                     $context['title'] = 'Diseño de tiendas online en León | WooCommerce | EMPC';
                     $context['description'] = 'Diseño de tiendas online en León con WooCommerce para empresas y autónomos. Catálogo, pagos, envíos y gestión de pedidos.';
+                }
+
+                if (is_page('reparacion-wordpress-leon')) {
+                    $context['title'] = 'Reparación WordPress en León y WooCommerce | EMPC';
+                    $context['description'] = '¿Error crítico, pantalla blanca o fallos tras actualizar? Reviso y reparo tu WordPress o WooCommerce en León, con presupuesto previo confirmado.';
+                    $context['service_type'] = 'Reparación WordPress y WooCommerce';
                 }
 
                 $context['schema_page_name'] = get_the_title();
@@ -824,6 +831,41 @@ if (!function_exists('empc_seo_rank_math_filters')) {
                     '@id' => rtrim($canonical, '/') . '#service',
                     'name' => 'Consultoría WordPress en León',
                     'serviceType' => 'Consultoría WordPress',
+                    'url' => $canonical,
+                    'description' => $context['description'] ?? '',
+                    'provider' => [
+                        '@id' => $site['organization_id'],
+                    ],
+                    'areaServed' => $site['areaServed'],
+                    'mainEntityOfPage' => [
+                        '@id' => rtrim($canonical, '/') . '#webpage',
+                    ],
+                ];
+            }
+
+            if (is_page('reparacion-wordpress-leon')) {
+                $site = empc_seo_site_data();
+                $context = empc_seo_current_context();
+                $canonical = !empty($context['canonical']) ? $context['canonical'] : get_permalink();
+                $service_id = rtrim($canonical, '/') . '#service';
+                foreach ($data as $key => $node) {
+                    if (!is_array($node)) {
+                        continue;
+                    }
+                    $types = (array) ($node['@type'] ?? []);
+                    if (($node['@type'] ?? null) === '' || array_intersect(['Article', 'BlogPosting', 'NewsArticle'], $types)) {
+                        unset($data[$key]);
+                        continue;
+                    }
+                    if (($node['@id'] ?? '') === $service_id) {
+                        unset($data[$key]);
+                    }
+                }
+                $data['EMPCRepairWordPressService'] = [
+                    '@type' => 'Service',
+                    '@id' => $service_id,
+                    'name' => 'Reparación de WordPress y WooCommerce en León',
+                    'serviceType' => 'Reparación WordPress y WooCommerce',
                     'url' => $canonical,
                     'description' => $context['description'] ?? '',
                     'provider' => [

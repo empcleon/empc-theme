@@ -84,11 +84,23 @@ $is_blog = is_home() || is_archive() || is_singular('post') || is_search();
                             <a href="<?php echo home_url('/diseno-web-leon'); ?>" class="block px-4 py-3 hover:bg-white/5 rounded-lg text-slate-300 hover:text-dusty-rose text-[10px] tracking-widest uppercase mb-1">
                                 Diseño Web
                             </a>
+                            <a href="<?php echo home_url('/mantenimiento-wordpress-leon/'); ?>" class="block px-4 py-3 hover:bg-white/5 rounded-lg text-slate-300 hover:text-dusty-rose text-[10px] tracking-widest uppercase mb-1">
+                                Mantenimiento WordPress
+                            </a>
+                            <a href="<?php echo home_url('/consultor-wordpress/'); ?>" class="block px-4 py-3 hover:bg-white/5 rounded-lg text-slate-300 hover:text-dusty-rose text-[10px] tracking-widest uppercase mb-1">
+                                Consultoría WordPress
+                            </a>
                             <a href="<?php echo home_url('/tiendas-online-leon'); ?>" class="block px-4 py-3 hover:bg-white/5 rounded-lg text-slate-300 hover:text-dusty-rose text-[10px] tracking-widest uppercase mb-1">
                                 Tiendas Online
                             </a>
+                            <a href="<?php echo home_url('/optimizacion-de-velocidad-wordpress-freelance/'); ?>" class="block px-4 py-3 hover:bg-white/5 rounded-lg text-slate-300 hover:text-dusty-rose text-[10px] tracking-widest uppercase mb-1">
+                                Optimización WordPress
+                            </a>
                             <a href="<?php echo home_url('/seo-local-leon'); ?>" class="block px-4 py-3 hover:bg-white/5 rounded-lg text-slate-300 hover:text-dusty-rose text-[10px] tracking-widest uppercase">
                                 SEO Local
+                            </a>
+                            <a href="<?php echo home_url('/alquiler-pagina-web-empresas-y-autonomos/'); ?>" class="block px-4 py-3 hover:bg-white/5 rounded-lg text-slate-300 hover:text-dusty-rose text-[10px] tracking-widest uppercase">
+                                Alquiler web
                             </a>
                         </div>
                     </div>
@@ -134,13 +146,29 @@ $is_blog = is_home() || is_archive() || is_singular('post') || is_search();
                     class="mobile-link block text-xl font-medium text-white">
                     Diseño Web
                 </a>
+                <a href="<?php echo home_url('/mantenimiento-wordpress-leon/'); ?>"
+                    class="mobile-link block text-xl font-medium text-white">
+                    Mantenimiento WordPress
+                </a>
+                <a href="<?php echo home_url('/consultor-wordpress/'); ?>"
+                    class="mobile-link block text-xl font-medium text-white">
+                    Consultoría WordPress
+                </a>
                 <a href="<?php echo home_url('/tiendas-online-leon'); ?>"
                     class="mobile-link block text-xl font-medium text-white">
                     Tiendas Online
                 </a>
+                <a href="<?php echo home_url('/optimizacion-de-velocidad-wordpress-freelance/'); ?>"
+                    class="mobile-link block text-xl font-medium text-white">
+                    Optimización WordPress
+                </a>
                 <a href="<?php echo home_url('/seo-local-leon'); ?>"
                     class="mobile-link block text-xl font-medium text-white">
                     SEO Local
+                </a>
+                <a href="<?php echo home_url('/alquiler-pagina-web-empresas-y-autonomos/'); ?>"
+                    class="mobile-link block text-xl font-medium text-white">
+                    Alquiler web
                 </a>
             </div>
 

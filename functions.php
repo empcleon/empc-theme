@@ -138,6 +138,7 @@ if (!function_exists('empc_force_specific_page_templates')) {
             'contacta-conmigo' => 'page-contacta-conmigo.php',
             'mantenimiento-wordpress-leon' => 'page-mantenimiento-wordpress-leon.php',
             'alquiler-pagina-web-empresas-y-autonomos' => 'page-alquiler-pagina-web-empresas-y-autonomos.php',
+            'reparacion-wordpress-leon' => 'page-reparacion-wordpress-leon.php',
             'reparacion-mantenimiento-en-leon' => 'page-reparacion-mantenimiento-en-leon.php',
         ];
 
