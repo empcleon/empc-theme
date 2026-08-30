@@ -815,6 +815,27 @@ if (!function_exists('empc_seo_rank_math_filters')) {
                 ];
             }
 
+            if (is_page('consultor-wordpress')) {
+                $site = empc_seo_site_data();
+                $context = empc_seo_current_context();
+                $canonical = !empty($context['canonical']) ? $context['canonical'] : get_permalink();
+                $data['EMPCConsultingService'] = [
+                    '@type' => 'Service',
+                    '@id' => rtrim($canonical, '/') . '#service',
+                    'name' => 'Consultoría WordPress en León',
+                    'serviceType' => 'Consultoría WordPress',
+                    'url' => $canonical,
+                    'description' => $context['description'] ?? '',
+                    'provider' => [
+                        '@id' => $site['organization_id'],
+                    ],
+                    'areaServed' => $site['areaServed'],
+                    'mainEntityOfPage' => [
+                        '@id' => rtrim($canonical, '/') . '#webpage',
+                    ],
+                ];
+            }
+
             return $data;
         }, 99999, 1);
 
