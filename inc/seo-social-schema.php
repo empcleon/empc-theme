@@ -275,6 +275,11 @@ if (!function_exists('empc_seo_preferred_title')) {
                     }
                 }
 
+                if (is_page('mantenimiento-wordpress-leon')) {
+                    $context['title'] = 'Mantenimiento WordPress en León y soporte técnico | EMPC';
+                    $context['description'] = 'Mantenimiento WordPress en León con actualizaciones, copias de seguridad, seguridad y soporte técnico para webs de empresas y autónomos.';
+                }
+
                 $context['schema_page_name'] = get_the_title();
                 $context['schema_page_description'] = $context['description'];
             }
@@ -722,6 +727,27 @@ if (!function_exists('empc_seo_rank_math_filters')) {
                     '@id' => $service_id,
                     'name' => 'Diseño web en León para empresas y autónomos',
                     'serviceType' => 'Diseño web',
+                    'url' => $canonical,
+                    'description' => $context['description'] ?? '',
+                    'provider' => [
+                        '@id' => $site['organization_id'],
+                    ],
+                    'areaServed' => $site['areaServed'],
+                    'mainEntityOfPage' => [
+                        '@id' => rtrim($canonical, '/') . '#webpage',
+                    ],
+                ];
+            }
+
+            if (is_page('mantenimiento-wordpress-leon')) {
+                $site = empc_seo_site_data();
+                $context = empc_seo_current_context();
+                $canonical = !empty($context['canonical']) ? $context['canonical'] : get_permalink();
+                $data['EMPCMaintenanceService'] = [
+                    '@type' => 'Service',
+                    '@id' => rtrim($canonical, '/') . '#service',
+                    'name' => 'Mantenimiento WordPress en León',
+                    'serviceType' => 'Mantenimiento WordPress y WooCommerce',
                     'url' => $canonical,
                     'description' => $context['description'] ?? '',
                     'provider' => [

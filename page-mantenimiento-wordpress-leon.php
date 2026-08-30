@@ -17,13 +17,12 @@ get_header();
                     </div>
 
                     <div class="space-y-4 max-w-3xl">
-                        <h1 class="text-4xl md:text-6xl font-bold text-white leading-tight">Mantenimiento WordPress profesional</h1>
+                        <h1 class="text-4xl md:text-6xl font-bold text-white leading-tight">Mantenimiento WordPress en León para empresas y autónomos</h1>
                         <h2 class="text-xl md:text-2xl text-slate-400 leading-relaxed">
-                            Servicio de mantenimiento WordPress y WooCommerce adaptado a tus necesidades.
+                            Mantenimiento técnico recurrente para WordPress y WooCommerce.
                         </h2>
                         <p class="text-lg text-slate-300 leading-relaxed max-w-2xl">
-                            Tu web necesita actualizaciones, copias de seguridad, seguridad y supervisión para seguir funcionando con estabilidad.
-                            Aquí tienes una propuesta clara, organizada y pensada para leer rápido sin perder el contenido útil del servicio.
+                            Mantener una web no consiste solo en actualizar botones. Revisamos actualizaciones, copias, seguridad, rendimiento y posibles incidencias dentro del plan contratado, con un alcance que puedas entender antes de elegir.
                         </p>
                     </div>
 
@@ -101,7 +100,7 @@ get_header();
                         <ul class="space-y-2 text-slate-300 text-sm">
                             <li>• Medidas de seguridad y antispam</li>
                             <li>• Limpieza básica de incidencias</li>
-                            <li>• Resolución de emergencias según el plan</li>
+                            <li>• Revisión de incidencias dentro del alcance contratado</li>
                             <li>• Restauración de sitio si procede</li>
                         </ul>
                     </div>
@@ -146,7 +145,7 @@ get_header();
                             <li>• Actualización WordPress, plugins y plantilla</li>
                             <li>• Back up automática y monitorización</li>
                             <li>• Solución de incidencias y limpieza de base de datos</li>
-                            <li>• Pequeñas actualizaciones e informe mensual</li>
+                            <li>• Ajustes técnicos menores e informe mensual</li>
                         </ul>
                         <p class="text-xs text-slate-400">Frecuencia: mensual</p>
                         <a href="<?php echo esc_url(home_url('/contacta-conmigo/?tipo=mantenimiento-wordpress')); ?>" class="inline-flex min-h-11 items-center justify-center px-4 py-3 rounded-xl bg-[#E29595] text-[#121826] font-bold text-sm">
@@ -164,7 +163,7 @@ get_header();
                             <li>• Todo lo del plan básico</li>
                             <li>• Copia de seguridad automática</li>
                             <li>• Monitorización de estado web</li>
-                            <li>• Solución de incidencias y pequeñas actualizaciones</li>
+                            <li>• Revisión de incidencias y ajustes técnicos menores</li>
                         </ul>
                         <p class="text-xs text-slate-400">Frecuencia: mensual</p>
                         <a href="<?php echo esc_url(home_url('/contacta-conmigo/?tipo=mantenimiento-wordpress')); ?>" class="inline-flex min-h-11 items-center justify-center px-4 py-3 rounded-xl bg-[#E29595] text-[#121826] font-bold text-sm">
@@ -180,9 +179,8 @@ get_header();
                         </div>
                         <ul class="space-y-2 text-sm text-slate-300">
                             <li>• Todo lo del plan medio</li>
-                            <li>• Actualización de contenido</li>
                             <li>• Copia de seguridad automática</li>
-                            <li>• Gestión para tiendas WooCommerce e informe mensual</li>
+                            <li>• Mantenimiento técnico de tiendas WooCommerce e informe mensual</li>
                         </ul>
                         <p class="text-xs text-slate-400">Frecuencia: mensual</p>
                         <a href="<?php echo esc_url(home_url('/contacta-conmigo/?tipo=mantenimiento-wordpress')); ?>" class="inline-flex min-h-11 items-center justify-center px-4 py-3 rounded-xl bg-[#E29595] text-[#121826] font-bold text-sm">
@@ -198,8 +196,7 @@ get_header();
                         </div>
                         <ul class="space-y-2 text-sm text-slate-300">
                             <li>• Todo lo del plan plus</li>
-                            <li>• Actualización de contenido</li>
-                            <li>• Copias de seguridad e intervención más completa</li>
+                            <li>• Copias de seguridad e intervención técnica según alcance</li>
                             <li>• Gestión para WooCommerce e informe mensual</li>
                         </ul>
                         <p class="text-xs text-slate-400">Frecuencia: mensual</p>
@@ -210,7 +207,7 @@ get_header();
                 </div>
 
                 <div class="rounded-2xl border border-amber-400/20 bg-amber-400/10 p-5 text-amber-100 text-sm leading-relaxed">
-                    Nota: el contenido original mezcla una exclusión general de cambios de contenido con planes que mencionan actualización de contenido. Ese punto queda pendiente de confirmación.
+                    Nota: la fuente original mezcla una exclusión general de gestión de contenidos con referencias a actualización de contenido en los planes Plus y Premium. Para no presentar una promesa ambigua, la gestión editorial queda fuera de estos planes hasta confirmar su alcance; cualquier trabajo de contenidos se presupuesta aparte.
                 </div>
             </section>
 
@@ -268,8 +265,28 @@ get_header();
 
             <section class="space-y-6">
                 <div class="max-w-3xl space-y-3">
+                    <p class="text-[11px] font-bold uppercase tracking-[0.25em] text-[#E29595]">Servicios relacionados</p>
+                    <h2 class="text-3xl md:text-4xl font-bold text-white">Cuando necesitas algo distinto</h2>
+                    <p class="text-slate-400 leading-relaxed">El mantenimiento recurrente no sustituye a una web nueva ni a una sesión de asesoramiento puntual. Cada necesidad tiene su servicio y su alcance.</p>
+                </div>
+                <div class="grid md:grid-cols-2 gap-4">
+                    <div class="rounded-2xl border border-white/10 bg-[#1F2937]/50 p-5">
+                        <h3 class="text-lg font-bold text-white mb-2">Diseño web nuevo</h3>
+                        <p class="text-sm text-slate-400 leading-relaxed mb-4">Si necesitas crear o reconstruir una web para presentar tu negocio y captar contactos, consulta el servicio de diseño web.</p>
+                        <a class="text-[#E29595] font-bold" href="<?php echo esc_url(home_url('/diseno-web-leon/')); ?>">Ver diseño web en León</a>
+                    </div>
+                    <div class="rounded-2xl border border-white/10 bg-[#1F2937]/50 p-5">
+                        <h3 class="text-lg font-bold text-white mb-2">Consultoría puntual</h3>
+                        <p class="text-sm text-slate-400 leading-relaxed mb-4">Si buscas analizar una duda o recibir asesoramiento concreto sin contratar mantenimiento recurrente, consulta la página de consultoría WordPress.</p>
+                        <a class="text-[#E29595] font-bold" href="<?php echo esc_url(home_url('/consultor-wordpress/')); ?>">Ver consultoría WordPress</a>
+                    </div>
+                </div>
+            </section>
+
+            <section class="space-y-6">
+                <div class="max-w-3xl space-y-3">
                     <p class="text-[11px] font-bold uppercase tracking-[0.25em] text-[#E29595]">Preguntas frecuentes</p>
-                    <h2 class="text-3xl md:text-4xl font-bold text-white">Respuestas útiles tomadas del contenido actual</h2>
+                    <h2 class="text-3xl md:text-4xl font-bold text-white">Respuestas útiles sobre el mantenimiento</h2>
                 </div>
 
                 <div class="space-y-3">
@@ -279,7 +296,7 @@ get_header();
                     </details>
                     <details class="rounded-2xl border border-white/10 bg-[#1F2937]/50 p-5">
                         <summary class="cursor-pointer list-none text-white font-bold">¿Es necesario contrato de permanencia?</summary>
-                        <p class="mt-3 text-sm text-slate-400 leading-relaxed">El contenido original habla de permanencias según el servicio: mensual, trimestral, semestral o anual.</p>
+                        <p class="mt-3 text-sm text-slate-400 leading-relaxed">La fuente heredada menciona periodicidades mensual, trimestral, semestral y anual, pero la duración y las condiciones concretas deben confirmarse en el presupuesto. No se presenta aquí una permanencia cerrada.</p>
                     </details>
                     <details class="rounded-2xl border border-white/10 bg-[#1F2937]/50 p-5">
                         <summary class="cursor-pointer list-none text-white font-bold">¿Cuándo se paga el servicio?</summary>
@@ -287,7 +304,7 @@ get_header();
                     </details>
                     <details class="rounded-2xl border border-white/10 bg-[#1F2937]/50 p-5">
                         <summary class="cursor-pointer list-none text-white font-bold">¿Da igual dónde esté alojado el sitio?</summary>
-                        <p class="mt-3 text-sm text-slate-400 leading-relaxed">En principio sí, aunque el contenido original aclara que algunos alojamientos son más adecuados para WordPress.</p>
+                        <p class="mt-3 text-sm text-slate-400 leading-relaxed">El alojamiento se revisa como parte del contexto técnico. Si requiere una migración o una intervención específica, se presupuesta aparte.</p>
                     </details>
                 </div>
             </section>
