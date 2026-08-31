@@ -84,6 +84,7 @@ get_header();
                     <p class="text-slate-300 text-sm leading-relaxed">
                         Cuando hace falta, conectamos los datos y servicios necesarios para que cada parte cumpla su función.
                     </p>
+                    <a href="<?php echo esc_url(home_url('/consultor-wordpress/')); ?>" class="inline-flex min-h-11 items-center justify-center mt-5 rounded-lg border border-purple-400/60 px-4 py-2 text-sm font-bold text-purple-200 underline decoration-purple-300 underline-offset-4 transition hover:bg-purple-500/10 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-purple-300">Analizar una integración</a>
                     <span class="inline-block mt-5 bg-purple-600 text-[10px] font-bold px-2 py-1 rounded text-white">JSON</span>
                 </article>
 
