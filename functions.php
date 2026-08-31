@@ -465,19 +465,6 @@ add_filter('rank_math/sitemap/posts_to_exclude', function ($posts_to_exclude) {
     return array_values(array_unique(array_merge(wp_parse_id_list($posts_to_exclude), $excluded)));
 });
 
-add_filter('rank_math/sitemap/entry', function ($url, $type, $object_id) {
-    if ('page' !== $type) {
-        return $url;
-    }
-
-    $post = get_post((int) $object_id);
-    if ($post instanceof WP_Post && in_array($post->post_name, ['diseno-wordpress-leon', 'diseno-web-wordpress-creativa-leon'], true)) {
-        return false;
-    }
-
-    return $url;
-}, 10, 3);
-
 if (!function_exists('empc_rank_math_exclude_post_tag_sitemap')) {
     function empc_rank_math_exclude_post_tag_sitemap($exclude, $type)
     {
