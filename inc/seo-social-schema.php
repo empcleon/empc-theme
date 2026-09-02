@@ -81,6 +81,7 @@ if (!function_exists('empc_seo_title_override')) {
             'pedido-a-un-cliente-con-enlace-directo-al-pago' => 'Crear pedidos WooCommerce con enlace de pago | EMPC',
             'formato-condicional-de-una-celda-excel' => 'Formato condicional en Excel según otra celda | EMPC',
             'tienda-online-con-tienda-fisica' => 'Tienda online y tienda física: comercio local | EMPC',
+            'cuanto-cuesta-web-leon' => 'Precio de una web en León: guía y referencias | EMPC',
         ];
 
         return $overrides[$slug] ?? '';
@@ -220,6 +221,9 @@ if (!function_exists('empc_seo_preferred_title')) {
             $context['kind'] = 'post';
             $context['title'] = empc_seo_preferred_title();
             $context['description'] = empc_trim_description(get_the_excerpt(), wp_strip_all_tags(get_post_field('post_content', get_the_ID())), 220);
+            if (get_post_field('post_name', get_the_ID()) === 'cuanto-cuesta-web-leon') {
+                $context['description'] = 'Guía para entender el precio de una web en León: web corporativa, tienda online y proyectos a medida, con referencias sin IVA.';
+            }
             $context['canonical'] = get_permalink();
             $context['og_type'] = 'article';
             $context['schema_page_type'] = 'WebPage';
