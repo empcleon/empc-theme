@@ -118,6 +118,10 @@ if (!function_exists('empc_seo_preferred_title')) {
         }
 
         if (is_page()) {
+            if (is_page('optimizacion-de-velocidad-wordpress-freelance')) {
+                return 'Optimización de velocidad WordPress (WPO) en León | EMPC';
+            }
+
             if (is_page('reparacion-wordpress-leon')) {
                 return 'Reparación WordPress en León y WooCommerce | EMPC';
             }
@@ -259,6 +263,11 @@ if (!function_exists('empc_seo_preferred_title')) {
             $context['canonical'] = get_permalink();
             $context['schema_page_name'] = get_the_title();
             $context['schema_page_description'] = $context['description'];
+
+            if (is_page('optimizacion-de-velocidad-wordpress-freelance')) {
+                $context['description'] = '¿Tu WordPress va lento? Mido la carga, localizo los cuellos de botella y te entrego qué mejoras tienen sentido y en qué orden. Desde 300 € + IVA.';
+                $context['schema_page_description'] = $context['description'];
+            }
 
             if (is_page('consultor-wordpress')) {
                 $context['kind'] = 'service';
