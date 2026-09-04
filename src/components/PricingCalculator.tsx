@@ -39,7 +39,7 @@ const PricingCalculator: React.FC = () => {
     return (
         <div className="max-w-6xl mx-auto px-4 py-12">
             <div className="text-center mb-12">
-                <h1 className="text-4xl md:text-5xl font-bold mb-4 text-white font-syne">Estimación orientativa</h1>
+                <h2 className="text-4xl md:text-5xl font-bold mb-4 text-white font-syne">Estimación orientativa</h2>
                 <p className="text-xl text-slate-400 max-w-3xl mx-auto">Selecciona un alcance inicial y separa la inversión del proyecto de los servicios mensuales.</p>
                 <div className="mt-6 inline-block p-4 bg-[#FF007A]/10 rounded-xl border border-[#FF007A]/20"><p className="text-[#FF007A]"><MapPin className="inline w-5 h-5 mr-2" /><strong>Territorio: León</strong> · El presupuesto final depende del alcance acordado.</p></div>
             </div>

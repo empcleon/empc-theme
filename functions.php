@@ -94,6 +94,19 @@ function empc_enqueue_react_assets()
         wp_enqueue_style('empc-react-styles', $react_css, [], filemtime($react_css_path));
     }
 
+    // CSS editorial aislado y exclusivo de la portada.
+    if (is_front_page()) {
+        $front_page_css_path = EMPC_THEME_DIR . '/assets/css/empc-front-page.css';
+        if (file_exists($front_page_css_path)) {
+            wp_enqueue_style(
+                'empc-front-page',
+                EMPC_THEME_URI . '/assets/css/empc-front-page.css',
+                ['empc-react-styles'],
+                filemtime($front_page_css_path)
+            );
+        }
+    }
+
     // Lógica de carga condicional
     global $post;
     $content = isset($post->post_content) ? $post->post_content : '';
