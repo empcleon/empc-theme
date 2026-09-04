@@ -65,6 +65,13 @@ get_header(); ?>
                             );
                         }
                         echo $post_content;
+                        if ($post_slug === 'seo-local-leon') : ?>
+                            <section class="mt-10 rounded-3xl border border-[#E29595]/20 bg-[#E29595]/5 p-6 md:p-8 not-prose">
+                                <p class="text-slate-300 leading-relaxed">Recibirás una revisión inicial de tu ficha, tu web y las principales prioridades locales para decidir qué acciones tienen sentido antes de contratar una intervención.</p>
+                                <p class="mt-4 text-slate-300 leading-relaxed">Si tu proyecto necesita una base nueva, consulta el servicio de <a class="text-[#E29595] font-semibold hover:underline" href="<?php echo esc_url(home_url('/diseno-web-leon/')); ?>">diseño web para negocios</a>. Si primero necesitas ordenar decisiones técnicas, puedes solicitar una <a class="text-[#E29595] font-semibold hover:underline" href="<?php echo esc_url(home_url('/consultor-wordpress/')); ?>">consultoría WordPress</a>.</p>
+                                <a href="<?php echo esc_url(home_url('/contacta-conmigo/')); ?>" class="mt-6 inline-flex min-h-11 items-center justify-center px-6 py-3 rounded-xl bg-[#E29595] text-[#121826] font-bold hover:brightness-110 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#E29595] focus-visible:ring-offset-[#121826]">Solicitar una valoración</a>
+                            </section>
+                        <?php endif;
                         ?>
                     <?php else : ?>
                         <?php the_content(); ?>

@@ -77,7 +77,7 @@ if (!function_exists('empc_seo_title_override')) {
             'reservas-online-clinicas-leon' => 'Sistema de reservas online para clínicas en León | EMPC',
             'comercio-local-panaderia-leon' => 'Tiendas de barrio en León: venta online local | EMPC',
             'webs-restaurantes-leon-booking' => 'Webs para restaurantes en León: reservas online | EMPC',
-            'seo-local-leon' => 'SEO local en León: mejora tu posición en Google Maps | EMPC',
+            'seo-local-leon' => 'SEO local en León para negocios en Google Maps | EMPC',
             'pedido-a-un-cliente-con-enlace-directo-al-pago' => 'Crear pedidos WooCommerce con enlace de pago | EMPC',
             'formato-condicional-de-una-celda-excel' => 'Formato condicional en Excel según otra celda | EMPC',
             'tienda-online-con-tienda-fisica' => 'Tienda online y tienda física: comercio local | EMPC',
@@ -227,6 +227,8 @@ if (!function_exists('empc_seo_preferred_title')) {
             $context['description'] = empc_trim_description(get_the_excerpt(), wp_strip_all_tags(get_post_field('post_content', get_the_ID())), 220);
             if (get_post_field('post_name', get_the_ID()) === 'cuanto-cuesta-web-leon') {
                 $context['description'] = 'Guía para entender el precio de una web en León: web corporativa, tienda online y proyectos a medida, con referencias sin IVA.';
+            } elseif (get_post_field('post_name', get_the_ID()) === 'seo-local-leon') {
+                $context['description'] = 'Mejora la presencia local de tu negocio en León con una revisión de ficha, web y prioridades técnicas antes de decidir qué acciones aplicar.';
             }
             $context['canonical'] = get_permalink();
             $context['og_type'] = 'article';
