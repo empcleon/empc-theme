@@ -475,7 +475,7 @@ if (!function_exists('empc_seo_json_ld_entities')) {
         $site = empc_seo_site_data();
         $image = empc_seo_social_image_data();
         $canonical = !empty($context['canonical']) ? $context['canonical'] : home_url('/');
-        $page_id = rtrim($canonical, '/') . '#webpage';
+        $page_id = trailingslashit($canonical) . '#webpage';
         $organization_id = $site['organization_id'];
         $website_id = $site['website_id'];
 
@@ -544,7 +544,7 @@ if (!function_exists('empc_seo_json_ld_entities')) {
                 ],
                 'areaServed' => $site['areaServed'],
                 'mainEntityOfPage' => [
-                    '@id' => rtrim($canonical, '/') . '#webpage',
+                    '@id' => trailingslashit($canonical) . '#webpage',
                 ],
             ];
             $page_entity['mainEntity'] = [
@@ -808,7 +808,7 @@ if (!function_exists('empc_seo_rank_math_filters')) {
                     ],
                     'areaServed' => $site['areaServed'],
                     'mainEntityOfPage' => [
-                        '@id' => rtrim($canonical, '/') . '#webpage',
+                        '@id' => trailingslashit($canonical) . '#webpage',
                     ],
                 ];
             }
@@ -829,7 +829,7 @@ if (!function_exists('empc_seo_rank_math_filters')) {
                     ],
                     'areaServed' => $site['areaServed'],
                     'mainEntityOfPage' => [
-                        '@id' => rtrim($canonical, '/') . '#webpage',
+                        '@id' => trailingslashit($canonical) . '#webpage',
                     ],
                 ];
             }
@@ -850,7 +850,7 @@ if (!function_exists('empc_seo_rank_math_filters')) {
                     ],
                     'areaServed' => $site['areaServed'],
                     'mainEntityOfPage' => [
-                        '@id' => rtrim($canonical, '/') . '#webpage',
+                        '@id' => trailingslashit($canonical) . '#webpage',
                     ],
                 ];
             }
@@ -871,7 +871,7 @@ if (!function_exists('empc_seo_rank_math_filters')) {
                     ],
                     'areaServed' => $site['areaServed'],
                     'mainEntityOfPage' => [
-                        '@id' => rtrim($canonical, '/') . '#webpage',
+                        '@id' => trailingslashit($canonical) . '#webpage',
                     ],
                 ];
             }
@@ -906,7 +906,7 @@ if (!function_exists('empc_seo_rank_math_filters')) {
                     ],
                     'areaServed' => $site['areaServed'],
                     'mainEntityOfPage' => [
-                        '@id' => rtrim($canonical, '/') . '#webpage',
+                        '@id' => trailingslashit($canonical) . '#webpage',
                     ],
                 ];
             }
@@ -941,7 +941,69 @@ if (!function_exists('empc_seo_rank_math_filters')) {
                     ],
                     'areaServed' => $site['areaServed'],
                     'mainEntityOfPage' => [
-                        '@id' => rtrim($canonical, '/') . '#webpage',
+                        '@id' => trailingslashit($canonical) . '#webpage',
+                    ],
+                ];
+            }
+
+            /*
+             * Keep Rank Math's graph internally resolvable. Some legacy entries
+             * can emit an empty richSnippet type, while Service entities require
+             * a canonical WebPage node ending in "/#webpage".
+             */
+            $context = empc_seo_current_context();
+            $canonical = !empty($context['canonical']) ? $context['canonical'] : get_permalink();
+            $page_id = trailingslashit($canonical) . '#webpage';
+            $service_id = '';
+            $has_webpage = false;
+
+            foreach ($data as $key => &$node) {
+                if (!is_array($node)) {
+                    continue;
+                }
+
+                if (array_key_exists('@type', $node) && empty($node['@type'])) {
+                    if (is_singular('post')) {
+                        $node['@type'] = 'BlogPosting';
+                    } elseif (is_page()) {
+                        $node['@type'] = 'WebPage';
+                        $node['@id'] = $page_id;
+                    } else {
+                        unset($data[$key]);
+                        continue;
+                    }
+                }
+
+                $types = (array) ($node['@type'] ?? []);
+                if (in_array('Service', $types, true)) {
+                    $service_id = (string) ($node['@id'] ?? '');
+                    $node['mainEntityOfPage'] = ['@id' => $page_id];
+                }
+
+                if (array_intersect(['WebPage', 'AboutPage', 'ContactPage'], $types)) {
+                    if ($service_id !== '') {
+                        $node['@id'] = $page_id;
+                    }
+                    if (($node['@id'] ?? '') === $page_id) {
+                        $has_webpage = true;
+                    }
+                }
+            }
+            unset($node);
+
+            if ($service_id !== '' && !$has_webpage) {
+                $site = empc_seo_site_data();
+                $data['EMPCServiceWebPage'] = [
+                    '@type' => 'WebPage',
+                    '@id' => $page_id,
+                    'url' => $canonical,
+                    'name' => wp_strip_all_tags(get_the_title()),
+                    'description' => $context['description'] ?? '',
+                    'isPartOf' => [
+                        '@id' => $site['website_id'],
+                    ],
+                    'about' => [
+                        '@id' => $service_id,
                     ],
                 ];
             }
@@ -956,6 +1018,24 @@ if (!function_exists('empc_seo_rank_math_filters')) {
 
         add_filter('rank_math/frontend/robots', function ($robots = []) {
             if (empc_is_laboratorio_ia_request() && (is_404() || !empty($GLOBALS['empc_laboratorio_ia_is_404']))) {
+                return ['noindex', 'follow'];
+            }
+
+            $non_public_portal_pages = [
+                'activate',
+                'dashboard',
+                'forums',
+                'groups',
+                'members',
+                'moderation',
+                'news-feed',
+                'photos',
+                'privacy-policy',
+                'register',
+                'registrar-en-plataforma',
+                'terms-of-service',
+            ];
+            if (is_page($non_public_portal_pages)) {
                 return ['noindex', 'follow'];
             }
 

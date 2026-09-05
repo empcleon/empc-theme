@@ -26,9 +26,9 @@ const Confirmation: React.FC<ConfirmationProps> = ({ data, config }) => {
                 <Check className="w-10 h-10 text-emerald-400" />
             </div>
 
-            <h2 className="text-2xl font-bold text-white mb-2">¡Todo listo!</h2>
+            <h2 className="text-2xl font-bold text-white mb-2">Solicitud preparada</h2>
             <p className="text-slate-300 mb-8 max-w-xs mx-auto">
-                Tu cita está reservada para el <strong>{formatDateES(data.date)}</strong> a las <strong>{data.slot}</strong>.
+                Has seleccionado el <strong>{formatDateES(data.date)}</strong> a las <strong>{data.slot}</strong>. No se ha creado ninguna reserva.
             </p>
 
             <div className="bg-slate-800 p-6 rounded-xl border border-slate-700 mb-8 text-left">
@@ -44,9 +44,9 @@ const Confirmation: React.FC<ConfirmationProps> = ({ data, config }) => {
                 className="w-full bg-[#25D366] hover:bg-[#20bd5a] text-white font-bold py-4 rounded-xl flex items-center justify-center gap-2 transition-all shadow-lg hover:shadow-emerald-900/20"
             >
                 <MessageCircle className="w-6 h-6" />
-                Confirmar por WhatsApp
+                Solicitar por WhatsApp
             </button>
-            <p className="text-xs text-slate-500 mt-4">Se abrirá WhatsApp para enviar los detalles.</p>
+            <p className="text-xs text-slate-500 mt-4">Se abrirá WhatsApp. La reserva solo quedará confirmada cuando el negocio responda.</p>
         </div>
     );
 };

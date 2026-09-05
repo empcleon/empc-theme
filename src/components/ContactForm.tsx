@@ -10,14 +10,18 @@ const ContactForm = () => {
         email: '',
         service: initialAttribution?.label ?? '',
         message: '',
-        website: ''
+        website: '',
+        consent: false
     });
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [isSuccess, setIsSuccess] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-        setFormData({ ...formData, [e.target.name]: e.target.value });
+        const value = e.target instanceof HTMLInputElement && e.target.type === 'checkbox'
+            ? e.target.checked
+            : e.target.value;
+        setFormData({ ...formData, [e.target.name]: value });
     };
 
     const nextStep = () => setStep(step + 1);
@@ -25,6 +29,10 @@ const ContactForm = () => {
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
+        if (!formData.consent) {
+            setErrorMessage('Debes aceptar la política de privacidad para enviar la solicitud.');
+            return;
+        }
         setIsSubmitting(true);
         setErrorMessage('');
 
@@ -64,14 +72,14 @@ const ContactForm = () => {
 
     if (isSuccess) {
         return (
-            <div className="bg-slate-800 p-8 rounded-2xl shadow-xl text-center border border-emerald-500/30 animate-fade-in">
+            <div role="status" aria-live="polite" className="bg-slate-800 p-8 rounded-2xl shadow-xl text-center border border-emerald-500/30 animate-fade-in">
                 <div className="w-16 h-16 bg-emerald-500/20 rounded-full flex items-center justify-center mx-auto mb-6">
                     <Check className="w-8 h-8 text-emerald-500" />
                 </div>
                 <h3 className="text-2xl font-bold text-white mb-2">Mensaje recibido</h3>
-                <p className="text-slate-300">Gracias, Emma. Te responderé lo antes posible.</p>
+                <p className="text-slate-300">Gracias, {formData.name}. Tu solicitud se ha enviado para revisión humana.</p>
                 <button
-                    onClick={() => { setIsSuccess(false); setStep(1); setFormData({ name: '', email: '', service: readServiceAttribution()?.label ?? '', message: '', website: '' }); }}
+                    onClick={() => { setIsSuccess(false); setStep(1); setFormData({ name: '', email: '', service: readServiceAttribution()?.label ?? '', message: '', website: '', consent: false }); }}
                     className="mt-6 text-emerald-400 hover:text-emerald-300 font-medium"
                 >
                     Enviar otro mensaje
@@ -83,7 +91,7 @@ const ContactForm = () => {
     return (
         <div className="w-full max-w-2xl mx-auto bg-slate-900 border border-slate-800 rounded-2xl shadow-2xl overflow-hidden mb-20">
             {/* Progress Bar */}
-            <div className="bg-slate-800 h-2 w-full">
+            <div className="bg-slate-800 h-2 w-full" role="progressbar" aria-label="Progreso del formulario" aria-valuemin={1} aria-valuemax={3} aria-valuenow={step}>
                 <div
                     className="h-full bg-gradient-to-r from-rose-500 to-orange-500 transition-all duration-500 ease-out"
                     style={{ width: `${(step / 3) * 100}%` }}
@@ -165,7 +173,7 @@ const ContactForm = () => {
                                 {SERVICE_OPTIONS.map((option) => (
                                     <label
                                         key={option.value}
-                                        className={`p-4 rounded-xl border cursor-pointer transition-all ${formData.service === option.label
+                                        className={`p-4 rounded-xl border cursor-pointer transition-all focus-within:ring-2 focus-within:ring-rose-400 ${formData.service === option.label
                                             ? 'bg-rose-500/10 border-rose-500 text-white'
                                             : 'bg-slate-800 border-slate-700 text-slate-300 hover:border-slate-500'
                                             }`}
@@ -176,7 +184,7 @@ const ContactForm = () => {
                                             value={option.label}
                                             checked={formData.service === option.label}
                                             onChange={handleChange}
-                                            className="hidden"
+                                            className="sr-only"
                                         />
                                         <span className="font-medium">{option.label}</span>
                                     </label>
@@ -209,8 +217,10 @@ const ContactForm = () => {
                             <h3 className="text-2xl font-bold text-white mb-6">Cuéntanos los detalles</h3>
 
                             <div className="relative">
-                                <MessageSquare className="absolute left-4 top-3.5 w-5 h-5 text-slate-500" />
+                                <label htmlFor="cf-message" className="block text-sm font-medium text-slate-300 mb-2">Detalles del proyecto</label>
+                                <MessageSquare className="absolute left-4 top-11 w-5 h-5 text-slate-500" aria-hidden="true" />
                                 <textarea
+                                    id="cf-message"
                                     name="message"
                                     value={formData.message}
                                     onChange={handleChange}
@@ -219,6 +229,19 @@ const ContactForm = () => {
                                     placeholder="¿Cuál es tu objetivo principal con este proyecto?"
                                     required
                                 />
+                            </div>
+
+                            <div className="flex items-start gap-3 text-sm text-slate-300">
+                                <input
+                                    id="cf-consent"
+                                    type="checkbox"
+                                    name="consent"
+                                    checked={formData.consent}
+                                    onChange={handleChange}
+                                    required
+                                    className="mt-1 h-4 w-4 accent-rose-500"
+                                />
+                                <label htmlFor="cf-consent">Acepto la <a href="/politica-de-privacidad/" className="text-rose-400 underline hover:text-rose-300">política de privacidad</a> y el tratamiento de mis datos para responder a esta solicitud.</label>
                             </div>
 
                             <div className="pt-4 flex justify-between">
@@ -231,7 +254,7 @@ const ContactForm = () => {
                                 </button>
                                 <button
                                     type="submit"
-                                    disabled={isSubmitting || !formData.message}
+                                    disabled={isSubmitting || !formData.message || !formData.consent}
                                     className="bg-gradient-to-r from-rose-600 to-orange-600 text-white px-8 py-3 rounded-xl font-bold flex items-center gap-2 hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-lg shadow-rose-900/20"
                                 >
                                     {isSubmitting ? 'Enviando...' : 'Enviar Solicitud'} <Send className="w-4 h-4" />
@@ -241,7 +264,7 @@ const ContactForm = () => {
                     )}
 
                     {errorMessage && (
-                        <p className="text-center text-red-400 font-medium bg-red-500/10 border border-red-500/30 rounded-xl px-4 py-3">
+                        <p role="alert" aria-live="assertive" className="text-center text-red-400 font-medium bg-red-500/10 border border-red-500/30 rounded-xl px-4 py-3">
                             {errorMessage}
                         </p>
                     )}

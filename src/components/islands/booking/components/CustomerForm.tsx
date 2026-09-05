@@ -82,7 +82,7 @@ const CustomerForm: React.FC<CustomerFormProps> = ({ data, onChange, onSubmit, i
                 disabled={!isValid || isSubmitting}
                 className="w-full bg-rose-600 hover:bg-rose-500 disabled:bg-slate-700 disabled:text-slate-500 disabled:cursor-not-allowed text-white font-bold py-3.5 rounded-xl flex items-center justify-center gap-2 transition-all shadow-lg hover:shadow-rose-900/20"
             >
-                {isSubmitting ? 'Procesando...' : 'Confirmar Reserva'} <ArrowRight className="w-5 h-5" />
+                {isSubmitting ? 'Procesando...' : 'Continuar en la demo'} <ArrowRight className="w-5 h-5" />
             </button>
         </div>
     );

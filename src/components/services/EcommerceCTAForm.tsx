@@ -73,12 +73,11 @@ export function EcommerceCTAForm({
         e.preventDefault();
         setIsSubmitting(true);
 
-        // Simulate submission
+        // Demostración local: no hay endpoint ni efecto externo.
         setTimeout(() => {
             setIsSubmitting(false);
             setIsSuccess(true);
-            console.log('Form submitted:', formData);
-        }, 1500);
+        }, 400);
     };
 
     if (isSuccess) {
@@ -88,9 +87,9 @@ export function EcommerceCTAForm({
                     <div className={`w-20 h-20 bg-${accentColor}-500/20 rounded-full flex items-center justify-center mx-auto mb-6`}>
                         <Send className={`w-10 h-10 text-${accentColor}-400`} />
                     </div>
-                    <h2 className="text-3xl font-bold text-white mb-4">¡Mensaje recibido!</h2>
+                    <h2 className="text-3xl font-bold text-white mb-4">Demostración completada</h2>
                     <p className="text-slate-300 text-lg mb-8">
-                        He recibido tu solicitud correctamente. Analizaré tu proyecto y te contactaré en menos de 24-48 horas.
+                        No se ha enviado ningún mensaje ni se ha realizado ningún pedido. Esta interfaz muestra únicamente el flujo de ejemplo.
                     </p>
                     <button
                         onClick={() => setIsSuccess(false)}
@@ -117,6 +116,9 @@ export function EcommerceCTAForm({
                     </div>
 
                     <form onSubmit={handleSubmit} className="space-y-6">
+                        <p className="rounded-lg border border-amber-400/40 bg-amber-400/10 px-4 py-3 text-sm text-amber-100" role="note">
+                            Demostración interactiva: los datos no se transmiten y este formulario no realiza pedidos.
+                        </p>
                         <div className="grid md:grid-cols-2 gap-6">
                             {fields.map((field, index) => {
                                 const isFullWidth = field.type === 'textarea' || field.type === 'select';

@@ -9,6 +9,10 @@ node_modules/
 # Build output (we build fresh in CI)
 # Note: Don't ignore react-app/ because it needs to be deployed
 
+# Python artifacts
+__pycache__/
+*.py[cod]
+
 # IDE
 .idea/
 .vscode/

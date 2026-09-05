@@ -20,6 +20,7 @@ interface FormData {
     presupuesto?: string;
     website?: string;
     service?: string;
+    consent: boolean;
 }
 
 const CTAForm: React.FC<CTAFormProps> = ({
@@ -39,21 +40,29 @@ const CTAForm: React.FC<CTAFormProps> = ({
         mensaje: '',
         presupuesto: '',
         website: '',
-        service: initialAttribution?.value
+        service: initialAttribution?.value,
+        consent: false
     });
 
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+        const value = e.target instanceof HTMLInputElement && e.target.type === 'checkbox'
+            ? e.target.checked
+            : e.target.value;
         setFormData({
             ...formData,
-            [e.target.name]: e.target.value
+            [e.target.name]: value
         });
     };
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
+        if (!formData.consent) {
+            setSubmitStatus('error');
+            return;
+        }
         setIsSubmitting(true);
         setSubmitStatus('idle');
 
@@ -93,7 +102,8 @@ const CTAForm: React.FC<CTAFormProps> = ({
                 mensaje: '',
                 presupuesto: '',
                 website: '',
-                service: readServiceAttribution()?.value
+                service: readServiceAttribution()?.value,
+                consent: false
             });
         } catch (error) {
             console.error('Error:', error);
@@ -135,8 +145,9 @@ const CTAForm: React.FC<CTAFormProps> = ({
                     </div>
                     <div className="grid md:grid-cols-2 gap-6 mb-6">
                         <div>
-                            <label className="block text-slate-300 text-sm mb-2">Nombre *</label>
+                            <label htmlFor="cta-nombre" className="block text-slate-300 text-sm mb-2">Nombre *</label>
                             <input
+                                id="cta-nombre"
                                 type="text"
                                 name="nombre"
                                 required
@@ -147,8 +158,9 @@ const CTAForm: React.FC<CTAFormProps> = ({
                             />
                         </div>
                         <div>
-                            <label className="block text-slate-300 text-sm mb-2">Email *</label>
+                            <label htmlFor="cta-email" className="block text-slate-300 text-sm mb-2">Email *</label>
                             <input
+                                id="cta-email"
                                 type="email"
                                 name="email"
                                 required
@@ -162,8 +174,9 @@ const CTAForm: React.FC<CTAFormProps> = ({
 
                     <div className="grid md:grid-cols-2 gap-6 mb-6">
                         <div>
-                            <label className="block text-slate-300 text-sm mb-2">Teléfono</label>
+                            <label htmlFor="cta-telefono" className="block text-slate-300 text-sm mb-2">Teléfono</label>
                             <input
+                                id="cta-telefono"
                                 type="tel"
                                 name="telefono"
                                 value={formData.telefono}
@@ -174,8 +187,9 @@ const CTAForm: React.FC<CTAFormProps> = ({
                         </div>
                         {showProjectType && (
                             <div>
-                                <label className="block text-slate-300 text-sm mb-2">Tipo de proyecto *</label>
+                                <label htmlFor="cta-tipo" className="block text-slate-300 text-sm mb-2">Tipo de proyecto *</label>
                                 <select
+                                    id="cta-tipo"
                                     name="tipo"
                                     required
                                     value={formData.tipo}
@@ -200,8 +214,9 @@ const CTAForm: React.FC<CTAFormProps> = ({
                     )}
 
                     <div className="mb-6">
-                        <label className="block text-slate-300 text-sm mb-2">Cuéntame tu proyecto *</label>
+                        <label htmlFor="cta-mensaje" className="block text-slate-300 text-sm mb-2">Cuéntame tu proyecto *</label>
                         <textarea
+                            id="cta-mensaje"
                             name="mensaje"
                             rows={4}
                             required
@@ -214,8 +229,9 @@ const CTAForm: React.FC<CTAFormProps> = ({
 
                     {showBudgetField && (
                         <div className="mb-6">
-                            <label className="block text-slate-300 text-sm mb-2">Presupuesto aproximado</label>
+                            <label htmlFor="cta-presupuesto" className="block text-slate-300 text-sm mb-2">Presupuesto aproximado</label>
                             <select
+                                id="cta-presupuesto"
                                 name="presupuesto"
                                 value={formData.presupuesto}
                                 onChange={handleChange}
@@ -230,9 +246,22 @@ const CTAForm: React.FC<CTAFormProps> = ({
                         </div>
                     )}
 
+                    <div className="mb-6 flex items-start gap-3 text-sm text-slate-300">
+                        <input
+                            id="cta-consent"
+                            type="checkbox"
+                            name="consent"
+                            checked={formData.consent}
+                            onChange={handleChange}
+                            required
+                            className="mt-1 h-4 w-4 accent-[#FF007A]"
+                        />
+                        <label htmlFor="cta-consent">Acepto la <a href="/politica-de-privacidad/" className="text-[#FF007A] underline hover:text-[#FB7185]">política de privacidad</a> y el tratamiento de mis datos para responder a esta solicitud.</label>
+                    </div>
+
                     <button
                         type="submit"
-                        disabled={isSubmitting}
+                        disabled={isSubmitting || !formData.consent}
                         className="w-full bg-[#FF007A] text-black py-4 rounded-xl font-bold text-lg hover:bg-[#FB7185] hover:shadow-[0_0_20px_rgba(255,0,122,0.6)] transition shadow-lg disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 uppercase tracking-wide"
                     >
                         {isSubmitting ? (
@@ -252,19 +281,19 @@ const CTAForm: React.FC<CTAFormProps> = ({
                     </button>
 
                     {submitStatus === 'success' && (
-                        <p className="text-center text-[#FF007A] mt-4 font-medium">
-                            ✓ Mensaje enviado correctamente. Te responderemos pronto.
+                        <p role="status" aria-live="polite" className="text-center text-[#FF007A] mt-4 font-medium">
+                            ✓ Solicitud enviada para revisión humana.
                         </p>
                     )}
 
                     {submitStatus === 'error' && (
-                        <p className="text-center text-red-400 mt-4 font-medium">
-                            ✗ Error al enviar. Por favor, inténtalo de nuevo.
+                        <p role="alert" aria-live="assertive" className="text-center text-red-400 mt-4 font-medium">
+                            ✗ No se pudo enviar. Revisa los campos e inténtalo de nuevo.
                         </p>
                     )}
 
                     <p className="text-slate-500 text-sm text-center mt-4">
-                        Sin compromiso. Respuesta garantizada en menos de 24 horas.
+                        Sin compromiso. Cada solicitud se revisa antes de confirmar alcance y plazos.
                     </p>
                 </form>
             </div>

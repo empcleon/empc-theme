@@ -83,7 +83,7 @@ const BookingIsland = () => {
             <div className="bg-slate-800/50 p-4 border-b border-slate-800 flex items-center justify-between">
                 <div className="flex items-center gap-2">
                     <Calendar className="text-rose-500 w-5 h-5" />
-                    <span className="font-bold text-white text-sm tracking-wide">RESERVAR CITA</span>
+                    <span className="font-bold text-white text-sm tracking-wide">DEMO DE RESERVA</span>
                 </div>
                 {selectedDate && step !== 'confirm' && (
                     <span className="text-xs font-medium text-rose-400 bg-rose-500/10 px-2 py-1 rounded">
@@ -93,6 +93,9 @@ const BookingIsland = () => {
             </div>
 
             <div className="p-6">
+                <p className="mb-5 rounded-lg border border-amber-400/40 bg-amber-400/10 px-4 py-3 text-sm text-amber-100" role="note">
+                    Demostración interactiva: no crea una reserva ni envía datos por sí sola.
+                </p>
                 <StepsIndicator currentStep={step} />
 
                 {/* Step 1: Select */}

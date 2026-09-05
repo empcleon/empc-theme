@@ -13,6 +13,7 @@ foreach ([
     EMPC_THEME_DIR . '/inc/service-pages-config.php',
     EMPC_THEME_DIR . '/inc/diseno-web-leon-safe-config.php',
     EMPC_THEME_DIR . '/inc/seo-social-schema.php',
+    EMPC_THEME_DIR . '/inc/agent-discovery.php',
 ] as $empc_include_file) {
     if (file_exists($empc_include_file)) {
         require_once $empc_include_file;
@@ -613,16 +614,15 @@ if (!function_exists('empc_mail_header_value')) {
     }
 }
 
-if (!function_exists('empc_has_declined_consent')) {
-    function empc_has_declined_consent(array $data): bool
+if (!function_exists('empc_has_valid_consent')) {
+    function empc_has_valid_consent(array $data): bool
     {
         foreach (['consent', 'privacyConsent', 'acceptPrivacy', 'acepto', 'acceptance'] as $key) {
-            if (array_key_exists($key, $data)) {
-                $value = filter_var($data[$key], FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE);
-                if ($value !== true) {
-                    return true;
-                }
+            if (!array_key_exists($key, $data)) {
+                continue;
             }
+
+            return filter_var($data[$key], FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE) === true;
         }
 
         return false;
@@ -632,10 +632,11 @@ if (!function_exists('empc_has_declined_consent')) {
 if (!function_exists('empc_rate_limit_request')) {
     function empc_rate_limit_request(string $endpoint, int $limit, int $window_seconds): ?WP_REST_Response
     {
+        // Hash the endpoint and source IP; User-Agent is intentionally excluded
+        // so clients cannot reset the bucket by rotating a header value.
         $fingerprint_source = implode('|', [
             $endpoint,
             (string) ($_SERVER['REMOTE_ADDR'] ?? 'unknown'),
-            (string) ($_SERVER['HTTP_USER_AGENT'] ?? 'unknown'),
         ]);
         $fingerprint = hash_hmac('sha256', $fingerprint_source, wp_salt('auth'));
         $transient_key = 'empc_rl_' . substr($fingerprint, 0, 24);
@@ -741,6 +742,18 @@ add_action('rest_api_init', function () {
     register_rest_route('empc/v1', '/contact', [
         'methods' => WP_REST_Server::CREATABLE,
         'permission_callback' => '__return_true',
+        'args' => [
+            'consent' => [
+                'description' => 'Consentimiento explícito para responder a la solicitud.',
+                'required' => true,
+                'type' => 'boolean',
+            ],
+            'name' => ['type' => 'string'],
+            'email' => ['type' => 'string', 'format' => 'email'],
+            'service' => ['type' => 'string'],
+            'message' => ['type' => 'string'],
+            'website' => ['type' => 'string'],
+        ],
         'callback' => function (WP_REST_Request $request) {
             $rate_limit = empc_rate_limit_request('contact', 5, 600);
             if ($rate_limit instanceof WP_REST_Response) {
@@ -752,7 +765,7 @@ add_action('rest_api_init', function () {
                 return empc_rest_error('Solicitud no válida.', 400);
             }
 
-            if (empc_has_declined_consent($data)) {
+            if (!empc_has_valid_consent($data)) {
                 return empc_rest_error('Debes aceptar la política de privacidad para continuar.', 400);
             }
 
@@ -823,6 +836,17 @@ add_action('rest_api_init', function () {
     register_rest_route('empc/v1', '/budget', [
         'methods' => WP_REST_Server::CREATABLE,
         'permission_callback' => '__return_true',
+        'args' => [
+            'consent' => [
+                'description' => 'Consentimiento explícito para responder a la solicitud.',
+                'required' => true,
+                'type' => 'boolean',
+            ],
+            'name' => ['type' => 'string'],
+            'email' => ['type' => 'string', 'format' => 'email'],
+            'budget_data' => ['type' => 'object'],
+            'website' => ['type' => 'string'],
+        ],
         'callback' => function (WP_REST_Request $request) {
             $rate_limit = empc_rate_limit_request('budget', 3, 600);
             if ($rate_limit instanceof WP_REST_Response) {
@@ -834,7 +858,7 @@ add_action('rest_api_init', function () {
                 return empc_rest_error('Solicitud no válida.', 400);
             }
 
-            if (empc_has_declined_consent($data)) {
+            if (!empc_has_valid_consent($data)) {
                 return empc_rest_error('Debes aceptar la política de privacidad para continuar.', 400);
             }
 

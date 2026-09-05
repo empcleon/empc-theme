@@ -16,7 +16,8 @@ const StepSummary: React.FC<StepProps> = ({ bookingData, onBack, reset }) => {
 
   const handleConfirm = async () => {
     setIsSubmitting(true);
-    await new Promise(resolve => setTimeout(resolve, 2000));
+    // Demostración local: no persiste ni transmite reservas o pedidos.
+    await new Promise(resolve => setTimeout(resolve, 400));
     setIsSubmitting(false);
     setIsSuccess(true);
   };
@@ -27,16 +28,14 @@ const StepSummary: React.FC<StepProps> = ({ bookingData, onBack, reset }) => {
         <div className="w-20 h-20 bg-emerald-100 rounded-full flex items-center justify-center mb-6 animate-bounce">
           <CheckCircle2 size={40} className="text-emerald-600" />
         </div>
-        <h2 className="text-3xl font-display font-bold text-gray-900 mb-2">
-          {bookingData.mode === 'reservation' ? '¡Mesa Reservada!' : '¡Pedido Recibido!'}
-        </h2>
+        <h2 className="text-3xl font-display font-bold text-gray-900 mb-2">Demostración completada</h2>
         <p className="text-gray-500 mb-8 max-w-xs mx-auto">
-          Hemos enviado los detalles a <span className="font-medium text-gray-900">{bookingData.contact.email}</span>.
+          No se ha creado ninguna reserva o pedido ni se ha enviado un email a <span className="font-medium text-gray-900">{bookingData.contact.email}</span>.
         </p>
         
         <div className="bg-gray-50 rounded-2xl p-6 w-full mb-8 text-left border border-gray-100 border-dashed relative">
            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-gray-200 to-transparent"></div>
-           <p className="text-sm text-gray-400 uppercase font-bold tracking-wider mb-4 text-center">Ticket Digital</p>
+           <p className="text-sm text-gray-400 uppercase font-bold tracking-wider mb-4 text-center">Resumen de ejemplo</p>
            
            {bookingData.mode === 'reservation' ? (
              <div className="space-y-2 text-center">
@@ -69,8 +68,8 @@ const StepSummary: React.FC<StepProps> = ({ bookingData, onBack, reset }) => {
   return (
     <div className="space-y-6 fade-in">
       <div className="text-center">
-        <h2 className="text-2xl font-display font-bold text-gray-900">Confirmación</h2>
-        <p className="text-gray-500 mt-2">Revisa los detalles antes de finalizar.</p>
+        <h2 className="text-2xl font-display font-bold text-gray-900">Resumen de demostración</h2>
+        <p className="text-gray-500 mt-2">Revisa cómo se presentaría el resumen. Esta demo no procesa pagos, reservas ni pedidos.</p>
       </div>
 
       <div className="bg-white rounded-3xl shadow-lg shadow-gray-200/50 overflow-hidden border border-gray-100">
@@ -168,7 +167,7 @@ const StepSummary: React.FC<StepProps> = ({ bookingData, onBack, reset }) => {
                   </svg>
                   Procesando...
               </span>
-          ) : (bookingData.mode === 'reservation' ? 'Confirmar Reserva' : 'Pagar y Pedir')}
+          ) : 'Ver resultado de la demo'}
         </Button>
       </div>
     </div>
