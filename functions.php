@@ -95,6 +95,15 @@ function empc_enqueue_react_assets()
         wp_enqueue_style('empc-react-styles', $react_css, [], filemtime($react_css_path));
     }
 
+    if (is_singular('post')) {
+        wp_enqueue_style(
+            'empc-post',
+            get_template_directory_uri() . '/assets/css/empc-post.css',
+            [],
+            filemtime(EMPC_THEME_DIR . '/assets/css/empc-post.css')
+        );
+    }
+
     // CSS editorial aislado y exclusivo de la portada.
     if (is_front_page()) {
         $front_page_css_path = EMPC_THEME_DIR . '/assets/css/empc-front-page.css';

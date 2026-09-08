@@ -7,9 +7,9 @@ Este proyecto implementa una **Arquitectura de Islas** que combina la robustez S
 ### 1. WordPress (Backend & Estructura)
 - **Tema Base**: Estructura clásica (`header.php`, `footer.php`, `index.php`).
 - **Renderizado Híbrido**:
-  - `functions.php`: Detecta entorno (Local vs Producción).
-  - **Local (Docker)**: Carga Vite Client (puerto 5173). *[Actualmente en modo Build por estabilidad]*
-  - **Producción**: Carga assets compilados de `/react-app/assets/`.
+  - `functions.php`: carga los assets compilados del tema y monta las islas React cuando la ruta lo necesita.
+  - **Local**: la URL y el servidor dependen de la instalación WordPress local activa; no se debe asumir Docker ni una URL fija.
+  - **Producción**: carga los assets compilados de `/react-app/assets/`.
 - **Mount Points (Islas)**:
   - `#root`: Contenedor principal (actualmente renderiza la Home completa).
   - `#react-whatsapp-bubble`: Widget flotante independiente.
@@ -22,25 +22,21 @@ Este proyecto implementa una **Arquitectura de Islas** que combina la robustez S
 
 ### 3. Workflow de Desarrollo
 
-#### Entorno Local (Docker)
-1. **Arrancar WordPress**:
-   ```bash
-   sudo docker-compose up -d
-   ```
-   Acceso: `http://localhost:8080`
-
-2. **Desarrollar en React**:
-   Editar archivos en `src/`.
-   Para ver cambios:
-   ```bash
-   npm run build
-   ```
-   *(Recargar navegador)*
+#### Entorno Local
+1. Identificar la instalación WordPress local activa, su URL y el árbol de tema que realmente sirve.
+2. Editar PHP o `src/` según el alcance del cambio.
+3. Ejecutar `npm run build` cuando se modifique React, TypeScript, Tailwind o los assets compilados.
+4. Verificar con `curl`/HTML las rutas afectadas.
 
 #### Despliegue (CI/CD)
 Gestionado por GitHub Actions (`.github/workflows/deploy.yml`):
-- Push a `main` -> `npm ci` -> `npm run build` -> FTP Upload al servidor.
-- Guía de trabajo remoto: `GITHUB_WORKFLOW.md`
+- Solo un `push` a `main` o una ejecución manual activa el workflow.
+- El runner ejecuta `npm ci` y `npm run build`.
+- Después sube el tema por FTP al directorio remoto configurado en el workflow.
+- WordPress, la base de datos, plugins y contenido editorial quedan fuera de este despliegue.
+- La publicación no se considera verificada hasta comprobar el HTML público de `https://empc.es/`.
+
+La guía completa para agentes y otros equipos está en [`GITHUB_WORKFLOW.md`](GITHUB_WORKFLOW.md).
 
 ## 🚀 Roadmap de Componentes
 

@@ -80,10 +80,12 @@ get_header(); ?>
 
                 <!-- Footer del Post -->
                 <div class="mt-16 pt-8 border-t border-slate-800 flex justify-between items-center">
+                    <?php if (has_tag()) : ?>
                     <div class="text-slate-500 text-sm">
                         Etiquetas:
                         <?php the_tags('', ', ', ''); ?>
                     </div>
+                    <?php endif; ?>
 
                     <!-- Share (Simulado) -->
                     <div class="flex gap-2">
@@ -100,18 +102,24 @@ get_header(); ?>
                 </div>
 
                 <!-- Navegación entre posts -->
+                <?php if (get_previous_post() || get_next_post()) : ?>
                 <div class="grid grid-cols-2 gap-4 mt-8">
+                    <?php if (get_previous_post()) : ?>
                     <div
                         class="bg-slate-900/50 p-4 rounded-xl border border-slate-800 hover:border-slate-700 transition-colors group">
                         <div class="text-xs text-slate-500 mb-1">Anterior</div>
                         <?php previous_post_link('%link', '<span class="text-white font-medium group-hover:text-rose-400 transition-colors">%title</span>'); ?>
                     </div>
+                    <?php endif; ?>
+                    <?php if (get_next_post()) : ?>
                     <div
                         class="bg-slate-900/50 p-4 rounded-xl border border-slate-800 hover:border-slate-700 transition-colors text-right group">
                         <div class="text-xs text-slate-500 mb-1">Siguiente</div>
                         <?php next_post_link('%link', '<span class="text-white font-medium group-hover:text-rose-400 transition-colors">%title</span>'); ?>
                     </div>
+                    <?php endif; ?>
                 </div>
+                <?php endif; ?>
 
             </div>
         </div>
