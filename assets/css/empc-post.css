@@ -1,0 +1,12 @@
+/* Keep long code examples readable within the article on narrow screens. */
+.single-post article .prose pre {
+    max-width: 100%;
+    overflow-x: auto;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+}
+
+.single-post article .prose pre code {
+    white-space: inherit;
+    overflow-wrap: inherit;
+}
