@@ -12,32 +12,6 @@ $is_blog = is_home() || is_archive() || is_singular('post') || is_search();
     <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    <!-- Crisp Chat - Lazy Load (no impacta LCP) -->
-    <script type="text/javascript">
-        // Configuración de Crisp (esto no pesa nada)
-        window.$crisp = [];
-        window.CRISP_WEBSITE_ID = "9f6b4900-955e-42d8-8aea-ed27760db271";
-
-        // Función para cargar el chat solo tras interacción o 5 segundos
-        function loadCrisp() {
-            if (window.crispLoaded) return;
-            window.crispLoaded = true;
-            (function () {
-                d = document;
-                s = d.createElement("script");
-                s.src = "https://client.crisp.chat/l.js";
-                s.async = 1;
-                d.getElementsByTagName("head")[0].appendChild(s);
-            })();
-        }
-
-        // Disparadores de carga: scroll, movimiento de ratón o espera de 5s
-        window.addEventListener('scroll', loadCrisp, { once: true });
-        window.addEventListener('mousemove', loadCrisp, { once: true });
-        window.addEventListener('touchstart', loadCrisp, { once: true });
-        setTimeout(loadCrisp, 5000);
-    </script>
-
     <?php 
     wp_head(); 
     ?>
