@@ -278,9 +278,9 @@ if (!function_exists('empc_seo_preferred_title')) {
                 $context['schema_page_type'] = 'WebPage';
                 $context['service_page'] = true;
                 $context['service_type'] = 'Consultoría WordPress';
-                $context['title'] = 'Consultoría WordPress en León | EMPC';
-                $context['description'] = 'Resuelve tus dudas y problemas de WordPress con consultoría online en León. Revisión técnica, WooCommerce, formación y orientación para mejorar tu web.';
-                $context['schema_page_name'] = $context['title'];
+                $context['title'] = 'Consultor WordPress en León para empresas | EMPC';
+                $context['description'] = 'Consultoría WordPress en León para analizar problemas, ordenar mejoras y decidir la solución adecuada para tu web o tienda online.';
+                $context['schema_page_name'] = get_the_title();
                 $context['schema_page_description'] = $context['description'];
             }
 
@@ -1012,11 +1012,6 @@ if (!function_exists('empc_seo_rank_math_filters')) {
         }, 99999, 1);
 
         add_filter('rank_math/frontend/title', function ($title) {
-            // Rank Math is authoritative for the approved Local metadata batch.
-            if (in_array((int) get_queried_object_id(), [38504, 30739, 38506, 38505, 38065], true)) {
-                return $title;
-            }
-
             $context = empc_seo_current_context();
             return !empty($context['title']) ? $context['title'] : $title;
         }, 20);
@@ -1048,11 +1043,6 @@ if (!function_exists('empc_seo_rank_math_filters')) {
         }, 20);
 
         add_filter('rank_math/frontend/description', function ($description) {
-            // Rank Math is authoritative for the approved Local metadata batch.
-            if (in_array((int) get_queried_object_id(), [38504, 30739, 38506, 38505, 38065], true)) {
-                return $description;
-            }
-
             $context = empc_seo_current_context();
             return !empty($context['description']) ? $context['description'] : $description;
         }, 20);
