@@ -149,7 +149,7 @@ get_header();
                         </ul>
                         <p class="text-xs text-slate-400">Frecuencia: mensual</p>
                         <a href="<?php echo esc_url(home_url('/contacta-conmigo/?tipo=mantenimiento-wordpress')); ?>" class="inline-flex min-h-11 items-center justify-center px-4 py-3 rounded-xl bg-[#E29595] text-[#121826] font-bold text-sm">
-                            Contratar
+                            Pedir presupuesto
                         </a>
                     </div>
 
@@ -167,7 +167,7 @@ get_header();
                         </ul>
                         <p class="text-xs text-slate-400">Frecuencia: mensual</p>
                         <a href="<?php echo esc_url(home_url('/contacta-conmigo/?tipo=mantenimiento-wordpress')); ?>" class="inline-flex min-h-11 items-center justify-center px-4 py-3 rounded-xl bg-[#E29595] text-[#121826] font-bold text-sm">
-                            Contratar
+                            Pedir presupuesto
                         </a>
                     </div>
 
@@ -184,7 +184,7 @@ get_header();
                         </ul>
                         <p class="text-xs text-slate-400">Frecuencia: mensual</p>
                         <a href="<?php echo esc_url(home_url('/contacta-conmigo/?tipo=mantenimiento-wordpress')); ?>" class="inline-flex min-h-11 items-center justify-center px-4 py-3 rounded-xl bg-[#E29595] text-[#121826] font-bold text-sm">
-                            Contratar
+                            Pedir presupuesto
                         </a>
                     </div>
 
@@ -201,7 +201,7 @@ get_header();
                         </ul>
                         <p class="text-xs text-slate-400">Frecuencia: mensual</p>
                         <a href="<?php echo esc_url(home_url('/contacta-conmigo/?tipo=mantenimiento-wordpress')); ?>" class="inline-flex min-h-11 items-center justify-center px-4 py-3 rounded-xl bg-[#E29595] text-[#121826] font-bold text-sm">
-                            Contratar
+                            Pedir presupuesto
                         </a>
                     </div>
                 </div>
