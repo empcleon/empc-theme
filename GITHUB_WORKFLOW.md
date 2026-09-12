@@ -4,6 +4,7 @@ Esta guía describe el flujo real de este repositorio `empc-theme` para que una 
 
 ## 0. Qué publica realmente este repositorio
 
+- El repositorio GitHub oficial es `https://github.com/empcleon/empc-theme.git`.
 - El repositorio contiene un tema WordPress híbrido: PHP/WordPress para el HTML y React/Vite para las islas interactivas.
 - `src/` contiene el código fuente React/TypeScript.
 - `react-app/assets/` contiene los assets compilados que utiliza el tema en producción.
