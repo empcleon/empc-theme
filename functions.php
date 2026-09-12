@@ -983,19 +983,6 @@ if (!function_exists('empc_is_laboratorio_ia_request')) {
     }
 }
 
-add_action('wp_enqueue_scripts', function () {
-    if (!empc_is_laboratorio_ia_request()) {
-        return;
-    }
-
-    $react_css = get_template_directory_uri() . '/react-app/assets/main.css';
-    $react_css_path = EMPC_THEME_DIR . '/react-app/assets/main.css';
-
-    if (file_exists($react_css_path)) {
-        wp_enqueue_style('empc-lab-main', $react_css, [], filemtime($react_css_path));
-    }
-}, 4);
-
 add_filter('pre_get_document_title', function ($title) {
     if (defined('RANK_MATH_VERSION')) {
         return $title;
