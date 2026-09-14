@@ -97,7 +97,7 @@ export const disenoWebLeonConfig = {
         subtitle: 'Testimonios',
         testimonials: [
             { text: 'Las solicitudes de presupuesto han subido un 40%.', author: 'Carlos Martínez', company: 'Talleres Martínez', rating: 5 },
-            { text: => 'Me vendieron una herramienta que genera clientes cada semana.', author: 'Laura Fernández', company: 'Clínica Dental Sonrisa', rating: 5 },
+            { text: 'Me vendieron una herramienta que genera clientes cada semana.', author: 'Laura Fernández', company: 'Clínica Dental Sonrisa', rating: 5 },
             { text: 'Comunicación clara, plazos cumplidos y resultado impecable.', author: 'Miguel Ángel Pérez', company: 'Asesoría P&A', rating: 5 }
         ]
     },
