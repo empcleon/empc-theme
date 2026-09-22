@@ -8,8 +8,8 @@ get_header();
     <article class="max-w-6xl mx-auto px-6 py-20">
         <section class="max-w-4xl space-y-6 mb-16">
             <p class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#E29595]/10 border border-[#E29595]/20 text-[#E29595] text-xs font-bold uppercase tracking-widest">León y alrededores</p>
-            <h1 class="text-4xl md:text-6xl font-bold text-white">Mantenimiento y reparación de ordenadores en León</h1>
-            <p class="text-xl leading-relaxed text-slate-300">¿Tu ordenador va lento, falla o es demasiado antiguo? Cuéntame qué ocurre y te prepararé un presupuesto antes de empezar. No se realiza ningún trabajo sin que conozcas el alcance y el coste.</p>
+            <h1 class="text-4xl md:text-6xl font-bold text-white">Reparación de ordenadores en León</h1>
+            <p class="text-xl leading-relaxed text-slate-300">¿Tu ordenador va lento, falla o es demasiado antiguo? Cuéntame qué ocurre y valoraremos la reparación o actualización posible antes de empezar. El diagnóstico o presupuesto puede tener coste y no se realiza ningún trabajo sin que conozcas el alcance y las condiciones.</p>
             <p class="text-lg leading-relaxed text-slate-400">Trabajo con ordenadores y portátiles de particulares, autónomos y pequeños negocios. Si el equipo no merece la pena, también te lo diré con claridad para que no gastes dinero en una reparación poco razonable.</p>
         </section>
 
@@ -39,7 +39,7 @@ get_header();
             <h3>¿Reparáis cualquier ordenador?</h3>
             <p>No. Primero valoramos si el trabajo es viable y si tiene sentido económico. En equipos muy antiguos, de gama baja o con daños en gráfica, placa base o pantalla, puede ser más sensato sustituirlos.</p>
             <h3>¿Tengo que pagar una revisión antes de saber el precio?</h3>
-            <p>No ofrecemos diagnósticos gratuitos ni comenzamos trabajos sin presupuesto. Envíanos la información del equipo y del problema; con esos datos valoraremos si podemos preparar un presupuesto previo. Si hace falta revisar físicamente el equipo para poder presupuestar, te informaremos antes de realizar cualquier actuación.</p>
+            <p>El diagnóstico o presupuesto puede tener coste. Envíanos la información del equipo y del problema; con esos datos valoraremos el siguiente paso. Si hace falta revisar físicamente el equipo para poder presupuestar, te informaremos del coste y de las condiciones antes de realizar cualquier actuación.</p>
             <h3>¿Puedo llevar un equipo para que lo reparéis sin presupuesto?</h3>
             <p>No. El presupuesto se acepta antes de empezar y el pago se acuerda por adelantado. Así sabes qué trabajo se va a realizar y cuánto va a costar antes de comprometerte.</p>
             <h3>¿Vendéis ordenadores usados?</h3>
