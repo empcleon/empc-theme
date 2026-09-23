@@ -157,6 +157,10 @@ get_header();
                             <h2 class="text-xl font-bold">Redacción de contenidos</h2>
                             <p class="mt-2 text-slate-400">Página de servicio existente.</p>
                         </a>
+                        <a href="<?php echo esc_url(home_url('/wpo-wordpress-leon/')); ?>" class="rounded-2xl border border-white/10 bg-[#1F2937]/50 p-6 text-white hover:border-[#E29595]/50 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E29595]">
+                            <h2 class="text-xl font-bold">Optimización WPO</h2>
+                            <p class="mt-2 text-slate-400">Página de servicio existente.</p>
+                        </a>
                     </nav>
                 </section>
 

@@ -81,6 +81,9 @@ $is_blog = is_home() || is_archive() || is_singular('post') || is_search();
                             <a href="<?php echo home_url('/redaccion-contenidos-web-leon/'); ?>" class="block px-4 py-3 hover:bg-white/5 rounded-lg text-slate-300 hover:text-dusty-rose text-[10px] tracking-widest uppercase">
                                 Redacción de contenidos
                             </a>
+                            <a href="<?php echo home_url('/wpo-wordpress-leon/'); ?>" class="block px-4 py-3 hover:bg-white/5 rounded-lg text-slate-300 hover:text-dusty-rose text-[10px] tracking-widest uppercase">
+                                Optimización WPO
+                            </a>
                         </div>
                     </div>
 
@@ -144,6 +147,10 @@ $is_blog = is_home() || is_archive() || is_singular('post') || is_search();
                 <a href="<?php echo home_url('/redaccion-contenidos-web-leon/'); ?>"
                     class="mobile-link block text-xl font-medium text-white">
                     Redacción de contenidos
+                </a>
+                <a href="<?php echo home_url('/wpo-wordpress-leon/'); ?>"
+                    class="mobile-link block text-xl font-medium text-white">
+                    Optimización WPO
                 </a>
             </div>
 
