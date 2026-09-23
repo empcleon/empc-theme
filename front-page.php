@@ -186,21 +186,21 @@ $empc_home_prices = [
                 <article class="empc-service" data-empc-reveal>
                     <span class="empc-service__number">05</span>
                     <div class="empc-service__copy">
-                        <p class="empc-service__label">Rendimiento</p>
-                        <h3>Optimización WPO</h3>
-                        <p>Revisión de carga, recursos y configuración para definir mejoras con alcance concreto.</p>
+                        <p class="empc-service__label">VELOCIDAD WEB</p>
+                        <h3>Velocidad de tu web</h3>
+                        <p>Si tarda en abrir, la gente se va. La dejamos más rápida y fácil de usar.</p>
                     </div>
-                    <a href="<?php echo esc_url(home_url('/optimizacion-de-velocidad-wordpress-freelance/')); ?>" class="empc-service__link">Ver optimización <span aria-hidden="true">↗</span></a>
+                    <a href="<?php echo esc_url(home_url('/wpo-wordpress-leon/')); ?>" class="empc-service__link">Ver servicio <span aria-hidden="true">↗</span></a>
                 </article>
 
                 <article class="empc-service empc-service--compact" data-empc-reveal>
                     <span class="empc-service__number">06</span>
                     <div class="empc-service__copy">
-                        <p class="empc-service__label">Visibilidad local</p>
-                        <h3>SEO local en León</h3>
-                        <p>Revisión inicial de la web y de las prioridades locales antes de definir una intervención.</p>
+                        <p class="empc-service__label">VISIBILIDAD EN GOOGLE</p>
+                        <h3>Que te encuentren en Google</h3>
+                        <p>Si te buscan en León y no sales, no te llaman. Revisamos tu web y tu ficha.</p>
                     </div>
-                    <a href="<?php echo esc_url(home_url('/seo-local-leon/')); ?>" class="empc-service__link">Ver SEO local <span aria-hidden="true">↗</span></a>
+                    <a href="<?php echo esc_url(home_url('/seo-local-leon/')); ?>" class="empc-service__link">Ver servicio <span aria-hidden="true">↗</span></a>
                 </article>
             </div>
 
