@@ -11,8 +11,8 @@ if (!function_exists('empc_diseno_web_leon_safe_config')) {
     {
         return [
             'seo' => [
-                'title' => 'Diseño web en León para empresas y autónomos | EMPC',
-                'description' => 'Diseño web en León con WordPress, rendimiento y soporte directo. Creamos páginas claras para empresas y autónomos que quieren captar clientes.',
+                'title' => 'Página web para tu negocio en León | EMPC',
+                'description' => 'Una web clara para explicar qué haces y conseguir contactos. Para negocios de León. Sin tecnicismos ni promesas de salir el primero.',
             ],
             'hero' => [
                 'badge' => 'Diseño web en León',
