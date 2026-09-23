@@ -73,7 +73,7 @@ $is_blog = is_home() || is_archive() || is_singular('post') || is_search();
                                 Mantenimiento WordPress
                             </a>
                             <a href="<?php echo home_url('/seo-local-leon/'); ?>" class="block px-4 py-3 hover:bg-white/5 rounded-lg text-slate-300 hover:text-dusty-rose text-[10px] tracking-widest uppercase">
-                                SEO Local
+                                Que te encuentren en Google
                             </a>
                             <a href="<?php echo home_url('/alquiler-pagina-web-empresas-y-autonomos/'); ?>" class="block px-4 py-3 hover:bg-white/5 rounded-lg text-slate-300 hover:text-dusty-rose text-[10px] tracking-widest uppercase">
                                 Alquiler web
@@ -82,7 +82,7 @@ $is_blog = is_home() || is_archive() || is_singular('post') || is_search();
                                 Redacción de contenidos
                             </a>
                             <a href="<?php echo home_url('/wpo-wordpress-leon/'); ?>" class="block px-4 py-3 hover:bg-white/5 rounded-lg text-slate-300 hover:text-dusty-rose text-[10px] tracking-widest uppercase">
-                                Optimización WPO
+                                Velocidad de tu web
                             </a>
                         </div>
                     </div>
@@ -138,7 +138,7 @@ $is_blog = is_home() || is_archive() || is_singular('post') || is_search();
                 </a>
                 <a href="<?php echo home_url('/seo-local-leon/'); ?>"
                     class="mobile-link block text-xl font-medium text-white">
-                    SEO Local
+                    Que te encuentren en Google
                 </a>
                 <a href="<?php echo home_url('/alquiler-pagina-web-empresas-y-autonomos/'); ?>"
                     class="mobile-link block text-xl font-medium text-white">
@@ -150,7 +150,7 @@ $is_blog = is_home() || is_archive() || is_singular('post') || is_search();
                 </a>
                 <a href="<?php echo home_url('/wpo-wordpress-leon/'); ?>"
                     class="mobile-link block text-xl font-medium text-white">
-                    Optimización WPO
+                    Velocidad de tu web
                 </a>
             </div>
 
