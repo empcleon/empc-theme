@@ -319,8 +319,8 @@ if (!function_exists('empc_seo_preferred_title')) {
                 }
 
                 if (is_page('tiendas-online-leon')) {
-                    $context['title'] = 'Diseño de tiendas online en León | WooCommerce | EMPC';
-                    $context['description'] = 'Diseño de tiendas online en León con WooCommerce para empresas y autónomos. Catálogo, pagos, envíos y gestión de pedidos.';
+                    $context['title'] = 'Vender por internet en León | EMPC';
+                    $context['description'] = 'Dejamos clara tu tienda para que se entienda qué vendes, cómo te pagan y qué ocurre después del pedido. Para negocios de León y toda España.';
                 }
 
                 if (is_page('reparacion-wordpress-leon')) {
