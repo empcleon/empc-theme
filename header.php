@@ -63,16 +63,16 @@ $is_blog = is_home() || is_archive() || is_singular('post') || is_search();
                             Servicios <span aria-hidden="true">⌄</span>
                         </a>
                         <div class="absolute left-1/2 -translate-x-1/2 top-full mt-4 w-56 bg-[#121826]/95 backdrop-blur-xl border border-white/10 rounded-xl p-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible group-focus-within:opacity-100 group-focus-within:visible transition-all duration-200 shadow-2xl" aria-label="Servicios">
-                            <a href="<?php echo home_url('/diseno-web-leon'); ?>" class="block px-4 py-3 hover:bg-white/5 rounded-lg text-slate-300 hover:text-dusty-rose text-[10px] tracking-widest uppercase mb-1">
+                            <a href="<?php echo home_url('/diseno-web-leon/'); ?>" class="block px-4 py-3 hover:bg-white/5 rounded-lg text-slate-300 hover:text-dusty-rose text-[10px] tracking-widest uppercase mb-1">
                                 Diseño Web
                             </a>
-                            <a href="<?php echo home_url('/tiendas-online-leon'); ?>" class="block px-4 py-3 hover:bg-white/5 rounded-lg text-slate-300 hover:text-dusty-rose text-[10px] tracking-widest uppercase mb-1">
+                            <a href="<?php echo home_url('/tiendas-online-leon/'); ?>" class="block px-4 py-3 hover:bg-white/5 rounded-lg text-slate-300 hover:text-dusty-rose text-[10px] tracking-widest uppercase mb-1">
                                 Tiendas Online
                             </a>
                             <a href="<?php echo home_url('/mantenimiento-wordpress-leon/'); ?>" class="block px-4 py-3 hover:bg-white/5 rounded-lg text-slate-300 hover:text-dusty-rose text-[10px] tracking-widest uppercase mb-1">
                                 Mantenimiento WordPress
                             </a>
-                            <a href="<?php echo home_url('/seo-local-leon'); ?>" class="block px-4 py-3 hover:bg-white/5 rounded-lg text-slate-300 hover:text-dusty-rose text-[10px] tracking-widest uppercase">
+                            <a href="<?php echo home_url('/seo-local-leon/'); ?>" class="block px-4 py-3 hover:bg-white/5 rounded-lg text-slate-300 hover:text-dusty-rose text-[10px] tracking-widest uppercase">
                                 SEO Local
                             </a>
                             <a href="<?php echo home_url('/alquiler-pagina-web-empresas-y-autonomos/'); ?>" class="block px-4 py-3 hover:bg-white/5 rounded-lg text-slate-300 hover:text-dusty-rose text-[10px] tracking-widest uppercase">
@@ -118,11 +118,11 @@ $is_blog = is_home() || is_archive() || is_singular('post') || is_search();
             <!-- Mobile Services Section -->
             <div class="space-y-4 border-y border-slate-800 py-6">
                 <a href="<?php echo home_url('/servicios/'); ?>" class="mobile-link inline-block text-xs uppercase tracking-widest text-slate-500 font-bold focus:outline-none focus-visible:ring-2 focus-visible:ring-dusty-rose rounded-sm" aria-haspopup="true">Servicios</a>
-                <a href="<?php echo home_url('/diseno-web-leon'); ?>"
+                <a href="<?php echo home_url('/diseno-web-leon/'); ?>"
                     class="mobile-link block text-xl font-medium text-white">
                     Diseño Web
                 </a>
-                <a href="<?php echo home_url('/tiendas-online-leon'); ?>"
+                <a href="<?php echo home_url('/tiendas-online-leon/'); ?>"
                     class="mobile-link block text-xl font-medium text-white">
                     Tiendas Online
                 </a>
@@ -130,7 +130,7 @@ $is_blog = is_home() || is_archive() || is_singular('post') || is_search();
                     class="mobile-link block text-xl font-medium text-white">
                     Mantenimiento WordPress
                 </a>
-                <a href="<?php echo home_url('/seo-local-leon'); ?>"
+                <a href="<?php echo home_url('/seo-local-leon/'); ?>"
                     class="mobile-link block text-xl font-medium text-white">
                     SEO Local
                 </a>
