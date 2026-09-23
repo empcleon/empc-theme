@@ -24,24 +24,24 @@ $empc_home_prices = [
             <div class="empc-hero__copy">
                 <p class="empc-eyebrow empc-hero__eyebrow">
                     <span class="empc-eyebrow__signal" aria-hidden="true"></span>
-                    Freelance WordPress en León · Servicio remoto en España
+                    Diseño web para negocios en León · Servicio remoto en España
                 </p>
 
                 <h1 id="empc-home-title" class="empc-hero__title">
-                    Diseño y desarrollo <span>WordPress en León</span>, con mantenimiento técnico para toda España
+                    Diseño web en León para negocios que necesitan clientes
                 </h1>
 
-                <p class="empc-hero__statement">Sistemas web sólidos, mantenibles y preparados para evolucionar.</p>
+                <p class="empc-hero__statement">Landing, web corporativa o tienda online. WordPress, Astro o React según el proyecto, no según una plantilla.</p>
                 <p class="empc-hero__intro">
                     Desarrollo, optimizo y mantengo sitios WordPress con una base visible desde el primer HTML y React únicamente donde la interacción aporta valor real.
                 </p>
 
                 <div class="empc-actions">
-                    <a class="empc-button empc-button--primary" href="<?php echo esc_url(home_url('/contacta-conmigo/')); ?>">
-                        Cuéntame tu proyecto <span aria-hidden="true">↗</span>
+                    <a class="empc-button empc-button--primary" href="#pack-presencia">
+                        Ver packs web <span aria-hidden="true">↓</span>
                     </a>
-                    <a class="empc-button empc-button--secondary" href="#servicios">
-                        Explorar servicios <span aria-hidden="true">↓</span>
+                    <a class="empc-button empc-button--secondary" href="<?php echo esc_url(home_url('/contacta-conmigo/?tipo=pack-presencia')); ?>">
+                        Pedir presupuesto <span aria-hidden="true">↗</span>
                     </a>
                 </div>
 
@@ -86,6 +86,23 @@ $empc_home_prices = [
                     </div>
                 </div>
                 <p class="empc-system__caption"><span>01</span> Ingeniería web con presencia editorial.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="pack-presencia" class="empc-section empc-pack" aria-labelledby="empc-pack-title">
+        <div class="empc-shell empc-pack__grid">
+            <div data-empc-reveal>
+                <p class="empc-kicker">01 / Puerta de entrada</p>
+                <h2 id="empc-pack-title" class="empc-heading">Pack Presencia</h2>
+            </div>
+            <div class="empc-pack__body" data-empc-reveal>
+                <p class="empc-lead">Un punto de partida para autónomos y pequeños negocios que necesitan explicar qué hacen y facilitar el contacto.</p>
+                <p>El alcance se concreta antes de presupuestar. No incluye por defecto tienda, ficha de Google Business Profile, logo, fotos, SEO avanzado ni entregas urgentes.</p>
+                <div class="empc-actions">
+                    <a class="empc-button empc-button--primary" href="<?php echo esc_url(home_url('/contacta-conmigo/?tipo=pack-presencia')); ?>">Pedir presupuesto <span aria-hidden="true">↗</span></a>
+                    <a class="empc-text-link" href="#servicios">Ver servicios <span aria-hidden="true">↓</span></a>
+                </div>
             </div>
         </div>
     </section>
