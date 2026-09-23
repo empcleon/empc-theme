@@ -228,7 +228,7 @@ if (!function_exists('empc_seo_preferred_title')) {
             if (get_post_field('post_name', get_the_ID()) === 'cuanto-cuesta-web-leon') {
                 $context['description'] = 'Guía para entender el precio de una web en León: web corporativa, tienda online y proyectos a medida, con referencias sin IVA.';
             } elseif (get_post_field('post_name', get_the_ID()) === 'seo-local-leon') {
-                $context['description'] = 'Mejora la presencia local de tu negocio en León con una revisión de ficha, web y prioridades técnicas antes de decidir qué acciones aplicar.';
+                $context['description'] = 'Si tienes un negocio en León y no apareces cuando te buscan, revisamos tu web y tu ficha de Google. Sin promesas de salir el primero.';
             }
             $context['canonical'] = get_permalink();
             $context['og_type'] = 'article';
