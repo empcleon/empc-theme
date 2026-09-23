@@ -1017,7 +1017,7 @@ if (!function_exists('empc_seo_rank_math_filters')) {
 
         add_filter('rank_math/frontend/title', function ($title) {
             // Rank Math is authoritative for the approved Local metadata batch.
-            if (in_array((int) get_queried_object_id(), [38504, 30739, 38506, 38505, 38065], true)) {
+            if (is_page('consultor-wordpress') || in_array((int) get_queried_object_id(), [38504, 30739, 38506, 38505, 38065], true)) {
                 return $title;
             }
 
@@ -1053,7 +1053,7 @@ if (!function_exists('empc_seo_rank_math_filters')) {
 
         add_filter('rank_math/frontend/description', function ($description) {
             // Rank Math is authoritative for the approved Local metadata batch.
-            if (in_array((int) get_queried_object_id(), [38504, 30739, 38506, 38505, 38065], true)) {
+            if (is_page('consultor-wordpress') || in_array((int) get_queried_object_id(), [38504, 30739, 38506, 38505, 38065], true)) {
                 return $description;
             }
 
