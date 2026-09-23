@@ -118,6 +118,10 @@ if (!function_exists('empc_seo_preferred_title')) {
         }
 
         if (is_page()) {
+            if (is_page('servicios')) {
+                return 'Servicios web en León | EMPC';
+            }
+
             if (is_page('optimizacion-de-velocidad-wordpress-freelance')) {
                 return 'Freelance optimización de velocidad WordPress | EMPC';
             }
