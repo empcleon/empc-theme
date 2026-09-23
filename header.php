@@ -20,6 +20,14 @@ $is_blog = is_home() || is_archive() || is_singular('post') || is_search();
 <body <?php body_class('bg-slate-deep text-slate-50 font-sans selection:bg-dusty-rose selection:text-slate-deep'); ?>>
     <?php wp_body_open(); ?>
 
+    <style id="empc-services-menu-accessibility">
+        #main-nav .empc-services-dropdown:focus-within > [aria-label="Servicios"],
+        #main-nav .empc-services-dropdown:hover > [aria-label="Servicios"] {
+            opacity: 1 !important;
+            visibility: visible !important;
+        }
+    </style>
+
     <!-- Navigation (Soberana V3) -->
     <nav id="main-nav"
         class="sticky top-0 z-50 w-full transition-all duration-300 backdrop-blur-xl border-b border-white/5 bg-[#121826]/80">
@@ -49,32 +57,32 @@ $is_blog = is_home() || is_archive() || is_singular('post') || is_search();
                     
                     <a href="<?php echo home_url('/#metodo'); ?>" class="<?php echo $link_base; ?>">Ingeniería</a>
 
-                    <!-- Servicios Dropdown (Simplificado para V3) -->
-                    <div class="relative group">
-                        <button class="<?php echo $link_base; ?> flex items-center gap-1 focus:outline-none">
-                            Servicios
-                        </button>
-                        <div class="absolute left-1/2 -translate-x-1/2 top-full mt-4 w-56 bg-[#121826]/95 backdrop-blur-xl border border-white/10 rounded-xl p-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 shadow-2xl">
-                            <a href="<?php echo home_url('/diseno-web-leon'); ?>" class="block px-4 py-3 hover:bg-white/5 rounded-lg text-slate-300 hover:text-dusty-rose text-[10px] tracking-widest uppercase mb-1">
+                    <!-- Servicios Dropdown -->
+                    <div class="relative group empc-services-dropdown">
+                        <a href="<?php echo home_url('/servicios/'); ?>" class="<?php echo $link_base; ?> flex items-center gap-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-dusty-rose rounded-sm" aria-haspopup="true">
+                            Servicios <span aria-hidden="true">⌄</span>
+                        </a>
+                        <div class="absolute left-1/2 -translate-x-1/2 top-full mt-4 w-56 bg-[#121826]/95 backdrop-blur-xl border border-white/10 rounded-xl p-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible group-focus-within:opacity-100 group-focus-within:visible transition-all duration-200 shadow-2xl" aria-label="Servicios">
+                            <a href="<?php echo home_url('/diseno-web-leon/'); ?>" class="block px-4 py-3 hover:bg-white/5 rounded-lg text-slate-300 hover:text-dusty-rose text-[10px] tracking-widest uppercase mb-1">
                                 Diseño Web
+                            </a>
+                            <a href="<?php echo home_url('/tiendas-online-leon/'); ?>" class="block px-4 py-3 hover:bg-white/5 rounded-lg text-slate-300 hover:text-dusty-rose text-[10px] tracking-widest uppercase mb-1">
+                                Tiendas Online
                             </a>
                             <a href="<?php echo home_url('/mantenimiento-wordpress-leon/'); ?>" class="block px-4 py-3 hover:bg-white/5 rounded-lg text-slate-300 hover:text-dusty-rose text-[10px] tracking-widest uppercase mb-1">
                                 Mantenimiento WordPress
                             </a>
-                            <a href="<?php echo home_url('/consultor-wordpress/'); ?>" class="block px-4 py-3 hover:bg-white/5 rounded-lg text-slate-300 hover:text-dusty-rose text-[10px] tracking-widest uppercase mb-1">
-                                Consultoría WordPress
-                            </a>
-                            <a href="<?php echo home_url('/tiendas-online-leon'); ?>" class="block px-4 py-3 hover:bg-white/5 rounded-lg text-slate-300 hover:text-dusty-rose text-[10px] tracking-widest uppercase mb-1">
-                                Tiendas Online
-                            </a>
-                            <a href="<?php echo home_url('/optimizacion-de-velocidad-wordpress-freelance/'); ?>" class="block px-4 py-3 hover:bg-white/5 rounded-lg text-slate-300 hover:text-dusty-rose text-[10px] tracking-widest uppercase mb-1">
-                                Optimización WordPress
-                            </a>
-                            <a href="<?php echo home_url('/seo-local-leon'); ?>" class="block px-4 py-3 hover:bg-white/5 rounded-lg text-slate-300 hover:text-dusty-rose text-[10px] tracking-widest uppercase">
+                            <a href="<?php echo home_url('/seo-local-leon/'); ?>" class="block px-4 py-3 hover:bg-white/5 rounded-lg text-slate-300 hover:text-dusty-rose text-[10px] tracking-widest uppercase">
                                 SEO Local
                             </a>
                             <a href="<?php echo home_url('/alquiler-pagina-web-empresas-y-autonomos/'); ?>" class="block px-4 py-3 hover:bg-white/5 rounded-lg text-slate-300 hover:text-dusty-rose text-[10px] tracking-widest uppercase">
                                 Alquiler web
+                            </a>
+                            <a href="<?php echo home_url('/redaccion-contenidos-web-leon/'); ?>" class="block px-4 py-3 hover:bg-white/5 rounded-lg text-slate-300 hover:text-dusty-rose text-[10px] tracking-widest uppercase">
+                                Redacción de contenidos
+                            </a>
+                            <a href="<?php echo home_url('/wpo-wordpress-leon/'); ?>" class="block px-4 py-3 hover:bg-white/5 rounded-lg text-slate-300 hover:text-dusty-rose text-[10px] tracking-widest uppercase">
+                                Optimización WPO
                             </a>
                         </div>
                     </div>
@@ -115,34 +123,34 @@ $is_blog = is_home() || is_archive() || is_singular('post') || is_search();
 
             <!-- Mobile Services Section -->
             <div class="space-y-4 border-y border-slate-800 py-6">
-                <span class="text-xs uppercase tracking-widest text-slate-500 font-bold">Servicios</span>
-                <a href="<?php echo home_url('/diseno-web-leon'); ?>"
+                <a href="<?php echo home_url('/servicios/'); ?>" class="mobile-link inline-block text-xs uppercase tracking-widest text-slate-500 font-bold focus:outline-none focus-visible:ring-2 focus-visible:ring-dusty-rose rounded-sm" aria-haspopup="true">Servicios</a>
+                <a href="<?php echo home_url('/diseno-web-leon/'); ?>"
                     class="mobile-link block text-xl font-medium text-white">
                     Diseño Web
+                </a>
+                <a href="<?php echo home_url('/tiendas-online-leon/'); ?>"
+                    class="mobile-link block text-xl font-medium text-white">
+                    Tiendas Online
                 </a>
                 <a href="<?php echo home_url('/mantenimiento-wordpress-leon/'); ?>"
                     class="mobile-link block text-xl font-medium text-white">
                     Mantenimiento WordPress
                 </a>
-                <a href="<?php echo home_url('/consultor-wordpress/'); ?>"
-                    class="mobile-link block text-xl font-medium text-white">
-                    Consultoría WordPress
-                </a>
-                <a href="<?php echo home_url('/tiendas-online-leon'); ?>"
-                    class="mobile-link block text-xl font-medium text-white">
-                    Tiendas Online
-                </a>
-                <a href="<?php echo home_url('/optimizacion-de-velocidad-wordpress-freelance/'); ?>"
-                    class="mobile-link block text-xl font-medium text-white">
-                    Optimización WordPress
-                </a>
-                <a href="<?php echo home_url('/seo-local-leon'); ?>"
+                <a href="<?php echo home_url('/seo-local-leon/'); ?>"
                     class="mobile-link block text-xl font-medium text-white">
                     SEO Local
                 </a>
                 <a href="<?php echo home_url('/alquiler-pagina-web-empresas-y-autonomos/'); ?>"
                     class="mobile-link block text-xl font-medium text-white">
                     Alquiler web
+                </a>
+                <a href="<?php echo home_url('/redaccion-contenidos-web-leon/'); ?>"
+                    class="mobile-link block text-xl font-medium text-white">
+                    Redacción de contenidos
+                </a>
+                <a href="<?php echo home_url('/wpo-wordpress-leon/'); ?>"
+                    class="mobile-link block text-xl font-medium text-white">
+                    Optimización WPO
                 </a>
             </div>
 

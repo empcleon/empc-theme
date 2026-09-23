@@ -125,6 +125,45 @@ get_header();
                     <section class="rounded-3xl border border-[#E29595]/20 bg-[#E29595]/5 p-6 md:p-8 flex flex-col md:flex-row md:items-center md:justify-between gap-6"><div><h2 class="text-3xl font-bold text-white mb-2">Cuéntame qué necesitas decidir</h2><p class="text-slate-400">Describe tu WordPress, el problema o la propuesta que quieres revisar.</p></div><a href="<?php echo esc_url(home_url('/contacta-conmigo/?tipo=consultoria-wordpress')); ?>" class="inline-flex items-center justify-center px-6 py-3 rounded-xl bg-[#E29595] text-slate-950 font-bold">Solicitar una valoración</a></section>
                 </section>
 
+            <?php elseif ($slug === 'servicios') : ?>
+                <section class="space-y-10">
+                    <div class="max-w-4xl space-y-5">
+                        <p class="text-[11px] font-bold uppercase tracking-[0.25em] text-[#E29595]">Índice de servicios</p>
+                        <h1 class="text-4xl md:text-6xl font-bold text-white leading-tight">Servicios | EMPC</h1>
+                        <p class="text-xl text-slate-400 leading-relaxed">Cada página enlazada concreta su propio alcance y condiciones.</p>
+                    </div>
+                    <nav aria-label="Servicios disponibles" class="grid gap-4 md:grid-cols-2">
+                        <a href="<?php echo esc_url(home_url('/diseno-web-leon/')); ?>" class="rounded-2xl border border-white/10 bg-[#1F2937]/50 p-6 text-white hover:border-[#E29595]/50 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E29595]">
+                            <h2 class="text-xl font-bold">Diseño web en León</h2>
+                            <p class="mt-2 text-slate-400">Página de servicio existente.</p>
+                        </a>
+                        <a href="<?php echo esc_url(home_url('/tiendas-online-leon/')); ?>" class="rounded-2xl border border-white/10 bg-[#1F2937]/50 p-6 text-white hover:border-[#E29595]/50 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E29595]">
+                            <h2 class="text-xl font-bold">Tiendas online</h2>
+                            <p class="mt-2 text-slate-400">Página de servicio existente.</p>
+                        </a>
+                        <a href="<?php echo esc_url(home_url('/mantenimiento-wordpress-leon/')); ?>" class="rounded-2xl border border-white/10 bg-[#1F2937]/50 p-6 text-white hover:border-[#E29595]/50 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E29595]">
+                            <h2 class="text-xl font-bold">Mantenimiento WordPress</h2>
+                            <p class="mt-2 text-slate-400">Página de servicio existente.</p>
+                        </a>
+                        <a href="<?php echo esc_url(home_url('/seo-local-leon/')); ?>" class="rounded-2xl border border-white/10 bg-[#1F2937]/50 p-6 text-white hover:border-[#E29595]/50 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E29595]">
+                            <h2 class="text-xl font-bold">SEO local</h2>
+                            <p class="mt-2 text-slate-400">Página de servicio existente.</p>
+                        </a>
+                        <a href="<?php echo esc_url(home_url('/alquiler-pagina-web-empresas-y-autonomos/')); ?>" class="rounded-2xl border border-white/10 bg-[#1F2937]/50 p-6 text-white hover:border-[#E29595]/50 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E29595]">
+                            <h2 class="text-xl font-bold">Alquiler de página web</h2>
+                            <p class="mt-2 text-slate-400">Página de servicio existente.</p>
+                        </a>
+                        <a href="<?php echo esc_url(home_url('/redaccion-contenidos-web-leon/')); ?>" class="rounded-2xl border border-white/10 bg-[#1F2937]/50 p-6 text-white hover:border-[#E29595]/50 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E29595]">
+                            <h2 class="text-xl font-bold">Redacción de contenidos</h2>
+                            <p class="mt-2 text-slate-400">Página de servicio existente.</p>
+                        </a>
+                        <a href="<?php echo esc_url(home_url('/wpo-wordpress-leon/')); ?>" class="rounded-2xl border border-white/10 bg-[#1F2937]/50 p-6 text-white hover:border-[#E29595]/50 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E29595]">
+                            <h2 class="text-xl font-bold">Optimización WPO</h2>
+                            <p class="mt-2 text-slate-400">Página de servicio existente.</p>
+                        </a>
+                    </nav>
+                </section>
+
             <?php else : ?>
                 <section class="prose prose-invert prose-lg max-w-4xl mx-auto text-slate-300">
                     <?php if ($slug === 'mas-informacion-sobre-las-cookies') : ?>
