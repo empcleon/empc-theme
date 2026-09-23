@@ -78,6 +78,9 @@ $is_blog = is_home() || is_archive() || is_singular('post') || is_search();
                             <a href="<?php echo home_url('/alquiler-pagina-web-empresas-y-autonomos/'); ?>" class="block px-4 py-3 hover:bg-white/5 rounded-lg text-slate-300 hover:text-dusty-rose text-[10px] tracking-widest uppercase">
                                 Alquiler web
                             </a>
+                            <a href="<?php echo home_url('/redaccion-contenidos-web-leon/'); ?>" class="block px-4 py-3 hover:bg-white/5 rounded-lg text-slate-300 hover:text-dusty-rose text-[10px] tracking-widest uppercase">
+                                Redacción de contenidos
+                            </a>
                         </div>
                     </div>
 
@@ -137,6 +140,10 @@ $is_blog = is_home() || is_archive() || is_singular('post') || is_search();
                 <a href="<?php echo home_url('/alquiler-pagina-web-empresas-y-autonomos/'); ?>"
                     class="mobile-link block text-xl font-medium text-white">
                     Alquiler web
+                </a>
+                <a href="<?php echo home_url('/redaccion-contenidos-web-leon/'); ?>"
+                    class="mobile-link block text-xl font-medium text-white">
+                    Redacción de contenidos
                 </a>
             </div>
 
