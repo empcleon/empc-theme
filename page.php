@@ -146,8 +146,8 @@ get_header();
                             <p class="mt-2 text-slate-400">Página de servicio existente.</p>
                         </a>
                         <a href="<?php echo esc_url(home_url('/seo-local-leon/')); ?>" class="rounded-2xl border border-white/10 bg-[#1F2937]/50 p-6 text-white hover:border-[#E29595]/50 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E29595]">
-                            <h2 class="text-xl font-bold">SEO local</h2>
-                            <p class="mt-2 text-slate-400">Página de servicio existente.</p>
+                            <h2 class="text-xl font-bold">Que te encuentren en Google</h2>
+                            <p class="mt-2 text-slate-400">Si te buscan en León y no sales, no te llaman. Revisamos tu web y tu ficha.</p>
                         </a>
                         <a href="<?php echo esc_url(home_url('/alquiler-pagina-web-empresas-y-autonomos/')); ?>" class="rounded-2xl border border-white/10 bg-[#1F2937]/50 p-6 text-white hover:border-[#E29595]/50 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E29595]">
                             <h2 class="text-xl font-bold">Alquiler de página web</h2>
@@ -158,8 +158,8 @@ get_header();
                             <p class="mt-2 text-slate-400">Página de servicio existente.</p>
                         </a>
                         <a href="<?php echo esc_url(home_url('/wpo-wordpress-leon/')); ?>" class="rounded-2xl border border-white/10 bg-[#1F2937]/50 p-6 text-white hover:border-[#E29595]/50 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E29595]">
-                            <h2 class="text-xl font-bold">Optimización WPO</h2>
-                            <p class="mt-2 text-slate-400">Página de servicio existente.</p>
+                            <h2 class="text-xl font-bold">Velocidad de tu web</h2>
+                            <p class="mt-2 text-slate-400">Si tarda en abrir, la gente se va. La dejamos más rápida y fácil de usar.</p>
                         </a>
                     </nav>
                 </section>
