@@ -19,10 +19,10 @@ get_header();
                     <div class="space-y-4 max-w-3xl">
                         <h1 class="text-4xl md:text-6xl font-bold text-white leading-tight">Mantenimiento WordPress en León para empresas y autónomos</h1>
                         <h2 class="text-xl md:text-2xl text-slate-400 leading-relaxed">
-                            Mantenimiento técnico recurrente para WordPress y WooCommerce.
+                            El mantenimiento técnico recurrente ayuda a mantener una web WordPress o WooCommerce actualizada, respaldada y revisada dentro del plan contratado.
                         </h2>
                         <p class="text-lg text-slate-300 leading-relaxed max-w-2xl">
-                            Mantener una web no consiste solo en actualizar botones. Revisamos actualizaciones, copias, seguridad, rendimiento y posibles incidencias dentro del plan contratado, con un alcance que puedas entender antes de elegir.
+                            El alcance debe quedar claro antes de elegir: actualizar no equivale a desarrollar funcionalidades, gestionar todos los contenidos ni resolver cualquier incidencia sin límites.
                         </p>
                     </div>
 
@@ -96,7 +96,7 @@ get_header();
                         </ul>
                     </div>
                     <div class="rounded-2xl border border-white/10 bg-[#1F2937]/50 p-6 space-y-3">
-                        <h3 class="text-xl font-bold text-white">Seguridad y emergencias</h3>
+                        <h3 class="text-xl font-bold text-white">Seguridad y copias</h3>
                         <ul class="space-y-2 text-slate-300 text-sm">
                             <li>• Medidas de seguridad y antispam</li>
                             <li>• Limpieza básica de incidencias</li>
@@ -260,6 +260,20 @@ get_header();
                         <h3 class="text-lg font-bold text-white mb-2">Licencias y migraciones</h3>
                         <p class="text-sm text-slate-400 leading-relaxed">Licencias de plugins/plantillas y cambios de hosting o dominio requieren presupuesto específico.</p>
                     </div>
+                </div>
+            </section>
+
+            <section class="space-y-6" aria-labelledby="mantenimiento-alcance-title">
+                <div class="max-w-3xl space-y-3">
+                    <p class="text-[11px] font-bold uppercase tracking-[0.25em] text-[#E29595]">Alcance honesto</p>
+                    <h2 id="mantenimiento-alcance-title" class="text-3xl md:text-4xl font-bold text-white">Mantenimiento recurrente no es una web nueva</h2>
+                    <p class="text-slate-400 leading-relaxed">El mantenimiento cubre tareas técnicas recurrentes dentro del plan contratado. Las mejoras puntuales, una web nueva, la consultoría y los servicios de terceros se revisan y presupuestan por separado.</p>
+                </div>
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <div class="rounded-2xl border border-white/10 bg-[#1F2937]/50 p-5"><h3 class="text-lg font-bold text-white mb-2">Mantenimiento recurrente</h3><p class="text-sm text-slate-400 leading-relaxed">Actualizaciones, copias, seguridad, rendimiento y soporte dentro del plan.</p></div>
+                    <div class="rounded-2xl border border-white/10 bg-[#1F2937]/50 p-5"><h3 class="text-lg font-bold text-white mb-2">Mejoras puntuales</h3><p class="text-sm text-slate-400 leading-relaxed">Nuevas páginas, funcionalidades o cambios de alcance necesitan una valoración específica.</p></div>
+                    <div class="rounded-2xl border border-white/10 bg-[#1F2937]/50 p-5"><h3 class="text-lg font-bold text-white mb-2">Web nueva y consultoría</h3><p class="text-sm text-slate-400 leading-relaxed">Crear una web o analizar una necesidad concreta son servicios distintos del mantenimiento recurrente.</p></div>
+                    <div class="rounded-2xl border border-white/10 bg-[#1F2937]/50 p-5"><h3 class="text-lg font-bold text-white mb-2">Servicios de terceros</h3><p class="text-sm text-slate-400 leading-relaxed">Hosting, dominios, licencias, pasarelas y proveedores externos dependen de sus propias condiciones.</p></div>
                 </div>
             </section>
 
