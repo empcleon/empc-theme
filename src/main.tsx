@@ -19,7 +19,7 @@ if (contactElement) {
     import('./components/ContactForm').then(({ default: ContactForm }) => {
         ReactDOM.createRoot(contactElement).render(
             <React.StrictMode>
-                <ContactForm />
+                <ContactForm initialService={contactElement.dataset.service} />
             </React.StrictMode>
         );
     });

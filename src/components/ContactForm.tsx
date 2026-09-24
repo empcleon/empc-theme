@@ -1,15 +1,34 @@
 import React, { useState } from 'react';
 import { Mail, ArrowRight, Check, User, MessageSquare, Send } from 'lucide-react';
-import { emitGenerateLead, readServiceAttribution, SERVICE_OPTIONS } from '../utils/serviceAttribution';
+import { emitGenerateLead, getServiceAttribution, readServiceAttribution, SERVICE_OPTIONS } from '../utils/serviceAttribution';
 
-const ContactForm = () => {
-    const initialAttribution = readServiceAttribution();
+const ContactForm = ({ initialService }: { initialService?: string }) => {
+    const initialAttribution = getServiceAttribution(initialService) ?? readServiceAttribution();
     const [step, setStep] = useState(1);
+    const budgetContext = (() => {
+        if (typeof window === 'undefined') return '';
+        const params = new URLSearchParams(window.location.search);
+        const allowedScopes = ['Landing o web de una página', 'Web corporativa básica', 'Web corporativa profesional', 'Tienda WooCommerce inicial', 'Tienda avanzada', 'Proyecto personalizado', 'Otro proyecto o integración'];
+        const scope = params.get('alcance') ?? '';
+        const numeric = ['paginas', 'base', 'iva', 'total'].map((key) => [key, params.get(key) ?? ''] as const).filter(([, value]) => /^\d+$/.test(value));
+        const maintenance = params.get('mantenimiento') ?? '';
+        const values = [
+            ...(allowedScopes.includes(scope) ? [['alcance', scope] as const] : []),
+            ...numeric,
+            ...( ['none', 'basic', 'medium', 'plus', 'premium'].includes(maintenance) ? [['mantenimiento', maintenance] as const] : [])
+        ];
+        return values.length ? `Contexto de calculadora: ${values.map(([key, value]) => `${key}=${value}`).join(', ')}` : '';
+    })();
     const [formData, setFormData] = useState({
         name: '',
         email: '',
+        phone: '',
         service: initialAttribution?.label ?? '',
-        message: '',
+        message: budgetContext,
+        scope: '',
+        hosting: '',
+        integrations: '',
+        timeframe: '',
         website: '',
         consent: false
     });
@@ -24,7 +43,14 @@ const ContactForm = () => {
         setFormData({ ...formData, [e.target.name]: value });
     };
 
-    const nextStep = () => setStep(step + 1);
+    const nextStep = () => {
+        if (step === 1 && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email.trim())) {
+            setErrorMessage('Introduce un correo electrónico válido.');
+            return;
+        }
+        setErrorMessage('');
+        setStep(step + 1);
+    };
     const prevStep = () => setStep(step - 1);
 
     const handleSubmit = async (e: React.FormEvent) => {
@@ -49,7 +75,10 @@ const ContactForm = () => {
                     'Content-Type': 'application/json',
                     'X-WP-Nonce': nonce
                 },
-                body: JSON.stringify(formData)
+                body: JSON.stringify({
+                    ...formData,
+                    message: [formData.message, formData.scope ? `Alcance/páginas: ${formData.scope}` : '', formData.hosting ? `Hosting/mantenimiento: ${formData.hosting}` : '', formData.integrations ? `Integraciones: ${formData.integrations}` : '', formData.timeframe ? `Plazo indicado por el cliente: ${formData.timeframe}` : ''].filter(Boolean).join('\n\n')
+                })
             });
 
             const payload = await response.json().catch(() => null);
@@ -77,9 +106,9 @@ const ContactForm = () => {
                     <Check className="w-8 h-8 text-emerald-500" />
                 </div>
                 <h3 className="text-2xl font-bold text-white mb-2">Mensaje recibido</h3>
-                <p className="text-slate-300">Gracias, {formData.name}. Tu solicitud se ha enviado para revisión humana.</p>
+                <p className="text-slate-300">Gracias, {formData.name}. Tu solicitud se ha enviado para revisión humana. No se genera una respuesta automática ni se promete un plazo concreto.</p>
                 <button
-                    onClick={() => { setIsSuccess(false); setStep(1); setFormData({ name: '', email: '', service: readServiceAttribution()?.label ?? '', message: '', website: '', consent: false }); }}
+                    onClick={() => { setIsSuccess(false); setStep(1); setFormData({ name: '', email: '', phone: '', service: initialAttribution?.label ?? '', message: '', scope: '', hosting: '', integrations: '', timeframe: '', website: '', consent: false }); }}
                     className="mt-6 text-emerald-400 hover:text-emerald-300 font-medium"
                 >
                     Enviar otro mensaje
@@ -151,6 +180,11 @@ const ContactForm = () => {
                                 </div>
                             </div>
 
+                            <div className="space-y-2">
+                                <label htmlFor="cf-phone" className="block text-sm font-medium text-slate-300">Teléfono <span className="text-slate-500">(opcional)</span></label>
+                                <input id="cf-phone" type="tel" name="phone" value={formData.phone} onChange={handleChange} className="w-full bg-slate-800 border border-slate-700 rounded-xl py-3 px-4 text-white focus:outline-none focus:border-rose-500 focus:ring-1 focus:ring-rose-500 transition-all placeholder-slate-500" placeholder="Si quieres que te llame" />
+                            </div>
+
                             <div className="pt-4 flex justify-end">
                                 <button
                                     type="button"
@@ -217,7 +251,7 @@ const ContactForm = () => {
                             <h3 className="text-2xl font-bold text-white mb-6">Cuéntanos los detalles</h3>
 
                             <div className="relative">
-                                <label htmlFor="cf-message" className="block text-sm font-medium text-slate-300 mb-2">Detalles del proyecto</label>
+                                <label htmlFor="cf-message" className="block text-sm font-medium text-slate-300 mb-2">Objetivo principal *</label>
                                 <MessageSquare className="absolute left-4 top-11 w-5 h-5 text-slate-500" aria-hidden="true" />
                                 <textarea
                                     id="cf-message"
@@ -226,9 +260,33 @@ const ContactForm = () => {
                                     onChange={handleChange}
                                     rows={4}
                                     className="w-full bg-slate-800 border border-slate-700 rounded-xl py-3 pl-12 pr-4 text-white focus:outline-none focus:border-rose-500 focus:ring-1 focus:ring-rose-500 transition-all resize-none"
-                                    placeholder="¿Cuál es tu objetivo principal con este proyecto?"
+                                    placeholder="¿Qué quieres conseguir con este proyecto?"
                                     required
                                 />
+                            </div>
+
+                            <div className="relative">
+                                <label htmlFor="cf-scope" className="block text-sm font-medium text-slate-300 mb-2">Alcance o páginas previstas *</label>
+                                <textarea id="cf-scope" name="scope" value={formData.scope} onChange={handleChange} rows={3} className="w-full bg-slate-800 border border-slate-700 rounded-xl py-3 px-4 text-white focus:outline-none focus:border-rose-500 focus:ring-1 focus:ring-rose-500 transition-all resize-none" placeholder="Por ejemplo: inicio, servicios, contacto y blog" required />
+                            </div>
+
+                            <div className="space-y-2">
+                                <label htmlFor="cf-hosting" className="block text-sm font-medium text-slate-300">Hosting o mantenimiento</label>
+                                <select id="cf-hosting" name="hosting" value={formData.hosting} onChange={handleChange} className="w-full bg-slate-800 border border-slate-700 rounded-xl py-3 px-4 text-white focus:outline-none focus:border-rose-500 focus:ring-1 focus:ring-rose-500 transition-all">
+                                    <option value="">No lo sé todavía</option><option value="ya-tengo-hosting">Ya tengo hosting</option><option value="necesito-hosting">Necesito orientación sobre hosting</option><option value="quiero-mantenimiento">Quiero valorar mantenimiento</option>
+                                </select>
+                            </div>
+
+                            <div className="relative">
+                                <label htmlFor="cf-integrations" className="block text-sm font-medium text-slate-300 mb-2">Integraciones o necesidades especiales</label>
+                                <textarea id="cf-integrations" name="integrations" value={formData.integrations} onChange={handleChange} rows={3} className="w-full bg-slate-800 border border-slate-700 rounded-xl py-3 px-4 text-white focus:outline-none focus:border-rose-500 focus:ring-1 focus:ring-rose-500 transition-all resize-none" placeholder="Reservas, pagos, CRM, ERP u otras necesidades; si no aplica, déjalo vacío." />
+                            </div>
+
+                            <div className="space-y-2">
+                                <label htmlFor="cf-timeframe" className="block text-sm font-medium text-slate-300">Plazo orientativo <span className="text-slate-500">(opcional)</span></label>
+                                <select id="cf-timeframe" name="timeframe" value={formData.timeframe} onChange={handleChange} className="w-full bg-slate-800 border border-slate-700 rounded-xl py-3 px-4 text-white focus:outline-none focus:border-rose-500 focus:ring-1 focus:ring-rose-500 transition-all">
+                                    <option value="">No indicado</option><option value="sin-fecha-concreta">Sin fecha concreta</option><option value="proximos-meses">En los próximos meses</option><option value="fecha-a-indicar">Tengo una fecha que indicaré en el mensaje</option>
+                                </select>
                             </div>
 
                             <div className="flex items-start gap-3 text-sm text-slate-300">

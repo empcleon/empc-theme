@@ -65,6 +65,12 @@ get_header(); ?>
                             );
                         }
                         echo $post_content;
+                        if ($post_slug === 'wpo-wordpress-leon') : ?>
+                            <section class="mt-16 rounded-3xl border border-[#E29595]/20 bg-[#E29595]/5 p-6 md:p-10 not-prose" aria-labelledby="wpo-contact-form-title">
+                                <div class="max-w-2xl mb-8"><p class="text-[11px] font-bold uppercase tracking-[0.25em] text-[#E29595]">Presupuesto a medida</p><h2 id="wpo-contact-form-title" class="text-3xl md:text-4xl font-bold text-white mt-2">Cuéntame qué está frenando tu web</h2><p class="text-slate-400 mt-3">La revisión define el alcance real antes de proponer cambios. No se muestra una cifra inventada.</p></div>
+                                <div id="island-contact-form" data-service="wpo"></div>
+                            </section>
+                        <?php endif;
                         if ($post_slug === 'seo-local-leon') : ?>
                             <section class="mt-10 rounded-3xl border border-[#E29595]/20 bg-[#E29595]/5 p-6 md:p-8 not-prose">
                                 <p class="text-slate-300 leading-relaxed">Recibirás una revisión inicial de tu ficha, tu web y las principales prioridades locales para decidir qué acciones tienen sentido antes de contratar una intervención.</p>
