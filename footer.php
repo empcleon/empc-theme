@@ -6,7 +6,6 @@
             <a href="mailto:info@empc.es" class="inline-block mt-3 text-sm text-[#E29595] hover:underline">info@empc.es</a>
         </div>
         <div class="flex gap-12 text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">
-            <a href="https://github.com/empcleon" target="_blank" rel="noopener noreferrer" class="hover:text-[#E29595] transition-colors">GitHub</a>
             <a href="https://www.linkedin.com/in/emma-pecharroman-clemente/" target="_blank" rel="noopener noreferrer" class="hover:text-[#E29595] transition-colors">LinkedIn</a>
             <a href="<?php echo home_url('/politica-de-privacidad'); ?>"
                 class="hover:text-[#E29595] transition-colors">Privacidad</a>

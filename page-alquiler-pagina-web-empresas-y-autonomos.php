@@ -17,12 +17,12 @@ get_header();
                     </div>
 
                     <div class="space-y-4 max-w-3xl">
-                        <h1 class="text-4xl md:text-6xl font-bold text-white leading-tight">Alquiler de página web para empresas y autónomos</h1>
+                        <h1 class="text-4xl md:text-6xl font-bold text-white leading-tight">Solución gestionada con alcance definido</h1>
                         <h2 class="text-xl md:text-2xl text-slate-400 leading-relaxed">
-                            Una forma de tener web o tienda online sin empezar con un gran desembolso inicial.
+                            Podemos valorar una solución gestionada para una web corporativa, un catálogo o una tienda online.
                         </h2>
                         <p class="text-lg text-slate-300 leading-relaxed max-w-2xl">
-                            La propuesta original explica un modelo escalable para empezar rápido, añadir servicios cuando haga falta y mantener la web con una estructura clara.
+                            Este modelo puede reunir una web o tienda online con servicios recurrentes de alojamiento, mantenimiento, soporte o contenidos, siempre dentro del alcance de la propuesta contratada. La cuota, las tareas incluidas y las condiciones deben quedar definidas antes de contratar.
                         </p>
                     </div>
 
@@ -44,7 +44,7 @@ get_header();
                     <ul class="space-y-3 text-slate-300">
                         <li>• Web corporativa, blog o tienda online</li>
                         <li>• Planes escalables según necesidades</li>
-                        <li>• Mantenimiento, contenidos y soporte según el plan</li>
+                        <li>• Mantenimiento, contenidos y soporte: solo cuando estén expresamente incluidos</li>
                         <li>• Enfoque para empresas, autónomos y pequeños comercios</li>
                     </ul>
                 </aside>
@@ -67,7 +67,7 @@ get_header();
                     </div>
                     <div class="rounded-2xl border border-white/10 bg-[#1F2937]/50 p-5">
                         <h3 class="text-lg font-bold text-white mb-2">3. Publicar y mantener</h3>
-                        <p class="text-sm text-slate-400 leading-relaxed">La web se entrega con mantenimiento, copias, soporte o contenidos según el plan seleccionado.</p>
+                        <p class="text-sm text-slate-400 leading-relaxed">La propuesta puede contemplar mantenimiento, copias, soporte o contenidos cuando estén expresamente incluidos.</p>
                     </div>
                     <div class="rounded-2xl border border-white/10 bg-[#1F2937]/50 p-5">
                         <h3 class="text-lg font-bold text-white mb-2">4. Escalar cuando haga falta</h3>
@@ -88,8 +88,8 @@ get_header();
                         <p class="text-sm text-slate-400 leading-relaxed">El propio contenido insiste en empezar sin un gran desembolso.</p>
                     </div>
                     <div class="rounded-2xl border border-white/10 bg-[#1F2937]/50 p-5">
-                        <h3 class="text-lg font-bold text-white mb-2">Mantenimiento incluido</h3>
-                        <p class="text-sm text-slate-400 leading-relaxed">Los planes publicados integran actualizaciones, copias o soporte según la tarifa.</p>
+                        <h3 class="text-lg font-bold text-white mb-2">Mantenimiento según propuesta</h3>
+                        <p class="text-sm text-slate-400 leading-relaxed">Los planes pueden contemplar actualizaciones, copias o soporte según lo que se concrete en la propuesta.</p>
                     </div>
                     <div class="rounded-2xl border border-white/10 bg-[#1F2937]/50 p-5">
                         <h3 class="text-lg font-bold text-white mb-2">Escalabilidad</h3>
@@ -112,7 +112,7 @@ get_header();
                     <div class="rounded-2xl border border-white/10 bg-[#1F2937]/50 p-6 space-y-3">
                         <h3 class="text-xl font-bold text-white">Base web</h3>
                         <ul class="space-y-2 text-slate-300 text-sm">
-                            <li>• Hosting y dominio incluidos en los planes publicados</li>
+                            <li>• Hosting y dominio: solo si se incluyen expresamente en la propuesta en los planes publicados</li>
                             <li>• Cuentas de correo profesionales</li>
                             <li>• Diseño personalizado</li>
                             <li>• Desarrollo de 10, 15 o 20 páginas según plan</li>
@@ -148,6 +148,20 @@ get_header();
                 </div>
             </section>
 
+            <section class="space-y-6" aria-labelledby="alcance-propuesta-title">
+                <div class="max-w-3xl space-y-3">
+                    <p class="text-[11px] font-bold uppercase tracking-[0.25em] text-[#E29595]">Antes de contratar</p>
+                    <h2 id="alcance-propuesta-title" class="text-3xl md:text-4xl font-bold text-white">Alcance, condiciones y responsabilidades</h2>
+                    <p class="text-slate-400 leading-relaxed">La propuesta debe indicar qué web, catálogo o tienda se construye, qué tareas se realizan, qué cambios posteriores se contemplan y qué responsabilidades mantiene cada parte.</p>
+                </div>
+                <div class="grid md:grid-cols-2 gap-4">
+                    <div class="rounded-2xl border border-white/10 bg-[#1F2937]/50 p-5"><h3 class="text-lg font-bold text-white mb-2">Web y servicios incluidos</h3><p class="text-sm text-slate-400 leading-relaxed">Hosting, dominio, copias, soporte y contenidos solo se incluyen cuando aparecen expresamente en la propuesta.</p></div>
+                    <div class="rounded-2xl border border-white/10 bg-[#1F2937]/50 p-5"><h3 class="text-lg font-bold text-white mb-2">Responsabilidades y tareas</h3><p class="text-sm text-slate-400 leading-relaxed">Se concretan las tareas de cada parte, los contenidos que debe aportar el negocio y los cambios incluidos o fuera de alcance.</p></div>
+                    <div class="rounded-2xl border border-white/10 bg-[#1F2937]/50 p-5"><h3 class="text-lg font-bold text-white mb-2">Cancelación y migración</h3><p class="text-sm text-slate-400 leading-relaxed">Las condiciones de cancelación, exportación o migración no se presuponen: deben constar en la propuesta antes de contratar.</p></div>
+                    <div class="rounded-2xl border border-white/10 bg-[#1F2937]/50 p-5"><h3 class="text-lg font-bold text-white mb-2">Costes de terceros</h3><p class="text-sm text-slate-400 leading-relaxed">Licencias, pasarelas de pago, servicios externos, tarifas de proveedores y otros costes dependen de sus condiciones y se revisan por separado.</p></div>
+                </div>
+            </section>
+
             <section id="planes-alquiler" class="space-y-6">
                 <div class="max-w-3xl space-y-3">
                     <p class="text-[11px] font-bold uppercase tracking-[0.25em] text-[#E29595]">Planes</p>
@@ -161,59 +175,59 @@ get_header();
                     <div class="rounded-3xl border border-white/10 bg-[#1F2937]/60 p-6 space-y-4">
                         <div>
                             <p class="text-xs uppercase tracking-[0.25em] text-[#E29595]">EMPC&amp;SITE</p>
-                            <h3 class="text-2xl font-bold text-white">Consultar propuesta</h3>
+                            <h3 class="text-2xl font-bold text-white">Web corporativa</h3>
                             <p class="text-sm text-slate-400">Web corporativa</p>
                         </div>
                         <ul class="space-y-2 text-sm text-slate-300">
-                            <li>• Hosting y dominio incluidos</li>
+                            <li>• Hosting y dominio: solo si se incluyen expresamente en la propuesta</li>
                             <li>• 10 páginas, formulario, blog y redes</li>
                             <li>• 1 actualización de contenido mensual</li>
                             <li>• Copia de seguridad mensual y SEO: consultar propuesta</li>
                         </ul>
                         <p class="text-xs text-slate-400">Permanencia, propiedad, dominio, hosting, soporte y cuota inicial: consultar propuesta</p>
-                        <a href="<?php echo esc_url(home_url('/contacta-conmigo/?tipo=alquiler-web')); ?>" class="inline-flex min-h-11 items-center justify-center px-4 py-3 rounded-xl bg-[#E29595] text-[#121826] font-bold text-sm">Contratar plan</a>
+                        <a href="<?php echo esc_url(home_url('/contacta-conmigo/?tipo=alquiler-web')); ?>" class="inline-flex min-h-11 items-center justify-center px-4 py-3 rounded-xl bg-[#E29595] text-[#121826] font-bold text-sm">Solicitar una propuesta</a>
                     </div>
 
                     <div class="rounded-3xl border border-[#E29595]/30 bg-[#1F2937]/70 p-6 space-y-4 ring-1 ring-[#E29595]/10">
                         <div>
                             <p class="text-xs uppercase tracking-[0.25em] text-[#E29595]">EMPC&amp;CATALOG</p>
-                            <h3 class="text-2xl font-bold text-white">Consultar propuesta</h3>
+                            <h3 class="text-2xl font-bold text-white">Web con catálogo</h3>
                             <p class="text-sm text-slate-400">Web con catálogo</p>
                         </div>
                         <ul class="space-y-2 text-sm text-slate-300">
-                            <li>• Hosting y dominio incluidos</li>
+                            <li>• Hosting y dominio: solo si se incluyen expresamente en la propuesta</li>
                             <li>• 10 páginas, blog + newsletter y redes</li>
                             <li>• Catálogo de productos hasta 50 unidades</li>
                             <li>• Backups quincenales, soporte y SEO: consultar propuesta</li>
                         </ul>
                         <p class="text-xs text-slate-400">Permanencia, propiedad, dominio, hosting, soporte y cuota inicial: consultar propuesta</p>
-                        <a href="<?php echo esc_url(home_url('/contacta-conmigo/?tipo=alquiler-web')); ?>" class="inline-flex min-h-11 items-center justify-center px-4 py-3 rounded-xl bg-[#E29595] text-[#121826] font-bold text-sm">Contratar plan</a>
+                        <a href="<?php echo esc_url(home_url('/contacta-conmigo/?tipo=alquiler-web')); ?>" class="inline-flex min-h-11 items-center justify-center px-4 py-3 rounded-xl bg-[#E29595] text-[#121826] font-bold text-sm">Solicitar una propuesta</a>
                     </div>
 
                     <div class="rounded-3xl border border-white/10 bg-[#1F2937]/60 p-6 space-y-4">
                         <div>
                             <p class="text-xs uppercase tracking-[0.25em] text-[#E29595]">EMPC&amp;CONTENTS</p>
-                            <h3 class="text-2xl font-bold text-white">Consultar propuesta</h3>
+                            <h3 class="text-2xl font-bold text-white">Web y gestión de contenidos</h3>
                             <p class="text-sm text-slate-400">Web y gestión de contenidos</p>
                         </div>
                         <ul class="space-y-2 text-sm text-slate-300">
-                            <li>• Hosting y dominio incluidos</li>
+                            <li>• Hosting y dominio: solo si se incluyen expresamente en la propuesta</li>
                             <li>• 15 páginas, blog + newsletter y redes</li>
                             <li>• 4 publicaciones de contenido al mes</li>
                             <li>• Copia de seguridad semanal y soporte técnico</li>
                         </ul>
                         <p class="text-xs text-slate-400">Alcance y condiciones: se concretan en la propuesta.</p>
-                        <a href="<?php echo esc_url(home_url('/contacta-conmigo/?tipo=alquiler-web')); ?>" class="inline-flex min-h-11 items-center justify-center px-4 py-3 rounded-xl bg-[#E29595] text-[#121826] font-bold text-sm">Contratar plan</a>
+                        <a href="<?php echo esc_url(home_url('/contacta-conmigo/?tipo=alquiler-web')); ?>" class="inline-flex min-h-11 items-center justify-center px-4 py-3 rounded-xl bg-[#E29595] text-[#121826] font-bold text-sm">Solicitar una propuesta</a>
                     </div>
 
                     <div class="rounded-3xl border border-white/10 bg-[#1F2937]/60 p-6 space-y-4">
                         <div>
                             <p class="text-xs uppercase tracking-[0.25em] text-[#E29595]">EMPC&amp;COMMERCE</p>
-                            <h3 class="text-2xl font-bold text-white">Consultar</h3>
+                            <h3 class="text-2xl font-bold text-white">Tienda online</h3>
                             <p class="text-sm text-slate-400">Tienda online</p>
                         </div>
                         <ul class="space-y-2 text-sm text-slate-300">
-                            <li>• Hosting y dominio incluidos</li>
+                            <li>• Hosting y dominio: solo si se incluyen expresamente en la propuesta</li>
                             <li>• 20 páginas, catálogo y cesta</li>
                             <li>• Conexión con TPV virtual</li>
                             <li>• 4 publicaciones al mes, backups 24h y soporte</li>
@@ -273,7 +287,7 @@ get_header();
                 <div class="space-y-3">
                     <details class="rounded-2xl border border-white/10 bg-[#1F2937]/50 p-5">
                         <summary class="cursor-pointer list-none text-white font-bold">¿Incluye hosting y dominio?</summary>
-                        <p class="mt-3 text-sm text-slate-400 leading-relaxed">Sí, aparecen como incluidos en los planes publicados.</p>
+                        <p class="mt-3 text-sm text-slate-400 leading-relaxed">El hosting y el dominio solo forman parte de la propuesta cuando se incluyen expresamente. Las condiciones se concretan antes de contratar.</p>
                     </details>
 
                     <details class="rounded-2xl border border-white/10 bg-[#1F2937]/50 p-5">
