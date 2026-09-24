@@ -1,3 +1,0 @@
-rollback_commit=8b13d82c9242ea2e9367c96cf43c7b6f72096107
-file=page-diseno-web.php
-efc9c9ecec22e1e9d5ccc2e97cefc673c87e5fcdf0b988301187623242f09ffd  page-diseno-web.php
