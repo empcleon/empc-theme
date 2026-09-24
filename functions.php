@@ -114,6 +114,20 @@ function empc_enqueue_react_assets()
         wp_enqueue_style('empc-react-styles', $react_css, [], filemtime($react_css_path));
     }
 
+    // La plantilla editorial usa style.css además del CSS del bundle. Se limita
+    // al archivo del blog y a los artículos para no cargarlo en el resto del sitio.
+    if (is_home() || is_singular('post')) {
+        $blog_css_path = EMPC_THEME_DIR . '/style.css';
+        if (file_exists($blog_css_path) && !wp_style_is('empc-blog-style', 'enqueued')) {
+            wp_enqueue_style(
+                'empc-blog-style',
+                EMPC_THEME_URI . '/style.css',
+                ['empc-react-styles'],
+                filemtime($blog_css_path)
+            );
+        }
+    }
+
     if (is_singular('post')) {
         wp_enqueue_style(
             'empc-post',

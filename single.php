@@ -1,137 +1,70 @@
 <?php
-/**
- * Single Post Template (single.php)
- */
-get_header(); ?>
-
-<?php while (have_posts()):
-    the_post(); ?>
-
-    <article id="post-<?php the_ID(); ?>" class="min-h-screen">
-
-        <!-- Hero del Post -->
-        <header class="pt-32 pb-12 bg-gradient-to-b from-slate-900 via-slate-900 to-slate-950 relative overflow-hidden">
-            <div class="absolute inset-0 bg-rose-500/5 blur-3xl rounded-full transform -translate-y-1/2"></div>
-
-            <div class="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                <!-- Meta data -->
-                <div class="flex items-center justify-center gap-4 mb-6 text-sm">
-                    <span class="bg-rose-500/10 text-rose-400 border border-rose-500/20 px-3 py-1 rounded-full font-medium">
-                        <?php echo get_the_category_list(', '); ?>
-                    </span>
-                    <span class="text-slate-500 flex items-center gap-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <rect width="18" height="18" x="3" y="4" rx="2" ry="2" />
-                            <line x1="16" x2="16" y1="2" y2="6" />
-                            <line x1="8" x2="8" y1="2" y2="6" />
-                            <line x1="3" x2="21" y1="10" y2="10" />
-                        </svg>
-                        <?php echo get_the_date(); ?>
-                    </span>
+/** Single Post Template (single.php) */
+get_header();
+$special_posts = ['que-es-wordpress', 'webs-restaurantes-leon-booking', 'seo-local-leon', 'reservas-online-clinicas-leon', 'demo-reservas-restaurantes-leon', 'webs-para-imprentas-leon', 'wpo-wordpress-leon', 'web-restaurantes-leon', 'comercio-local-panaderia-leon'];
+?>
+<?php while (have_posts()): the_post();
+    $post_slug = get_post_field('post_name', get_the_ID());
+    $categories = get_the_category();
+    $word_count = str_word_count(wp_strip_all_tags(get_the_content()));
+    $reading_minutes = max(1, (int) ceil($word_count / 220));
+?>
+<main id="primary" class="blog-shell blog-article-shell site-main">
+    <article id="post-<?php the_ID(); ?>" <?php post_class('blog-article'); ?>>
+        <header class="blog-article__hero">
+            <div class="blog-container blog-article__hero-inner">
+                <p class="blog-eyebrow"><?php echo esc_html($categories[0]->name ?? 'Notas de EMPC'); ?></p>
+                <h1><?php the_title(); ?></h1>
+                <div class="blog-article__meta">
+                    <time datetime="<?php echo esc_attr(get_the_date('c')); ?>">Publicado el <?php echo esc_html(get_the_date()); ?></time>
+                    <span aria-hidden="true">·</span><span><?php echo esc_html($reading_minutes); ?> min de lectura</span>
                 </div>
-
-                <h1 class="text-3xl md:text-5xl font-extrabold text-white leading-tight mb-8">
-                    <?php the_title(); ?>
-                </h1>
-
                 <?php if (has_post_thumbnail()): ?>
-                    <div class="relative rounded-2xl overflow-hidden shadow-2xl border border-slate-700/50 mt-8 aspect-video">
-                        <?php the_post_thumbnail('large', ['class' => 'w-full h-full object-cover']); ?>
-                    </div>
+                    <figure class="blog-article__image"><?php the_post_thumbnail('large', ['loading' => 'eager']); ?></figure>
                 <?php endif; ?>
             </div>
         </header>
 
-        <!-- Contenido -->
-        <div class="bg-slate-950 pb-20">
-            <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-
-                <!-- WordPress Content Wrapper -->
-                <!-- Usamos 'prose prose-invert' para estilizar el contenido automático de WP -->
-                <div
-                    class="prose prose-invert prose-lg max-w-none text-slate-300 prose-headings:text-white prose-a:text-rose-400 prose-a:no-underline hover:prose-a:underline prose-strong:text-white prose-code:text-rose-300 prose-pre:bg-slate-900 prose-pre:border prose-pre:border-slate-800">
-                    <?php if (in_array(get_post_field('post_name', get_the_ID()), ['que-es-wordpress', 'webs-restaurantes-leon-booking', 'seo-local-leon', 'reservas-online-clinicas-leon', 'demo-reservas-restaurantes-leon', 'webs-para-imprentas-leon', 'wpo-wordpress-leon', 'web-restaurantes-leon', 'comercio-local-panaderia-leon'], true)) : ?>
-                        <?php
-                        $post_slug = get_post_field('post_name', get_the_ID());
-                        $post_content = apply_filters('the_content', get_the_content());
-                        if (in_array($post_slug, ['seo-local-leon', 'reservas-online-clinicas-leon', 'webs-para-imprentas-leon', 'wpo-wordpress-leon', 'web-restaurantes-leon', 'comercio-local-panaderia-leon'], true)) {
-                            $post_content = preg_replace('#<h1\b[^>]*>.*?</h1>#is', '', $post_content, 1);
-                        } else {
-                            $post_content = preg_replace(
-                                ['#<h1(\b[^>]*)>#i', '#</h1>#i'],
-                                ['<h2$1>', '</h2>'],
-                                $post_content
-                            );
-                        }
-                        echo $post_content;
-                        if ($post_slug === 'wpo-wordpress-leon') : ?>
-                            <section class="mt-16 rounded-3xl border border-[#E29595]/20 bg-[#E29595]/5 p-6 md:p-10 not-prose" aria-labelledby="wpo-contact-form-title">
-                                <div class="max-w-2xl mb-8"><p class="text-[11px] font-bold uppercase tracking-[0.25em] text-[#E29595]">Presupuesto a medida</p><h2 id="wpo-contact-form-title" class="text-3xl md:text-4xl font-bold text-white mt-2">Cuéntame qué está frenando tu web</h2><p class="text-slate-400 mt-3">La revisión define el alcance real antes de proponer cambios. No se muestra una cifra inventada.</p></div>
-                                <div id="island-contact-form" data-service="wpo"></div>
-                            </section>
-                        <?php endif;
-                        if ($post_slug === 'seo-local-leon') : ?>
-                            <section class="mt-10 rounded-3xl border border-[#E29595]/20 bg-[#E29595]/5 p-6 md:p-8 not-prose">
-                                <p class="text-slate-300 leading-relaxed">Recibirás una revisión inicial de tu ficha, tu web y las principales prioridades locales para decidir qué acciones tienen sentido antes de contratar una intervención.</p>
-                                <p class="mt-4 text-slate-300 leading-relaxed">Si tu proyecto necesita una base nueva, consulta el servicio de <a class="text-[#E29595] font-semibold hover:underline" href="<?php echo esc_url(home_url('/diseno-web-leon/')); ?>">diseño web para negocios</a>. Si primero necesitas ordenar decisiones técnicas, puedes solicitar una <a class="text-[#E29595] font-semibold hover:underline" href="<?php echo esc_url(home_url('/consultor-wordpress/')); ?>">consultoría WordPress</a>.</p>
-                                <a href="<?php echo esc_url(home_url('/contacta-conmigo/')); ?>" class="mt-6 inline-flex min-h-11 items-center justify-center px-6 py-3 rounded-xl bg-[#E29595] text-[#121826] font-bold hover:brightness-110 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#E29595] focus-visible:ring-offset-[#121826]">Solicitar una valoración</a>
-                            </section>
-                        <?php endif;
-                        ?>
-                    <?php else : ?>
-                        <?php the_content(); ?>
+        <div class="blog-container blog-article__layout">
+            <aside class="blog-article__rail" aria-label="En este artículo">
+                <span class="blog-eyebrow">Lectura práctica</span>
+                <p>Ideas aplicables, contexto suficiente y límites explícitos.</p>
+                <a href="<?php echo esc_url(home_url('/blog/')); ?>">← Volver al blog</a>
+            </aside>
+            <div class="blog-article__content">
+                <?php if (in_array($post_slug, $special_posts, true)): ?>
+                    <?php
+                    $post_content = apply_filters('the_content', get_the_content());
+                    if (in_array($post_slug, ['seo-local-leon', 'reservas-online-clinicas-leon', 'webs-para-imprentas-leon', 'wpo-wordpress-leon', 'web-restaurantes-leon', 'comercio-local-panaderia-leon'], true)) {
+                        $post_content = preg_replace('#<h1\b[^>]*>.*?</h1>#is', '', $post_content, 1);
+                    } else {
+                        $post_content = preg_replace(['#<h1(\b[^>]*)>#i', '#</h1>#i'], ['<h2$1>', '</h2>'], $post_content);
+                    }
+                    echo $post_content;
+                    if ($post_slug === 'wpo-wordpress-leon'): ?>
+                        <section class="blog-inline-cta" aria-labelledby="wpo-contact-form-title">
+                            <p class="blog-eyebrow">Presupuesto a medida</p><h2 id="wpo-contact-form-title">Cuéntame qué está frenando tu web</h2><p>La revisión define el alcance real antes de proponer cambios.</p><div id="island-contact-form" data-service="wpo"></div>
+                        </section>
+                    <?php elseif ($post_slug === 'seo-local-leon'): ?>
+                        <section class="blog-inline-cta"><p>Recibirás una revisión inicial de tu ficha, tu web y las principales prioridades locales antes de decidir qué acciones tienen sentido.</p><a class="blog-button" href="<?php echo esc_url(home_url('/contacta-conmigo/?tipo=consultoria-wordpress')); ?>">Solicitar una valoración <span aria-hidden="true">↗</span></a></section>
                     <?php endif; ?>
-                </div>
-
-                <!-- Footer del Post -->
-                <div class="mt-16 pt-8 border-t border-slate-800 flex justify-between items-center">
-                    <?php if (has_tag()) : ?>
-                    <div class="text-slate-500 text-sm">
-                        Etiquetas:
-                        <?php the_tags('', ', ', ''); ?>
-                    </div>
-                    <?php endif; ?>
-
-                    <!-- Share (Simulado) -->
-                    <div class="flex gap-2">
-                        <button
-                            class="text-slate-400 hover:text-white p-2 rounded-full hover:bg-slate-900 transition-colors">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
-                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8" />
-                                <polyline points="16 6 12 2 8 6" />
-                                <line x1="12" x2="12" y1="2" y2="15" />
-                            </svg>
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Navegación entre posts -->
-                <?php if (get_previous_post() || get_next_post()) : ?>
-                <div class="grid grid-cols-2 gap-4 mt-8">
-                    <?php if (get_previous_post()) : ?>
-                    <div
-                        class="bg-slate-900/50 p-4 rounded-xl border border-slate-800 hover:border-slate-700 transition-colors group">
-                        <div class="text-xs text-slate-500 mb-1">Anterior</div>
-                        <?php previous_post_link('%link', '<span class="text-white font-medium group-hover:text-rose-400 transition-colors">%title</span>'); ?>
-                    </div>
-                    <?php endif; ?>
-                    <?php if (get_next_post()) : ?>
-                    <div
-                        class="bg-slate-900/50 p-4 rounded-xl border border-slate-800 hover:border-slate-700 transition-colors text-right group">
-                        <div class="text-xs text-slate-500 mb-1">Siguiente</div>
-                        <?php next_post_link('%link', '<span class="text-white font-medium group-hover:text-rose-400 transition-colors">%title</span>'); ?>
-                    </div>
-                    <?php endif; ?>
-                </div>
+                <?php else: ?>
+                    <?php the_content(); ?>
                 <?php endif; ?>
 
+                <section class="blog-inline-cta" aria-labelledby="article-cta-title">
+                    <p class="blog-eyebrow">Siguiente paso</p><h2 id="article-cta-title">¿Quieres aplicar esta idea a tu web?</h2><p>Cuéntame el contexto y revisamos un alcance razonable, sin añadir herramientas innecesarias.</p><a class="blog-button" href="<?php echo esc_url(home_url('/contacta-conmigo/')); ?>">Hablar del proyecto <span aria-hidden="true">↗</span></a>
+                </section>
             </div>
         </div>
-
     </article>
 
+    <?php if (get_previous_post() || get_next_post()): ?>
+        <nav class="blog-container blog-post-nav" aria-label="Navegación entre artículos">
+            <?php if (get_previous_post()): ?><div><span>Anterior</span><?php previous_post_link('%link', '%title'); ?></div><?php endif; ?>
+            <?php if (get_next_post()): ?><div class="blog-post-nav__next"><span>Siguiente</span><?php next_post_link('%link', '%title'); ?></div><?php endif; ?>
+        </nav>
+    <?php endif; ?>
+</main>
 <?php endwhile; ?>
-
 <?php get_footer(); ?>
