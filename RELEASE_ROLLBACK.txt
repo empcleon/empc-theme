@@ -1,6 +1,0 @@
-rollback_commit=1c710a1139f26a9eb3d6dbcba79465c67d0e476e
-files=functions.php home.php single.php style.css
-9d12197148d6e18e025ff8b51dadad42e98860376d721c486aa79c9acd8276dc  functions.php
-533986459594a9f8608672a32914bd7be4960557092d89461befc85b61c8dc4d  home.php
-1748719aca68044b2c1003ce3d3e7737f7dc23d0b37f7ff95d24ae91a67211cd  single.php
-f38630e5d9aaeb7b46b91c671b9d8899f15dbad109c641911f1af09faf32bb8d  style.css
