@@ -40,6 +40,25 @@ function empc_theme_setup()
 add_action('after_setup_theme', 'empc_theme_setup');
 
 /**
+ * Conserva los enlaces antiguos de contacto y los lleva al formulario de la home.
+ */
+function empc_redirect_legacy_contact()
+{
+    if (is_admin() || wp_doing_ajax() || (defined('REST_REQUEST') && REST_REQUEST) || !is_404()) {
+        return;
+    }
+
+    $request_path = parse_url($_SERVER['REQUEST_URI'] ?? '', PHP_URL_PATH);
+    $legacy_path = parse_url(home_url('/contacto/'), PHP_URL_PATH);
+
+    if ($request_path && $legacy_path && untrailingslashit($request_path) === untrailingslashit($legacy_path)) {
+        wp_safe_redirect(home_url('/#contacto'), 301);
+        exit;
+    }
+}
+add_action('template_redirect', 'empc_redirect_legacy_contact', 1);
+
+/**
  * 🤖 INTEGRACIÓN OFICIAL CON LA ABILITIES API (EMPC REACT THEME)
  */
 add_action('wpai_register_features', function ($registry) {

@@ -3,6 +3,7 @@
         <div class="text-center md:text-left">
             <p class="text-2xl font-serif text-white mb-2">EMPC<span class="text-[#E29595]">.es</span></p>
             <p class="text-xs text-slate-500 uppercase tracking-[0.3em]">Ingeniería de Autoridad desde León</p>
+            <a href="mailto:info@empc.es" class="inline-block mt-3 text-sm text-[#E29595] hover:underline">info@empc.es</a>
         </div>
         <div class="flex gap-12 text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">
             <a href="https://github.com/empcleon" target="_blank" rel="noopener noreferrer" class="hover:text-[#E29595] transition-colors">GitHub</a>
