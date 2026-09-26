@@ -1,0 +1,29 @@
+/* Demos (ID 38528): responsive para rejillas con estilos inline.
+   Las rejillas inline del contenido no admiten media queries; este CSS
+   se limita a la página /demos/ y reordena columnas con !important.
+   Regla sola por breakpoint; no toca otros contenidos. */
+
+/* Tableta: 2 columnas */
+@media (max-width: 1024px) {
+  body.page-id-38528 [style*="grid-template-columns:repeat(3"] {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+}
+
+/* Móvil: 1 columna */
+@media (max-width: 640px) {
+  body.page-id-38528 [style*="grid-template-columns:repeat(3"] {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Ficha: imagen sin altura fijada y título/tarjeta fluidos */
+  body.page-id-38528 article[style*="flex-direction:column"] {
+    min-height: 0 !important;
+    height: auto !important;
+  }
+
+  body.page-id-38528 article[style*="flex-direction:column"] img[style*="height:100%"] {
+    height: auto !important;
+    aspect-ratio: 16 / 9 !important;
+  }
+}

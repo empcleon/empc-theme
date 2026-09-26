@@ -137,6 +137,19 @@ function empc_enqueue_react_assets()
         );
     }
 
+    // CSS responsive de la página Demos (rejillas inline del contenido).
+    if (is_page('demos')) {
+        $demos_css_path = EMPC_THEME_DIR . '/assets/css/empc-demos.css';
+        if (file_exists($demos_css_path)) {
+            wp_enqueue_style(
+                'empc-demos',
+                EMPC_THEME_URI . '/assets/css/empc-demos.css',
+                [],
+                filemtime($demos_css_path)
+            );
+        }
+    }
+
     // CSS editorial aislado y exclusivo de la portada.
     if (is_front_page()) {
         $front_page_css_path = EMPC_THEME_DIR . '/assets/css/empc-front-page.css';
