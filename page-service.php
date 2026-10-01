@@ -60,7 +60,7 @@ if (have_posts()) {
 
                     <div class="flex flex-col sm:flex-row gap-4 pt-4">
                         <?php if (!empty($hero['ctaPrimary'])) : ?>
-                            <?php $cta_href = $slug === 'diseno-web-leon' ? home_url('/contacta-conmigo/?tipo=diseno-web') : home_url('/contacta-conmigo/'); ?>
+                            <?php $cta_type = $slug === 'diseno-web-leon' ? 'diseno-web' : ($slug === 'wpo-wordpress-leon' ? 'wpo' : ''); $cta_href = $cta_type ? home_url('/contacta-conmigo/?tipo=' . $cta_type) : home_url('/contacta-conmigo/'); ?>
                             <a href="<?php echo esc_url($cta_href); ?>" class="px-8 py-4 bg-[#E29595] text-[#121826] font-bold rounded-2xl uppercase tracking-widest text-sm text-center">
                                 <?php echo esc_html($hero['ctaPrimary']['text'] ?? 'Solicitar presupuesto'); ?>
                             </a>
