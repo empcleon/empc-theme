@@ -54,7 +54,7 @@ $lab_current_filters = [
     'platform' => sanitize_key(wp_unslash($_GET['platform'] ?? '')),
     'level' => sanitize_key(wp_unslash($_GET['level'] ?? '')),
     'state' => sanitize_key(wp_unslash($_GET['state'] ?? '')),
-    'sort' => sanitize_key(wp_unslash($_GET['sort'] ?? 'recommended')),
+    'sort' => sanitize_key(wp_unslash($_GET['sort'] ?? 'published')),
 ];
 $page = max(1, absint($_GET['page'] ?? 1));
 
@@ -523,16 +523,28 @@ $js_config = [
                         </section>
                     <?php endif; ?>
 
+                    <?php if (!empty($current_item['static_experiment_url'])): ?>
+                        <section class="rounded-[2rem] border border-[#F2A0A4]/25 bg-[#F2A0A4]/10 p-6 text-slate-100 shadow-[0_24px_80px_-40px_rgba(0,0,0,0.85)] lg:p-8">
+                            <p class="text-[11px] font-semibold uppercase tracking-[0.22em] text-[#F4C7C7]">Experimento local</p>
+                            <p class="mt-4 text-sm leading-7 text-slate-200">Abre la pieza estática con su lectura completa, audio, ilustraciones y alternativa accesible para la interacción.</p>
+                            <a href="<?php echo esc_url(home_url('/' . ltrim($current_item['static_experiment_url'], '/'))); ?>" class="mt-5 inline-flex min-h-11 w-full items-center justify-center rounded-xl bg-[#F2A0A4] px-5 py-3 text-sm font-semibold text-[#121826] transition hover:bg-[#f4adb0] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F2A0A4]/35 sm:w-auto">Abrir experimento ↗</a>
+                        </section>
+                    <?php endif; ?>
+
                     <?php if (!empty($current_item['source_url'])): ?>
                         <section class="rounded-[2rem] border border-cyan-400/20 bg-cyan-400/10 p-6 text-cyan-50 shadow-[0_24px_80px_-40px_rgba(0,0,0,0.85)] lg:p-8">
                             <p class="text-[11px] font-semibold uppercase tracking-[0.22em] text-cyan-100">Fuente externa</p>
                             <p class="mt-4 text-sm leading-7 text-cyan-50/90">
-                                Esta ficha lleva a un recurso externo. Al pulsar <strong>Abrir recurso oficial ↗</strong> abandonas EMPC y accedes al dominio original.
+                                <?php if (!empty($current_item['source_cta_label'])): ?>
+                                    Esta ficha enlaza a una publicación original externa en X. Al pulsar <strong><?php echo esc_html($current_item['source_cta_label']); ?></strong> abandonas EMPC y accedes al mirror consultable.
+                                <?php else: ?>
+                                    Esta ficha lleva a un recurso externo. Al pulsar <strong>Abrir recurso oficial ↗</strong> abandonas EMPC y accedes al dominio original.
+                                <?php endif; ?>
                             </p>
                             <div class="mt-5 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
                                 <a href="<?php echo esc_url($current_item['source_url']); ?>" target="_blank" rel="noopener noreferrer"
                                    class="inline-flex min-h-11 w-full items-center justify-center rounded-xl px-5 py-3 text-sm font-semibold transition hover:scale-[1.01] focus-visible:outline-none focus-visible:ring-2 motion-reduce:transform-none sm:w-auto <?php echo esc_attr($primary_cta_class($current_item['tipo_key'] ?? '')); ?>">
-                                    Abrir recurso oficial ↗
+                                    <?php echo esc_html($current_item['source_cta_label'] ?? 'Abrir recurso oficial ↗'); ?>
                                 </a>
                                 <span class="text-xs uppercase tracking-[0.22em] text-cyan-100/80">
                                     <?php echo esc_html($current_item['source_name'] ?? ''); ?>
@@ -699,7 +711,7 @@ $js_config = [
                             <div class="mt-auto flex flex-wrap items-center gap-3 pt-6">
                                 <?php if (!empty($item['external']) && !empty($item['source_url'])): ?>
                                     <a href="<?php echo esc_url($item['source_url']); ?>" target="_blank" rel="noopener noreferrer" class="inline-flex min-h-11 w-full items-center justify-center rounded-xl px-4 py-2.5 text-sm font-semibold transition focus-visible:outline-none focus-visible:ring-2 motion-reduce:transform-none sm:w-auto <?php echo esc_attr($primary_cta_class($item['tipo_key'] ?? '')); ?>">
-                                        Abrir recurso oficial ↗
+                                        <?php echo esc_html($item['source_cta_label'] ?? 'Abrir recurso oficial ↗'); ?>
                                     </a>
                                 <?php endif; ?>
                                 <a href="<?php echo esc_url($item_url); ?>" class="inline-flex min-h-11 w-full items-center justify-center rounded-xl px-4 py-2.5 text-sm font-semibold transition focus-visible:outline-none focus-visible:ring-2 motion-reduce:transform-none sm:w-auto <?php echo !empty($item['external']) ? $secondary_cta_class() : $primary_cta_class($item['tipo_key'] ?? ''); ?>">
