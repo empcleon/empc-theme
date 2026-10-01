@@ -53,7 +53,7 @@ $special_posts = ['que-es-wordpress', 'webs-restaurantes-leon-booking', 'seo-loc
                 <?php endif; ?>
 
                 <section class="blog-inline-cta" aria-labelledby="article-cta-title">
-                    <p class="blog-eyebrow">Siguiente paso</p><h2 id="article-cta-title">¿Quieres aplicar esta idea a tu web?</h2><p>Cuéntame el contexto y revisamos un alcance razonable, sin añadir herramientas innecesarias.</p><a class="blog-button" href="<?php echo esc_url(home_url('/contacta-conmigo/')); ?>">Hablar del proyecto <span aria-hidden="true">↗</span></a>
+                    <p class="blog-eyebrow">Siguiente paso</p><h2 id="article-cta-title">¿Quieres aplicar esta idea a tu web?</h2><p>Cuéntame el contexto y revisamos un alcance razonable, sin añadir herramientas innecesarias.</p><a class="blog-button" href="<?php echo esc_url(home_url($post_slug === 'wpo-wordpress-leon' ? '/contacta-conmigo/?tipo=wpo' : '/contacta-conmigo/')); ?>">Hablar del proyecto <span aria-hidden="true">↗</span></a>
                 </section>
             </div>
         </div>
